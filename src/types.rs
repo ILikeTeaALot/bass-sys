@@ -5,7 +5,24 @@ pub type BYTE = u8;
 pub type WORD = u16;
 pub type DWORD = u32;
 pub type QWORD = u64;
-pub type BOOL = i32;
+// pub type BOOL = i32;
+#[derive(Clone, Debug, PartialEq, Eq)]
+#[repr(i32)]
+pub enum BOOL {
+	FALSE = 0,
+	TRUE = 1,
+}
+
+impl Default for BOOL {
+    fn default() -> Self {
+        Self::FALSE
+    }
+}
+
+/// Nice little short-hand for if statements
+pub const FALSE: BOOL = BOOL::FALSE;
+/// Nice little short-hand for if statements
+pub const TRUE: BOOL = BOOL::TRUE;
 
 pub type HMUSIC = DWORD;
 pub type HSAMPLE = DWORD;
