@@ -48,13 +48,13 @@ pub type IOSNOTIFYPROC = extern "C" fn(DWORD);
 #[repr(C)]
 #[derive(Debug, Clone)]
 pub struct BassDeviceInfo {
-    pub name: *const c_void,
-    pub driver: *const c_void,
+    pub name: *const c_char,
+    pub driver: *const c_char,
     pub flags: DWORD,
 }
 
 impl BassDeviceInfo {
-    pub fn new(name: *const c_void, driver: *const c_void, flags: DWORD) -> Self {
+    pub fn new(name: *const c_char, driver: *const c_char, flags: DWORD) -> Self {
         Self {
             name,
             driver,
