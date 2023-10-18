@@ -5,4 +5,4 @@ pub use types::*;
 mod consts;
 mod functions;
 mod macros;
-mod types;
+pub mod types;
