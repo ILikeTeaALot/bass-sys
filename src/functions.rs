@@ -33,8 +33,25 @@ static BASS_LIBRARY: Lazy<Library> = Lazy::new(|| {
     let library_search_paths = BASS_LIBRARY_SEARCH_PATHS.get_or_init(|| {
         if let Ok(mut current_directory) = env::current_exe() {
             current_directory.pop();
+			let mut paths = vec![current_directory.clone()];
 
-            return vec![current_directory];
+			// If there's a way to do something akin to:
+			// for parent of current_directory.parent()
+			// I'd prefer that, but otherwise this works well
+			//
+			// N.B. @rpath searching would also be good
+			loop {
+				if let Some(parent) = current_directory.parent() {
+					// println!("Parent: {:?}", parent);
+					paths.push(parent.to_owned());
+				}
+
+				if !current_directory.pop() { // remove file && remove parent
+					break;
+				}
+			}
+
+			return paths;
         } else {
             panic!("Failed to retrieve current working directory, can't initialize library search paths.");
         }
@@ -49,7 +66,9 @@ static BASS_LIBRARY: Lazy<Library> = Lazy::new(|| {
             } else {
                 panic!("Failed to load the library.");
             }
-        }
+        } else {
+			// println!("Libary path invalid: {}", library_path.to_str().unwrap());
+		}
     }
 
     panic!("Couldn't find the library.");
