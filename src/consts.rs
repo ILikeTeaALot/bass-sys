@@ -1,5 +1,5 @@
 use crate::types::DWORD;
-use std::os::raw::c_int;
+use std::ffi::c_int;
 
 // Error codes returned by BASS_ErrorGetCode
 pub const BASS_OK: c_int = 0; // all is OK
