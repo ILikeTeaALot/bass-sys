@@ -140,7 +140,7 @@ generate_bindings! {
     binding BASS_IS_STARTED fn BASS_IsStarted() -> DWORD;
     binding BASS_SET_VOLUME fn BASS_SetVolume(value: f32) -> BOOL;
     binding BASS_GET_VOLUME fn BASS_GetVolume() -> f32;
-    binding BASS_PLUGIN_LOAD fn BASS_PluginLoad(file: *const c_char, flags: DWORD) -> HPLUGIN;
+    binding BASS_PLUGIN_LOAD fn BASS_PluginLoad(file: *const c_void, flags: DWORD) -> HPLUGIN;
     binding BASS_PLUGIN_FREE fn BASS_PluginFree(handle: HPLUGIN) -> BOOL;
     binding BASS_PLUGIN_ENABLE fn BASS_PluginEnable(handle: HPLUGIN, enable: BOOL) -> BOOL;
     binding BASS_PLUGIN_GET_INFO fn BASS_PluginGetInfo(handle: HPLUGIN) -> *mut BassPluginInfo;
@@ -161,7 +161,7 @@ generate_bindings! {
     binding BASS_APPLY_3D fn BASS_Apply3D();
     binding BASS_MUSIC_LOAD fn BASS_MusicLoad(
         memory: BOOL,
-        file: *const c_char,
+        file: *const c_void,
         offset: QWORD,
         length: DWORD,
         flags: DWORD,
@@ -170,7 +170,7 @@ generate_bindings! {
     binding BASS_MUSIC_FREE fn BASS_MusicFree(handle: HMUSIC) -> BOOL;
     binding BASS_SAMPLE_LOAD fn BASS_SampleLoad(
         memory: BOOL,
-        file: *const c_char,
+        file: *const c_void,
         offset: QWORD,
         length: DWORD,
         maximum: DWORD,
@@ -200,13 +200,13 @@ generate_bindings! {
     ) -> HSTREAM;
     binding BASS_STREAM_CREATE_FILE fn BASS_StreamCreateFile(
         memory: BOOL,
-        file: *const c_char,
+        file: *const c_void,
         offset: QWORD,
         length: QWORD,
         flags: DWORD
     ) -> HSTREAM;
     binding BASS_STREAM_CREATE_URL fn BASS_StreamCreateURL(
-        url: *const c_char,
+        url: *const c_void,
         offset: DWORD,
         flags: DWORD,
         proc: *mut DOWNLOADPROC,
