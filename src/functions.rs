@@ -42,7 +42,7 @@ static BASS_LIBRARY: Lazy<Library> = Lazy::new(|| {
 			// N.B. @rpath searching would also be good
 			loop {
 				if let Some(parent) = current_directory.parent() {
-					// println!("Parent: {:?}", parent);
+					// println!("Parent: {:#?}", parent);
 					paths.push(parent.to_owned());
 				}
 
