@@ -1,0 +1,33 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_DOWNLOADPROC attribute</h1>
+<p>The download callback function on an internet stream.
+<p><pre class="def">BASS_ChannelSetAttributeEx(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_DOWNLOADPROC,
+    void *<I>info</I>,
+    DWORD <I>size</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>info<td>A pointer to a <a href="DOWNLOADPROC.html">DOWNLOADPROC</a> callback function and <i>user</i> parameter. The <i>user</i> parameter is optional; if it is not included then the existing value will be kept.
+<tr><td>size<td>The size of the info. This should be the size of one or two pointers, depending on whether a <i>user</i> parameter is included.
+</table>
+<p><h2>Remarks</h2>
+This attribute can be used to change the <a href="DOWNLOADPROC.html">DOWNLOADPROC</a> callback function that was set in a <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a> call. The new callback function will only receive data that is subsequently downloaded, not any that has already been downloaded. Callbacks can be disabled by setting it to NULL.
+<p>This attribute can be set at any time, including within a <a href="DOWNLOADPROC.html">DOWNLOADPROC</a> function.
+<p><h2>Platform-specific</h2>
+For Java on Android, a BASS_ChannelSetAttributeDOWNLOADPROC function is provided to set this attribute, to be used instead of <a href="BASS_ChannelSetAttributeEx.html">BASS_ChannelSetAttributeEx</a>. It will not be possible to get the same value back from <a href="BASS_ChannelGetAttributeEx.html">BASS_ChannelGetAttributeEx</a> (as it will be converted to an internal wrapper form) except when it is NULL.
+<p><h2>Example</h2>
+Set a new download callback on a stream.
+<pre class="code">
+void *info[2] = { (void*)DownloadProc, user };
+BASS_ChannelSetAttributeEx(stream, BASS_ATTRIB_DOWNLOADPROC, info, sizeof(info));
+</pre>
+<p>Disable download callbacks on a stream.
+<pre class="code">
+void *proc = NULL;
+BASS_ChannelSetAttributeEx(stream, BASS_ATTRIB_DOWNLOADPROC, &proc, sizeof(proc));
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttributeEx.html">BASS_ChannelGetAttributeEx</a>, <a href="BASS_ChannelSetAttributeEx.html">BASS_ChannelSetAttributeEx</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>

@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_SAMPLE_ONEHANDLE config option</h1>
+<p>Use the same handle for a sample and its single playback channel?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_SAMPLE_ONEHANDLE,
+    BOOL <I>onehandle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>onehandle<td>Use the same handle for a sample and its single channel?
+</table>
+<p><h2>Remarks</h2>
+When a sample has a channel limit of only one (max = 1 with <a href="BASS_SampleLoad.html">BASS_SampleLoad</a> or <a href="BASS_SampleCreate.html">BASS_SampleCreate</a>), the same handle may be used for the sample (HSAMPLE) and its playback channel (HCHANNEL), depending on this config setting. When the same handle is used, <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a> still needs to be called to create the playback channel.
+<p>This config option is enabled by default. Changes take effect from the next <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a> call.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a>

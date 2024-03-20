@@ -1,0 +1,26 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelIsActive</h1>
+<p>Checks if a mixer source channel is active.
+<p><pre class="def">DWORD BASS_Mixer_ChannelIsActive(
+    DWORD <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+</table>
+<p><h2>Return value</h2>
+The return value is one of the following.<br>
+<table>
+<tr><td>BASS_ACTIVE_STOPPED<td>The channel is not active.
+<tr><td>BASS_ACTIVE_PLAYING<td>The channel is playing.
+<tr><td>BASS_ACTIVE_PAUSED<td>The channel is paused. This takes precedence when another status could also apply.
+<tr><td>BASS_ACTIVE_STALLED<td>The channel has stalled due to a lack of sample data. It will automatically resume when more data is available.
+<tr><td>BASS_ACTIVE_WAITING<td>The channel is waiting to start because it was delayed by <a href="BASS_Mixer_StreamAddChannelEx.html">BASS_Mixer_StreamAddChannelEx</a>.
+<tr><td>BASS_ACTIVE_QUEUED<td>The channel is waiting in a queue.
+</table>
+<p><h2>Remarks</h2>
+This function gives the status of a source channel as the mixer currently sees it, which may be ahead of what is heard if the mixer is playing due to buffering. The source channel's status is unaffected by the mixer's status, eg. whether it is playing or stopped.
+<p>A BASS_SYNC_STALL sync can be set via <a href="BASS_Mixer_ChannelSetSync.html">BASS_Mixer_ChannelSetSync</a> to be notified when a channel stalls/resumes.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelFlags.html">BASS_Mixer_ChannelFlags</a>, <a href="BASS_Mixer_ChannelSetSync.html">BASS_Mixer_ChannelSetSync</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelIsActive.html">BASS_ChannelIsActive</a>

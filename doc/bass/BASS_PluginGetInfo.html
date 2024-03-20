@@ -1,0 +1,29 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_PluginGetInfo</h1>
+<p>Retrieves information on a plugin.
+<p><pre class="def">const <a href="BASS_PLUGININFO.html">BASS_PLUGININFO</a> *BASS_PluginGetInfo(
+    HPLUGIN <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The plugin handle.
+</table>
+<p><h2>Return value</h2>
+If successful, a pointer to the plugin info is returned, else NULL is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Remarks</h2>
+The plugin information does not change, so the returned pointer remains valid for as long as the plugin is loaded.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+</table>
+<p><h2>Example</h2>
+List the formats supported by a plugin.
+<pre class="code">
+const BASS_PLUGININFO *info = BASS_PluginGetInfo(plugin); // get the plugin info
+int a;
+for (a = 0; a &lt; info-&gt;formatc; a++) { // display the array of formats...
+    printf("ctype=%x name=%s exts=%s\n",
+        info-&gt;formats[a].ctype, info-&gt;formats[a].name, info-&gt;formats[a].exts);
+}</pre>
+<p><h2>See also</h2>
+<a href="BASS_PluginLoad.html">BASS_PluginLoad</a>, <a href="BASS_PLUGININFO.html">BASS_PLUGININFO structure</a>

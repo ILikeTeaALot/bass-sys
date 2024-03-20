@@ -1,0 +1,28 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelGetPosition</h1>
+<p>Retrieves the playback position of a sample, stream, or MOD music. Can also be used with a recording channel.
+<p><pre class="def">QWORD BASS_ChannelGetPosition(
+    DWORD <I>handle</I>,
+    DWORD <I>mode</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD.
+<tr><td>mode<td>How to retrieve the position. One of the following, with optional flags.<br>
+<table>
+<tr><td>BASS_POS_BYTE<td>Get the position in bytes.
+<tr><td>BASS_POS_MUSIC_ORDER<td>Get the position in orders and rows... LOWORD = order, HIWORD = row * scaler (<a href="BASS_ATTRIB_MUSIC_PSCALER.html">BASS_ATTRIB_MUSIC_PSCALER</a>). (HMUSIC only)
+<tr><td>BASS_POS_DECODE<td>Flag: Get the decoding/rendering position, which may be ahead of the playback position due to buffering. This flag is unnecessary with decoding channels because the decoding position will always be given for them anyway, as they do not have playback buffers.
+</table>
+<i>other modes & flags may be supported by add-ons, see the documentation.</i>
+</table>
+<p><h2>Return value</h2>
+If successful, then the channel's position is returned, else -1 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The requested position is not available.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelBytes2Seconds.html">BASS_ChannelBytes2Seconds</a>, <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a>, <a href="BASS_ChannelIsActive.html">BASS_ChannelIsActive</a>, <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a>, <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>, <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a>

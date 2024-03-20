@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_MIXER_NODE</h1>
+<p>Used with <a href="BASS_Mixer_ChannelSetEnvelope.html">BASS_Mixer_ChannelSetEnvelope</a> to set an envelope on a channel.
+<p><pre class="def">typedef struct {
+    QWORD <i>pos</i>;
+    float <i>val</i>;
+} BASS_MIXER_NODE;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>pos<td>The position of the node in bytes. This is based on the mixer's sample format, not the source channel's format.
+<tr><td>val<td>The envelope value at the position.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelSetEnvelope.html">BASS_Mixer_ChannelSetEnvelope</a>
+
+

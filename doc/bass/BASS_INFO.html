@@ -1,0 +1,46 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_INFO structure</h1>
+<p>Used with <a href="BASS_GetInfo.html">BASS_GetInfo</a> to retrieve information on the current device.
+<p><pre class="def">typedef struct {
+    DWORD <i>flags</i>;
+    DWORD <i>hwsize</i>;
+    DWORD <i>hwfree</i>;
+    DWORD <i>freesam</i>;
+    DWORD <i>free3d</i>;
+    DWORD <i>minrate</i>;
+    DWORD <i>maxrate</i>;
+    BOOL <i>eax</i>;
+    DWORD <i>minbuf</i>;
+    DWORD <i>dsver</i>;
+    DWORD <i>latency</i>;
+    DWORD <i>initflags</i>;
+    DWORD <i>speakers</i>;
+    DWORD <i>freq</i>;
+} BASS_INFO;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>flags<td>The device's DirectSound capabilities... a combination of the following flags.
+<table>
+<tr><td>DSCAPS_EMULDRIVER<td>The device's drivers do not have DirectSound support, so it is being emulated.
+<tr><td>DSCAPS_CERTIFIED<td>The device driver has been certified by Microsoft. This flag is always set on WDM drivers.
+<tr><td>DSCAPS_HARDWARE<td>The device is using hardware mixing to play the BASS output. The BASS channel mixing is still done in software by BASS.
+</table>
+<tr><td>hwsize<td>Unused.
+<tr><td>hwfree<td>Unused.
+<tr><td>freesam<td>Unused.
+<tr><td>free3d<td>Unused.
+<tr><td>minrate<td>Unused.
+<tr><td>maxrate<td>Unused.
+<tr><td>eax<td>Unused.
+<tr><td>minbuf<td>The minimum buffer length (rounded up to the nearest millisecond) to avoid stuttering playback. This is determined by the <a href="BASS_CONFIG_DEV_PERIOD.html">BASS_CONFIG_DEV_PERIOD</a> setting. Note stuttering may still occur when this buffer length is used if the buffer is not updated frequently enough. When minimal latency is required, it is generally better to disable buffering via  the <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a> option instead.
+<tr><td>dsver<td>DirectSound version... 9 = DX9/8/7/5 features are available, 8 = DX8/7/5 features are available, 7 = DX7/5 features are available, 5 = DX5 features are available. 0 = none of the DX9/8/7/5 features are available.
+<tr><td>latency<td>The average delay (rounded up to the nearest millisecond) for channel playback to start and be heard.
+<tr><td>initflags<td>The <i>flags</i> parameter of the <a href="BASS_Init.html">BASS_Init</a> call. This will include any flags that were applied automatically.
+<tr><td>speakers<td>The number of available speakers, which can be accessed via the <a href=speaker.html>speaker assignment flags</a>.
+<tr><td>freq<td>The output rate.
+</table>
+<p><h2>Platform-specific</h2>
+The <i>speakers</i> and <i>freq</i> members give the format of BASS's output mix. That will initially be set by <a href="BASS_Init.html">BASS_Init</a> but may also be updated to match the device's native format whenever that changes on Windows/macOS/iOS (not when using DirectSound output). A BASS_SYNC_DEV_FORMAT sync can be set via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> to be informed when that happens. On other platforms, BASS's output format may not necessarily match the device's output format, in which case the OS will be resampling it.
+<p>The <i>flags</i> and <i>dsver</i> members are only used on Windows.
+<p><h2>See also</h2>
+<a href="BASS_GetInfo.html">BASS_GetInfo</a>

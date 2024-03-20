@@ -1,0 +1,42 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_RecordGetDeviceInfo</h1>
+<p>Retrieves information on a recording device.
+<p><pre class="def">BOOL BASS_RecordGetDeviceInfo(
+    DWORD <I>device</I>,
+    <a href="BASS_DEVICEINFO.html">BASS_DEVICEINFO</a> *<I>info</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>device<td>The device to get the information of... 0 = first.
+<tr><td>info<td>Pointer to a structure to receive the information.
+</table>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DX<td>A sufficient version of DirectX is not installed.
+<tr><td>BASS_ERROR_DEVICE<td><i>device</i> is invalid.
+</table>
+<p><h2>Remarks</h2>
+This function can be used to enumerate the available devices for a setup dialog.
+<p><h2>Platform-specific</h2>
+Recording support requires DirectX 5 (or above) on Windows.
+<p>On Linux, a "Default" device is hardcoded to device number 0, which uses the default input set in the ALSA config.
+<p><h2>Example</h2>
+Get the total number of devices currently present.
+<pre class="code">int a, count = 0;
+BASS_DEVICEINFO info;
+for (a = 0; BASS_RecordGetDeviceInfo(a, &info); a++)
+    if (info.flags & BASS_DEVICE_ENABLED) // device is enabled
+        count++; // count it
+</pre>
+<p>Find a microphone.
+<pre class="code">int a;
+BASS_DEVICEINFO info;
+for (a = 0; BASS_RecordGetDeviceInfo(a, &info); a++)
+    if ((info.flags & BASS_DEVICE_ENABLED) && (info.flags & BASS_DEVICE_TYPE_MASK) == BASS_DEVICE_TYPE_MICROPHONE) { // found an enabled microphone
+        // do something
+    }
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_RecordGetInfo.html">BASS_RecordGetInfo</a>, <a href="BASS_RecordInit.html">BASS_RecordInit</a>, <a href="BASS_DEVICEINFO.html">BASS_DEVICEINFO structure</a>

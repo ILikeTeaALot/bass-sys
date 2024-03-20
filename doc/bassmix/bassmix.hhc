@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASSMIX.TXT">
+		<param name="Local" value="bassmix.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_Mixer_GetVersion">
+		<param name="Local" value="BASS_Mixer_GetVersion.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Config">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CONFIG_MIXER_BUFFER">
+			<param name="Local" value="BASS_CONFIG_MIXER_BUFFER.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CONFIG_MIXER_POSEX">
+			<param name="Local" value="BASS_CONFIG_MIXER_POSEX.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CONFIG_SPLIT_BUFFER">
+			<param name="Local" value="BASS_CONFIG_SPLIT_BUFFER.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Mixer streams">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_StreamCreate">
+			<param name="Local" value="BASS_Mixer_StreamCreate.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_StreamAddChannel">
+			<param name="Local" value="BASS_Mixer_StreamAddChannel.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_StreamAddChannelEx">
+			<param name="Local" value="BASS_Mixer_StreamAddChannelEx.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_StreamGetChannels">
+			<param name="Local" value="BASS_Mixer_StreamGetChannels.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Mixer syncs">
+			<param name="Local" value="syncs.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Attributes">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MIXER_LATENCY">
+				<param name="Local" value="BASS_ATTRIB_MIXER_LATENCY.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MIXER_THREADS">
+				<param name="Local" value="BASS_ATTRIB_MIXER_THREADS.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MIXER_VOL">
+				<param name="Local" value="BASS_ATTRIB_MIXER_VOL.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Mixer source channels">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelFlags">
+			<param name="Local" value="BASS_Mixer_ChannelFlags.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelGetData">
+			<param name="Local" value="BASS_Mixer_ChannelGetData.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelGetEnvelopePos">
+			<param name="Local" value="BASS_Mixer_ChannelGetEnvelopePos.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelGetLevel">
+			<param name="Local" value="BASS_Mixer_ChannelGetLevel.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelGetLevelEx">
+			<param name="Local" value="BASS_Mixer_ChannelGetLevelEx.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelGetMatrix">
+			<param name="Local" value="BASS_Mixer_ChannelGetMatrix.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelGetMixer">
+			<param name="Local" value="BASS_Mixer_ChannelGetMixer.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelGetPosition">
+			<param name="Local" value="BASS_Mixer_ChannelGetPosition.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelGetPositionEx">
+			<param name="Local" value="BASS_Mixer_ChannelGetPositionEx.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelIsActive">
+			<param name="Local" value="BASS_Mixer_ChannelIsActive.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelRemove">
+			<param name="Local" value="BASS_Mixer_ChannelRemove.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelRemoveSync">
+			<param name="Local" value="BASS_Mixer_ChannelRemoveSync.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelSetEnvelope">
+			<param name="Local" value="BASS_Mixer_ChannelSetEnvelope.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelSetEnvelopePos">
+			<param name="Local" value="BASS_Mixer_ChannelSetEnvelopePos.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelSetMatrix">
+			<param name="Local" value="BASS_Mixer_ChannelSetMatrix.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelSetMatrixEx">
+			<param name="Local" value="BASS_Mixer_ChannelSetMatrixEx.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelSetPosition">
+			<param name="Local" value="BASS_Mixer_ChannelSetPosition.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Mixer_ChannelSetSync">
+			<param name="Local" value="BASS_Mixer_ChannelSetSync.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Structures">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_MIXER_NODE">
+				<param name="Local" value="BASS_MIXER_NODE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Splitter streams">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Split_StreamCreate">
+			<param name="Local" value="BASS_Split_StreamCreate.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Split_StreamGetAvailable">
+			<param name="Local" value="BASS_Split_StreamGetAvailable.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Split_StreamGetSource">
+			<param name="Local" value="BASS_Split_StreamGetSource.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Split_StreamGetSplits">
+			<param name="Local" value="BASS_Split_StreamGetSplits.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Split_StreamReset">
+			<param name="Local" value="BASS_Split_StreamReset.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Split_StreamResetEx">
+			<param name="Local" value="BASS_Split_StreamResetEx.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Attributes">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_SPLIT_ASYNCBUFFER">
+				<param name="Local" value="BASS_ATTRIB_SPLIT_ASYNCBUFFER.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_SPLIT_ASYNCPERIOD">
+				<param name="Local" value="BASS_ATTRIB_SPLIT_ASYNCPERIOD.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Matrix mixing">
+		<param name="Local" value="matrix.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+</UL>
+</BODY></HTML>

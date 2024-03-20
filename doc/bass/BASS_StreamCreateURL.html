@@ -1,0 +1,76 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_StreamCreateURL</h1>
+<p>Creates a sample stream from an MP3, MP2, MP1, OGG, WAV, AIFF or plugin supported file on the internet, optionally receiving the downloaded data in a callback function.
+<p><pre class="def">HSTREAM BASS_StreamCreateURL(
+    char *<I>url</I>,
+    DWORD <I>offset</I>,
+    DWORD <I>flags</I>,
+    <a href="DOWNLOADPROC.html">DOWNLOADPROC</a> *<I>proc</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>url<td>URL of the file to stream. Should begin with "http://" or "https://" or "ftp://", or another add-on supported protocol. The URL can be followed by custom HTTP request headers to be sent to the server; the URL and each header should be terminated with a carriage return and line feed ("\r\n").
+<tr><td>offset<td>File position to start streaming from. This is ignored by some servers, specifically when the length is unknown/undefined.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMPLE_FLOAT<td>Use 32-bit floating-point sample data. See <a href=float.html>Floating-point channels</a> for info.
+<tr><td>BASS_SAMPLE_MONO<td>Decode/play the file (OGG/MP3/MP2/MP1 only) in mono. This flag is automatically applied if BASS_DEVICE_MONO was specified when calling <a href="BASS_Init.html">BASS_Init</a>.
+<tr><td>BASS_SAMPLE_3D<td>Enable 3D functionality. The stream must be mono. The SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_SAMPLE_LOOP<td>Loop the file. This flag can be toggled at any time using <a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>. This flag is ignored when streaming in blocks (BASS_STREAM_BLOCK).
+<tr><td>BASS_STREAM_RESTRATE<td>Restrict the download rate of the file, according to the <a href="BASS_CONFIG_NET_RESTRATE.html">BASS_CONFIG_NET_RESTRATE</a> config setting. If this flag is not used then the file will be downloaded as quickly as possible.
+<tr><td>BASS_STREAM_BLOCK<td>Only keep a block of the downloaded file in memory, determined by the <a href="BASS_CONFIG_NET_BUFFER.html">BASS_CONFIG_NET_BUFFER</a> config setting, rather than the whole file. This uses a lot less memory than otherwise, but it is not possible to seek or loop the stream. This flag will be applied automatically when the file length is unknown or over 2GB.
+<tr><td>BASS_STREAM_STATUS<td>Pass status info (HTTP/ICY tags) from the server to the <a href="DOWNLOADPROC.html">DOWNLOADPROC</a> callback during connection. This can be useful to determine the reason for a failure. If the downloaded data is not needed then the callbacks can be disabled via the <a href="BASS_ATTRIB_DOWNLOADPROC.html">BASS_ATTRIB_DOWNLOADPROC</a> attribute after this call returns.
+<tr><td>BASS_STREAM_AUTOFREE<td>Automatically free the stream when playback ends.
+<tr><td>BASS_STREAM_DECODE<td>Decode the sample data, without playing it. Use <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> to retrieve decoded sample data. The BASS_SAMPLE_3D, BASS_STREAM_AUTOFREE and SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href=speaker.html>Speaker assignment flags</a>. These flags have no effect when the stream is more than stereo.
+<tr><td>BASS_UNICODE<td><i>url</i> is in UTF-16 form. Otherwise it is ANSI on Windows and UTF-8 on other platforms.
+</table>
+<tr><td>proc<td>Callback function to receive the file as it is downloaded... NULL = no callback.
+<tr><td>user<td>User instance data to pass to the callback function.
+</table>
+<p><h2>Return value</h2>
+If successful, the new stream's handle is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_STREAM_AUTOFREE flag cannot be combined with the BASS_STREAM_DECODE flag.
+<tr><td>BASS_ERROR_NONET<td>No internet connection could be opened. Can be caused by a bad <a href="BASS_CONFIG_NET_PROXY.html">proxy</a> setting.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>url</i> is not a valid URL.
+<tr><td>BASS_ERROR_PROTOCOL<td>The protocol in <i>url</i> is not supported.
+<tr><td>BASS_ERROR_SSL<td>SSL/HTTPS support is not available. See <a href="BASS_CONFIG_LIBSSL.html">BASS_CONFIG_LIBSSL</a>.
+<tr><td>BASS_ERROR_TIMEOUT<td>The server did not respond to the request within the timeout period, as set with the <a href="BASS_CONFIG_NET_TIMEOUT.html">BASS_CONFIG_NET_TIMEOUT</a> config option.
+<tr><td>BASS_ERROR_DENIED<td>A valid username/password is required.
+<tr><td>BASS_ERROR_FILEOPEN<td>The file could not be opened.
+<tr><td>BASS_ERROR_FILEFORM<td>The file's format is not recognised/supported.
+<tr><td>BASS_ERROR_UNSTREAMABLE<td>The file cannot be streamed. This could be because an MP4 file's "mdat" atom comes before its "moov" atom.
+<tr><td>BASS_ERROR_NOTAUDIO<td>The file does not contain audio, or it also contains video and videos are disabled.
+<tr><td>BASS_ERROR_CODEC<td>The file uses a codec that is not available/supported. This can apply to WAV and AIFF files.
+<tr><td>BASS_ERROR_FORMAT<td>The sample format is not supported.
+<tr><td>BASS_ERROR_SPEAKER<td>The specified SPEAKER flags are invalid.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+<tr><td>BASS_ERROR_NO3D<td>Could not initialize 3D support.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+Use <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a> to retrieve information on the file format and sample format of the stream. The playback length of the stream can be retrieved using <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a>.
+<p>When playing the stream, BASS will stall the playback if there is insufficient data to continue playing. Playback will automatically be resumed when sufficient data has been downloaded. <a href="BASS_ChannelIsActive.html">BASS_ChannelIsActive</a> can be used to check if the playback is stalled, and the progress of the file download can be checked with <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a>.
+<p>If the server supports HTTP range requests (indicated in its response headers), BASS will automatically try to reconnect whenever the connection is lost before the end. Stopping/pausing should otherwise be avoided when the BASS_STREAM_BLOCK flag is set, to reduce the chance of disconnects from timing out.
+<p>When streaming from Shoutcast servers, metadata (track titles) may be sent by the server. The data can be retrieved with <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>. A BASS_SYNC_META sync can also be set via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> to be informed when metadata is received. A BASS_SYNC_OGG_CHANGE sync can be used to be informed of when a new logical bitstream begins in an Icecast/OGG stream.
+<p>When using an <i>offset</i>, the file length returned by <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a> can be used to check that it was successful by comparing it with the original file length. Another way to check is to inspect the HTTP headers retrieved with <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>.
+<p>When a plugin is used by a stream, there may be additional flags that are supported by it. Any such flags can be set after stream creation via <a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>. <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a> can be used to check which, if any, plugin is being used.
+<p>Custom HTTP request headers may be ignored by some plugins, notably <a href="basswma.html">BASSWMA</a>.
+<p><h2>Platform-specific</h2>
+On Windows, ACM codecs are supported with compressed WAV files. Media Foundation codecs are also supported on Windows 7 and updated versions of Vista, including support for AAC and WMA. On iOS and macOS, CoreAudio codecs are supported, including support for AAC and ALAC. Android's media codecs are also supported, including support for AAC. In all cases, the OS's codecs are only tried after BASS's built-in decoders and any plugins have rejected the file. Built-in support for IMA and Microsoft ADPCM WAV files is provided on Linux/Android, while they are supported via ACM and CoreAudio codecs on Windows and macOS/iOS.
+<p>On iOS 7 and above, this function can be used to open files in the iPod Library ("ipod-library://" URLs). The <i>offset</i> and <i>proc</i> and <i>user</i> parameters are ignored then, as are the BASS_STREAM_RESTRATE and BASS_STREAM_BLOCK and BASS_STREAM_STATUS flags. The files are played using CoreAudio codecs and BASS does not have direct access to the files itself, so the only tags available from <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a> will be BASS_TAG_CA_CODEC tags; the MPMediaItem properties could be used to get more info.
+<p><h2>Example</h2>
+Stream an MP3 file.
+<pre class="code">
+HSTREAM stream = BASS_StreamCreateURL("http://www.asite.com/afile.mp3", 0, 0, NULL, 0);
+</pre>
+<p>Stream an MP3 file with a cookie sent to the server.
+<pre class="code">
+HSTREAM stream = BASS_StreamCreateURL("http://www.asite.com/afile.mp3\r\nCookie: mycookie=blah\r\n", 0, 0, NULL, 0);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>, <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a>, <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>, <a href="BASS_ChannelPlay.html">BASS_ChannelPlay</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSetDSP.html">BASS_ChannelSetDSP</a>, <a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>, <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_StreamFree.html">BASS_StreamFree</a>, <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a>, <a href="DOWNLOADPROC.html">DOWNLOADPROC callback</a>, <a href="BASS_ATTRIB_NET_RESUME.html">BASS_ATTRIB_NET_RESUME</a>, <a href="BASS_CONFIG_NET_AGENT.html">BASS_CONFIG_NET_AGENT</a>, <a href="BASS_CONFIG_NET_BUFFER.html">BASS_CONFIG_NET_BUFFER</a>, <a href="BASS_CONFIG_NET_PASSIVE.html">BASS_CONFIG_NET_PASSIVE</a>, <a href="BASS_CONFIG_NET_PREBUF.html">BASS_CONFIG_NET_PREBUF</a>, <a href="BASS_CONFIG_NET_PROXY.html">BASS_CONFIG_NET_PROXY</a>, <a href="BASS_CONFIG_NET_READTIMEOUT.html">BASS_CONFIG_NET_READTIMEOUT</a>, <a href="BASS_CONFIG_NET_TIMEOUT.html">BASS_CONFIG_NET_TIMEOUT</a>, <a href="BASS_CONFIG_VERIFY_NET.html">BASS_CONFIG_VERIFY_NET</a>

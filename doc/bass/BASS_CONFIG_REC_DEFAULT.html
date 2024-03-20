@@ -1,0 +1,19 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_REC_DEFAULT config option</h1>
+<p>Include a "Default" entry in the recording device list?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_REC_DEFAULT,
+    BOOL <I>default</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>default<td>If TRUE, a "Default" device will be included in the device list.
+</table>
+<p><h2>Remarks</h2>
+This option adds a "Default" entry to the recording device list, which maps to the device that is currently the system's default. Its input will automatically switch over when the system's default device setting changes.
+<p>When enabled, the "Default" device will also become the default device to <a href="BASS_RecordInit.html">BASS_RecordInit</a> (with <i>device = -1</i>). Both it and the device that it currently maps to will have the BASS_DEVICE_DEFAULT flag set by <a href="BASS_RecordGetDeviceInfo.html">BASS_RecordGetDeviceInfo</a>.
+<p>This option is enabled by default, and can only be disabled before <a href="BASS_RecordGetDeviceInfo.html">BASS_RecordGetDeviceInfo</a> or <a href="BASS_RecordInit.html">BASS_RecordInit</a> has been called.
+<p><h2>Platform-specific</h2>
+This config option is only available on Windows and macOS; a "Default" entry is always included on other platforms. On Windows, the automatic device switching feature requires using WASAPI (not DirectSound) for recording.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_Init.html">BASS_Init</a>

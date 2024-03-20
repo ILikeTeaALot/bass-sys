@@ -1,0 +1,54 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Split_StreamCreate</h1>
+<p>Creates a splitter stream.
+<p><pre class="def">HSTREAM BASS_Split_StreamCreate(
+    DWORD <I>channel</I>,
+    DWORD <I>flags</I>,
+    int *<I>chanmap</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>channel<td>The handle of the channel to split... a HMUSIC, HSTREAM or HRECORD.
+<tr><td>flags<td>Any combination of these flags.
+<table>
+<tr><td>BASS_SAMPLE_3D<td>Enable 3D functionality. The stream must be mono. The SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_STREAM_AUTOFREE<td>Automatically free the stream when playback ends.
+<tr><td>BASS_STREAM_DECODE<td>Render the sample data, without playing it. Use <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetData.html">BASS_ChannelGetData</a> to retrieve the sample data. The BASS_SAMPLE_3D, BASS_STREAM_AUTOFREE and SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_SPLIT_POS<td>The splitter's length and position is based on the splitter's (rather than the source's) channel count.
+<tr><td>BASS_SPLIT_SLAVE<td>Only get data from the splitter buffer, not directly from the source.
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href=mk:@MSITStore:bass.chm::/speaker.html>Speaker assignment flags</a>. These flags have no effect when the stream is more than stereo.
+</table>
+<tr><td>chanmap<td>Channel mapping... pointer to an array of channel indexes (0=first, -1=end of array), NULL = a 1:1 mapping of the source.
+</table>
+<p><h2>Return value</h2>
+If successful, the new stream's handle is returned, else 0 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="mk:@MSITStore:bass.chm::/BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_HANDLE<td><i>channel</i> is not valid.
+<tr><td>BASS_ERROR_DECODE<td><i>channel</i> is not a decoding channel.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>chanmap</i> contains an invalid channel index.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_STREAM_AUTOFREE flag cannot be combined with the BASS_STREAM_DECODE flag.
+<tr><td>BASS_ERROR_FORMAT<td>The sample format is not supported.
+<tr><td>BASS_ERROR_SPEAKER<td>The specified SPEAKER flags are invalid.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+<tr><td>BASS_ERROR_NO3D<td>Could not initialize 3D support.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+A "splitter" basically does the opposite of a mixer: it splits a single source into multiple streams rather then mixing multiple sources into a single stream. Like mixer sources, splitter sources must be decoding channels.
+<p>The splitter stream will have the same sample rate and resolution as its source, but it can have a different number of channels, as dictated by the <i>chanmap</i> parameter. Even when the number of channels is different (and so the amount of data produced is different), <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetLength.html">BASS_ChannelGetLength</a> will give the source length, and <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a> will give the source position that is currently being output by the splitter stream, unless the BASS_SPLIT_POS flag is used. The BASS_SPLIT_POS flag can be toggled at any time via <a href="mk:@MSITStore:bass.chm::/BASS_ChannelFlags.html">BASS_ChannelFlags</a>.
+<p>All splitter streams with the same source share a buffer to access its sample data. The length of the buffer is determined by the <a href="BASS_CONFIG_SPLIT_BUFFER.html">BASS_CONFIG_SPLIT_BUFFER</a> config option; the splitter streams should not be allowed to drift apart beyond that, otherwise those left behind will suffer buffer overflows. Data will usually be requested from the source only when it is needed, but it can also be gotten ahead of time asynchronously instead via the <a href="BASS_ATTRIB_SPLIT_ASYNCBUFFER.html">BASS_ATTRIB_SPLIT_ASYNCBUFFER</a> attribute, so that it is ready for the splitter(s) to access immediately when needed.
+<p>If the BASS_SPLIT_SLAVE flag is used, the splitter stream will only receive data from the buffer and will not request more data from the source, so it can only receive data that has already been received by another splitter stream with the same source. The BASS_SPLIT_SLAVE flag can be toggled at any time via <a href="mk:@MSITStore:bass.chm::/BASS_ChannelFlags.html">BASS_ChannelFlags</a>.
+<p>When <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a> is used on a splitter stream, its source will be set to the requested position and the splitter stream's buffer state will be reset so that it immediately receives data from the new position. The position change will affect all of the source's splitter streams, but the others will not have their buffer state reset; they will continue to receive any buffered data before reaching the data from the new position. <a href="BASS_Split_StreamReset.html">BASS_Split_StreamReset</a> can be used to reset the buffer state; that can also be used to reset a splitter stream that has ended so that it can be played again.
+<p>The source can be a "dummy" stream (STREAMPROC_DUMMY). In that case, the BASS_SPLIT_SLAVE flag is set automatically because the splitters can only receive data as it is processed rather than request it.
+<p>When a source is freed, all of its splitter streams are automatically freed.
+<p><h2>Example</h2>
+Create a splitter stream from a stereo source with the channels reversed.
+<pre class="code">
+int chanmap[] = {1, 0, -1}; // channel mapping: left = source right, right = source left
+split = BASS_Split_StreamCreate(source, 0, chanmap); // create the splitter stream
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_Split_StreamGetSource.html">BASS_Split_StreamGetSource</a>, <a href="BASS_Split_StreamReset.html">BASS_Split_StreamReset</a>, <a href="BASS_Split_StreamResetEx.html">BASS_Split_StreamResetEx</a>, <a href="BASS_ATTRIB_SPLIT_ASYNCBUFFER.html">BASS_ATTRIB_SPLIT_ASYNCBUFFER</a>, <a href="BASS_CONFIG_SPLIT_BUFFER.html">BASS_CONFIG_SPLIT_BUFFER</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelPlay.html">BASS_ChannelPlay</a>, <a href="mk:@MSITStore:bass.chm::/BASS_StreamFree.html">BASS_StreamFree</a>

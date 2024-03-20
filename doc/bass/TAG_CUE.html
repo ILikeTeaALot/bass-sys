@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>TAG_CUE structure</h1>
+<p>RIFF "cue " tag structure.
+<p><pre class="def">typedef struct {
+    DWORD <I>dwCuePoints</I>;
+    <a href="TAG_CUE_POINT.html">TAG_CUE_POINT</a> <I>CuePoints</I>[];
+} TAG_CUE;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>dwCuePoints<td>Count of cue points
+<tr><td>CuePoints<td>Cue point table.
+</table>
+<p><h2>Remarks</h2>
+The structure is given by <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a> as it is in the RIFF file, which is little-endian, so the members will need to be reversed on big-endian platforms.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>, <a href="TAG_CUE_POINT.html">TAG_CUE_POINT structure</a>

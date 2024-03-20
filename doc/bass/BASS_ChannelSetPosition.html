@@ -1,0 +1,62 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelSetPosition</h1>
+<p>Sets the playback position of a sample, MOD music, or stream.
+<p><pre class="def">BOOL BASS_ChannelSetPosition(
+    DWORD <I>handle</I>,
+    QWORD <I>pos</I>,
+    DWORD <I>mode</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HSTREAM or HMUSIC.
+<tr><td>pos<td>The position, in units determined by the <i>mode</i>.
+<tr><td>mode<td>How to set the position. One of the following, with optional flags.<br>
+<table>
+<tr><td>BASS_POS_BYTE<td>The position is in bytes, which will be rounded down to the nearest sample boundary.
+<tr><td>BASS_POS_MUSIC_ORDER<td>The position is in orders and rows... use MAKELONG(<i>order,row</i>). (HMUSIC only)
+<tr><td>BASS_POS_OGG<td>The position is a bitstream number in an OGG file... 0 = first.
+<tr><td>BASS_POS_END<td>The position is in bytes and is where the channel will end... 0 = normal end position. This will have no effect if it is beyond the channel's normal end position. If the channel is already at/beyond the position then it will end at its current position.
+<tr><td>BASS_POS_LOOP<td>The position is in bytes and is where looping will start from (when looping is enabled). If this is at/beyond the end then the default loop position of 0 will be used instead.
+<tr><td>BASS_POS_DECODETO<td>Flag: Decode/render up to the position rather than seeking to it. This is useful for streams that are unseekable or that have inexact seeking, but it is generally slower than normal seeking and the requested position cannot be behind the current decoding position. This flag can only be used with the BASS_POS_BYTE mode.
+<tr><td>BASS_POS_FLUSH<td>Flag: Flush all output buffers (including FX) so that no remnant of the old position is heard after seeking. This is automatic on normal playback channels (not decoding channels) outside of a "mixtime" <a href="SYNCPROC.html">SYNCPROC</a>.
+<tr><td>BASS_POS_INEXACT<td>Flag: Allow inexact seeking. For speed, seeking may stop at the beginning of a block rather than partially processing the block to reach the requested position.
+<tr><td>BASS_POS_RELATIVE<td>Flag: The requested position is relative to the current position. <i>pos</i> is treated as signed in this case and can be negative.
+<tr><td>BASS_POS_RESET<td>Flag: Reset user file buffers. This allows a user file stream with the BASS_STREAM_BLOCK flag set to be reset, so that it is ready to process new data. This flag can only be used with the BASS_POS_BYTE mode, and <i>pos</i> must be 0. 
+<tr><td>BASS_POS_SCAN<td>Flag: Scan the file to build a seek table up to the position, if it has not already been scanned. Scanning will continue from where it left off previously rather than restarting from the beginning of the file each time. This flag only applies to MP3/MP2/MP1 files and will be ignored with other file formats.
+<tr><td>BASS_MUSIC_POSRESET<td>Flag: Stop all notes. This flag is applied automatically if it has been set on the channel, eg. via <a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>. (HMUSIC)
+<tr><td>BASS_MUSIC_POSRESETEX<td>Flag: Stop all notes and reset bpm/etc to defaults. This flag is applied automatically if it has been set on the channel, eg. via <a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>. (HMUSIC)
+</table>
+<i>other modes & flags may be supported by add-ons, see the documentation.</i>
+</table>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_NOTFILE<td>The stream is not a file stream.
+<tr><td>BASS_ERROR_POSITION<td>The requested position is invalid, eg. it is beyond the end or the download has not yet reached it.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The requested <i>mode</i> is not available. Invalid flags are ignored and do not result in this error.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+Setting the position of a MOD music in bytes (other than 0) requires that the BASS_MUSIC_PRESCAN flag was used in the <a href="BASS_MusicLoad.html">BASS_MusicLoad</a> call, or the use of the BASS_POS_DECODETO flag. When setting the position in orders and rows, the channel's byte position (as reported by <a href="BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a>) is reset to 0. That is because it is not possible to get the byte position of an order/row position; it is possible for an order/row position to never be played in the normal course of events, or it may be played multiple times.
+<p>When setting the position of a MOD music, and the BASS_MUSIC_POSRESET flag is active, all notes that were playing before the position changed will be stopped. Otherwise, the notes will continue playing until they are stopped in the MOD music. When setting the position in bytes, the <a href=BASS_ATTRIB_MUSIC_BPM.html>BPM</a>, <a href=BASS_ATTRIB_MUSIC_SPEED.html>speed</a> and <a href=BASS_ATTRIB_MUSIC_VOL_GLOBAL.html>global volume</a> are updated to what they would normally be at the new position. Otherwise they are left as they were prior to the position change, unless the seek position is 0 (the start), in which case they are also reset to the starting values (with the BASS_MUSIC_POSRESET flag). When the BASS_MUSIC_POSRESETEX flag is active, the <a href=BASS_ATTRIB_MUSIC_BPM.html>BPM</a>, <a href=BASS_ATTRIB_MUSIC_SPEED.html>speed</a> and <a href=BASS_ATTRIB_MUSIC_VOL_GLOBAL.html>global volume</a> are reset with every seek. The BASS_MUSIC_POSRESETEX flag (or seeking to position 0) also resets channel volume and panning to defaults.<p>
+<p>For MP3/MP2/MP1 streams, unless the file is scanned via the BASS_POS_SCAN flag or the BASS_STREAM_PRESCAN flag at stream creation, seeking will be approximate but generally still quite accurate. Besides scanning, exact seeking can also be achieved with the BASS_POS_DECODETO flag.
+<p>Seeking in internet file (and "buffered" user file) streams is possible once the download has reached the requested position, so long as the file is not being streamed in blocks (BASS_STREAM_BLOCK flag).
+<p>The BASS_POS_RESET flag can be used to reset/flush a buffered user file stream, so that new data can be processed, but it may not be supported by some decoders. When it is not supported, <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a> can be used again instead to create a new stream for the new data.
+<p>User streams (created with <a href="BASS_StreamCreate.html">BASS_StreamCreate</a>) are not seekable, but it is possible to reset a user stream (including its buffer contents) by setting its position to byte 0.
+<p>The BASS_POS_DECODETO flag can be used to seek forwards in streams that are not normally seekable, like custom streams or internet streams that are using the BASS_STREAM_BLOCK flag, but it will only go as far as what is currently available; it will not wait for more data to be downloaded, for example.
+<p>In some cases, particularly when the BASS_POS_INEXACT flag is used, the new position may not be what was requested. <a href="BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a> can be used to confirm what the new position actually is.
+<p>The BASS_POS_SCAN flag works the same way as the <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a> BASS_STREAM_PRESCAN flag, and can be used to delay the scanning until after the stream has been created. When a position beyond the end is requested, the call will fail (BASS_ERROR_POSITION error code) but the seek table and exact length will have been scanned. When a file has been scanned, all seeking (even without the BASS_POS_SCAN flag) within the scanned part of it will use the scanned infomation.
+<p>When looping is enabled, the BASS_POS_LOOP and BASS_POS_END modes can be used to set custom loop start and end points in bytes. Non-byte position (eg. BASS_POS_MUSIC_ORDER) custom looping is also possible by setting a "mixtime" sync at the loop end position via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> and then seeking to the loop start position in the <a href="SYNCPROC.html">SYNCPROC</a> callback.
+<p><h2>Example</h2>
+Set the position of a channel to 1000000 bytes.
+<pre class="code">
+BASS_ChannelSetPosition(channel, 1000000, BASS_POS_BYTE);
+</pre>
+<p>Set the position of a MOD music to row 20 of order 10, and stop all currently playing notes.
+<pre class="code">
+BASS_ChannelSetPosition(music, MAKELONG(10, 20), BASS_POS_MUSIC_ORDER | BASS_MUSIC_POSRESET);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>, <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a>, <a href="BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a>, <a href="BASS_ChannelIsActive.html">BASS_ChannelIsActive</a>, <a href="BASS_ChannelSeconds2Bytes.html">BASS_ChannelSeconds2Bytes</a>, <a href="BASS_ChannelUpdate.html">BASS_ChannelUpdate</a>

@@ -1,0 +1,34 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>RECORDPROC callback</h1>
+<p>User defined callback function to process recorded sample data.
+<p><pre class="def">BOOL CALLBACK RecordProc(
+    HRECORD <I>handle</I>,
+    const void *<I>buffer</I>,
+    DWORD <I>length</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The recording that the data is from.
+<tr><td>buffer<td>Pointer to the recorded sample data. The sample data is in standard Windows PCM format, that is 8-bit samples are unsigned, 16-bit samples are signed, 32-bit floating-point samples range from -1 to +1.
+<tr><td>length<td>The number of bytes in the buffer.
+<tr><td>user<td>The user instance data given when <a href="BASS_RecordStart.html">BASS_RecordStart</a> was called.
+</table>
+<p><h2>Return value</h2>
+Return FALSE to stop recording, and anything else to continue recording.
+<p><h2>Remarks</h2>
+The <a href="BASS_ATTRIB_GRANULE.html">BASS_ATTRIB_GRANULE</a> attribute can be used to control the granularity of the amount of data received.
+<p><a href="BASS_RecordFree.html">BASS_RecordFree</a> should not be used to free the recording device within a recording callback function. Nor should <a href="BASS_ChannelStop.html">BASS_ChannelStop</a> be used to stop the recording; return FALSE to do that instead.
+<p><h2>Example</h2>
+A callback function to write the recorded data to disk.
+<pre class="code">
+BOOL CALLBACK MyRecordProc(HRECORD handle, const void *buffer, DWORD length, void *user)
+{
+    fwrite(buffer, 1, length, (FILE*)user); // write the buffer to the file
+    return TRUE; // continue recording
+}
+...
+HRECORD record = BASS_RecordStart(44100, 2, 0, MyRecordProc, file); // start recording
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_RecordStart.html">BASS_RecordStart</a>, <a href="BASS_ATTRIB_GRANULE.html">BASS_ATTRIB_GRANULE</a>

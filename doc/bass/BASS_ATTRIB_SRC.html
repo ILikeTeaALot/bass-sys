@@ -1,0 +1,20 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_SRC attribute</h1>
+<p>The sample rate conversion quality of a channel.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_SRC,
+    float <I>quality</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>quality<td>The sample rate conversion quality... 0 = linear interpolation, 1 = 8 point sinc interpolation, 2 = 16 point sinc interpolation, 3 = 32 point sinc interpolation, 4 = 64 point sinc interpolation. Other values are also accepted but will be interpreted as 0 or 4, depending on whether they are lower or higher.
+</table>
+<p><h2>Remarks</h2>
+When a channel has a different sample rate to what the output device is using, the channel's sample data will need to be converted to match the output device's rate during playback. This attribute determines how that is done. The linear interpolation option uses less CPU, but the sinc interpolation gives better sound quality (less aliasing), with the quality and CPU usage increasing with the number of points. A good compromise for lower spec systems could be to use sinc interpolation for music playback and linear interpolation for sound effects.
+<p>Whenever possible, a channel's sample rate should match the output device's rate to avoid the need for any sample rate conversion. The device's sample rate could be used in <a href="BASS_StreamCreate.html">BASS_StreamCreate</a> or <a href="BASS_MusicLoad.html">BASS_MusicLoad</a> or <a href=bassmidi.html>MIDI</a> stream creation calls, for example.
+<p>The sample rate conversion occurs (when required) during playback, after the sample data has left the channel's playback buffer, so it does not affect the data delivered by <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>. Although this attribute has no direct effect on decoding channels, it is still available so that it can be used by the <a href=bassmix.html>BASSmix</a> add-on and anything else that wants to use it.
+<p>This attribute can be set at any time, and changes take immediate effect. A channel's initial setting is determined by the <a href="BASS_CONFIG_SRC.html">BASS_CONFIG_SRC</a> config option, or <a href="BASS_CONFIG_SRC_SAMPLE.html">BASS_CONFIG_SRC_SAMPLE</a> in the case of a sample channel.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_CONFIG_SRC.html">BASS_CONFIG_SRC</a>, <a href="BASS_CONFIG_SRC_SAMPLE.html">BASS_CONFIG_SRC_SAMPLE</a>

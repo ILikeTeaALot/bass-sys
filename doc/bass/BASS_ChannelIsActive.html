@@ -1,0 +1,27 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+
+<h1>BASS_ChannelIsActive</h1>
+<p>Checks if a sample, stream, or MOD music is active (playing) or stalled. Can also check if a recording is in progress.
+<p><pre class="def">DWORD BASS_ChannelIsActive(
+    DWORD <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD.
+</table>
+<p><h2>Return value</h2>
+The return value is one of the following.<br>
+<table>
+<tr><td>BASS_ACTIVE_STOPPED<td>The channel is not active, or <I>handle</I> is not a valid channel.
+<tr><td>BASS_ACTIVE_PLAYING<td>The channel is playing (or recording).
+<tr><td>BASS_ACTIVE_PAUSED<td>The channel is paused.
+<tr><td>BASS_ACTIVE_PAUSED_DEVICE<td>The channel's device is paused.
+<tr><td>BASS_ACTIVE_STALLED<td>Playback of the stream has been stalled due to a lack of sample data. Playback will automatically resume once there is sufficient data to do so.
+</table>
+<p><h2>Remarks</h2>
+When using this function with a decoding channel, BASS_ACTIVE_PLAYING will be returned while there is still data to decode. Once the end has been reached, BASS_ACTIVE_STOPPED will be returned. BASS_ACTIVE_STALLED is never returned for decoding channels; you can tell a decoding channel is stalled if <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> returns less data than requested and this function still returns BASS_ACTIVE_PLAYING.
+<p>The BASS_ACTIVE_PAUSED_DEVICE state can be the result of a <a href="BASS_Pause.html">BASS_Pause</a> call or of the device stopping unexpectedly (eg. a USB soundcard being disconnected). In either case, playback will be resumed by <a href="BASS_Start.html">BASS_Start</a>.
+<p><a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> can be used to differentiate a stopped channel from an invalid channel. The error code will be BASS_OK if the channel is valid and stopped.
+<p>Syncs can be set via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> to be notified when a channel reaches the end (BASS_SYNC_END sync) or stalls/resumes (BASS_SYNC_STALL sync) or pauses due to device failure (BASS_SYNC_DEV_FAIL sync).
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a>, <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>, <a href="BASS_ChannelStart.html">BASS_ChannelStart</a>, <a href="BASS_IsStarted.html">BASS_IsStarted</a>, <a href="BASS_ATTRIB_NET_RESUME.html">BASS_ATTRIB_NET_RESUME</a>

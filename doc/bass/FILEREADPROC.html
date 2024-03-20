@@ -1,0 +1,21 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>FILEREADPROC callback</h1>
+<p>User file stream read callback function.
+<p><pre class="def">DWORD CALLBACK FileReadProc(
+    void *<I>buffer</I>,
+    DWORD <I>length</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>buffer<td>Pointer to the buffer to put the data in.
+<tr><td>length<td>Maximum number of bytes to read.
+<tr><td>user<td>The user instance data given when <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a> was called.
+</table>
+<p><h2>Return value</h2>
+The number of bytes read... -1 = end of file, 0 = end of file (STREAMFILE_BUFFER file system only).
+<p><h2>Remarks</h2>
+During creation of the stream, this function should try to return the amount of data requested. After that, it can just return whatever is available up to the requested amount.
+<p>For an unbuffered file stream, this function should be as quick as possible during playback; any delays will not only affect the decoding of the current stream, but can also affect other streams and MOD musics that are playing. It is better to return less data (even none) rather than wait for more data. A buffered file stream is not affected by delays like this, as this function runs in its own thread then.
+<p><h2>See also</h2>
+<a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_FILEPROCS.html">BASS_FILEPROCS structure</a>

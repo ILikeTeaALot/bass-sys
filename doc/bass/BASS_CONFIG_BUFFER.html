@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_BUFFER config option</h1>
+<p>The playback buffer length for HSTREAM and HMUSIC channels.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_BUFFER,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>length<td>The buffer length in milliseconds. The minimum length is 10ms, the maximum is 5000 milliseconds. If the length specified is outside this range, it is automatically capped.
+</table>
+<p><h2>Remarks</h2>
+The default buffer length is 500 milliseconds. Increasing the length decreases the chance of the sound possibly breaking-up on slower computers, but also increases the latency for DSP/FX. The buffer length should always be greater than the update period (<a href="BASS_CONFIG_UPDATEPERIOD.html">BASS_CONFIG_UPDATEPERIOD</a>), which determines how often the buffer is refilled.
+<p>Small buffer lengths are only required if the sound is going to be changing in real-time, for example, in a soft-synth. If you need to use a small buffer, then the <i>minbuf</i> member of <a href="BASS_INFO.html">BASS_INFO</a> should be used to get the recommended minimum buffer length supported by the device and its drivers, and add that to the update period plus some margin for the stream's processing. Even then, it is still possible that the sound could break up on some systems, it is also possible that smaller buffers may be fine. So when using small buffers, you should have an option in your software for the user to finetune the length used, for optimal performance.
+<p>Using this config option only affects the HMUSIC/HSTREAM channels that are created afterwards, not any that have already been created. So you can have channels with differing buffer lengths by using this config option each time before creating them. A channel's buffer length can be also reduced (or bypassed entirely) at any time via the <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a> attribute.
+<p>If automatic updating is disabled, make sure you call <a href="BASS_Update.html">BASS_Update</a> frequently enough to keep the buffers updated.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_GetInfo.html">BASS_GetInfo</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a>, <a href="BASS_CONFIG_UPDATEPERIOD.html">BASS_CONFIG_UPDATEPERIOD</a>

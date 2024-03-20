@@ -1,0 +1,47 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>STREAMPROC callback</h1>
+<p>User stream writing callback function.
+<p><pre class="def">DWORD CALLBACK StreamProc(
+    HSTREAM <I>handle</I>,
+    void *<I>buffer</I>,
+    DWORD <I>length</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The stream that needs writing.
+<tr><td>buffer<td>Pointer to the buffer to write the sample data in. The data should be as follows: 8-bit samples are unsigned, 16-bit samples are signed, 32-bit floating-point samples range from -1 to +1.
+<tr><td>length<td>The maximum number of bytes to write.
+<tr><td>user<td>The user instance data given when <a href="BASS_StreamCreate.html">BASS_StreamCreate</a> was called.
+</table>
+<p><h2>Return value</h2>
+The number of bytes written by the function, optionally using the BASS_STREAMPROC_END flag to signify that the end of the stream is reached.
+<p><h2>Remarks</h2>
+A stream writing function should be as quick as possible because other playing streams (and MOD musics) cannot be updated until it has finished (unless multiple update threads are enabled via the <a href="BASS_CONFIG_UPDATETHREADS.html">BASS_CONFIG_UPDATETHREADS</a> option). It is better to return less data quickly, rather than spending a long time delivering exactly the amount requested.
+<p>Although a STREAMPROC may return less data than BASS requests, be careful not to do so by too much, too often. If the buffer gets exhausted, BASS will automatically stall playback of the stream, until more data is provided. <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> (BASS_DATA_AVAILABLE) can be used to check the buffer level, and <a href="BASS_ChannelIsActive.html">BASS_ChannelIsActive</a> can be used to check if playback has stalled. A BASS_SYNC_STALL sync can also be set via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>, to be triggered upon playback stalling or resuming. If you do return less than the requested amount of data, the number of bytes should still equate to a whole number of samples.
+<p>The <a href="BASS_ATTRIB_GRANULE.html">BASS_ATTRIB_GRANULE</a> attribute can be used to control the granularity of the amount of data requested.
+<p>Some functions can cause problems if called from within a stream (or DSP) function. Do not call <a href="BASS_Stop.html">BASS_Stop</a> or <a href="BASS_Free.html">BASS_Free</a> from within a stream callback, and do not call <a href="BASS_ChannelStop.html">BASS_ChannelStop</a> or <a href="BASS_ChannelFree.html">BASS_ChannelFree</a> or <a href="BASS_StreamFree.html">BASS_StreamFree</a> with the same handle as received by the callback.
+<p>When streaming multi-channel sample data, the channel order of each sample is as follows.
+<table>
+<tr><td>3 channels<td>front left, front right, center.
+<tr><td>4 channels<td>front left, front right, rear left, rear right.
+<tr><td>5 channels<td>front left, front right, center, rear left, rear right.
+<tr><td>6 channels (5.1)<td>front left, front right, center, LFE, rear left, rear right.
+<tr><td>8 channels (7.1)<td>front left, front right, center, LFE, rear left, rear right, side left, side right.
+</table>
+<p><h2>Example</h2>
+A callback function to stream a file, in 44100 Hz stereo 16-bit.
+<pre class="code">FILE *file;
+...
+// the stream writing callback
+DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *user)
+{
+    DWORD c = fread(buffer, 1, length, file); // read the file into the buffer
+    if (feof(file)) c |= BASS_STREAMPROC_END; // end of the file/stream
+    return c;
+}
+...
+HSTREAM stream = BASS_StreamCreate(44100, 2, 0, MyStreamProc, 0); // create the stream
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_StreamCreate.html">BASS_StreamCreate</a>, <a href="BASS_ATTRIB_GRANULE.html">BASS_ATTRIB_GRANULE</a>

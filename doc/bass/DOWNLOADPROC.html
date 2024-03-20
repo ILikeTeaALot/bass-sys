@@ -1,0 +1,34 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>DOWNLOADPROC callback</h1>
+<p>Internet stream download callback function.
+<p><pre class="def">void CALLBACK DownloadProc(
+    const void *<I>buffer</I>,
+    DWORD <I>length</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>buffer<td>Pointer to the downloaded data... NULL = finished downloading.
+<tr><td>length<td>The number of bytes in the buffer... 0 = HTTP or ICY tags.
+<tr><td>user<td>The user instance data given when <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a> was called.
+</table>
+<p><h2>Remarks</h2>
+The callback will be called before the <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a> call returns (if it is successful), with the initial downloaded data. So any initialization (eg. creating the file if writing to disk) needs to be done either before the call, or in the callback function.
+<p>When the BASS_STREAM_STATUS flag is specified in the <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a> call, HTTP and ICY tags may be passed to the callback during connection, before any stream data is received. The tags are given exactly as would be returned by <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>. You can distinguish between HTTP and ICY tags by checking what the first string starts with: "HTTP" or "ICY".
+<p>A download callback function could be used in conjunction with a BASS_SYNC_META sync set via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> to save individual tracks to disk from a Shoutcast stream.
+<p><h2>Example</h2>
+Stream an MP3 file, and save a local copy.
+<pre class="code">
+FILE *file = NULL;
+...
+void CALLBACK MyDownloadProc(const void *buffer, DWORD length, void *user)
+{
+    if (!file) file = fopen("afile.mp3", "wb"); // create the file
+    if (!buffer) fclose(file); // finished downloading
+    else fwrite(buffer, 1, length, file);
+}
+...
+HSTREAM stream = BASS_StreamCreateURL("http://www.asite.com/afile.mp3", 0, 0, MyDownloadProc, 0);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>

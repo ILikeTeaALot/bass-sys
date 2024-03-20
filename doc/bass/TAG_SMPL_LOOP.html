@@ -1,0 +1,24 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>TAG_SMPL_LOOP structure</h1>
+<p>RIFF "smpl" tag sample loop structure.
+<p><pre class="def">typedef struct {
+    DWORD <I>dwIdentifier</I>;
+    DWORD <I>dwType</I>;
+    DWORD <I>dwStart</I>;
+    DWORD <I>dwEnd</I>;
+    DWORD <I>dwFraction</I>;
+    DWORD <I>dwPlayCount</I>;
+} TAG_SMPL_LOOP;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>dwIdentifier<td>Identifies the unique ’name’ of the loop. This field may correspond with a name stored in a cue points ("cue ") chunk. The name data is stored in an associated data list ("adtl") chunk.
+<tr><td>dwType<td>Specifies the loop type: 0 - Loop forward (normal), 1 - Alternating loop (forward/backward), 2 - Loop backward, 3-31 - reserved for future standard types, 32-? - sampler specific types (manufacturer defined)
+<tr><td>dwStart<td>Specifies the startpoint of the loop in samples.
+<tr><td>dwEnd<td>Specifies the endpoint of the loop in samples (this sample will also be played).
+<tr><td>dwFraction<td>Allows fine-tuning for loop fractional areas between samples. Values range from 0x00000000 to 0xFFFFFFFF. A value of 0x80000000 represents 1/2 of a sample length.
+<tr><td>dwPlayCount<td>Specifies the number of times.
+</table>
+<p><h2>Remarks</h2>
+The structure is given by <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a> as it is in the RIFF file, which is little-endian, so the members will need to be reversed on big-endian platforms.
+<p><h2>See also</h2>
+<a href="TAG_SMPL.html">TAG_SMPL structure</a>

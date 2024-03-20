@@ -1,0 +1,14 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_GetCPU</h1>
+<p>Retrieves the current CPU usage of BASS.
+<p><pre class="def">float BASS_GetCPU();</pre>
+<p><h2>Return value</h2>
+The BASS CPU usage as a percentage.
+<p><h2>Remarks</h2>
+This function does not strictly tell the CPU usage, but rather how timely the processing is. For example, if it takes 10ms to generate 100ms of data, that would be 10%. If the reported usage gets to 100%, that means the channel data is being played faster than it can be generated and buffer underruns are likely to occur.
+<p>The CPU usage value includes the time taken by decoding and DSP/FX processing during playback buffer update cycles plus the time taken to produce the final output mix. The processing of some add-on stream formats may not be entirely included if they use additional decoding threads; see the add-on documentation for details.
+<p>If automatic updates are disabled then the playback buffer update cycle CPU usage value is updated after each call to <a href="BASS_Update.html">BASS_Update</a>. <a href="BASS_ChannelUpdate.html">BASS_ChannelUpdate</a> usage is not included. The CPU usage of an individual channel is available via the <a href="BASS_ATTRIB_CPU.html">BASS_ATTRIB_CPU</a> attribute.
+<p><h2>Platform-specific</h2>
+On Windows, the CPU usage does not include the decoding of internet (or "buffered" user file) streams that use Media Foundation codecs.
+<p><h2>See also</h2>
+<a href="BASS_CONFIG_UPDATETHREADS.html">BASS_CONFIG_UPDATETHREADS</a>, <a href="BASS_ATTRIB_CPU.html">BASS_ATTRIB_CPU</a>

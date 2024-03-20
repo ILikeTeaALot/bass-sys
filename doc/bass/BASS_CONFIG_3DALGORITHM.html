@@ -1,0 +1,19 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_3DALGORITHM config option</h1>
+<p>The positioning algorithm for 3D channels.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_3DALGORITHM,
+    DWORD <I>algo</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>algo<td>One of these algorithms.<br>
+<table>
+<tr><td>BASS_3DALG_DEFAULT<td>If at least 4 speakers are available (see <a href="BASS_GetInfo.html">BASS_GetInfo</a>) then the sound is panned among them, otherwise it equates to BASS_3DALG_OFF.
+<tr><td>BASS_3DALG_OFF<td>Left and right panning on only 2 speakers is used.
+</table>
+</table>
+<p><h2>Remarks</h2>
+The default setting is BASS_3DALG_DEFAULT. Changes only affect subsequently created 3D channels, not any that already exist.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SampleCreate.html">BASS_SampleCreate</a>, <a href="BASS_SampleLoad.html">BASS_SampleLoad</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>

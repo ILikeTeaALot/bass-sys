@@ -1,0 +1,59 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_RecordGetInput</h1>
+<p>Retrieves the current settings of a recording input source.
+<p><pre class="def">DWORD BASS_RecordGetInput(
+    int <I>input</I>,
+    float *<I>volume</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>input<td>The input to get the settings of... 0 = first, -1 = master.
+<tr><td>volume<td>Pointer to a variable to receive the volume... NULL = don't retrieve the volume.
+</table>
+<p><h2>Return value</h2>
+If an error occurs, -1 is returned, use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. If successful, then the settings are returned. The BASS_INPUT_OFF flag will be set if the input is disabled, otherwise the input is enabled. The type of input is also indicated in the high 8 bits (use BASS_INPUT_TYPE_MASK to test) of the return value, and can be one of the following. If the volume is requested but not available, <i>volume</i> will receive -1.
+<p><table>
+<tr><td>BASS_INPUT_TYPE_DIGITAL<td>Digital input source, for example, a DAT or audio CD.
+<tr><td>BASS_INPUT_TYPE_LINE<td>Line-in. On some devices, "Line-in" may be combined with other analog sources into a single BASS_INPUT_TYPE_ANALOG input.
+<tr><td>BASS_INPUT_TYPE_MIC<td>Microphone.
+<tr><td>BASS_INPUT_TYPE_SYNTH<td>Internal MIDI synthesizer.
+<tr><td>BASS_INPUT_TYPE_CD<td>Analog audio CD.
+<tr><td>BASS_INPUT_TYPE_PHONE<td>Telephone.
+<tr><td>BASS_INPUT_TYPE_SPEAKER<td>PC speaker.
+<tr><td>BASS_INPUT_TYPE_WAVE<td>The device's WAVE/PCM output.
+<tr><td>BASS_INPUT_TYPE_AUX<td>Auxiliary. Like "Line-in", "Aux" may be combined with other analog sources into a single BASS_INPUT_TYPE_ANALOG input on some devices.
+<tr><td>BASS_INPUT_TYPE_ANALOG<td>Analog, typically a mix of all analog sources.
+<tr><td>BASS_INPUT_TYPE_UNDEF<td>Anything that is not covered by the other types.
+</table>
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_RecordInit.html">BASS_RecordInit</a> has not been successfully called.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>input</i> is invalid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>A master input is not available.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Platform-specific</h2>
+No input control/information is available on the "Default" recording device except on Linux. The master input (-1) is only available on Windows and Linux.
+<p>The input type information is only available on Windows. There is no "what you hear" type of input defined; if the device has one, it will typically come under BASS_INPUT_TYPE_ANALOG or BASS_INPUT_TYPE_UNDEF.
+<p>On macOS, only the currently enabled input has its volume setting available (if it has a volume control).
+<p><h2>Example</h2>
+List all available input sources, with their current status.
+<pre class="code">int n;
+const char *name;
+for (n = 0; name = BASS_RecordGetInputName(n); n++) {
+    float vol;
+    int s = BASS_RecordGetInput(n, &vol);
+    printf("%s [%s : %g]\n", name, s & BASS_INPUT_OFF ? "off" : "on", vol);
+}</pre>
+<p>Find a microphone input.
+<pre class="code">int mic = -1, n, flags;
+for (n = 0; (flags = BASS_RecordGetInput(n, NULL)) != -1; n++) {
+    if ((flags & BASS_INPUT_TYPE_MASK) == BASS_INPUT_TYPE_MIC) { // found the mic!
+        mic = n;
+        break;
+    }
+}
+if (mic != -1) printf("Found a microphone at input %d\n", mic);
+else printf("No microphone found\n");</pre>
+<p><h2>See also</h2>
+<a href="BASS_RecordGetInfo.html">BASS_RecordGetInfo</a>, <a href="BASS_RecordGetInputName.html">BASS_RecordGetInputName</a>, <a href="BASS_RecordSetInput.html">BASS_RecordSetInput</a>

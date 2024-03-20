@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NET_PROXY config option</h1>
+<p>Proxy server settings.
+<p><pre class="def">BASS_SetConfigPtr(
+    BASS_CONFIG_NET_PROXY,
+    char *<I>proxy</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>proxy<td>The proxy server settings, in the form of "user:pass@server:port"... NULL = don't use a proxy. "" (empty string) = use the OS's default proxy settings. If only the "user:pass@" part is specified, then those authorization credentials are used with the default proxy server. If only the "server:port" part is specified, then that proxy server is used without any authorization credentials.
+</table>
+<p><h2>Remarks</h2>
+<a href="BASS_SetConfigPtr.html">BASS_SetConfigPtr</a> makes a copy of the provided string, so it does not need to persist beyond the call. Changes take effect from the next internet stream creation call.
+<p><h2>Platform-specific</h2>
+On Windows, the BASS_UNICODE flag can be used with a UTF-16 string ("wchar_t" rather than "char").
+<p><h2>See also</h2>
+<a href="BASS_GetConfigPtr.html">BASS_GetConfigPtr</a>, <a href="BASS_SetConfigPtr.html">BASS_SetConfigPtr</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>

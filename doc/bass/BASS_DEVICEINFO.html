@@ -1,0 +1,44 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_DEVICEINFO structure</h1>
+<p>Used with <a href="BASS_GetDeviceInfo.html">BASS_GetDeviceInfo</a> or <a href="BASS_RecordGetDeviceInfo.html">BASS_RecordGetDeviceInfo</a> to retrieve information on a device.
+<p><pre class="def">typedef struct {
+    char *<i>name</i>;
+    char *<i>driver</i>;
+    DWORD <i>flags</i>;
+} BASS_DEVICEINFO;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>name<td>Description of the device.
+<tr><td>driver<td>Driver identification.
+<tr><td>flags<td>The device's current status... a combination of these flags.
+<table>
+<tr><td>BASS_DEVICE_ENABLED<td>The device is enabled. It will not be possible to initialize the device if this flag is not present.
+<tr><td>BASS_DEVICE_DEFAULT<td>The device is the system default.
+<tr><td>BASS_DEVICE_DEFAULTCOM<td>The device is the system default communication device.
+<tr><td>BASS_DEVICE_INIT<td>The device is initialized, ie. <a href="BASS_Init.html">BASS_Init</a> or <a href="BASS_RecordInit.html">BASS_RecordInit</a> has been called.
+<tr><td>BASS_DEVICE_LOOPBACK<td>The device is a loopback recording device; it captures the sound from an output device. The corresponding output device can be identified by having the same <i>driver</i> value.
+</table>
+The type of device may also be indicated in the high 8 bits (use BASS_DEVICE_TYPE_MASK to test), and can be one of the following.
+<table>
+<tr><td>BASS_DEVICE_TYPE_DIGITAL<td>An audio endpoint device that connects to an audio adapter through a connector for a digital interface of unknown type.
+<tr><td>BASS_DEVICE_TYPE_DISPLAYPORT<td>An audio endpoint device that connects to an audio adapter through a DisplayPort connector.
+<tr><td>BASS_DEVICE_TYPE_HANDSET<td>The part of a telephone that is held in the hand and that contains a speaker and a microphone for two-way communication.
+<tr><td>BASS_DEVICE_TYPE_HDMI<td>An audio endpoint device that connects to an audio adapter through a High-Definition Multimedia Interface (HDMI) connector.
+<tr><td>BASS_DEVICE_TYPE_HEADPHONES<td>A set of headphones.
+<tr><td>BASS_DEVICE_TYPE_HEADSET<td>An earphone or a pair of earphones with an attached mouthpiece for two-way communication.
+<tr><td>BASS_DEVICE_TYPE_LINE<td>An audio endpoint device that sends a line-level analog signal to a line-input jack on an audio adapter or that receives a line-level analog signal from a line-output jack on the adapter.
+<tr><td>BASS_DEVICE_TYPE_MICROPHONE<td>A microphone.
+<tr><td>BASS_DEVICE_TYPE_NETWORK<td>An audio endpoint device that the user accesses remotely through a network.
+<tr><td>BASS_DEVICE_TYPE_SPDIF<td>An audio endpoint device that connects to an audio adapter through a Sony/Philips Digital Interface (S/PDIF) connector.
+<tr><td>BASS_DEVICE_TYPE_SPEAKERS<td>A set of speakers.
+</table>
+</table>
+<p><h2>Remarks</h2>
+When a device is disabled/disconnected, it is still retained in the device list, but the BASS_DEVICE_ENABLED flag is removed from it. If the device is subsequently re-enabled, it may become available again with the same device number, or the system may add a new entry for it.
+<p>When a new device is connected, it can affect the other devices and result in the system moving them to new device entries. If an affected device is initialized, it will stop working and will need to be reinitialized using its new device number.
+<p><h2>Platform-specific</h2>
+On Windows Vista and newer, <i>driver</i> is the device's endpoint ID. On older Windows, it is a filename and further information can be obtained from the file via the GetFileVersionInfo function. On macOS, <i>driver</i> is the device's UID, and on Linux it is the ALSA device name. It is unused on other platforms. The device type is only available on Windows (Vista and newer) and macOS. On Windows, DisplayPort devices will have BASS_DEVICE_TYPE_HDMI rather than BASS_DEVICE_TYPE_DISPLAYPORT.
+<p>On Windows and macOS, when the <a href="BASS_CONFIG_DEV_DEFAULT.html">BASS_CONFIG_DEV_DEFAULT</a> option is enabled, the BASS_DEVICE_DEFAULT flag will be set on both the "Default" device and the device that it currently maps to. The BASS_DEVICE_DEFAULTCOM flag is only used on Windows Vista and newer.
+<p>Depending on the <a href="BASS_CONFIG_UNICODE.html">BASS_CONFIG_UNICODE</a> config setting, <i>name</i> and <i>driver</i> can be in ANSI or UTF-8 form on Windows. They are always in UTF-8 form on other platforms.
+<p><h2>See also</h2>
+<a href="BASS_GetDeviceInfo.html">BASS_GetDeviceInfo</a>, <a href="BASS_RecordGetDeviceInfo.html">BASS_RecordGetDeviceInfo</a>, <a href="BASS_CONFIG_UNICODE.html">BASS_CONFIG_UNICODE</a>

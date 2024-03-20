@@ -1,0 +1,1333 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS.TXT">
+		<param name="Local" value="bass.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Upgrading">
+		<param name="Local" value="upgrade.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Config">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_GetConfig">
+			<param name="Local" value="BASS_GetConfig.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_GetConfigPtr">
+			<param name="Local" value="BASS_GetConfigPtr.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SetConfig">
+			<param name="Local" value="BASS_SetConfig.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SetConfigPtr">
+			<param name="Local" value="BASS_SetConfigPtr.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Options">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_3DALGORITHM">
+				<param name="Local" value="BASS_CONFIG_3DALGORITHM.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_AM_DISABLE">
+				<param name="Local" value="BASS_CONFIG_AM_DISABLE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_ANDROID_AAUDIO">
+				<param name="Local" value="BASS_CONFIG_ANDROID_AAUDIO.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_ANDROID_SESSIONID">
+				<param name="Local" value="BASS_CONFIG_ANDROID_SESSIONID.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_ASYNCFILE_BUFFER">
+				<param name="Local" value="BASS_CONFIG_ASYNCFILE_BUFFER.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_BUFFER">
+				<param name="Local" value="BASS_CONFIG_BUFFER.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_CURVE_VOL">
+				<param name="Local" value="BASS_CONFIG_CURVE_VOL.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_CURVE_PAN">
+				<param name="Local" value="BASS_CONFIG_CURVE_PAN.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_DEV_BUFFER">
+				<param name="Local" value="BASS_CONFIG_DEV_BUFFER.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_DEV_DEFAULT">
+				<param name="Local" value="BASS_CONFIG_DEV_DEFAULT.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_DEV_NONSTOP">
+				<param name="Local" value="BASS_CONFIG_DEV_NONSTOP.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_DEV_PERIOD">
+				<param name="Local" value="BASS_CONFIG_DEV_PERIOD.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_FILENAME">
+				<param name="Local" value="BASS_CONFIG_FILENAME.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_FLOATDSP">
+				<param name="Local" value="BASS_CONFIG_FLOATDSP.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_GVOL_MUSIC">
+				<param name="Local" value="BASS_CONFIG_GVOL_MUSIC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_GVOL_SAMPLE">
+				<param name="Local" value="BASS_CONFIG_GVOL_SAMPLE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_GVOL_STREAM">
+				<param name="Local" value="BASS_CONFIG_GVOL_STREAM.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_HANDLES">
+				<param name="Local" value="BASS_CONFIG_HANDLES.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_IOS_SESSION">
+				<param name="Local" value="BASS_CONFIG_IOS_SESSION.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_LIBSSL">
+				<param name="Local" value="BASS_CONFIG_LIBSSL.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_MF_DISABLE">
+				<param name="Local" value="BASS_CONFIG_MF_DISABLE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_MF_VIDEO">
+				<param name="Local" value="BASS_CONFIG_MF_VIDEO.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_MUSIC_VIRTUAL">
+				<param name="Local" value="BASS_CONFIG_MUSIC_VIRTUAL.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NET_AGENT">
+				<param name="Local" value="BASS_CONFIG_NET_AGENT.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NET_BUFFER">
+				<param name="Local" value="BASS_CONFIG_NET_BUFFER.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NET_META">
+				<param name="Local" value="BASS_CONFIG_NET_META.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NET_PASSIVE">
+				<param name="Local" value="BASS_CONFIG_NET_PASSIVE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NET_PLAYLIST">
+				<param name="Local" value="BASS_CONFIG_NET_PLAYLIST.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NET_PLAYLIST_DEPTH">
+				<param name="Local" value="BASS_CONFIG_NET_PLAYLIST_DEPTH.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NET_PREBUF">
+				<param name="Local" value="BASS_CONFIG_NET_PREBUF.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NET_PROXY">
+				<param name="Local" value="BASS_CONFIG_NET_PROXY.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NET_READTIMEOUT">
+				<param name="Local" value="BASS_CONFIG_NET_READTIMEOUT.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NET_RESTRATE">
+				<param name="Local" value="BASS_CONFIG_NET_RESTRATE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NET_TIMEOUT">
+				<param name="Local" value="BASS_CONFIG_NET_TIMEOUT.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_NORAMP">
+				<param name="Local" value="BASS_CONFIG_NORAMP.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_OGG_PRESCAN">
+				<param name="Local" value="BASS_CONFIG_OGG_PRESCAN.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_PAUSE_NOPLAY">
+				<param name="Local" value="BASS_CONFIG_PAUSE_NOPLAY.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_REC_BUFFER">
+				<param name="Local" value="BASS_CONFIG_REC_BUFFER.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_REC_WASAPI">
+				<param name="Local" value="BASS_CONFIG_REC_WASAPI.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_SAMPLE_ONEHANDLE">
+				<param name="Local" value="BASS_CONFIG_SAMPLE_ONEHANDLE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_SRC">
+				<param name="Local" value="BASS_CONFIG_SRC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_SRC_SAMPLE">
+				<param name="Local" value="BASS_CONFIG_SRC_SAMPLE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_UNICODE">
+				<param name="Local" value="BASS_CONFIG_UNICODE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_UPDATEPERIOD">
+				<param name="Local" value="BASS_CONFIG_UPDATEPERIOD.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_UPDATETHREADS">
+				<param name="Local" value="BASS_CONFIG_UPDATETHREADS.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_VERIFY">
+				<param name="Local" value="BASS_CONFIG_VERIFY.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_VERIFY_NET">
+				<param name="Local" value="BASS_CONFIG_VERIFY_NET.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CONFIG_WASAPI_PERSIST">
+				<param name="Local" value="BASS_CONFIG_WASAPI_PERSIST.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Plugins">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_PluginEnable">
+			<param name="Local" value="BASS_PluginEnable.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_PluginFree">
+			<param name="Local" value="BASS_PluginFree.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_PluginGetInfo">
+			<param name="Local" value="BASS_PluginGetInfo.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_PluginLoad">
+			<param name="Local" value="BASS_PluginLoad.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Structures">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_PLUGINFORM">
+				<param name="Local" value="BASS_PLUGINFORM.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_PLUGININFO">
+				<param name="Local" value="BASS_PLUGININFO.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Initialization, info, etc...">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ErrorGetCode">
+			<param name="Local" value="BASS_ErrorGetCode.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Free">
+			<param name="Local" value="BASS_Free.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_GetCPU">
+			<param name="Local" value="BASS_GetCPU.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_GetDevice">
+			<param name="Local" value="BASS_GetDevice.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_GetDeviceInfo">
+			<param name="Local" value="BASS_GetDeviceInfo.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_GetInfo">
+			<param name="Local" value="BASS_GetInfo.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_GetVersion">
+			<param name="Local" value="BASS_GetVersion.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_GetVolume">
+			<param name="Local" value="BASS_GetVolume.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Init">
+			<param name="Local" value="BASS_Init.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_IsStarted">
+			<param name="Local" value="BASS_IsStarted.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Pause">
+			<param name="Local" value="BASS_Pause.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SetDevice">
+			<param name="Local" value="BASS_SetDevice.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SetVolume">
+			<param name="Local" value="BASS_SetVolume.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Start">
+			<param name="Local" value="BASS_Start.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Stop">
+			<param name="Local" value="BASS_Stop.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Update">
+			<param name="Local" value="BASS_Update.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Structures">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_DEVICEINFO">
+				<param name="Local" value="BASS_DEVICEINFO.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_INFO">
+				<param name="Local" value="BASS_INFO.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="3D">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Apply3D">
+			<param name="Local" value="BASS_Apply3D.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Get3DFactors">
+			<param name="Local" value="BASS_Get3DFactors.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Get3DPosition">
+			<param name="Local" value="BASS_Get3DPosition.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Set3DFactors">
+			<param name="Local" value="BASS_Set3DFactors.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_Set3DPosition">
+			<param name="Local" value="BASS_Set3DPosition.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Structures">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_3DVECTOR">
+				<param name="Local" value="BASS_3DVECTOR.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Samples">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SampleCreate">
+			<param name="Local" value="BASS_SampleCreate.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SampleFree">
+			<param name="Local" value="BASS_SampleFree.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SampleGetChannel">
+			<param name="Local" value="BASS_SampleGetChannel.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SampleGetChannels">
+			<param name="Local" value="BASS_SampleGetChannels.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SampleGetData">
+			<param name="Local" value="BASS_SampleGetData.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SampleGetInfo">
+			<param name="Local" value="BASS_SampleGetInfo.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SampleLoad">
+			<param name="Local" value="BASS_SampleLoad.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SampleSetData">
+			<param name="Local" value="BASS_SampleSetData.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SampleSetInfo">
+			<param name="Local" value="BASS_SampleSetInfo.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_SampleStop">
+			<param name="Local" value="BASS_SampleStop.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Structures">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_SAMPLE">
+				<param name="Local" value="BASS_SAMPLE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Streams">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_StreamCreate">
+			<param name="Local" value="BASS_StreamCreate.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_StreamCreateFile">
+			<param name="Local" value="BASS_StreamCreateFile.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_StreamCreateFileUser">
+			<param name="Local" value="BASS_StreamCreateFileUser.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_StreamCreateURL">
+			<param name="Local" value="BASS_StreamCreateURL.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_StreamFree">
+			<param name="Local" value="BASS_StreamFree.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_StreamGetFilePosition">
+			<param name="Local" value="BASS_StreamGetFilePosition.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_StreamPutData">
+			<param name="Local" value="BASS_StreamPutData.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_StreamPutFileData">
+			<param name="Local" value="BASS_StreamPutFileData.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Callback functions">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="DOWNLOADPROC">
+				<param name="Local" value="DOWNLOADPROC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="FILECLOSEPROC">
+				<param name="Local" value="FILECLOSEPROC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="FILELENPROC">
+				<param name="Local" value="FILELENPROC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="FILEREADPROC">
+				<param name="Local" value="FILEREADPROC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="FILESEEKPROC">
+				<param name="Local" value="FILESEEKPROC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="STREAMPROC">
+				<param name="Local" value="STREAMPROC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Structures">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_FILEPROCS">
+				<param name="Local" value="BASS_FILEPROCS.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="MOD/MO3 music">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_MusicFree">
+			<param name="Local" value="BASS_MusicFree.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_MusicLoad">
+			<param name="Local" value="BASS_MusicLoad.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Recording">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_RecordFree">
+			<param name="Local" value="BASS_RecordFree.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_RecordGetDevice">
+			<param name="Local" value="BASS_RecordGetDevice.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_RecordGetDeviceInfo">
+			<param name="Local" value="BASS_RecordGetDeviceInfo.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_RecordGetInfo">
+			<param name="Local" value="BASS_RecordGetInfo.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_RecordGetInput">
+			<param name="Local" value="BASS_RecordGetInput.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_RecordGetInputName">
+			<param name="Local" value="BASS_RecordGetInputName.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_RecordInit">
+			<param name="Local" value="BASS_RecordInit.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_RecordSetDevice">
+			<param name="Local" value="BASS_RecordSetDevice.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_RecordSetInput">
+			<param name="Local" value="BASS_RecordSetInput.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_RecordStart">
+			<param name="Local" value="BASS_RecordStart.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Callback functions">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="RECORDPROC">
+				<param name="Local" value="RECORDPROC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Structures">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_RECORDINFO">
+				<param name="Local" value="BASS_RECORDINFO.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Channels">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="What is a channel?">
+			<param name="Local" value="channel.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelBytes2Seconds">
+			<param name="Local" value="BASS_ChannelBytes2Seconds.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelFlags">
+			<param name="Local" value="BASS_ChannelFlags.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelFree">
+			<param name="Local" value="BASS_ChannelFree.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGet3DAttributes">
+			<param name="Local" value="BASS_ChannelGet3DAttributes.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGet3DPosition">
+			<param name="Local" value="BASS_ChannelGet3DPosition.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGetAttribute">
+			<param name="Local" value="BASS_ChannelGetAttribute.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGetAttributeEx">
+			<param name="Local" value="BASS_ChannelGetAttributeEx.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGetData">
+			<param name="Local" value="BASS_ChannelGetData.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGetDevice">
+			<param name="Local" value="BASS_ChannelGetDevice.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGetInfo">
+			<param name="Local" value="BASS_ChannelGetInfo.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGetLength">
+			<param name="Local" value="BASS_ChannelGetLength.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGetLevel">
+			<param name="Local" value="BASS_ChannelGetLevel.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGetLevelEx">
+			<param name="Local" value="BASS_ChannelGetLevelEx.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGetPosition">
+			<param name="Local" value="BASS_ChannelGetPosition.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelGetTags">
+			<param name="Local" value="BASS_ChannelGetTags.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelIsActive">
+			<param name="Local" value="BASS_ChannelIsActive.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelIsSliding">
+			<param name="Local" value="BASS_ChannelIsSliding.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelLock">
+			<param name="Local" value="BASS_ChannelLock.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelPause">
+			<param name="Local" value="BASS_ChannelPause.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelPlay">
+			<param name="Local" value="BASS_ChannelPlay.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelRemoveDSP">
+			<param name="Local" value="BASS_ChannelRemoveDSP.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelRemoveFX">
+			<param name="Local" value="BASS_ChannelRemoveFX.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelRemoveLink">
+			<param name="Local" value="BASS_ChannelRemoveLink.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelRemoveSync">
+			<param name="Local" value="BASS_ChannelRemoveSync.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSeconds2Bytes">
+			<param name="Local" value="BASS_ChannelSeconds2Bytes.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSet3DAttributes">
+			<param name="Local" value="BASS_ChannelSet3DAttributes.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSet3DPosition">
+			<param name="Local" value="BASS_ChannelSet3DPosition.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSetAttribute">
+			<param name="Local" value="BASS_ChannelSetAttribute.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSetAttributeEx">
+			<param name="Local" value="BASS_ChannelSetAttributeEx.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSetDevice">
+			<param name="Local" value="BASS_ChannelSetDevice.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSetDSP">
+			<param name="Local" value="BASS_ChannelSetDSP.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSetFX">
+			<param name="Local" value="BASS_ChannelSetFX.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSetLink">
+			<param name="Local" value="BASS_ChannelSetLink.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSetPosition">
+			<param name="Local" value="BASS_ChannelSetPosition.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSetSync">
+			<param name="Local" value="BASS_ChannelSetSync.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelSlideAttribute">
+			<param name="Local" value="BASS_ChannelSlideAttribute.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelStart">
+			<param name="Local" value="BASS_ChannelStart.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelStop">
+			<param name="Local" value="BASS_ChannelStop.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_ChannelUpdate">
+			<param name="Local" value="BASS_ChannelUpdate.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Attributes">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_BITRATE">
+				<param name="Local" value="BASS_ATTRIB_BITRATE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_BUFFER">
+				<param name="Local" value="BASS_ATTRIB_BUFFER.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_CPU">
+				<param name="Local" value="BASS_ATTRIB_CPU.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_DOWNLOADPROC">
+				<param name="Local" value="BASS_ATTRIB_DOWNLOADPROC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_FREQ">
+				<param name="Local" value="BASS_ATTRIB_FREQ.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_GRANULE">
+				<param name="Local" value="BASS_ATTRIB_GRANULE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MUSIC_ACTIVE">
+				<param name="Local" value="BASS_ATTRIB_MUSIC_ACTIVE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MUSIC_AMPLIFY">
+				<param name="Local" value="BASS_ATTRIB_MUSIC_AMPLIFY.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MUSIC_BPM">
+				<param name="Local" value="BASS_ATTRIB_MUSIC_BPM.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MUSIC_PANSEP">
+				<param name="Local" value="BASS_ATTRIB_MUSIC_PANSEP.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MUSIC_PSCALER">
+				<param name="Local" value="BASS_ATTRIB_MUSIC_PSCALER.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MUSIC_SPEED">
+				<param name="Local" value="BASS_ATTRIB_MUSIC_SPEED.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MUSIC_VOL_CHAN">
+				<param name="Local" value="BASS_ATTRIB_MUSIC_VOL_CHAN.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MUSIC_VOL_GLOBAL">
+				<param name="Local" value="BASS_ATTRIB_MUSIC_VOL_GLOBAL.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_MUSIC_VOL_INST">
+				<param name="Local" value="BASS_ATTRIB_MUSIC_VOL_INST.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_NET_RESUME">
+				<param name="Local" value="BASS_ATTRIB_NET_RESUME.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_NORAMP">
+				<param name="Local" value="BASS_ATTRIB_NORAMP.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_PAN">
+				<param name="Local" value="BASS_ATTRIB_PAN.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_PUSH_LIMIT">
+				<param name="Local" value="BASS_ATTRIB_PUSH_LIMIT.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_SCANINFO">
+				<param name="Local" value="BASS_ATTRIB_SCANINFO.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_SRC">
+				<param name="Local" value="BASS_ATTRIB_SRC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_TAIL">
+				<param name="Local" value="BASS_ATTRIB_TAIL.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_USER">
+				<param name="Local" value="BASS_ATTRIB_USER.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_VOL">
+				<param name="Local" value="BASS_ATTRIB_VOL.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_VOLDSP">
+				<param name="Local" value="BASS_ATTRIB_VOLDSP.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_ATTRIB_VOLDSP_PRIORITY">
+				<param name="Local" value="BASS_ATTRIB_VOLDSP_PRIORITY.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Callback functions">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="DSPPROC">
+				<param name="Local" value="DSPPROC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="SYNCPROC">
+				<param name="Local" value="SYNCPROC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Structures">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CHANNELINFO">
+				<param name="Local" value="BASS_CHANNELINFO.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="TAG_APE_BINARY">
+				<param name="Local" value="TAG_APE_BINARY.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="TAG_BEXT">
+				<param name="Local" value="TAG_BEXT.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="TAG_CA_CODEC">
+				<param name="Local" value="TAG_CA_CODEC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="TAG_CART">
+				<param name="Local" value="TAG_CART.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="TAG_CART_TIMER">
+				<param name="Local" value="TAG_CART_TIMER.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="TAG_CUE">
+				<param name="Local" value="TAG_CUE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="TAG_CUE_POINT">
+				<param name="Local" value="TAG_CUE_POINT.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="TAG_ID3">
+				<param name="Local" value="TAG_ID3.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="TAG_SMPL">
+				<param name="Local" value="TAG_SMPL.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="TAG_SMPL_LOOP">
+				<param name="Local" value="TAG_SMPL_LOOP.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Effects">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_FXGetParameters">
+			<param name="Local" value="BASS_FXGetParameters.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_FXReset">
+			<param name="Local" value="BASS_FXReset.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_FXSetParameters">
+			<param name="Local" value="BASS_FXSetParameters.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_FXSetPriority">
+			<param name="Local" value="BASS_FXSetPriority.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Structures">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_DX8_CHORUS">
+				<param name="Local" value="BASS_DX8_CHORUS.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_DX8_COMPRESSOR">
+				<param name="Local" value="BASS_DX8_COMPRESSOR.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_DX8_DISTORTION">
+				<param name="Local" value="BASS_DX8_DISTORTION.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_DX8_ECHO">
+				<param name="Local" value="BASS_DX8_ECHO.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_DX8_FLANGER">
+				<param name="Local" value="BASS_DX8_FLANGER.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_DX8_GARGLE">
+				<param name="Local" value="BASS_DX8_GARGLE.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_DX8_I3DL2REVERB">
+				<param name="Local" value="BASS_DX8_I3DL2REVERB.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_DX8_PARAMEQ">
+				<param name="Local" value="BASS_DX8_PARAMEQ.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_DX8_REVERB">
+				<param name="Local" value="BASS_DX8_REVERB.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_FX_VOLUME_PARAM">
+				<param name="Local" value="BASS_FX_VOLUME_PARAM.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Floating-point channels">
+		<param name="Local" value="float.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Speaker assignment flags">
+		<param name="Local" value="speaker.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Multi-channel streams">
+		<param name="Local" value="multichan.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Add-ons">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSALAC">
+			<param name="Local" value="bassalac.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:bassalac.chm::\bassalac.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSAPE">
+			<param name="Local" value="bassape.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:bassape.chm::\bassape.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSCD">
+			<param name="Local" value="basscd.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:basscd.chm::\basscd.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSDSD">
+			<param name="Local" value="bassdsd.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:bassdsd.chm::\bassdsd.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSFLAC">
+			<param name="Local" value="bassflac.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:bassflac.chm::\bassflac.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSHLS">
+			<param name="Local" value="basshls.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:basshls.chm::\basshls.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSMIDI">
+			<param name="Local" value="bassmidi.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:bassmidi.chm::\bassmidi.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSOPUS">
+			<param name="Local" value="bassopus.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:bassopus.chm::\bassopus.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSWEBM">
+			<param name="Local" value="basswebm.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:basswebm.chm::\basswebm.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSWMA">
+			<param name="Local" value="basswma.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:basswma.chm::\basswma.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSWV">
+			<param name="Local" value="basswv.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:basswv.chm::\basswv.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSenc">
+			<param name="Local" value="bassenc.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:bassenc.chm::\bassenc.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSmix">
+			<param name="Local" value="bassmix.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:bassmix.chm::\bassmix.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASSWASAPI">
+			<param name="Local" value="basswasapi.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:basswasapi.chm::\basswasapi.hhc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_FX">
+			<param name="Local" value="bass_fx.html">
+			</OBJECT>
+		<OBJECT type="text/sitemap">
+			<param name="Merge" value="ms-its:bass_fx.chm::\bass_fx.hhc">
+			</OBJECT>
+	</UL>
+</UL>
+

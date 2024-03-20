@@ -1,0 +1,32 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>TAG_ID3 structure</h1>
+<p>ID3v1 tag structure.
+<p><pre class="def">typedef struct {
+    char <I>id</I>[3];
+    char <I>title</I>[30];
+    char <I>artist</I>[30];
+    char <I>album</I>[30];
+    char <I>year</I>[4];
+    char <I>comment</I>[30];
+    BYTE <I>genre</I>;
+} TAG_ID3;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>id<td>ID3v1 tag identifier... "TAG".
+<tr><td>title<td>Song title.
+<tr><td>artist<td>Artist name.
+<tr><td>album<td>Album title.
+<tr><td>year<td>Year.
+<tr><td>comment<td>Comment. If the 30th character is non-null whilst the 29th character is null, then the 30th character is the track number and the comment is limited to the first 28 characters.
+<tr><td>genre<td>Genre number. The number can be translated to a genre, using the list at <a href="https://id3.org/id3v2.3.0#Appendix_A_-_Genre_List_from_ID3v1" target=_blank>id3.org</a>.
+</table>
+<p><h2>Remarks</h2>
+See <a href=https://id3.org/ID3v1 target=_blank>id3.org/ID3v1</a> for further details.
+<p><h2>Example</h2>
+Display the title from a channel's ID3v1 tag.
+<pre class="code">
+const TAG_ID3 *id3 = (const TAG_ID3*)BASS_ChannelGetTags(channel, BASS_TAG_ID3); // get the ID3 tags
+if (id3) printf("title = %.30s\n", id3-&gt;title); // display the title
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>

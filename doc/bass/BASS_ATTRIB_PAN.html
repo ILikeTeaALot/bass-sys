@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_PAN attribute</h1>
+<p>The panning/balance position of a channel.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_PAN,
+    float <I>pan</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>pan<td>The pan position... -1 (full left) to +1 (full right), 0 = centre.
+</table>
+<p><h2>Remarks</h2>
+This attribute is applied during playback of the channel and is not present in the sample data returned by <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>, so it has no direct effect on decoding channels. It also has no effect on multi-channel channels (more than stereo), and it is not available at all on 3D channels.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a>, <a href="BASS_CONFIG_CURVE_PAN.html">BASS_CONFIG_CURVE_PAN</a>

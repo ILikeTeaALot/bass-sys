@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+
+<h1>BASS_ChannelRemoveSync</h1>
+<p>Removes a synchronizer from a MOD music, stream or recording channel.
+<p><pre class="def">BOOL BASS_ChannelRemoveSync(
+    DWORD <I>handle</I>,
+    HSYNC <I>sync</I>
+);</pre>
+
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HMUSIC, HSTREAM or HRECORD.
+<tr><td>sync<td>Handle of the synchronizer to remove.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td>At least one of <I>handle</I> and <I>sync</I> is not valid.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>

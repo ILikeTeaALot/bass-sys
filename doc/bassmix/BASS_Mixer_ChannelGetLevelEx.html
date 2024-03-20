@@ -1,0 +1,36 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelGetLevelEx</h1>
+<p>Retrieves the level of a mixer source channel.
+<p><pre class="def">BOOL BASS_Mixer_ChannelGetLevelEx(
+    BOOL <I>handle</I>,
+    float *<I>levels</I>,
+    float <I>length</I>,
+    DWORD <I>flags</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>levels<td>An array to receive the levels.
+<tr><td>length<td>The amount of data to inspect to calculate the level, in seconds. The maximum is 1 second. Less data than requested may be used if the full amount is not available, eg. if the source's buffer (determined by the <a href="BASS_CONFIG_MIXER_BUFFER.html">BASS_CONFIG_MIXER_BUFFER</a> config option) is shorter.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_LEVEL_MONO<td>Get a mono level. If neither this or the BASS_LEVEL_STEREO flag is used, then a separate level is retrieved for each channel.
+<tr><td>BASS_LEVEL_STEREO<td>Get a stereo level. The left level will be from the even channels, and the right level will be from the odd channels. If there are an odd number of channels then the left and right levels will both include all channels.
+<tr><td>BASS_LEVEL_RMS<td>Get the RMS level. Otherwise the peak level.
+<tr><td>BASS_LEVEL_VOLPAN<td>Apply the current <a href="mk:@MSITStore:bass.chm::/BASS_ATTRIB_VOL.html">BASS_ATTRIB_VOL</a> and <a href="mk:@MSITStore:bass.chm::/BASS_ATTRIB_PAN.html">BASS_ATTRIB_PAN</a> values and volume and pan envelopes to the level reading. Due to buffering, these values might not be the same as they were when the currently heard data was mixed.
+</table>
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+<tr><td>BASS_ERROR_ILLPARAM<td><I>length</I> is not valid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The channel does not have buffering enabled.</a>
+<tr><td>BASS_ERROR_NOPLAY<td>The mixer is not playing.</a>
+</table>
+<p><h2>Remarks</h2>
+This function operates in the same way as <a href="BASS_Mixer_ChannelGetLevel.html">BASS_Mixer_ChannelGetLevel</a> but has greater flexibility on how the level is measured. The levels are not clipped, so may exceed +/-1.0 on floating-point channels.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelGetData.html">BASS_Mixer_ChannelGetData</a>, <a href="BASS_Mixer_ChannelGetLevel.html">BASS_Mixer_ChannelGetLevel</a>, <a href="BASS_Mixer_ChannelIsActive.html">BASS_Mixer_ChannelIsActive</a>, <a href="BASS_ATTRIB_MIXER_LATENCY.html">BASS_ATTRIB_MIXER_LATENCY</a>, <a href="BASS_CONFIG_MIXER_BUFFER.html">BASS_CONFIG_MIXER_BUFFER</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetLevelEx.html">BASS_ChannelGetLevelEx</a>

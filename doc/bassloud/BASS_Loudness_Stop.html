@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Loudness_Stop</h1>
+<p>Stops a loudness measurement or all loudness measurements on a channel.
+<p><pre class="def">BOOL BASS_Loudness_Stop(
+    DWORD <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The loudness measurement or channel handle... a HLOUDNESS, HSTREAM, HMUSIC, or HRECORD.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><i>handle</i> is not valid.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_Loudness_Start.html">BASS_Loudness_Start</a>

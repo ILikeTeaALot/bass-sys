@@ -1,0 +1,40 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelSet3DAttributes</h1>
+<p>Sets the 3D attributes of a sample, stream, or MOD music channel with 3D functionality.
+<p><pre class="def">BOOL BASS_ChannelSet3DAttributes(
+    DWORD <I>handle</I>,
+    int <I>mode</I>,
+    float <I>min</I>,
+    float <I>max</I>,
+    int <I>iangle</I>,
+    int <I>oangle</I>,
+    float <I>outvol</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM.
+<tr><td>mode<td>The 3D processing mode... one of these flags, -1 = leave current.
+<table>
+<tr><td>BASS_3DMODE_NORMAL<td>Normal 3D processing.
+<tr><td>BASS_3DMODE_RELATIVE<td>The channel's 3D position (position/velocity/orientation) is relative to the listener. When the listener's position/velocity/orientation is changed with <a href="BASS_Set3DPosition.html">BASS_Set3DPosition</a>, the channel's position relative to the listener does not change.
+<tr><td>BASS_3DMODE_OFF<td>Turn off 3D processing on the channel, the sound will be played in the centre.
+</table>
+<tr><td>min<td>The minimum distance. The channel's volume is at maximum when the listener is within this distance... 0 or less = leave current.
+<tr><td>max<td>The maximum distance. The channel's volume stops decreasing when the listener is beyond this distance... 0 or less = leave current.
+<tr><td>iangle<td>The angle of the inside projection cone in degrees... 0 (no cone) to 360 (sphere), -1 = leave current.
+<tr><td>oangle<td>The angle of the outside projection cone in degrees... 0 (no cone) to 360 (sphere), -1 = leave current.
+<tr><td>outvol<td>The delta-volume outside the outer projection cone... 0 (silent) to 1 (same as inside the cone), less than 0 = leave current.
+</table>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_NO3D<td>The channel does not have 3D functionality.
+<tr><td>BASS_ERROR_ILLPARAM<td>One or more of the attribute values is invalid.
+</table>
+<p><h2>Remarks</h2>
+The <I>iangle</I> and <I>oangle</I> parameters must both be set in a single call of this function; one cannot be set without the other. The <I>iangle</I> and <I>oangle</I> angles decide how wide the sound is projected around the orientation angle. Within the inside angle the volume level is the channel volume (<a href=BASS_ATTRIB_VOL.html>BASS_ATTRIB_VOL</a> attribute). Outside the outer angle, the volume changes according to the <I>outvol</I> value. Between the inner and outer angles, the volume gradually changes between the inner and outer volume levels. If the inner and outer angles are 360 degrees, then the sound is transmitted equally in all directions.
+<p>As with all 3D functions, use <a href="BASS_Apply3D.html">BASS_Apply3D</a> to apply the changes made.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGet3DAttributes.html">BASS_ChannelGet3DAttributes</a>, <a href="BASS_ChannelSet3DPosition.html">BASS_ChannelSet3DPosition</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>

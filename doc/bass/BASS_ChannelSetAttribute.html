@@ -1,0 +1,50 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelSetAttribute</h1>
+<p>Sets the value of a channel's attribute.
+<p><pre class="def">BOOL BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    DWORD <I>attrib</I>,
+    float <I>value</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD.
+<tr><td>attrib<td>The attribute to set the value of... one of the following.<br>
+<table>
+<tr><td><a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a><td>Playback buffering length. (HMUSIC/HSTREAM only)
+<tr><td><a href="BASS_ATTRIB_FREQ.html">BASS_ATTRIB_FREQ</a><td>Sample rate.
+<tr><td><a href="BASS_ATTRIB_GRANULE.html">BASS_ATTRIB_GRANULE</a><td>Processing granularity. (HMUSIC/HSTREAM/HRECORD)
+<tr><td><a href="BASS_ATTRIB_MUSIC_AMPLIFY.html">BASS_ATTRIB_MUSIC_AMPLIFY</a><td>Amplification level. (HMUSIC)
+<tr><td><a href="BASS_ATTRIB_MUSIC_BPM.html">BASS_ATTRIB_MUSIC_BPM</a><td>BPM. (HMUSIC)
+<tr><td><a href="BASS_ATTRIB_MUSIC_PANSEP.html">BASS_ATTRIB_MUSIC_PANSEP</a><td>Pan separation level. (HMUSIC)
+<tr><td><a href="BASS_ATTRIB_MUSIC_PSCALER.html">BASS_ATTRIB_MUSIC_PSCALER</a><td>Position scaler. (HMUSIC)
+<tr><td><a href="BASS_ATTRIB_MUSIC_SPEED.html">BASS_ATTRIB_MUSIC_SPEED</a><td>Speed. (HMUSIC)
+<tr><td><a href="BASS_ATTRIB_MUSIC_VOL_CHAN.html">BASS_ATTRIB_MUSIC_VOL_CHAN</a><td>A channel volume level. (HMUSIC)
+<tr><td><a href="BASS_ATTRIB_MUSIC_VOL_GLOBAL.html">BASS_ATTRIB_MUSIC_VOL_GLOBAL</a><td>Global volume level. (HMUSIC)
+<tr><td><a href="BASS_ATTRIB_MUSIC_VOL_INST.html">BASS_ATTRIB_MUSIC_VOL_INST</a><td>An instrument/sample volume level. (HMUSIC)
+<tr><td><a href="BASS_ATTRIB_NET_RESUME.html">BASS_ATTRIB_NET_RESUME</a><td>Buffer level to resume stalled playback. (HSTREAM)
+<tr><td><a href="BASS_ATTRIB_NORAMP.html">BASS_ATTRIB_NORAMP</a><td>Playback ramping.
+<tr><td><a href="BASS_ATTRIB_PAN.html">BASS_ATTRIB_PAN</a><td>Panning/balance position.
+<tr><td><a href="BASS_ATTRIB_PUSH_LIMIT.html">BASS_ATTRIB_PUSH_LIMIT</a><td>Push stream buffer limit.
+<tr><td><a href="BASS_ATTRIB_SRC.html">BASS_ATTRIB_SRC</a><td>Sample rate conversion quality.
+<tr><td><a href="BASS_ATTRIB_TAIL.html">BASS_ATTRIB_TAIL</a><td>Length extension. (HMUSIC/HSTREAM)
+<tr><td><a href="BASS_ATTRIB_VOL.html">BASS_ATTRIB_VOL</a><td>Volume level.
+<tr><td><a href="BASS_ATTRIB_VOLDSP.html">BASS_ATTRIB_VOLDSP</a><td>DSP chain volume level. (HMUSIC/HSTREAM/HRECORD)
+<tr><td><a href="BASS_ATTRIB_VOLDSP_PRIORITY.html">BASS_ATTRIB_VOLDSP_PRIORITY</a><td>DSP chain volume priority. (HMUSIC/HSTREAM/HRECORD)
+</table>
+<i>other attributes may be supported by add-ons, see the documentation.</i>
+<tr><td>value<td>The new attribute value. See the attribute's documentation for details on the possible values.
+</table>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_ILLTYPE<td><I>attrib</I> is not valid.
+<tr><td>BASS_ERROR_ILLPARAM<td><I>value</I> is not valid. See the attribute's documentation for the valid range of values.
+</table>
+<i>some attributes may have additional error codes, see the documentation.</i>
+<p><h2>Remarks</h2>
+The actual attribute value may not be exactly the same as requested, due to precision differences. For example, an attribute might only allow whole number values. <a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a> can be used to confirm what the value is.
+<p><h2>See also</h2>
+<a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>, <a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttributeEx.html">BASS_ChannelSetAttributeEx</a>, <a href="BASS_ChannelSet3DAttributes.html">BASS_ChannelSet3DAttributes</a>, <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a>

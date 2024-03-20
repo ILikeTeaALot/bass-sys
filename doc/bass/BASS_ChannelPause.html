@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelPause</h1>
+<p>Pauses a sample, stream, MOD music, or recording.
+<p><pre class="def">BOOL BASS_ChannelPause(
+    DWORD <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_DECODE<td><I>handle</I> is a decoding channel, so cannot be played or paused.
+<tr><td>BASS_ERROR_NOPLAY<td>The channel is not playing.
+</table>
+<p><h2>Remarks</h2>
+Use <a href="BASS_ChannelStart.html">BASS_ChannelStart</a> to resume a paused channel. <a href="BASS_ChannelStop.html">BASS_ChannelStop</a> can be used to stop a paused channel.
+<p><h2>See also</h2>
+<a href="BASS_ChannelIsActive.html">BASS_ChannelIsActive</a>, <a href="BASS_ChannelStart.html">BASS_ChannelStart</a>, <a href="BASS_ChannelStop.html">BASS_ChannelStop</a>

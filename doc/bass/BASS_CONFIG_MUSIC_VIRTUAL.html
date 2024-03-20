@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_MUSIC_VIRTUAL config option</h1>
+<p>The maximum number of virtual channels to use in the rendering of IT files.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_MUSIC_VIRTUAL,
+    DWORD <I>chans</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>chans<td>The number of virtual channels... 0 (min) to 512 (max). If the value specified is outside this range, it is automatically capped.
+
+</table>
+<p><h2>Remarks</h2>
+This setting only affects IT files, as the other MOD music formats do not have virtual channels. The default setting is 64. Changes only apply to subsequently loaded files, not any that are already loaded.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_MusicLoad.html">BASS_MusicLoad</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_ATTRIB_MUSIC_ACTIVE.html">BASS_ATTRIB_MUSIC_ACTIVE</a>

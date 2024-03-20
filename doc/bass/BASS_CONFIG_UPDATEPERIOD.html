@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_UPDATEPERIOD config option</h1>
+<p>The update period of HSTREAM and HMUSIC channel playback buffers.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_UPDATEPERIOD,
+    DWORD <I>period</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>period<td>The update period in milliseconds... 0 = disable automatic updating. The minimum period is 5ms, the maximum is 100ms. If the period specified is outside this range, it is automatically capped.
+</table>
+<p><h2>Remarks</h2>
+The update period is the amount of time between updates of the playback buffers of HSTREAM/HMUSIC channels that are playing; no update cycles occur when nothing is playing. Shorter update periods allow smaller buffers to be set with the <a href="BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a> config option, but as the rate of updates increases, so the overhead of setting up the updates becomes a greater part of the CPU usage. The update period only affects HSTREAM and HMUSIC channels; it does not affect samples. Nor does it have any effect on decoding channels, as they are not played.
+<p>BASS creates one or more threads (determined by <a href="BASS_CONFIG_UPDATETHREADS.html">BASS_CONFIG_UPDATETHREADS</a>) specifically to perform the updating, except when automatic updating is disabled (<i>period = 0</i>), in which case <a href="BASS_Update.html">BASS_Update</a> or <a href="BASS_ChannelUpdate.html">BASS_ChannelUpdate</a> should be used instead. This allows BASS's CPU usage to be synchronized with your software's. For example, in a game loop you could call <a href="BASS_Update.html">BASS_Update</a> once per frame, to keep all the processing in sync so that the frame rate is as smooth as possible.
+<p>The update period can be altered at any time, including during playback. The default period is 100ms.
+<p><h2>See also</h2>
+<a href="BASS_ChannelUpdate.html">BASS_ChannelUpdate</a>, <a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_Update.html">BASS_Update</a>, <a href="BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a>, <a href="BASS_CONFIG_UPDATETHREADS.html">BASS_CONFIG_UPDATETHREADS</a>, <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a>

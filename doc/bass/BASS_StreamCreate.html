@@ -1,0 +1,49 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_StreamCreate</h1>
+<p>Creates a user sample stream.
+<p><pre class="def">HSTREAM BASS_StreamCreate(
+    DWORD <I>freq</I>,
+    DWORD <I>chans</I>,
+    DWORD <I>flags</I>,
+    <a href="STREAMPROC.html">STREAMPROC</a> *<I>proc</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>freq<td>The default sample rate. The sample rate can be changed using <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>.
+<tr><td>chans<td>The number of channels... 1 = mono, 2 = stereo, 4 = quadraphonic, 6 = 5.1, 8 = 7.1.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMPLE_8BITS<td>Use 8-bit resolution. If neither this or the BASS_SAMPLE_FLOAT flags are specified, then the stream is 16-bit.
+<tr><td>BASS_SAMPLE_FLOAT<td>Use 32-bit floating-point sample data. See <a href=float.html>Floating-point channels</a> for info.
+<tr><td>BASS_SAMPLE_3D<td>Enable 3D functionality. The stream must be mono (<i>chans=1</i>). The SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_STREAM_AUTOFREE<td>Automatically free the stream when playback ends.
+<tr><td>BASS_STREAM_DECODE<td>Decode the sample data, without playing it. Use <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> to retrieve decoded sample data. The BASS_SAMPLE_3D, BASS_STREAM_AUTOFREE and SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href=speaker.html>Speaker assignment flags</a>. These flags have no effect when the stream is more than stereo.
+</table>
+<tr><td>proc<td>The user defined stream writing function, or one of the following.<br>
+<table>
+<tr><td>STREAMPROC_DEVICE<td>Create a "dummy" stream for the device's final output mix. This allows DSP/FX to be applied to all channels that are playing on the device, rather than individual channels. DSP/FX parameter change latency is also reduced because channel playback buffering is avoided. The stream is created with the device's current output sample format; the <I>freq</I>, <I>chans</I>, and <I>flags</I> parameters are ignored. It will always be floating-point.
+<tr><td>STREAMPROC_DUMMY<td>Create a "dummy" stream. A dummy stream does not have any sample data of its own, but a decoding dummy stream (with BASS_STREAM_DECODE flag) can be used to apply DSP/FX processing to any sample data, by setting DSP/FX on the stream and feeding the data through <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>. The dummy stream should have the same sample format as the data being fed through it.
+<tr><td>STREAMPROC_PUSH<td>Create a "push" stream. Instead of BASS pulling data from a <a href="STREAMPROC.html">STREAMPROC</a> function, data is pushed to BASS via <a href="BASS_StreamPutData.html">BASS_StreamPutData</a>.
+</table>
+<tr><td>user<td>User instance data to pass to the callback function. Unused when creating a dummy or push stream.
+</table>
+<p><h2>Return value</h2>
+If successful, the new stream's handle is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_STREAM_AUTOFREE flag cannot be combined with the BASS_STREAM_DECODE flag.
+<tr><td>BASS_ERROR_FORMAT<td>The sample format is not supported.
+<tr><td>BASS_ERROR_SPEAKER<td>The specified SPEAKER flags are invalid.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+<tr><td>BASS_ERROR_NO3D<td>Could not initialize 3D support.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+Sample streams allow any sample data to be played through BASS, and are particularly useful for playing a large amount of sample data without requiring a large amount of memory. If you wish to play a sample format that BASS does not support, then you can create a stream and decode the sample data into it.
+<p>Each device has a single final output mix stream, which can be used to apply DSP/FX to the device output. Multiple requests for a final output mix stream (using STREAMPROC_DEVICE) on the same device will receive the same stream handle, which cannot be freed via <a href="BASS_StreamFree.html">BASS_StreamFree</a> or <a href="BASS_ChannelFree.html">BASS_ChannelFree</a>. It will automatically be freed if the device's output format (sample rate or channel count) changes. A BASS_SYNC_FREE sync can be set via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> to be notified when this happens, at which point a new stream with the device's new format could be created.
+<p>BASS can automatically stream MP3, MP2, MP1, OGG, WAV and AIFF files, using <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>, and also from HTTP and FTP servers, using <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>. <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a> allows streaming from other sources too.
+<p><h2>See also</h2>
+<a href="BASS_ChannelPlay.html">BASS_ChannelPlay</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSetDSP.html">BASS_ChannelSetDSP</a>, <a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_ChannelSetLink.html">BASS_ChannelSetLink</a>, <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>, <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, <a href="BASS_StreamFree.html">BASS_StreamFree</a>, <a href="BASS_StreamPutData.html">BASS_StreamPutData</a>, <a href="STREAMPROC.html">STREAMPROC callback</a>, <a href="BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a>

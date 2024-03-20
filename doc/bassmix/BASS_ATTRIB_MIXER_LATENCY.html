@@ -1,0 +1,20 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_MIXER_LATENCY attribute</h1>
+<p>Custom output latency.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    HSTREAM <I>handle</I>,
+    BASS_ATTRIB_MIXER_LATENCY,
+    float <I>latency</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The mixer stream handle.
+<tr><td>latency<td>The latency in seconds.
+</table>
+<p><h2>Remarks</h2>
+When a mixer is played by BASS, the <a href="BASS_Mixer_ChannelGetData.html">BASS_Mixer_ChannelGetData</a>, <a href="BASS_Mixer_ChannelGetLevel.html">BASS_Mixer_ChannelGetLevel</a>, <a href="BASS_Mixer_ChannelGetLevelEx.html">BASS_Mixer_ChannelGetLevelEx</a>, and <a href="BASS_Mixer_ChannelGetPosition.html">BASS_Mixer_ChannelGetPosition</a> functions will get the output latency and account for that so that they reflect what is currently being heard, but that cannot be done when a different output system is used, eg. ASIO. In that case, this attribute can be used to tell the mixer what the output latency is, so that those functions can still account for it. The mixer needs to have the BASS_STREAM_DECODE and BASS_MIXER_POSEX flags set to use this attribute.
+<p>This attribute does not affect the timing of sync callbacks, set via <a href="BASS_Mixer_ChannelSetSync.html">BASS_Mixer_ChannelSetSync</a>.
+<p>The default setting is 0 (no accounting for latency). Changes take immediate effect.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelGetData.html">BASS_Mixer_ChannelGetData</a>, <a href="BASS_Mixer_ChannelGetLevel.html">BASS_Mixer_ChannelGetLevel</a>, <a href="BASS_Mixer_ChannelGetLevelEx.html">BASS_Mixer_ChannelGetLevelEx</a>, <a href="BASS_Mixer_ChannelGetPosition.html">BASS_Mixer_ChannelGetPosition</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>

@@ -1,0 +1,14 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>FILECLOSEPROC callback</h1>
+<p>User file stream close callback function.
+<p><pre class="def">void CALLBACK FileCloseProc(
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>user<td>The user instance data given when <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a> was called.
+</table>
+<p><h2>Remarks</h2>
+With a buffered file stream, this function is called as soon as reading reaches the end of the file. If the stream is freed before then, this function could be called while its <a href="FILEREADPROC.html">FILEREADPROC</a> function is in progress. If that happens, the <a href="FILEREADPROC.html">FILEREADPROC</a> function call should be immediately cancelled.
+<p><h2>See also</h2>
+<a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_FILEPROCS.html">BASS_FILEPROCS structure</a>

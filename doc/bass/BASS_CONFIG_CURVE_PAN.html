@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_CURVE_PAN config option</h1>
+<p>The translation curve of panning values.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_CURVE_PAN,
+    BOOL <I>logpan</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>logpan<td>Panning curve... FALSE = linear, TRUE = logarithmic.
+</table>
+<p><h2>Remarks</h2>
+The panning curve affects panning in exactly the same way as the volume curve (<a href="BASS_CONFIG_CURVE_VOL.html">BASS_CONFIG_CURVE_VOL</a>) affects the volume.
+<p>The linear curve is used by default.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href=BASS_ATTRIB_PAN.html>BASS_ATTRIB_PAN</a>, <a href="BASS_CONFIG_CURVE_VOL.html">BASS_CONFIG_CURVE_VOL</a>

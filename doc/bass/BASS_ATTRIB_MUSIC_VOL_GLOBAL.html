@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_MUSIC_VOL_GLOBAL attribute</h1>
+<p>The global volume level of a MOD music.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    HMUSIC <I>handle</I>,
+    BASS_ATTRIB_MUSIC_VOL_GLOBAL,
+    float <I>volume</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The MOD music handle.
+<tr><td>volume<td>The global volume level... 0 (min) to 64 (max, 128 for IT format). This will be rounded down to a whole number.
+</table>
+<p><h2>Remarks</h2>
+This attribute is a direct mapping of the MOD's global volume, so the value can be changed via effects in the MOD itself.
+<p>During playback, the effect of changes to this attribute are not heard instantaneously, due to buffering. This latency can be reduced via the <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a> attribute.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a>, <a href="BASS_ATTRIB_MUSIC_AMPLIFY.html">BASS_ATTRIB_MUSIC_AMPLIFY</a>

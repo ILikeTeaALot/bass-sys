@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_GetVolume</h1>
+<p>Retrieves the current master volume level.
+<p><pre class="def">float BASS_GetVolume();</pre>
+<p><h2>Return value</h2>
+If successful, the volume level is returned, else -1 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html"> BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>There is no volume control when using the "no sound" device.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+When using multiple devices, the current thread's device setting (as set with <a href="BASS_SetDevice.html">BASS_SetDevice</a>) determines which device this function call applies to.
+<p><h2>See also</h2>
+<a href="BASS_SetVolume.html">BASS_SetVolume</a>

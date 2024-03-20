@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NET_AGENT config option</h1>
+<p>The "User-Agent" request header sent to servers.
+<p><pre class="def">BASS_SetConfigPtr(
+    BASS_CONFIG_NET_AGENT,
+    char *<I>agent</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>agent<td>The "User-Agent" header.
+</table>
+<p><h2>Remarks</h2>
+<a href="BASS_SetConfigPtr.html">BASS_SetConfigPtr</a> makes a copy of the provided string, so it does not need to persist beyond the call. Changes take effect from the next internet stream creation call.
+<p><h2>Platform-specific</h2>
+On Windows, the BASS_UNICODE flag can be used with a UTF-16 string ("wchar_t" rather than "char").
+<p><h2>See also</h2>
+<a href="BASS_GetConfigPtr.html">BASS_GetConfigPtr</a>, <a href="BASS_SetConfigPtr.html">BASS_SetConfigPtr</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>

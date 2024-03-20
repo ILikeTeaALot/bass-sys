@@ -1,0 +1,23 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_MIXER_THREADS attribute</h1>
+<p>The number of threads to use for mixing.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    HSTREAM <I>handle</I>,
+    BASS_ATTRIB_MIXER_THREADS,
+    float <I>threads</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The mixer stream handle.
+<tr><td>threads<td>The number of threads... 1 (min) to 16 (max).
+</table>
+<p><h2>Remarks</h2>
+The number of mixing threads determines how many source channels can be processed simultaneously by the mixer. If there are multiple CPU cores available then processing multiple sources simultaneously (if there are multiple sources) will generally mean that the final mix can be produced more quickly. When the BASS_MIXER_CHAN_LIMIT flag is set on a source, that source will always be processed alone first because it determines how much data may be processed from the other sources.
+<p>The default setting is 1. Changes take immediate effect.
+<p><h2>Example</h2>
+Set a mixer to use 2 threads.
+<pre class="code">
+BASS_ChannelSetAttribute(mixer, BASS_ATTRIB_MIXER_THREADS, 2);
+</pre>
+<p><h2>See also</h2>
+<a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>

@@ -1,0 +1,15 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NET_META config option</h1>
+<p>Request Shoutcast metadata from internet servers?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_NET_META,
+    BOOL <I>metadata</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>metadata<td>Request metadata... FALSE = no, TRUE = yes.
+</table>
+<p><h2>Remarks</h2>
+By default, BASS will request Shoutcast metadata from the server when opening a URL, which is then available from <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a> (BASS_TAG_META). That can be disabled via this config option to save a little bandwidth if Shoutcast metadata is not required.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>, <a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>

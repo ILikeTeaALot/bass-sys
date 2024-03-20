@@ -1,0 +1,24 @@
+<!doctype html><html><HEAD><LINK REL="stylesheet" TYPE="text/css" href="bass.css"></HEAD>
+<BODY>
+<h1>BASS_Loudness_SetChannel</h1>
+<p>Moves a loudness measurement to another channel or just changes its DSP priority.
+<p><pre class="def">BOOL BASS_Loudness_SetChannel(
+    HLOUDNESS <I>handle</I>,
+    DWORD <I>channel</I>,
+    int <I>priority</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The loudness measurement handle.
+<tr><td>channel<td>The channel to move the measurement to... a HSTREAM, HMUSIC, or HRECORD.
+<tr><td>priority<td>The new DSP priority of the measurements.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> or <i>channel</i> is not valid.
+</table><p><h2>Remarks</h2>
+The new channel does not need to have the same sample format as the old channel.
+<p><h2>See also</h2>
+<a href="BASS_Loudness_GetChannel.html">BASS_Loudness_GetChannel</a>

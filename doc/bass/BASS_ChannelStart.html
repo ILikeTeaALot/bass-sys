@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelStart</h1>
+<p>Starts/resumes playback of a sample, stream, MOD music, or a recording.
+<p><pre class="def">BOOL BASS_ChannelStart(
+    DWORD <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_DECODE<td><I>handle</I> is a decoding channel, so cannot be played.
+<tr><td>BASS_ERROR_START<td>The output is paused/stopped, use <a href="BASS_Start.html">BASS_Start</a> to start it.
+</table>
+<p><h2>Remarks</h2>
+If other channels have been linked to the specified channel via <a href="BASS_ChannelSetLink.html">BASS_ChannelSetLink</a>, this function will attempt to simultaneously start playing them too but if any fail, it will be silently. The return value and error code only reflects what happened with the specified channel. <a href="BASS_ChannelIsActive.html">BASS_ChannelIsActive</a> can be used to confirm the status of linked channels.
+<p><h2>See also</h2>
+<a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>, <a href="BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a>, <a href="BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a>, <a href="BASS_ChannelIsActive.html">BASS_ChannelIsActive</a>, <a href="BASS_ChannelPause.html">BASS_ChannelPause</a>, <a href="BASS_ChannelPlay.html">BASS_ChannelPlay</a>, <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a>, <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>, <a href="BASS_ChannelStop.html">BASS_ChannelStop</a>, <a href="BASS_ChannelUpdate.html">BASS_ChannelUpdate</a>, <a href="BASS_Start.html">BASS_Start</a>, <a href=BASS_CONFIG_NET_PREBUF.html>BASS_CONFIG_NET_PREBUF</a>

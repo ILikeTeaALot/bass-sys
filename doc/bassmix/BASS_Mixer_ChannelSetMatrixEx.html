@@ -1,0 +1,25 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelSetMatrixEx</h1>
+<p>Sets a source channel's mixing matrix, transitioning from the current matrix.
+<p><pre class="def">BOOL BASS_Mixer_ChannelSetMatrixEx(
+    DWORD <I>handle</I>,
+    void *<I>matrix</I>,
+    float <I>time</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>matrix<td>Pointer to the matrix.
+<tr><td>time<td>The time to take (in seconds) to transition from the current matrix to the specified matrix.
+</table>
+<p><h2>Return value</h2>
+If successful, a TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The channel is not using matrix mixing.
+</table>
+<p><h2>Remarks</h2>
+The function is identical to <a href="BASS_Mixer_ChannelSetMatrix.html">BASS_Mixer_ChannelSetMatrix</a> but with the option of transitioning over time to the specified matrix. If this function or <a href="BASS_Mixer_ChannelSetMatrix.html">BASS_Mixer_ChannelSetMatrix</a> is called while a previous matrix transition is still in progress, then that transition will be stopped. If <a href="BASS_Mixer_ChannelGetMatrix.html">BASS_Mixer_ChannelGetMatrix</a> is called mid-transition, it will give the mid-transition matrix values.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelGetMatrix.html">BASS_Mixer_ChannelGetMatrix</a>, <a href="BASS_Mixer_ChannelSetMatrix.html">BASS_Mixer_ChannelSetMatrix</a>, <a href="BASS_Mixer_StreamAddChannel.html">BASS_Mixer_StreamAddChannel</a>, <a href="BASS_Mixer_StreamAddChannelEx.html">BASS_Mixer_StreamAddChannelEx</a>

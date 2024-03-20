@@ -1,0 +1,20 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_GetVersion</h1>
+<p>Retrieves the version of BASS that is loaded.
+<p><pre class="def">DWORD BASS_GetVersion();</pre>
+<p><h2>Return value</h2>
+The BASS version. For example, 0x02040103 (hex), would be version 2.4.1.3
+<p><h2>Remarks</h2>
+There is no guarantee that a previous or future version of BASS supports all the BASS functions that you are using, so you should always use this function to make sure the correct version is loaded. It is safe to assume that future revisions (indicated in the LOWORD) will be fully compatible.
+<p>The BASS API includes a BASSVERSION constant, which can be used to check that the loaded BASS.DLL matches the API version used, ignoring revisions.
+<p><h2>Example</h2>
+Check that the correct BASS version is loaded, ignoring the revision.
+<pre class="code">if (HIWORD(BASS_GetVersion()) != BASSVERSION) {
+    // incorrect version loaded!
+}</pre>
+<p>Check that revision 1.0 or above of the correct BASS version is loaded.
+<pre class="code">DWORD version = BASS_GetVersion(); // get the version number
+if (HIWORD(version) != BASSVERSION // check the main version
+    || LOWORD(version) < 0x100) { // check the revision
+    // incorrect version loaded!
+}</pre>

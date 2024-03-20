@@ -1,0 +1,23 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+
+<h1>BASS_ChannelBytes2Seconds</h1>
+<p>Translates a byte position into time (seconds), based on a channel's format.
+<p><pre class="def">double BASS_ChannelBytes2Seconds(
+    DWORD <I>handle</I>,
+    QWORD <I>pos</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD. HSAMPLE handles may also be used.
+<tr><td>pos<td>The position to translate.
+</table>
+<p><h2>Return value</h2>
+If successful, then the translated length is returned, else a negative value is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+</table>
+<p><h2>Remarks</h2>
+The translation is based on the channel's initial sample rate, when it was created.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>, <a href="BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a>, <a href="BASS_ChannelSeconds2Bytes.html">BASS_ChannelSeconds2Bytes</a>

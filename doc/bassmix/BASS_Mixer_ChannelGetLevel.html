@@ -1,0 +1,28 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelGetLevel</h1>
+<p>Retrieves the level (peak amplitude) of a mixer source channel.
+<p><pre class="def">DWORD BASS_Mixer_ChannelGetLevel(
+    DWORD <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+</table>
+<p><h2>Return value</h2>
+If an error occurs, -1 is returned, use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. If successful, the level of the left channel is returned in the low word (low 16-bits), and the level of the right channel is returned in the high word (high 16-bits). If the channel is mono, then the low word is duplicated in the high word. The level ranges linearly from 0 (silent) to 32768 (max). 0 will be returned when a channel is stalled.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The channel does not have buffering enabled.</a>
+<tr><td>BASS_ERROR_NOPLAY<td>The mixer is not playing.</a>
+</table>
+<p><h2>Remarks</h2>
+This function is like the standard <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a>, but it gets the level from the channel's buffer instead of decoding data from the channel, which means that the mixer does not miss out on any data. In order to do this, the source channel must have buffering enabled via the BASS_MIXER_CHAN_BUFFER flag.
+<p>This function measures the level of the channel's sample data, not its level in the mixer output. It includes the effect of any DSP/FX set on the channel, but not the effect of the channel's <a href="mk:@MSITStore:bass.chm::/BASS_ATTRIB_VOL.html">BASS_ATTRIB_VOL</a> or <a href="mk:@MSITStore:bass.chm::/BASS_ATTRIB_PAN.html">BASS_ATTRIB_PAN</a> attributes or <a href=matrix.html>matrix mixing</a> or any envelope set via <a href="BASS_Mixer_ChannelSetEnvelope.html">BASS_Mixer_ChannelSetEnvelope</a>.
+<p>If the mixer is being played by BASS, the returned level will be in sync with what is currently being heard from the mixer. If another output system is being used, the <a href="BASS_ATTRIB_MIXER_LATENCY.html">BASS_ATTRIB_MIXER_LATENCY</a> option can be used to tell the mixer what the latency is so that it can be taken account of, otherwise the channel's most recent data will be used to get the level.
+<p>If the mixer is a submixer (source of another mixer) without its own latency set via the <a href="BASS_ATTRIB_MIXER_LATENCY.html">BASS_ATTRIB_MIXER_LATENCY</a> option then the parent mixer's latency will be used. If the parent mixer is also a submixer then the process will be repeated, and so on, until a final latency value is obtained (if possible). This is only possible if the submixer(s) have the BASS_MIXER_POSEX flag set, to enable keeping a record of source positions.
+<p>The <a href="BASS_CONFIG_MIXER_BUFFER.html">BASS_CONFIG_MIXER_BUFFER</a> config option determines how far back the level will be available from, so it should be set high enough to cover any latency.
+<p>More flexible level retrieval is available with <a href="BASS_Mixer_ChannelGetLevelEx.html">BASS_Mixer_ChannelGetLevelEx</a>.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelGetData.html">BASS_Mixer_ChannelGetData</a>, <a href="BASS_Mixer_ChannelGetLevelEx.html">BASS_Mixer_ChannelGetLevelEx</a>, <a href="BASS_Mixer_ChannelIsActive.html">BASS_Mixer_ChannelIsActive</a>, <a href="BASS_ATTRIB_MIXER_LATENCY.html">BASS_ATTRIB_MIXER_LATENCY</a>, <a href="BASS_CONFIG_MIXER_BUFFER.html">BASS_CONFIG_MIXER_BUFFER</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a>

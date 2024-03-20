@@ -1,0 +1,32 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelGetPositionEx</h1>
+<p>Retrieves the playback position of a mixer source channel, optionally accounting for some latency.
+<p><pre class="def">QWORD BASS_Mixer_ChannelGetPositionEx(
+    DWORD <I>handle</I>,
+    DWORD <I>mode</I>,
+    DWORD <I>delay</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>mode<td>How to retrieve the position. One of the following.
+<table>
+<tr><td>BASS_POS_BYTE<td>Get the position in bytes.
+<tr><td>BASS_POS_MUSIC_ORDER<td>Get the position in orders and rows... LOWORD = order, HIWORD = row * scaler (<a href="mk:@MSITStore:bass.chm::/BASS_ATTRIB_MUSIC_PSCALER.html">BASS_ATTRIB_MUSIC_PSCALER</a>). (HMUSIC only)
+</table>
+<i>other modes may be supported by add-ons, see the documentation.</i>
+<tr><td>delay<td>How far back (in bytes) in the mixer output to get the source channel's position from.
+</table>
+<p><h2>Return value</h2>
+If successful, then the channel's position is returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The requested position <I>mode</I> is not available, or <I>delay</I> goes beyond where the mixer has record of the source channel's position.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+<a href="BASS_Mixer_ChannelGetPosition.html">BASS_Mixer_ChannelGetPosition</a> compensates for the mixer's playback buffering to give the position that is currently being heard, but if the mixer is feeding some other output system, it will not know how to compensate for that. This function fills that gap by allowing the latency to be specified in the call. This functionality requires the mixer to keep a record of its sources' position going back some time, and that is enabled via the BASS_MIXER_POSEX flag when a mixer is created, with the <a href="BASS_CONFIG_MIXER_POSEX.html">BASS_CONFIG_MIXER_POSEX</a> config option determining how far back the position record goes. If the mixer is not a decoding channel (not using the BASS_STREAM_DECODE flag) then it will automatically have a position record at least equal to its playback buffer length.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelGetPosition.html">BASS_Mixer_ChannelGetPosition</a>, <a href="BASS_CONFIG_MIXER_POSEX.html">BASS_CONFIG_MIXER_POSEX</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a>

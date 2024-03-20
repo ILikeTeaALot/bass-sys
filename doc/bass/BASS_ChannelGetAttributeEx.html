@@ -1,0 +1,36 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelGetAttributeEx</h1>
+<p>Retrieves the value of a channel's attribute.
+<p><pre class="def">DWORD BASS_ChannelGetAttributeEx(
+    DWORD <I>handle</I>,
+    DWORD <I>attrib</I>,
+    void *<I>value</I>,
+    DWORD <I>size</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD.
+<tr><td>attrib<td>The attribute to get the value of... one of the following.<br>
+<table>
+<tr><td><a href="BASS_ATTRIB_DOWNLOADPROC.html">BASS_ATTRIB_DOWNLOADPROC</a><td>Internet stream download callback. (HSTREAM only)
+<tr><td><a href="BASS_ATTRIB_SCANINFO.html">BASS_ATTRIB_SCANINFO</a><td>Scanned info. (HSTREAM only)
+<tr><td><a href="BASS_ATTRIB_USER.html">BASS_ATTRIB_USER</a><td>User-defined info. (HMUSIC/HSTREAM/HRECORD)
+</table>
+<i>other attributes may be supported by add-ons, see the documentation.</i>
+<tr><td>value<td>Pointer to a buffer to receive the attribute data.
+<tr><td>size<td>The size of the attribute data in bytes... 0 = get the size of the attribute without getting the data.
+</table>
+<p><h2>Return value</h2>
+If successful, the size of the attribute data is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The attribute is not available.
+<tr><td>BASS_ERROR_ILLTYPE<td><I>attrib</I> is not valid.
+<tr><td>BASS_ERROR_ILLPARAM<td><I>size</I> is not valid.
+</table>
+<i>some attributes may have additional error codes, see the documentation.</i>
+<p><h2>Remarks</h2>
+This function also supports the floating-point attributes supported by <a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>, <a href="BASS_ChannelSetAttributeEx.html">BASS_ChannelSetAttributeEx</a>

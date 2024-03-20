@@ -1,0 +1,28 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_MUSIC_PSCALER attribute</h1>
+<p>The position scaler of a MOD music.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    HMUSIC <I>handle</I>,
+    BASS_ATTRIB_MUSIC_PSCALER,
+    float <I>scale</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The MOD music handle.
+<tr><td>scale<td>The scaler... 1 (min) to 256 (max). This will be rounded down to a whole number.
+</table>
+<p><h2>Remarks</h2>
+When getting the order position via <a href="BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a>, the row will be scaled by this value. By using a higher scaler, you can get a more precise position indication.
+<p>The default position scaler is 1.
+<p><h2>Example</h2>
+Get the position of a MOD music accurate to within a 10th of a row.
+<pre class="code">
+DWORD pos, order, row, row10th;
+BASS_ChannelSetAttribute(music, BASS_ATTRIB_MUSIC_PSCALER, 10); // set the scaler
+pos = ChannelGetPosition(music, BASS_POS_MUSIC_ORDER);
+order = LOWORD(pos); // the order
+row = HIWORD(pos) / 10; // the row
+row10th = HIWORD(pos) % 10; // the 10th of a row
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a>

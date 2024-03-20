@@ -1,0 +1,61 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_StreamCreateFileUser</h1>
+<p>Creates a sample stream from an MP3, MP2, MP1, OGG, WAV, AIFF or plugin supported file via user callback functions.
+<p><pre class="def">HSTREAM BASS_StreamCreateFileUser(
+    DWORD <I>system</I>,
+    DWORD <I>flags</I>,
+    <a href="BASS_FILEPROCS.html">BASS_FILEPROCS</a> *<I>procs</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>system<td>File system to use, one of the following.
+<table>
+<tr><td>STREAMFILE_NOBUFFER<td>Unbuffered.
+<tr><td>STREAMFILE_BUFFER<td>Buffered.
+<tr><td>STREAMFILE_BUFFERPUSH<td>Buffered, with the data pushed to BASS via <a href="BASS_StreamPutFileData.html">BASS_StreamPutFileData</a>.
+</table>
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMPLE_FLOAT<td>Use 32-bit floating-point sample data. See <a href=float.html>Floating-point channels</a> for info.
+<tr><td>BASS_SAMPLE_MONO<td>Decode/play the file (OGG/MP3/MP2/MP1 only) in mono. This flag is automatically applied if BASS_DEVICE_MONO was specified when calling <a href="BASS_Init.html">BASS_Init</a>.
+<tr><td>BASS_SAMPLE_3D<td>Enable 3D functionality. The stream must be mono. The SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_SAMPLE_LOOP<td>Loop the file. This flag can be toggled at any time using <a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>. This flag is ignored when streaming in blocks (BASS_STREAM_BLOCK).
+<tr><td>BASS_STREAM_PRESCAN<td>Pre-scan the file for accurate seek points and length reading in MP3/MP2/MP1 files and chained OGG files (has no effect on normal OGG files). This can significantly increase the time taken to create the stream, particularly with a large file and/or slow storage media. This flag only applies when using the STREAMFILE_NOBUFFER system.
+<tr><td>BASS_STREAM_RESTRATE<td>Restrict the "download" rate of the file, according to the <a href="BASS_CONFIG_NET_RESTRATE.html">BASS_CONFIG_NET_RESTRATE</a> config setting. If this flag is not used then the file will be downloaded as quickly as possible. This flag only has effect when using the STREAMFILE_BUFFER system.
+<tr><td>BASS_STREAM_BLOCK<td>Only keep a block of the file in memory, determined by the <a href="BASS_CONFIG_NET_BUFFER.html">BASS_CONFIG_NET_BUFFER</a> config setting, rather than the whole file. This uses a lot less memory than otherwise, but it is not possible to seek or loop the stream. This flag will be applied automatically when the file length is unknown or over 2GB. This flag has no effect when using the STREAMFILE_NOBUFFER system.
+<tr><td>BASS_STREAM_AUTOFREE<td>Automatically free the stream when playback ends.
+<tr><td>BASS_STREAM_DECODE<td>Decode the sample data, without playing it. Use <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> to retrieve decoded sample data. The BASS_SAMPLE_3D, BASS_STREAM_AUTOFREE and SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href=speaker.html>Speaker assignment flags</a>. These flags have no effect when the stream is more than stereo.
+<tr><td>BASS_ASYNCFILE<td>Read the file asynchronously. When enabled, the file is read and buffered in parallel with the decoding, to reduce the chances of the decoder being affected by I/O delays. This can be particularly useful with slow storage media and/or low latency output. The size of the file buffer is determined by the <a href="BASS_CONFIG_ASYNCFILE_BUFFER.html">BASS_CONFIG_ASYNCFILE_BUFFER</a> config option. This flag only applies when using the STREAMFILE_NOBUFFER system.
+</table>
+<tr><td>procs<td>The user defined file functions.
+<tr><td>user<td>User instance data to pass to the callback functions.
+</table>
+<p><h2>Return value</h2>
+If successful, the new stream's handle is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_STREAM_AUTOFREE flag cannot be combined with the BASS_STREAM_DECODE flag.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>system</i> is not valid.
+<tr><td>BASS_ERROR_FILEFORM<td>The file's format is not recognised/supported.
+<tr><td>BASS_ERROR_UNSTREAMABLE<td>The file cannot be streamed using the buffered file system. This could be because an MP4 file's "mdat" atom comes before its "moov" atom.
+<tr><td>BASS_ERROR_NOTAUDIO<td>The file does not contain audio, or it also contains video and videos are disabled.
+<tr><td>BASS_ERROR_CODEC<td>The file uses a codec that is not available/supported. This can apply to WAV and AIFF files.
+<tr><td>BASS_ERROR_FORMAT<td>The sample format is not supported.
+<tr><td>BASS_ERROR_SPEAKER<td>The specified SPEAKER flags are invalid.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+<tr><td>BASS_ERROR_NO3D<td>Could not initialize 3D support.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+The buffered file system (STREAMFILE_BUFFER) is what is used by <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>. As the name suggests, data from the file is buffered so that it is readily available for decoding; BASS creates a thread dedicated to "downloading" the data. This is ideal for when the data is coming from a source that has high latency, like the internet. It is not possible to seek in buffered file streams, until the download has reached the requested position; it is not possible to seek at all if it is being streamed in blocks. When streaming in blocks, it may be possible to reset the stream via <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a> with the BASS_POS_RESET flag, so that it is ready to process new data.
+<p>The push buffered file system (STREAMFILE_BUFFERPUSH) is the same, except that instead of the file data being pulled from the <a href="FILEREADPROC.html">FILEREADPROC</a> function in a "download" thread, the data is pushed to the stream via <a href="BASS_StreamPutFileData.html">BASS_StreamPutFileData</a>. A <a href="FILEREADPROC.html">FILEREADPROC</a> function is still required, to get the initial data used in the creation of the stream.
+<p>The unbuffered file system (STREAMFILE_NOBUFFER) is what is used by <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>. In this system, BASS does not do any intermediate buffering; it simply requests data from the file as and when it needs it. This means that reading (<a href="FILEREADPROC.html">FILEREADPROC</a>) must be quick, otherwise the decoding will be delayed and playback buffer underruns (old data repeated) are a possibility. It is not so important for seeking (<a href="FILESEEKPROC.html">FILESEEKPROC</a>) to be fast, as that is generally not required during decoding, except when looping a file.
+<p>In all cases, BASS will automatically stall playback of the stream when insufficient data is available, and resume it when enough data does become available.
+<p>A copy is made of the <i>procs</i> callback function table, so it does not need to persist beyond this function call.
+<p><h2>Platform-specific</h2>
+On Windows, ACM codecs are supported with compressed WAV files. Media Foundation codecs are also supported on Windows 7 and updated versions of Vista, including support for AAC and WMA. On iOS and macOS, CoreAudio codecs are supported, including support for AAC and ALAC. Android's media codecs are also supported on Android 9 and above (Android 5 for AAC/ADTS). In all cases, the OS's codecs are only tried after BASS's built-in decoders and any plugins have rejected the file. Built-in support for IMA and Microsoft ADPCM WAV files is provided on Linux/Android, while they are supported via ACM and CoreAudio codecs on Windows and macOS/iOS.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>, <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a>, <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>, <a href="BASS_ChannelPlay.html">BASS_ChannelPlay</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSetDSP.html">BASS_ChannelSetDSP</a>, <a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, <a href="BASS_StreamFree.html">BASS_StreamFree</a>, <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a>, <a href="BASS_StreamPutFileData.html">BASS_StreamPutFileData</a>, <a href="BASS_FILEPROCS.html">BASS_FILEPROCS structure</a>, <a href="BASS_CONFIG_NET_BUFFER.html">BASS_CONFIG_NET_BUFFER</a>

@@ -1,0 +1,110 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelSetSync</h1>
+<p>Sets up a synchronizer on a MOD music, stream or recording channel.
+<p><pre class="def">HSYNC BASS_ChannelSetSync(
+    DWORD <I>handle</I>,
+    DWORD <I>type</I>,
+    QWORD <I>param</I>,
+    <a href="SYNCPROC.html">SYNCPROC</a> *<I>proc</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HMUSIC, HSTREAM or HRECORD.
+<tr><td>type<td>The type of sync (see the table below). The following flags may also be used.<br>
+<table>
+<tr><td>BASS_SYNC_MIXTIME<td>Call the sync function immediately when the sync is triggered, instead of delaying the call until the sync event is actually heard. This is automatic with some sync types (see table below), and always with decoding and recording channels, as they cannot be played/heard. 
+<tr><td>BASS_SYNC_ONETIME<td>Call the sync only once and then remove it from the channel.
+<tr><td>BASS_SYNC_THREAD<td>Call the sync asynchronously in the dedicated sync thread. This only affects mixtime syncs (except BASS_SYNC_FREE syncs) and allows the callback function to safely call <a href="BASS_ChannelFree.html">BASS_ChannelFree</a> or <a href="BASS_StreamFree.html">BASS_StreamFree</a> or <a href="BASS_MusicFree.html">BASS_MusicFree</a> on the same channel handle.
+</table>
+<tr><td>param<td>The sync parameter. Depends on the sync <I>type</I>... see the table below.
+<tr><td>proc<td>The callback function.
+<tr><td>user<td>User instance data to pass to the callback function.
+</table>
+<p><b>Sync types</b>, with <I><B>param</B></I> and <a href="SYNCPROC.html">SYNCPROC</a> <I><B>data</B></I> definitions.<br>
+<table>
+<tr><td>BASS_SYNC_DEV_FAIL<br><font size=-2><i>mixtime only</i></font><td>Sync when the channel's device stops unexpectedly (eg. if it is disconnected/disabled). When this happens, it will not be possible to resume a recording but it may be possible to resume playback via <a href="BASS_Start.html">BASS_Start</a> once the device becomes available again.<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : not used.
+<tr><td>BASS_SYNC_DEV_FORMAT<br><font size=-2><i>mixtime only</i></font><td>Sync when the sample format (sample rate and/or channel count) of the channel's device changes. The new format is available from <a href="BASS_GetInfo.html">BASS_GetInfo</a> or <a href="BASS_RecordGetInfo.html">BASS_RecordGetInfo</a>.<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : not used.
+<tr><td>BASS_SYNC_DOWNLOAD<br><font size=-2><i>mixtime only</i></font><td>Sync when downloading of an internet (or "buffered" user file) stream is done.<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : not used.
+<tr><td>BASS_SYNC_END<td>Sync when a channel reaches the end, including when looping. Note that some MOD musics never reach the end; they may jump to another position first. If the BASS_MUSIC_STOPBACK flag is used with a MOD music (through <a href="BASS_MusicLoad.html">BASS_MusicLoad</a> or <a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>) then this sync will also be called when a backward jump effect is played.<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : 0 = the normal end position, 1 = a backward jump in a MOD music, 2 = the BASS_POS_END position, 3 = the end of a tail (<a href="BASS_ATTRIB_TAIL.html">BASS_ATTRIB_TAIL</a>).
+<tr><td>BASS_SYNC_FREE<br><font size=-2><i>mixtime only</i></font><td>Sync when a channel is freed. This can be useful when you need to release some resources associated with the channel. Note that you will not be able to use any BASS functions with the channel in the callback, as the channel will no longer exist.<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : not used.
+<tr><td>BASS_SYNC_META<br><font size=-2><i>mixtime only</i></font><td>Sync when metadata is received in a Shoutcast stream. The updated metadata is available from <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>.<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : not used.
+<tr><td>BASS_SYNC_MUSICFX<td>Sync when the sync effect is used in a MOD music. The sync effect is <code>E8x</code> or <code>Wxx</code> for the XM/MTM/MOD formats, and <code>S2x</code> for the IT/S3M formats (where x = any value).<br>
+<I><B>param</B></I> : 0 = the position is passed to the callback (<I><B>data</B></I> : LOWORD = order, HIWORD = row), 1 = the value of <code>x</code> is passed to the callback (<I><B>data</B></I> : <code>x</code> value).
+<tr><td>BASS_SYNC_MUSICINST<td>Sync when an instrument (sample for the MOD/S3M/MTM formats) is played in a MOD music (not including retrigs).<br>
+<I><B>param</B></I> : LOWORD = instrument (1=first), HIWORD = note (0=c0...119=b9, -1=all). <I><B>data</B></I> : LOWORD = note, HIWORD = volume (0-64).
+<tr><td>BASS_SYNC_MUSICPOS<td>Sync when a MOD music reaches an order.row position.<br>
+<I><B>param</B></I> : LOWORD = order (0=first, -1=all), HIWORD = row (0=first, -1=all). <I><B>data</B></I> : LOWORD = order, HIWORD = row.<br>
+<tr><td>BASS_SYNC_OGG_CHANGE<td>Sync when a new logical bitstream begins in a chained OGG stream. Updated tags are available from <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>.<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : not used.
+<tr><td>BASS_SYNC_POS<td>Sync when a channel reaches a position.<br>
+<I><B>param</B></I> : position in bytes (automatically rounded down to nearest sample). <I><B>data</B></I> : not used.
+<tr><td>BASS_SYNC_SETPOS<td>Sync when a channel's position is set, including when looping/restarting.<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : 0 = playback buffer is not flushed, 1 = playback buffer is flushed.
+<tr><td>BASS_SYNC_SLIDE<br><font size=-2><i>mixtime only</i></font><td>Sync when an attribute slide has ended.<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : the attribute that has finished sliding.
+<tr><td>BASS_SYNC_STALL<br><font size=-2><i>mixtime only</i></font><td>Sync when playback of the channel is stalled/resumed.<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : 0 = stalled, 1 = resumed.
+</table>
+<i>other sync types may be supported by add-ons, see the documentation.</i>
+<p><h2>Return value</h2>
+If successful, then the new synchronizer's handle is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_ILLTYPE<td>An illegal <I>type</I> was specified.
+<tr><td>BASS_ERROR_ILLPARAM<td>An illegal <I>param</I> was specified.
+</table>
+<p><h2>Remarks</h2>
+Multiple synchronizers may be used per channel, and they can be set before and while playing. Equally, synchronizers can also be removed at any time, using <a href="BASS_ChannelRemoveSync.html">BASS_ChannelRemoveSync</a>. If the BASS_SYNC_ONETIME flag is used then the sync is automatically removed after its first occurrence.
+<p>The BASS_SYNC_MIXTIME flag (without BASS_SYNC_THREAD) can be used with BASS_SYNC_END or BASS_SYNC_POS/MUSICPOS syncs to implement custom looping, by using <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a> in the callback. A mixtime sync can also be used to make DSP/FX changes at specific points, or change a HMUSIC channel's flags or attributes. The BASS_SYNC_MIXTIME flag can also be useful with a BASS_SYNC_SETPOS sync, to reset DSP states after seeking.
+<p>Several of the sync types are triggered in the process of rendering the channel's sample data; for example, BASS_SYNC_POS and BASS_SYNC_END syncs, when the rendering reaches the sync position or the end, respectively. Those sync types should be set before starting playback or pre-buffering (ie. before any rendering), to avoid missing any early sync events.
+<p>A channel does not need to be playing for its BASS_SYNC_DEV_FAIL and BASS_SYNC_DEV_FORMAT syncs to be triggered but the device does need to be active, which means it needs to be playing other channels or the <a href="BASS_CONFIG_DEV_NONSTOP.html">BASS_CONFIG_DEV_NONSTOP</a> option needs to be enabled.
+<p>With recording channels, BASS_SYNC_POS syncs are triggered just before the <a href="RECORDPROC.html">RECORDPROC</a> receives the block of data containing the sync position.
+<p><h2>Example</h2>
+Do some processing until a MOD music reaches the 10th order.
+<pre class="code">
+BOOL order10 = FALSE; // the order 10 flag
+...
+// the sync callback
+void CALLBACK MySyncProc(HSYNC handle, DWORD channel, DWORD data, void *user)
+{
+    order10 = TRUE; // set the order 10 flag
+}
+...
+BASS_ChannelSetSync(music, BASS_SYNC_MUSICPOS | BASS_SYNC_ONETIME, MAKELONG(10, 0), MySyncProc, 0); // set the one-time order 10 sync
+while (!order10) {
+    // order 10 has not arrived, so do some processing
+}
+// order 10 has arrived!
+</pre>
+<p>Process metadata received from a Shoutcast stream.
+<pre class="code">
+char title[100] = ""; // the current stream title
+...
+// the sync callback
+void CALLBACK MyMetaSyncProc(HSYNC handle, DWORD channel, DWORD data, void *user)
+{
+    const char *meta = BASS_ChannelGetTags(channel, BASS_TAG_META); // get metadata
+    meta = strstr(meta, "StreamTitle='"); // look for title
+    if (meta) { // found it, copy it...
+        int a;
+        meta += 13;
+        for (a = 0; a &lt; sizeof(title) - 1; a++) {
+            if (meta[a] == ';' || !meta[a]) break;
+            title[a] = meta[a];
+        }
+        title[a] = 0;
+    }
+}
+...
+BASS_ChannelSetSync(stream, BASS_SYNC_META, 0, MyMetaSyncProc, 0); // set the meta sync
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelRemoveSync.html">BASS_ChannelRemoveSync</a>, <a href="SYNCPROC.html">SYNCPROC callback</a>

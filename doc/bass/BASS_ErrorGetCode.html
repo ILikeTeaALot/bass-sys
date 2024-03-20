@@ -1,0 +1,54 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+
+<h1>BASS_ErrorGetCode</h1>
+<p>Retrieves the error code for the most recent BASS function call in the current thread.
+<p><pre class="def">int BASS_ErrorGetCode();</pre>
+<p><h2>Return value</h2>
+If no error occurred during the last BASS function call then BASS_OK is returned, else one of the BASS_ERROR values is returned. See the function description for an explanation of what the error code means.
+<p>Error codes are stored for each thread. So if you happen to call 2 or more BASS functions at the same time, they will not interfere with each other's error codes.
+<p><h2>Error codes list</h2>
+<table>
+<tr><td>0<td>BASS_OK
+<tr><td>1<td>BASS_ERROR_MEM
+<tr><td>2<td>BASS_ERROR_FILEOPEN
+<tr><td>3<td>BASS_ERROR_DRIVER
+<tr><td>4<td>BASS_ERROR_BUFLOST
+<tr><td>5<td>BASS_ERROR_HANDLE
+<tr><td>6<td>BASS_ERROR_FORMAT
+<tr><td>7<td>BASS_ERROR_POSITION
+<tr><td>8<td>BASS_ERROR_INIT
+<tr><td>9<td>BASS_ERROR_START
+<tr><td>10<td>BASS_ERROR_SSL
+<tr><td>11<td>BASS_ERROR_REINIT
+<tr><td>14<td>BASS_ERROR_ALREADY
+<tr><td>17<td>BASS_ERROR_NOTAUDIO
+<tr><td>18<td>BASS_ERROR_NOCHAN
+<tr><td>19<td>BASS_ERROR_ILLTYPE
+<tr><td>20<td>BASS_ERROR_ILLPARAM
+<tr><td>21<td>BASS_ERROR_NO3D
+<tr><td>22<td>BASS_ERROR_NOEAX
+<tr><td>23<td>BASS_ERROR_DEVICE
+<tr><td>24<td>BASS_ERROR_NOPLAY
+<tr><td>25<td>BASS_ERROR_FREQ
+<tr><td>27<td>BASS_ERROR_NOTFILE
+<tr><td>29<td>BASS_ERROR_NOHW
+<tr><td>31<td>BASS_ERROR_EMPTY
+<tr><td>32<td>BASS_ERROR_NONET
+<tr><td>33<td>BASS_ERROR_CREATE
+<tr><td>34<td>BASS_ERROR_NOFX
+<tr><td>37<td>BASS_ERROR_NOTAVAIL
+<tr><td>38<td>BASS_ERROR_DECODE
+<tr><td>39<td>BASS_ERROR_DX
+<tr><td>40<td>BASS_ERROR_TIMEOUT
+<tr><td>41<td>BASS_ERROR_FILEFORM
+<tr><td>42<td>BASS_ERROR_SPEAKER
+<tr><td>43<td>BASS_ERROR_VERSION
+<tr><td>44<td>BASS_ERROR_CODEC
+<tr><td>45<td>BASS_ERROR_ENDED
+<tr><td>46<td>BASS_ERROR_BUSY
+<tr><td>47<td>BASS_ERROR_UNSTREAMABLE
+<tr><td>48<td>BASS_ERROR_PROTOCOL
+<tr><td>49<td>BASS_ERROR_DENIED
+<tr><td>-1<td>BASS_ERROR_UNKNOWN
+</table>
+<i>Add-ons may introduce additional error codes</i>.

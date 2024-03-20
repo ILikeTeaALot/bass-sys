@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_FXSetParameters</h1>
+<p>Sets the parameters of an effect.
+<p><pre class="def">BOOL BASS_FXSetParameters(
+    HFX <I>handle</I>,
+    void *<I>params</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The effect handle.
+<tr><td>params<td>Pointer to the parameters structure. The structure used depends on the effect type.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is invalid.
+<tr><td>BASS_ERROR_ILLPARAM<td>One or more of the parameters are invalid, make sure all the values are within the valid ranges.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a>

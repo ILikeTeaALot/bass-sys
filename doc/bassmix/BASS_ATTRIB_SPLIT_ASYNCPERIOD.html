@@ -1,0 +1,19 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_SPLIT_ASYNCPERIOD attribute</h1>
+<p>Maximum amount of data to asynchronously buffer at a time from a splitter's source.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    HSTREAM <I>handle</I>,
+    BASS_ATTRIB_SPLIT_ASYNCPERIOD,
+    float <I>period</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The splitter stream handle.
+<tr><td>period<td>The maximum amount to data to asynchronously buffer at a time from the source, in seconds... 0 = as much as possible.
+</table>
+<p><h2>Remarks</h2>
+When asynchronous buffering is enabled via the <a href="BASS_ATTRIB_SPLIT_ASYNCBUFFER.html">BASS_ATTRIB_SPLIT_ASYNCBUFFER</a> attribute, this attribute limits how much data is requested from the source at a time. When there is more space available in the buffer, the request will be repeated until the space is filled.
+<p>The setting applies to all splitter streams that have the same source. The default setting is 0 (as much as possible). Changes take immediate effect.
+<p><h2>See also</h2>
+<a href="BASS_Split_StreamCreate.html">BASS_Split_StreamCreate</a>, <a href="BASS_Split_StreamGetAvailable.html">BASS_Split_StreamGetAvailable</a>, <a href="BASS_ATTRIB_SPLIT_ASYNCBUFFER.html">BASS_ATTRIB_SPLIT_ASYNCBUFFER</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>

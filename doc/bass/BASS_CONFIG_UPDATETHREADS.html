@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_UPDATETHREADS config option</h1>
+<p>The number of threads to use for updating playback buffers.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_UPDATETHREADS,
+    DWORD <I>threads</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>threads<td>The number of threads to use... 0 = disable automatic updating.
+</table>
+<p><h2>Remarks</h2>
+The number of update threads determines how many HSTREAM/HMUSIC channel playback buffers can be updated in parallel; each thread can process one channel at a time. The default is to use a single thread, but additional threads can be used to take advantage of multiple CPU cores. There is generally nothing much to be gained by creating more threads than there are CPU cores, but one benefit of using multiple threads even with a single CPU core is that a slowly updating channel need not delay the updating of other channels.
+<p>When automatic updating is disabled (<i>threads = 0</i>), <a href="BASS_Update.html">BASS_Update</a> or <a href="BASS_ChannelUpdate.html">BASS_ChannelUpdate</a> should be used instead.
+<p>The number of update threads can be changed at any time, including during playback.
+<p><h2>See also</h2>
+<a href="BASS_ChannelUpdate.html">BASS_ChannelUpdate</a>, <a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_Update.html">BASS_Update</a>, <a href="BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a>, <a href="BASS_CONFIG_UPDATEPERIOD.html">BASS_CONFIG_UPDATEPERIOD</a>

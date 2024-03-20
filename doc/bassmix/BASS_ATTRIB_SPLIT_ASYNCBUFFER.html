@@ -1,0 +1,24 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_SPLIT_ASYNCBUFFER attribute</h1>
+<p>Amount of data to asynchronously buffer from a splitter's source.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    HSTREAM <I>handle</I>,
+    BASS_ATTRIB_SPLIT_ASYNCBUFFER,
+    float <I>buffer</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The splitter stream handle.
+<tr><td>buffer<td>The amount to buffer, in seconds... 0 = disable asynchronous buffering. The asynchronous buffering will be limited to the splitter's buffer length, as determined by <a href="BASS_CONFIG_SPLIT_BUFFER.html">BASS_CONFIG_SPLIT_BUFFER</a>.
+</table>
+<p><h2>Remarks</h2>
+A splitter stream will usually get data from its source only when it is needed. This attribute allows the data to be gotten ahead of time asynchronously instead, so that it is ready for the splitter to access immediately when needed. This is not really useful with normal BASS playback (which is already buffered) but it can be used to implement buffering in other cases, eg. for mixer sources. The setting applies to all splitter streams that have the same source
+<p>When there are multiple splitters with the same source, the asynchronous buffering is based on the most advanced of them, which means that the asynchronous buffer length should be under the splitter buffer length (<a href="BASS_CONFIG_SPLIT_BUFFER.html">BASS_CONFIG_SPLIT_BUFFER</a>) to allow the splitter positions to get apart from each other without the buffer overflowing for any of them. That margin should be at least equal to the maximum amount that you expect the splitter positions to get apart at any time.
+<p>By default, the asynchronous buffering will try to fill any space in the buffer in one data request of the source. It can be broken down into smaller amounts via the <a href="BASS_ATTRIB_SPLIT_ASYNCPERIOD.html">BASS_ATTRIB_SPLIT_ASYNCPERIOD</a> attribute.
+<p>If a splitter stream needs more data than has been buffered then it will revert to synchronously getting data from the source for the remainder, unless it has the BASS_SPLIT_SLAVE flag set.
+<p>The amount of data that a splitter has buffered can be retrieved from <a href="BASS_Split_StreamGetAvailable.html">BASS_Split_StreamGetAvailable</a>.
+<p>Asynchronous buffering is not possible when the source is a "dummy" stream.
+<p>The default setting is 0 (no asynchronous buffering). Changes take immediate effect.
+<p><h2>See also</h2>
+<a href="BASS_Split_StreamCreate.html">BASS_Split_StreamCreate</a>, <a href="BASS_Split_StreamGetAvailable.html">BASS_Split_StreamGetAvailable</a>, <a href="BASS_ATTRIB_SPLIT_ASYNCPERIOD.html">BASS_ATTRIB_SPLIT_ASYNCPERIOD</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>

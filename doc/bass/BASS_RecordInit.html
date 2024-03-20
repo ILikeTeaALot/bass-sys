@@ -1,0 +1,27 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_RecordInit</h1>
+<p>Initializes a recording device.
+<p><pre class="def">BOOL BASS_RecordInit(
+    int <I>device</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>device<td>The device to use... -1 = default device, 0 = first. <a href="BASS_RecordGetDeviceInfo.html">BASS_RecordGetDeviceInfo</a> can be used to enumerate the available devices.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>device</i> is invalid.
+<tr><td>BASS_ERROR_ALREADY<td>The device has already been initialized. <a href="BASS_RecordFree.html">BASS_RecordFree</a> must be called before it can be initialized again.
+<tr><td>BASS_ERROR_DRIVER<td>There is no available device driver.
+</table>
+<p><h2>Remarks</h2>
+This function must be successfully called before using the recording features.
+<p>Simultaneously using multiple devices is supported in the BASS API via a context switching system; instead of there being an extra "device" parameter in the function calls, the device to be used is set prior to calling the functions. <a href="BASS_RecordSetDevice.html">BASS_RecordSetDevice</a> is used to switch the current recording device. When successful, BASS_RecordInit automatically sets the current thread's device to the one that was just initialized.
+<p>The default device (<i>device = -1</i>) always maps to the "Default" device unless that has been disabled via the <a href="BASS_CONFIG_REC_DEFAULT.html">BASS_CONFIG_REC_DEFAULT</a> config option. <a href="BASS_RecordGetDevice.html">BASS_RecordGetDevice</a> can be used afterwards to confirm which device is being used.
+<p><h2>Platform-specific</h2>
+On Windows, WASAPI or DirectSound may be used, depending on the <a href="BASS_CONFIG_REC_WASAPI.html">BASS_CONFIG_REC_WASAPI</a> config option setting.
+<p>On Linux, a "Default" device is hardcoded to device number 0, which uses the default input set in the ALSA config; that could map directly to one of the other devices or it could use ALSA plugins.
+<p><h2>See also</h2>
+<a href="BASS_RecordFree.html">BASS_RecordFree</a>, <a href="BASS_RecordGetDeviceInfo.html">BASS_RecordGetDeviceInfo</a>, <a href="BASS_RecordGetInfo.html">BASS_RecordGetInfo</a>, <a href="BASS_RecordGetInput.html">BASS_RecordGetInput</a>, <a href="BASS_RecordSetDevice.html">BASS_RecordSetDevice</a>, <a href="BASS_RecordSetInput.html">BASS_RecordSetInput</a>, <a href="BASS_RecordStart.html">BASS_RecordStart</a>

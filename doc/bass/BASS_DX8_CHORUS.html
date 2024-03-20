@@ -1,0 +1,24 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_DX8_CHORUS structure</h1>
+<p>Used with <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a> and <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a> to retrieve and set the parameters of a DX8 chorus effect.
+<p><pre class="def">typedef struct {
+    float <i>fWetDryMix</i>;
+    float <i>fDepth</i>;
+    float <i>fFeedback</i>;
+    float <i>fFrequency</i>;
+    DWORD <i>lWaveform</i>;
+    float <i>fDelay</i>;
+    DWORD <i>lPhase</i>;
+} BASS_DX8_CHORUS;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>fWetDryMix<td>Ratio of wet (processed) signal to dry (unprocessed) signal. Must be in the range from 0 through 100 (all wet). The default value is 50.
+<tr><td>fDepth<td>Percentage by which the delay time is modulated by the low-frequency oscillator (LFO). Must be in the range from 0 through 100. The default value is 10.
+<tr><td>fFeedback<td>Percentage of output signal to feed back into the effect's input, in the range from -99 to 99. The default value is 25.
+<tr><td>fFrequency<td>Frequency of the LFO, in the range from 0 to 10. The default value is 1.1.
+<tr><td>lWaveform<td>Waveform of the LFO... 0 = triangle, 1 = sine. By default, the waveform is sine.
+<tr><td>fDelay<td>Number of milliseconds the input is delayed before it is played back, in the range from 0 to 20. The default value is 16 ms.
+<tr><td>lPhase<td>Phase differential between left and right LFOs, one of BASS_DX8_PHASE_NEG_180, BASS_DX8_PHASE_NEG_90, BASS_DX8_PHASE_ZERO, BASS_DX8_PHASE_90 and BASS_DX8_PHASE_180. The default value is BASS_DX8_PHASE_90.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a>, <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a>

@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Start</h1>
+<p>Starts/resumes the output.
+<p><pre class="def">BOOL BASS_Start();</pre>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_BUSY<td>The app's audio has been interrupted and cannot be resumed yet. (iOS only)
+<tr><td>BASS_ERROR_REINIT<td>The device is currently being reinitialized or needs to be.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+The output is automatically started by <a href="BASS_Init.html">BASS_Init</a>, so there is usually no need to use this function unless <a href="BASS_Stop.html">BASS_Stop</a> or <a href="BASS_Pause.html">BASS_Pause</a> has been used. But the output may also be paused automatically if the output device becomes unavailable, eg. disconnected. A BASS_SYNC_DEV_FAIL sync can be set via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> to be notified when that happens. <a href="BASS_IsStarted.html">BASS_IsStarted</a> can be used to check if the output is currently running.
+<p>When using multiple devices, the current thread's device setting (as set with <a href="BASS_SetDevice.html">BASS_SetDevice</a>) determines which device this function call applies to.
+<p><h2>See also</h2>
+<a href="BASS_IsStarted.html">BASS_IsStarted</a>, <a href="BASS_Pause.html">BASS_Pause</a>, <a href="BASS_Stop.html">BASS_Stop</a>

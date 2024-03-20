@@ -1,0 +1,19 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>TAG_CA_CODEC structure</h1>
+<p>CoreAudio codec information structure.
+<p><pre class="def">typedef struct {
+    DWORD <I>ftype</I>;
+    DWORD <I>atype</I>;
+    char *<I>name</I>;
+} TAG_CA_CODEC;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>ftype<td>File format identifier.
+<tr><td>atype<td>Audio data format identifier.
+<tr><td>name<td>Description of the audio file format.
+
+</table>
+<p><h2>Remarks</h2>
+A list of file and audio data format identifiers is available from Apple, <a href="https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/CoreAudioOverview/SupportedAudioFormatsMacOSX/SupportedAudioFormatsMacOSX.html" target=_blank>here</a>. Additional formats may be available via third-party codecs.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>

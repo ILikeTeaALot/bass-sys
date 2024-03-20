@@ -1,0 +1,12 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_RecordGetDevice</h1>
+<p>Retrieves the recording device setting of the current thread.
+<p><pre class="def">DWORD BASS_RecordGetDevice();</pre>
+<p><h2>Return value</h2>
+If successful, the device number is returned, else -1 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_RecordInit.html">BASS_RecordInit</a> has not been successfully called; there are no initialized devices.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetDevice.html">BASS_ChannelGetDevice</a>, <a href="BASS_RecordInit.html">BASS_RecordInit</a>, <a href="BASS_RecordSetDevice.html">BASS_RecordSetDevice</a>

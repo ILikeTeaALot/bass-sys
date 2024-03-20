@@ -1,0 +1,20 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_SampleStop</h1>
+<p>Stops and frees all of a sample's channels (HCHANNEL).
+<p><pre class="def">BOOL BASS_SampleStop(
+    HSAMPLE <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The sample handle.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid sample.
+</table>
+<p><h2>Remarks</h2>
+This function is basically equivalent to calling <a href="BASS_ChannelStop.html">BASS_ChannelStop</a> on each of a sample's channels (HCHANNEL). The sample's streams (HSTREAM) are not affected.
+<p><h2>See also</h2>
+<a href="BASS_ChannelStop.html">BASS_ChannelStop</a>

@@ -1,0 +1,42 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelFlags</h1>
+<p>Modifies and retrieves a source channel's mixer flags.
+<p><pre class="def">DWORD BASS_Mixer_ChannelFlags(
+    DWORD <I>handle</I>,
+    DWORD <I>flags</I>,
+    DWORD <I>mask</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>flags<td>A combination of these flags.
+<table>
+<tr><td>BASS_MIXER_CHAN_BUFFER<td>Buffer the sample data, for use by <a href="BASS_Mixer_ChannelGetData.html">BASS_Mixer_ChannelGetData</a> and <a href="BASS_Mixer_ChannelGetLevel.html">BASS_Mixer_ChannelGetLevel</a> and <a href="BASS_Mixer_ChannelGetLevelEx.html">BASS_Mixer_ChannelGetLevelEx</a>.
+<tr><td>BASS_MIXER_CHAN_DOWNMIX<td>Apply downmixing when switching BASS_SPEAKER_xxx flags. This is ignored if matrix mixing is not enabled.
+<tr><td>BASS_MIXER_CHAN_LIMIT<td>Limit the mixer processing to the amount of data available from this source. This flag can only be applied to one source per mixer, so it will automatically be removed from any other source of the same mixer.
+<tr><td>BASS_MIXER_CHAN_NORAMPIN<td>Do not ramp-in the start, including after seeking (<a href="BASS_Mixer_ChannelSetPosition.html">BASS_Mixer_ChannelSetPosition</a>).
+<tr><td>BASS_MIXER_CHAN_PAUSE<td>Pause processing of the source.
+<tr><td>BASS_STREAM_AUTOFREE<td>Automatically free the source channel when it ends.
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href=mk:@MSITStore:bass.chm::/speaker.html>Speaker assignment flags</a>. If matrix mixing is enabled, then the matrix will be modified to place the source on the requested speaker(s).
+</table>
+<tr><td>mask<td>The flags (as above) to modify. Flags that are not included in this are left as they are, so it can be set to 0 in order to just retrieve the current flags. To modify the speaker flags, any of the BASS_SPEAKER_<i>xxx</i> flags can be used in the mask (no need to include all of them).
+</table>
+<p><h2>Return value</h2>
+If successful, the channel's updated flags are returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+<tr><td>BASS_ERROR_SPEAKER<td>The mixer does not support the requested speaker(s).</table>
+<p><h2>Remarks</h2>
+This function only deals with the channel's mixer related flags. The channel's standard flags, for example looping (BASS_SAMPLE_LOOP), are unaffected; use <a href="mk:@MSITStore:bass.chm::/BASS_ChannelFlags.html">BASS_ChannelFlags</a> to modify them.
+<p><h2>Example</h2>
+Disable ramping-in of a channel.
+<pre class="code">
+BASS_Mixer_ChannelFlags(channel, BASS_MIXER_CHAN_NORAMPIN, BASS_MIXER_CHAN_NORAMPIN); // set NORAMPIN flag
+</pre>
+<p>Enable ramping-in of a channel.
+<pre class="code">
+BASS_Mixer_ChannelFlags(channel, 0, BASS_MIXER_CHAN_NORAMPIN); // remove NORAMPIN flag
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_Mixer_StreamAddChannel.html">BASS_Mixer_StreamAddChannel</a>

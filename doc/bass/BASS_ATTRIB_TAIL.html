@@ -1,0 +1,19 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_TAIL attribute</h1>
+<p>An amount of time to add to the length of a channel.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_TAIL,
+    float <I>tail</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HMUSIC, HSTREAM.
+<tr><td>tail<td>The amount of time to add in seconds.
+</table>
+<p><h2>Remarks</h2>
+This attribute allows some silence to be added to the end a channel, which can be useful for hearing the tail of DSP/FX processing on the channel, eg. from reverb or echo effects. The silence is not added when looping is enabled.
+<p>The default value is 0. Changes take immediate effect.
+<p>Any BASS_SYNC_END syncs that are set on the channel (via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>) will be triggered twice: once at the normal end position and again at the end of the tail. The <a href="SYNCPROC.html">SYNCPROC</a> callback's "data" parameter will indicate which has occurred.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>

@@ -1,0 +1,51 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>DSPPROC callback</h1>
+<p>User defined DSP callback function.
+<p><pre class="def">void CALLBACK DSPProc(
+    HDSP <I>handle</I>,
+    DWORD <I>channel</I>,
+    void *<i>buffer</i>,
+    DWORD <i>length</i>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The DSP handle.
+<tr><td>channel<td>Channel that the DSP is being applied to.
+<tr><td>buffer<td>Pointer to the sample data to apply the DSP to. The data is as follows: 8-bit samples are unsigned, 16-bit samples are signed, 32-bit floating-point samples range from -1 to +1 (not clipped, so can actually be outside this range).
+<tr><td>length<td>The number of bytes to process.
+<tr><td>user<td>The user instance data given when <a href="BASS_ChannelSetDSP.html">BASS_ChannelSetDSP</a> was called.
+</table>
+<p><h2>Remarks</h2>
+The format of the sample data is as stated by <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>, except that it will always be floating-point if the <a href="BASS_CONFIG_FLOATDSP.html">BASS_CONFIG_FLOATDSP</a> config option is enabled.
+<p>If the DSP processing requires a particular amount of data, the <a href="BASS_ATTRIB_GRANULE.html">BASS_ATTRIB_GRANULE</a> attribute can be used to specify that.
+<p>A DSP function should be as quick as possible, as any lengthy delays can result in stuttering playback. Some functions can cause problems if called from within a DSP function. Do not call <a href="BASS_Stop.html">BASS_Stop</a> or <a href="BASS_Free.html">BASS_Free</a> from within a DSP callback, and do not call <a href="BASS_ChannelStop.html">BASS_ChannelStop</a>, <a href="BASS_ChannelFree.html">BASS_ChannelFree</a>, <a href="BASS_MusicFree.html">BASS_MusicFree</a> or <a href="BASS_StreamFree.html">BASS_StreamFree</a> with the same channel handle as received by the callback. <a href="BASS_ChannelRemoveDSP.html">BASS_ChannelRemoveDSP</a> can be called to stop the DSP function being used any more.
+<p><h2>Example</h2>
+A DSP function to swap the left/right channels of a stereo 16-bit channel.
+<pre class="code">
+void CALLBACK SwapDSP(HDSP handle, DWORD channel, void *buffer, DWORD length, void *user)
+{
+    short *s = (short*)buffer;
+    for (; length; length -= 4, s += 2) {
+        short temp = s[0];
+        s[0] = s[1];
+        s[1] = temp;
+    }
+}
+</pre>
+<p>A panning/balance DSP function for a stereo 16-bit channel.
+<pre class="code">
+float pan; // panning position, set as you would the BASS_ATTRIB_PAN attribute
+
+void CALLBACK PanDSP(HDSP handle, DWORD channel, void *buffer, DWORD length, void *user)
+{
+    short *s = (short*)buffer;
+    if (!pan) return; // no processing neeeded for centre panning
+    for (; length; length -= 4, s += 2) {
+        if (pan &lt; 0) s[1] = s[1] * (1 + pan); // pan left = reduce right
+        else s[0] = s[0] * (1 - pan); // vice versa
+    }
+}
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetDSP.html">BASS_ChannelSetDSP</a>, <a href="BASS_ATTRIB_GRANULE.html">BASS_ATTRIB_GRANULE</a>, <a href="BASS_CONFIG_FLOATDSP.html">BASS_CONFIG_FLOATDSP</a>

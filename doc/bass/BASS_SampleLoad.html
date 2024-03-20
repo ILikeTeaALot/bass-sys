@@ -1,0 +1,55 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_SampleLoad</h1>
+<p>Loads a WAV, AIFF, MP3, MP2, MP1, OGG or plugin supported sample.
+<p><pre class="def">HSAMPLE BASS_SampleLoad(
+    BOOL <I>mem</I>,
+    void *<I>file</I>,
+    QWORD <I>offset</I>,
+    DWORD <I>length</I>,
+    DWORD <I>max</I>,
+    DWORD <I>flags</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>mem<td>TRUE = load the sample from memory.
+<tr><td>file<td>Filename (mem = FALSE) or a memory location (mem = TRUE).
+<tr><td>offset<td>File offset to load the sample from (only used if mem = FALSE).
+<tr><td>length<td>Data length... 0 = use all data up to the end of file (if mem = FALSE). If <I>length</I> over-runs the end of the file, it will automatically be lowered to the end of the file.
+<tr><td>max<td>Maximum number of simultaneous playbacks... 1 (min) - 65535 (max). Use one of the BASS_SAMPLE_OVER flags to choose the override decider, in the case of there being no free channel available for playback (ie. the sample is already playing <I>max</I> times).
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMPLE_FLOAT<td>Use 32-bit floating-point sample data. Not really recommended for samples as it (at least) doubles the memory usage.
+<tr><td>BASS_SAMPLE_LOOP<td>Loop the sample.
+<tr><td>BASS_SAMPLE_MONO<td>Convert the sample to mono, if it is not already mono. This flag is automatically applied if BASS_DEVICE_MONO was specified when calling <a href="BASS_Init.html">BASS_Init</a>.
+<tr><td>BASS_SAMPLE_3D<td>Enable 3D functionality. The sample must be mono.
+<tr><td>BASS_SAMPLE_MUTEMAX<td>Mute the sample when it is at (or beyond) its max distance (3D samples only).
+<tr><td>BASS_SAMPLE_OVER_VOL<td>Override: the channel with the lowest volume is overridden.
+<tr><td>BASS_SAMPLE_OVER_POS<td>Override: the longest playing channel is overridden.
+<tr><td>BASS_SAMPLE_OVER_DIST<td>Override: the channel furthest away (from the listener) is overridden (3D samples only).
+<tr><td>BASS_UNICODE<td><i>file</i> is in UTF-16 form. Otherwise it is ANSI on Windows and UTF-8 on other platforms.
+</table>
+</table>
+<p><h2>Return value</h2>
+If successful, the loaded sample's handle is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>max</i> and/or <i>length</i> is invalid. The <i>length</i> must be specified when loading from memory.
+<tr><td>BASS_ERROR_FILEOPEN<td>The file could not be opened.
+<tr><td>BASS_ERROR_FILEFORM<td>The file's format is not recognised/supported.
+<tr><td>BASS_ERROR_NOTAUDIO<td>The file does not contain audio, or it also contains video and videos are disabled.
+<tr><td>BASS_ERROR_CODEC<td>The file uses a codec that is not available/supported. This can apply to WAV and AIFF files.
+<tr><td>BASS_ERROR_FORMAT<td>The sample format is not supported.
+<tr><td>BASS_ERROR_EMPTY<td>The file does not contain any sample data.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+<tr><td>BASS_ERROR_NO3D<td>Could not initialize 3D support.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+This function supports the same file formats as <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a> does, including those supported via the plugin system.
+<p>To play a sample, first a channel must be obtained using <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a>, which can then be played using <a href="BASS_ChannelStart.html">BASS_ChannelStart</a> or <a href="BASS_ChannelPlay.html">BASS_ChannelPlay</a>.
+<p>After loading a sample from memory (<i>mem = TRUE</i>), the memory can safely be discarded, as a copy is made.
+<p>If you want to play a large or one-off sample, then it would probably be better to stream it instead with <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>.
+<p>On Android, <i>file</i> may be a String, ByteBuffer, ParcelFileDescriptor, or asset (via the Asset class) when using Java. See the BASS.JAVA file for available overloads.
+<p><h2>See also</h2>
+<a href="BASS_SampleCreate.html">BASS_SampleCreate</a>, <a href="BASS_SampleFree.html">BASS_SampleFree</a>, <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a>, <a href="BASS_SampleGetInfo.html">BASS_SampleGetInfo</a>, <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>

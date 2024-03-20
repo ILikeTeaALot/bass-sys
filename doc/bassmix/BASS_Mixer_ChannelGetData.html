@@ -1,0 +1,29 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelGetData</h1>
+<p>Retrieves the immediate sample data (or an FFT representation of it) of a mixer source channel.
+<p><pre class="def">DWORD BASS_Mixer_ChannelGetData(
+    DWORD <I>handle</I>,
+    void *<I>buffer</I>,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>buffer<td>Pointer to a buffer to receive the data.
+<tr><td>length<td>Number of bytes wanted, and/or the <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetData.html">BASS_ChannelGetData</a> flags.
+</table>
+<p><h2>Return value</h2>
+If an error occurs, -1 is returned, use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. When requesting FFT data, the number of bytes read from the channel (to perform the FFT) is returned. When requesting sample data, the number of bytes written to <i>buffer</i> will be returned (not necessarily the same as the number of bytes read when using the BASS_DATA_FLOAT flag). When using the BASS_DATA_AVAILABLE flag, the number of bytes in the channel's buffer is returned.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The channel does not have buffering enabled.</a>
+</table>
+<p><h2>Remarks</h2>
+This function is like the standard <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetData.html">BASS_ChannelGetData</a>, but it gets the data from the channel's buffer instead of decoding it from the channel, which means that the mixer does not miss out on any data. In order to do this, the source channel must have buffering enabled via the BASS_MIXER_CHAN_BUFFER flag.
+<p>If the mixer is being played by BASS, the returned data will be in sync with what is currently being heard from the mixer. If another output system is being used, the <a href="BASS_ATTRIB_MIXER_LATENCY.html">BASS_ATTRIB_MIXER_LATENCY</a> option can be used to tell the mixer what the latency is so that it can be taken account of, otherwise the channel's most recent data will be returned.
+<p>If the mixer is a submixer (source of another mixer) without its own latency set via the <a href="BASS_ATTRIB_MIXER_LATENCY.html">BASS_ATTRIB_MIXER_LATENCY</a> option then the parent mixer's latency will be used. If the parent mixer is also a submixer then the process will be repeated, and so on, until a final latency value is obtained (if possible). This is only possible if the submixer(s) have the BASS_MIXER_POSEX flag set, to enable keeping a record of source positions.
+<p>The <a href="BASS_CONFIG_MIXER_BUFFER.html">BASS_CONFIG_MIXER_BUFFER</a> config option determines how far back data will be available from, so it should be set high enough to cover any latency.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelGetLevel.html">BASS_Mixer_ChannelGetLevel</a>, <a href="BASS_Mixer_ChannelIsActive.html">BASS_Mixer_ChannelIsActive</a>, <a href="BASS_ATTRIB_MIXER_LATENCY.html">BASS_ATTRIB_MIXER_LATENCY</a>, <a href="BASS_CONFIG_MIXER_BUFFER.html">BASS_CONFIG_MIXER_BUFFER</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetData.html">BASS_ChannelGetData</a>

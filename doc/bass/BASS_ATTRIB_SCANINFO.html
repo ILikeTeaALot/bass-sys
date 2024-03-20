@@ -1,0 +1,29 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_SCANINFO attribute</h1>
+<p>The scanned info of a channel.
+<p><pre class="def">BASS_ChannelSetAttributeEx(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_SCANINFO,
+    void *<I>scaninfo</I>,
+    DWORD <I>size</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>scaninfo<td>The scanned info.
+<tr><td>size<td>The size of the scanned info.
+</table>
+<p><h2>Remarks</h2>
+This attribute is the information that is scanned from a file when the BASS_STREAM_PRESCAN flag is used in a <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a> call or when the BASS_POS_SCAN flag is used with <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a>. It is supported on MP3/MP2/MP1 files and chained OGG files. It may be supported by add-ons too; see the documentation.
+<p>The structure of the scanned info may change in future versions, so if the data is stored, be prepared for <a href="BASS_ChannelSetAttributeEx.html">BASS_ChannelSetAttributeEx</a> to fail when trying to apply it; the file can be scanned again if that happens.
+<p><h2>Example</h2>
+Transfer scanned info from one stream to another stream of the same file.
+<pre class="code">
+DWORD size = BASS_ChannelGetAttributeEx(stream1, BASS_ATTRIB_SCANINFO, NULL, 0); // get the size
+void *scaninfo = malloc(size); // allocate a buffer for the data
+BASS_ChannelGetAttributeEx(stream1, BASS_ATTRIB_SCANINFO, scaninfo, size); // get the data
+BASS_ChannelSetAttributeEx(stream2, BASS_ATTRIB_SCANINFO, scaninfo, size); // apply it to the other stream
+free(scaninfo);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttributeEx.html">BASS_ChannelGetAttributeEx</a>, <a href="BASS_ChannelSetAttributeEx.html">BASS_ChannelSetAttributeEx</a>

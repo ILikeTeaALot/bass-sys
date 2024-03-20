@@ -1,0 +1,48 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelSetFX</h1>
+<p>Sets an effect on a stream, MOD music, or recording channel.
+<p><pre class="def">HFX BASS_ChannelSetFX(
+    DWORD <I>handle</I>,
+    DWORD <I>type</I>,
+    int <I>priority</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HSTREAM, HMUSIC, or HRECORD.
+<tr><td>type<td>The type of effect. One of the following, with optional flags.<br>
+<table>
+<tr><td>BASS_FX_DX8_CHORUS<td>DX8 Chorus. Use <a href="BASS_DX8_CHORUS.html">BASS_DX8_CHORUS</a> structure to set/get parameters.
+<tr><td>BASS_FX_DX8_COMPRESSOR<td>DX8 Compression. Use <a href="BASS_DX8_COMPRESSOR.html">BASS_DX8_COMPRESSOR</a> structure to set/get parameters.
+<tr><td>BASS_FX_DX8_DISTORTION<td>DX8 Distortion. Use <a href="BASS_DX8_DISTORTION.html">BASS_DX8_DISTORTION</a> structure to set/get parameters.
+<tr><td>BASS_FX_DX8_ECHO<td>DX8 Echo. Use <a href="BASS_DX8_ECHO.html">BASS_DX8_ECHO</a> structure to set/get parameters.
+<tr><td>BASS_FX_DX8_FLANGER<td>DX8 Flanger. Use <a href="BASS_DX8_FLANGER.html">BASS_DX8_FLANGER</a> structure to set/get parameters.
+<tr><td>BASS_FX_DX8_GARGLE<td>DX8 Gargle. Use <a href="BASS_DX8_GARGLE.html">BASS_DX8_GARGLE</a> structure to set/get parameters.
+<tr><td>BASS_FX_DX8_I3DL2REVERB<td>DX8 I3DL2 (Interactive 3D Audio Level 2) reverb. Use <a href="BASS_DX8_I3DL2REVERB.html">BASS_DX8_I3DL2REVERB</a> structure to set/get parameters.
+<tr><td>BASS_FX_DX8_PARAMEQ<td>DX8 Parametric equalizer. Use <a href="BASS_DX8_PARAMEQ.html">BASS_DX8_PARAMEQ</a> structure to set/get parameters.
+<tr><td>BASS_FX_DX8_REVERB<td>DX8 Reverb. Use <a href="BASS_DX8_REVERB.html">BASS_DX8_REVERB</a> structure to set/get parameters.
+<tr><td>BASS_FX_VOLUME<td>Volume level adjustment. Use <a href="BASS_FX_VOLUME_PARAM.html">BASS_FX_VOLUME_PARAM</a> structure to set/get parameters.
+<tr><td>BASS_FX_MONO_N(n)<td>Flag: Apply the effect to only the n'th channel (1 = first).
+<tr><td>BASS_FX_STEREO_N(n)<td>Flag: Apply the effect to only the n'th channel and the one after it.
+</table>
+<i>other effects may be supported by add-ons, eg. <a href="bass_fx.html">BASS_FX</a>.</i>
+<tr><td>priority<td>The priority of the new effect, which determines its position in the DSP chain. DSP/FX with higher priority are applied before those with lower.
+</table>
+<p><h2>Return value</h2>
+If successful, then the new effect's handle is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_ILLTYPE<td><I>type</I> is invalid.
+<tr><td>BASS_ERROR_NOFX<td>The specified DX8 effect is unavailable.
+<tr><td>BASS_ERROR_FORMAT<td>The channel's format is not supported by the effect.
+<tr><td>BASS_ERROR_SPEAKER<td>The specified MONO or STEREO flag is invalid.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+Multiple effects may be used per channel. Use <a href="BASS_ChannelRemoveFX.html">BASS_ChannelRemoveFX</a> to remove an effect. Use <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a> to set an effect's parameters. An effect's priority value can be changed via <a href="BASS_FXSetPriority.html">BASS_FXSetPriority</a>.
+<p>DX8 effects are limited to stereo, so when they are used on a multi-channel stream, BASS will split the data into stereo streams (plus a mono one for odd numbers) for processing by multiple instances of the effect. That separate processing of channels may lead to unexpected results with some effect types.
+<p>Effects can be applied to MOD musics and streams, but not sample channels. If you want to apply effects to a sample, <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a> can create a stream from a sample.
+<p><h2>Platform-specific</h2>
+DX8 effects are a Windows feature requiring DirectX 8, or DirectX 9 for floating-point support. On other platforms, they are emulated by BASS, except for the following which are currently unsupported: COMPRESSOR, GARGLE, and I3DL2REVERB.
+<p><h2>See also</h2>
+<a href="BASS_ChannelLock.html">BASS_ChannelLock</a>, <a href="BASS_ChannelRemoveFX.html">BASS_ChannelRemoveFX</a>, <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a>, <a href="BASS_FXReset.html">BASS_FXReset</a>, <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a>, <a href="BASS_FXSetPriority.html">BASS_FXSetPriority</a>, <a href="BASS_ChannelSetDSP.html">BASS_ChannelSetDSP</a>, <a href="BASS_CONFIG_FLOATDSP.html">BASS_CONFIG_FLOATDSP</a>

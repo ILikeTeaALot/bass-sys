@@ -1,0 +1,81 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelGetTags</h1>
+<p>Retrieves tags/headers from a channel.
+<p><pre class="def">const char *BASS_ChannelGetTags(
+    DWORD <I>handle</I>,
+    DWORD <I>tags</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HMUSIC or HSTREAM.
+<tr><td>tags<td>The tags/headers wanted... one of the following.<br>
+<table>
+<tr><td>BASS_TAG_AM_MIME<td>Android media codec MIME type. A single string is returned.
+<tr><td>BASS_TAG_AM_NAME<td>Android media codec name. A single string is returned. This in only available on Android 4.3 and above.
+<tr><td>BASS_TAG_APE<td>APE (v1 or v2) tags. A pointer to a series of null-terminated UTF-8 strings is returned, the final string ending with a double null. Each string is in the form of "key=value", or "key=value1/value2/..." if there are multiple values.
+<tr><td>BASS_TAG_APE_BINARY<br><i>+ tag number (0=first)</i><td>APE binary tag. A pointer to a <a href="TAG_APE_BINARY.html">TAG_APE_BINARY</a> structure is returned.
+<tr><td>BASS_TAG_CA_CODEC<td>CoreAudio codec information. A pointer to a <a href="TAG_CA_CODEC.html">TAG_CA_CODEC</a> structure is returned.
+<tr><td>BASS_TAG_HTTP<td>HTTP headers, only available when streaming from a HTTP server. A pointer to a series of null-terminated strings is returned, the final string ending with a double null.
+<tr><td>BASS_TAG_ICY<td>ICY (Shoutcast) tags. A pointer to a series of null-terminated strings is returned, the final string ending with a double null.
+<tr><td>BASS_TAG_ID3<td>ID3v1 tags. A pointer to a <a href="TAG_ID3.html">TAG_ID3</a> structure is returned.
+<tr><td>BASS_TAG_ID3V2<td>ID3v2 tags. A pointer to a variable length block is returned. ID3v2 tags are supported at both the start and end of the file, and in designated RIFF/AIFF chunks. See <a href=https://id3.org/ target=_blank>id3.org</a> for details of the block's structure.
+<tr><td>BASS_TAG_ID3V2_2<td>A second ID3v2 tag block (if one is present after the first block).
+<tr><td>BASS_TAG_LOCATION<td>The final URL after HTTP redirection.
+<tr><td>BASS_TAG_LYRICS3<td>Lyrics3v2 tag. A single string is returned, containing the Lyrics3v2 information. See <a href=https://id3.org/Lyrics3v2 target=_blank>id3.org/Lyrics3v2</a> for details of its format.
+<tr><td>BASS_TAG_META<td>Shoutcast metadata. A single string is returned, containing the current stream title and url (usually omitted). The format of the string is: <i>StreamTitle='xxx';StreamUrl='xxx';</i>
+<tr><td>BASS_TAG_MF<td>Media Foundation metadata. A pointer to a series of null-terminated UTF-8 strings is returned, the final string ending with a double null.
+<tr><td>BASS_TAG_MP4<td>MP4/iTunes metadata.  A pointer to a series of null-terminated UTF-8 strings is returned, the final string ending with a double null.
+<tr><td>BASS_TAG_MUSIC_AUTH<td>MOD music author. Only available in files created with the OpenMPT tracker.
+<tr><td>BASS_TAG_MUSIC_CHAN<br><i>+ channel number (0=first)</i><td>MOD channel name. Only available in files created with the OpenMPT tracker.
+<tr><td>BASS_TAG_MUSIC_INST<br><i>+ instrument number (0=first)</i><td>MOD instrument name. Only available with formats that have instruments, eg. IT and XM (and MO3).
+<tr><td>BASS_TAG_MUSIC_MESSAGE<td>MOD message text.
+<tr><td>BASS_TAG_MUSIC_NAME<td>MOD music title.
+<tr><td>BASS_TAG_MUSIC_ORDERS<td>MOD music order list. A pointer to a byte array is returned, with each byte being the pattern number played at that order position. Pattern number 254 is "+++" (skip order) and 255 is "---" (end song).
+<tr><td>BASS_TAG_MUSIC_SAMPLE<br><i>+ sample number (0=first)</i><td>MOD sample name.
+<tr><td>BASS_TAG_OGG<td>OGG comments. A pointer to a series of null-terminated UTF-8 strings is returned, the final string ending with a double null.
+<tr><td>BASS_TAG_RIFF_BEXT<td>RIFF/BWF "bext" chunk tags. A pointer to a <a href="TAG_BEXT.html">TAG_BEXT</a> structure is returned.
+<tr><td>BASS_TAG_RIFF_CART<td>RIFF/BWF "cart" chunk tags. A pointer to a <a href="TAG_CART.html">TAG_CART</a> structure is returned.
+<tr><td>BASS_TAG_RIFF_CUE<td>RIFF "cue " chunk. A pointer to a <a href="TAG_CUE.html">TAG_CUE</a> structure is returned.
+<tr><td>BASS_TAG_RIFF_DISP<td>RIFF "DISP" chunk text (CF_TEXT) tag. A single string is returned.
+<tr><td>BASS_TAG_RIFF_INFO<td>RIFF "INFO" chunk tags. A pointer to a series of null-terminated strings is returned, the final string ending with a double null. The tags are in the form of "XXXX=text", where "XXXX" is the chunk ID.
+<tr><td>BASS_TAG_RIFF_SMPL<td>RIFF "smpl" chunk. A pointer to a <a href="TAG_SMPL.html">TAG_SMPL</a> structure is returned.
+<tr><td>BASS_TAG_VENDOR<td>OGG encoder. A single UTF-8 string is returned.
+<tr><td>BASS_TAG_WAVEFORMAT<td>WAVE "fmt " chunk contents. A pointer to a WAVEFORMATEX structure is returned. As well as WAVE files, this is also provided by Media Foundation codecs.
+<tr><td>BASS_TAG_WMA<td>WMA tags. A pointer to a series of null-terminated UTF-8 strings is returned, the final string ending with a double null.
+</table>
+<i>other tags may be supported by add-ons, see the documentation.</i>
+</table>
+<p><h2>Return value</h2>
+If successful, the requested tags are returned, else NULL is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The requested tags are not available.
+</table>
+<p><h2>Remarks</h2>
+Some tags (eg. ID3v1) are located at the end of the file, so when streaming a file from the internet, the tags will not be available until the download is complete. A BASS_SYNC_DOWNLOAD sync can be set via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>, to be informed of when the download is complete. A BASS_SYNC_META sync can be used to be informed of new Shoutcast metadata, and a BASS_SYNC_OGG_CHANGE sync for when a new logical bitstream begins in a chained OGG stream, which generally brings new OGG tags.
+<p>In a chained OGG file containing multiple bitstreams, each bitstream will have its own tags. To get the tags from a particular one, <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a> can be first used to seek to it.
+<p>When a Media Foundation codec is in use, the BASS_TAG_WAVEFORMAT tag can be used to find out what the source format is, eg. via the WAVEFORMATEX structure's wFormatTag member. Some typical wFormatTag examples are: 0x0161 = WMA, 0x0162 = WMA pro, 0x0163 = WMA lossless, 0x1610 = AAC.
+<p>MP4 metadata can include a "Genre" tag that is either text or a number. When a number, it is an ID3v1 genre list index +1, eg. 1 = Blues, 2 = Classic Rock, etc. The full list can be found at <a href="https://id3.org/id3v2.3.0#Appendix_A_-_Genre_List_from_ID3v1" target=_blank>id3.org</a>.
+<p>The returned tag's memory is owned by BASS (or an add-on) and should not be modified. It should also not be accessed after the channel has been freed. If longer-term access is needed, a copy should be made.
+<p><h2>Example</h2>
+List an OGG stream's comments.
+<pre class="code">
+const char *comments = BASS_ChannelGetTags(channel, BASS_TAG_OGG); // get a pointer to the 1st comment
+if (comments)
+    while (*comments) {
+        printf("%s\n", comments); // display the comment
+        comments += strlen(comments) + 1; // move on to next comment
+    }
+</pre>
+<p>List a MOD music's samples.
+<pre class="code">
+const char *text;
+int n = 0;
+while (text = BASS_ChannelGetTags(channel, BASS_TAG_MUSIC_SAMPLE + n)) {
+    printf("sample %d = %s\n", n + 1, text); // display the sample text
+    n++; // move on to next sample
+}
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>, <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>

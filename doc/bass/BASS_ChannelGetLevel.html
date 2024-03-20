@@ -1,0 +1,31 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelGetLevel</h1>
+<p>Retrieves the level (peak amplitude) of a sample, stream, MOD music, or recording channel.
+<p><pre class="def">DWORD BASS_ChannelGetLevel(
+    DWORD <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD.
+</table>
+<p><h2>Return value</h2>
+If an error occurs, -1 is returned, use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. If successful, the level of the left channel is returned in the low word (low 16 bits), and the level of the right channel is returned in the high word (high 16 bits). If the channel is mono, then the low word is duplicated in the high word. The level ranges linearly from 0 (silent) to 32768 (max). 0 will be returned when a channel is stalled.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_NOPLAY<td>The channel is not playing.</a>
+<tr><td>BASS_ERROR_ENDED<td>The decoding channel has reached the end.</a>
+</table>
+<p><h2>Remarks</h2>
+This function measures the level of the channel's sample data, not its level in the final output mix, so the channel's volume (<a href=BASS_ATTRIB_VOL.html>BASS_ATTRIB_VOL</a> attribute) and panning (<a href=BASS_ATTRIB_PAN.html>BASS_ATTRIB_PAN</a>) does not affect it. The effect of any DSP/FX set on the channel is present in the measurement, except when it is a recording channel with a <a href="RECORDPROC.html">RECORDPROC</a> callback function (DSP/FX are only present in the data received by the <a href="RECORDPROC.html">RECORDPROC</a>).
+<p>For channels that are more than stereo, the left level will include all left channels (eg. front left, rear left, center), and the right will include all right (front right, rear right, LFE). If there are an odd number of channels then the left and right levels will include all channels. If the level of each individual channel is required, that is available from <a href="BASS_ChannelGetLevelEx.html">BASS_ChannelGetLevelEx</a>.
+<p>20ms of data is inspected to calculate the level. When used with a decoding channel, that means 20ms of data needs to be decoded from the channel in order to calculate the level, and that data is then gone, eg. it is not available to a subsequent <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> call.
+<p>More flexible level retrieval is available with <a href="BASS_ChannelGetLevelEx.html">BASS_ChannelGetLevelEx</a>.
+<p><h2>Example</h2>
+Get the left and right levels of a stereo channel.
+<pre class="code">DWORD level, left, right;
+level = BASS_ChannelGetLevel(channel);
+left = LOWORD(level); // the left level
+right = HIWORD(level); // the right level</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>, <a href="BASS_ChannelGetLevelEx.html">BASS_ChannelGetLevelEx</a>, <a href="BASS_ChannelIsActive.html">BASS_ChannelIsActive</a>

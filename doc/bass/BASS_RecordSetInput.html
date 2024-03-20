@@ -1,0 +1,39 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_RecordSetInput</h1>
+<p>Adjusts the settings of a recording input source.
+<p><pre class="def">BOOL BASS_RecordSetInput(
+    int <I>input</I>,
+    DWORD <I>flags</I>,
+    float <I>volume</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>input<td>The input to adjust the settings of... 0 = first, -1 = master.
+<tr><td>flags<td>The new setting... a combination of these flags.<br>
+<table>
+<tr><td>BASS_INPUT_OFF<td>Disable the input. This flag cannot be used when the device supports only one input at a time.
+<tr><td>BASS_INPUT_ON<td>Enable the input. If the device only allows one input at a time, then any previously enabled input will be disabled by this.
+</table>
+
+<tr><td>volume<td>The volume level... 0 (silent) to 1 (max), less than 0 = leave current.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_RecordInit.html">BASS_RecordInit</a> has not been successfully called.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>input</i> or <i>volume</i> is invalid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The input does not have the necessary controls to apply the <i>flags</i> and/or <i>volume</i>. If attempting to set both at the same time, try separating them to determine which is unavailable.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+The actual volume level may not be exactly the same as requested, due to underlying precision differences. <a href="BASS_RecordGetInput.html">BASS_RecordGetInput</a> can be used to confirm what the volume is. The volume curve used is always linear; the <a href="BASS_CONFIG_CURVE_VOL.html">BASS_CONFIG_CURVE_VOL</a> config option setting has no effect on this.
+<p>Changes made by this function are system-wide, ie. other software using the device will be affected by it. The <a href="BASS_ATTRIB_VOLDSP.html">BASS_ATTRIB_VOLDSP</a> attribute can be used instead for volume control over individual recordings.
+<p><h2>Platform-specific</h2>
+No input control/information is available on the "Default" recording device except on Linux. The master input (-1) is only available on Windows and Linux.
+<p>On macOS, only the currently enabled input may have its volume set (if it has a volume control).
+<p><h2>Example</h2>
+Enable the first input, and set its volume level to 50%.
+<pre class="code">BASS_RecordSetInput(0, BASS_INPUT_ON, 0.5);</pre>
+<p><h2>See also</h2>
+<a href="BASS_RecordGetInfo.html">BASS_RecordGetInfo</a>, <a href="BASS_RecordGetInput.html">BASS_RecordGetInput</a>

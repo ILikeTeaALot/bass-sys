@@ -1,0 +1,29 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_RecordSetDevice</h1>
+<p>Sets the recording device to use for subsequent calls in the current thread.
+<p><pre class="def">BOOL BASS_RecordSetDevice(
+    DWORD <I>device</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>device<td>The device to use... 0 = first.
+</table>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>device</i> is invalid.
+<tr><td>BASS_ERROR_INIT<td>The device has not been initialized.
+</table>
+<p><h2>Remarks</h2>
+Simultaneously using multiple devices is supported in the BASS API via a context switching system; instead of there being an extra "device" parameter in the function calls, the device to be used is set prior to calling the functions. The device setting is local to the current thread, so calling functions with different devices simultaneously in multiple threads is not a problem.
+<p>The functions that use the recording device selection are the following: <a href="BASS_RecordFree.html">BASS_RecordFree</a>, <a href="BASS_RecordGetInfo.html">BASS_RecordGetInfo</a>, <a href="BASS_RecordGetInput.html">BASS_RecordGetInput</a>, <a href="BASS_RecordGetInputName.html">BASS_RecordGetInputName</a>, <a href="BASS_RecordSetInput.html">BASS_RecordSetInput</a>, <a href="BASS_RecordStart.html">BASS_RecordStart</a>.
+<p>When one of the above functions (or <a href="BASS_RecordGetDevice.html">BASS_RecordGetDevice</a>) is called, BASS will check the current thread's recording device setting, and if no device is selected (or the selected device is not initialized), BASS will automatically select the lowest device that is initialized. This means that when using a single device, there is no need to use this function; BASS will automatically use the device that's initialized. Even if you free the device, and initialize another, BASS will automatically switch to the one that is initialized.
+<p><h2>Example</h2>
+Start recording on device 2.
+<pre class="code">
+BASS_RecordSetDevice(2); // select device 2
+record = BASS_RecordStart(44100, 2, 0, MyRecordProc, 0); // start recording
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetDevice.html">BASS_ChannelGetDevice</a>, <a href="BASS_RecordGetDevice.html">BASS_RecordGetDevice</a>, <a href="BASS_RecordInit.html">BASS_RecordInit</a>

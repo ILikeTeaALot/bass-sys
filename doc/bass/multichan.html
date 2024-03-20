@@ -1,0 +1,6 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>Multi-channel streams</h1>
+<p>Most soundcards these days are capable of more than plain stereo output. To take advantage of this, as well as the <a href=speaker.html>speaker assignment flags</a>, BASS has support for multi-channel user streams, and also has built-in support for multi-channel OGG, WAV and AIFF files. Add-ons provide support for other multi-channel formats.
+<p>When a stream having more channels than there are speakers is played, the extra channels will not be heard. The <i>chans</i> member of the <a href="BASS_CHANNELINFO.html">BASS_CHANNELINFO</a> structure can be used to check how many channels a stream has, and the <i>speakers</i> member of the <a href="BASS_INFO.html">BASS_INFO</a> structure can be used to check how many speakers are available.
+<p><h2>See also</h2>
+<a href="BASS_StreamCreate.html">BASS_StreamCreate</a>, <a href="STREAMPROC.html">STREAMPROC callback</a>

@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_SRC_SAMPLE config option</h1>
+<p>The default sample rate conversion quality for sample channels.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_SRC_SAMPLE,
+    DWORD <I>quality</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>quality<td>The sample rate conversion quality... 0 = linear interpolation, 1 = 8 point sinc interpolation, 2 = 16 point sinc interpolation, 3 = 32 point sinc interpolation, 4 = 64 point sinc interpolation. Other values are also accepted.
+</table>
+<p><h2>Remarks</h2>
+This config option determines what sample rate conversion quality a new sample channel (HCHANNEL) will initially have, following a <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a> call. The channel's sample rate conversion quality can subsequently be changed via the <a href="BASS_ATTRIB_SRC.html">BASS_ATTRIB_SRC</a> attribute.
+<p>The default setting is 0 (linear interpolation).
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_ATTRIB_SRC.html">BASS_ATTRIB_SRC</a>, <a href="BASS_CONFIG_SRC.html">BASS_CONFIG_SRC</a>

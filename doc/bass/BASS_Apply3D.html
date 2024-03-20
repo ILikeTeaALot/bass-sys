@@ -1,0 +1,10 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+
+<h1>BASS_Apply3D</h1>
+<p>Applies changes made to the 3D system. 
+<p><pre class="def">void BASS_Apply3D();</pre>
+<p><h2>Remarks</h2>
+This function must be called to apply any changes made with <a href="BASS_Set3DFactors.html">BASS_Set3DFactors</a>, <a href="BASS_Set3DPosition.html">BASS_Set3DPosition</a>, <a href="BASS_ChannelSet3DAttributes.html">BASS_ChannelSet3DAttributes</a> or <a href="BASS_ChannelSet3DPosition.html">BASS_ChannelSet3DPosition</a>. This allows multiple changes to be synchronized, and also improves performance.
+<p>This function applies 3D changes on all the initialized devices. There is no need to re-call it for each individual device when using multiple devices.
+<p><h2>See also</h2>
+<a href="BASS_ChannelSet3DAttributes.html">BASS_ChannelSet3DAttributes</a>, <a href="BASS_ChannelSet3DPosition.html">BASS_ChannelSet3DPosition</a>, <a href="BASS_Set3DFactors.html">BASS_Set3DFactors</a>, <a href="BASS_Set3DPosition.html">BASS_Set3DPosition</a>

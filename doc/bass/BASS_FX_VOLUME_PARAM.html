@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_FX_VOLUME_PARAM structure</h1>
+<p>Used with <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a> and <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a> to retrieve and set the parameters of a volume level effect.
+<p><pre class="def">typedef struct {
+    float <i>fTarget</i>;
+    float <i>fCurrent</i>;
+    float <i>fTime</i>;
+    DWORD <i>lCurve</i>;
+} BASS_FX_VOLUME_PARAM;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>fTarget<td>The new volume level... 0 = silent, 1.0 = normal, above 1.0 = amplification. The default value is 1.
+<tr><td>fCurrent<td>The current volume level... -1 = leave existing current level when setting parameters. The default value is 1.
+<tr><td>fTime<td>The time to take to transition from the current level to the new level, in seconds. The default value is 0.
+<tr><td>lCurve<td>The curve to use in the transition... 0 = linear, 1 = logarithmic. The default value is 0.
+</table>
+<p><h2>Remarks</h2>
+The <i>fTime</i> value is based on the channel's original sample rate. If the playback rate is changed via the <a href="BASS_ATTRIB_FREQ.html">BASS_ATTRIB_FREQ</a> attribute, then the transition time that is heard will be affected accordingly.
+<p>When retrieving parameters, the returned <i>fCurrent</i> value is the level that is currently being applied, not necessarily the level that was last set via <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a>. During playback, it may not be the value that is currently being heard, due to buffering.
+<p>Unlike the <a href="BASS_ATTRIB_VOL.html">BASS_ATTRIB_VOL</a> attribute, this effect modifies the channel's sample data, so it can be used to change the level of decoding channels and recording channels. The <a href="BASS_CONFIG_CURVE_VOL.html">BASS_CONFIG_CURVE_VOL</a> setting does not affect this effect; the <i>fTarget</i> and <i>fCurrent</i> values are always linear.
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a>, <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a>, <a href="BASS_ATTRIB_VOL.html">BASS_ATTRIB_VOL</a>

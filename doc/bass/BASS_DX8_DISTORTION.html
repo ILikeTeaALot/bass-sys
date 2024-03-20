@@ -1,0 +1,20 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_DX8_DISTORTION structure</h1>
+<p>Used with <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a> and <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a> to retrieve and set the parameters of a DX8 distortion effect.
+<p><pre class="def">typedef struct {
+    float <i>fGain</i>;
+    float <i>fEdge</i>;
+    float <i>fPostEQCenterFrequency</i>;
+    float <i>fPostEQBandwidth</i>;
+    float <i>fPreLowpassCutoff</i>;
+} BASS_DX8_DISTORTION;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>fGain<td>Amount of signal change after distortion, in the range from -60 through 0. The default value is -18 dB.
+<tr><td>fEdge<td>Percentage of distortion intensity, in the range in the range from 0 through 100. The default value is 15 percent.
+<tr><td>fPostEQCenterFrequency<td>Center frequency of harmonic content addition, in the range from 100 through 8000. The default value is 2400 Hz. 
+<tr><td>fPostEQBandwidth<td>Width of frequency band that determines range of harmonic content addition, in the range from 100 through 8000. The default value is 2400 Hz. 
+<tr><td>fPreLowpassCutoff<td>Filter cutoff for high-frequency harmonics attenuation, in the range from 100 through 8000. The default value is 8000 Hz. 
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a>, <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a>

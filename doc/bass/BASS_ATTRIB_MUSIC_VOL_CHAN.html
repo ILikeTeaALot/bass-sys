@@ -1,0 +1,28 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_MUSIC_VOL_CHAN attribute</h1>
+<p>The volume level of a channel in a MOD music.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    HMUSIC <I>handle</I>,
+    BASS_ATTRIB_MUSIC_VOL_CHAN + <I>channel</I>,
+    float <I>volume</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The MOD music handle.
+<tr><td>channel<td>The channel to set the volume of... 0 = 1st channel.
+<tr><td>volume<td>The volume level... 0 (silent) to 1 (full).
+</table>
+<p><h2>Remarks</h2>
+The volume curve used by this attribute is always linear, eg. 0.5 = 50%. The <a href="BASS_CONFIG_CURVE_VOL.html">BASS_CONFIG_CURVE_VOL</a> config option setting has no effect on this. The volume level of all channels is initially 1 (full).
+<p>During playback, the effect of changes to this attribute are not heard instantaneously, due to buffering. This latency can be reduced via the <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a> attribute.
+<p>This attribute can also be used to count the number of channels in a MOD Music.
+<p><h2>Example</h2>
+Count the number of channels in a MOD music.
+<pre class="code">
+int channels = 0;
+float dummy;
+while (BASS_ChannelGetAttribute(music, BASS_ATTRIB_MUSIC_VOL_CHAN + channels, &dummy))
+    channels++;
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a>, <a href="BASS_ATTRIB_MUSIC_VOL_INST.html">BASS_ATTRIB_MUSIC_VOL_INST</a>

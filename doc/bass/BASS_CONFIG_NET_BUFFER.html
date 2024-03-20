@@ -1,0 +1,19 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NET_BUFFER config option</h1>
+<p>The internet download buffer length.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_NET_BUFFER,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>length<td>The buffer length in milliseconds.
+</table>
+<p><h2>Remarks</h2>
+When streaming in blocks (BASS_STREAM_BLOCK flag set), this config option determines the download buffer length. When the download rate is restricted (BASS_STREAM_RESTRATE flag set), it determines how much data needs to be buffered before the restriction applies. The effective buffer length can actually be a bit more than that specified, including data that has been read from the buffer by the decoder but not yet decoded.
+<p>Together with the <a href="BASS_CONFIG_NET_PREBUF.html">BASS_CONFIG_NET_PREBUF</a> config option, this config option also affects how much data is pre-buffered before playback begins.
+<p>The default setting is 5 seconds (5000 milliseconds). Changes only affect streams that are created afterwards, not any that already exist. 
+<p>The BASS_CONFIG_THREAD flag can be used to make the setting specific to the current thread. When that is non-zero, it will override the global setting in the current thread.
+<p>As well as internet streams, this config setting also applies to "buffered" user file streams created with <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, <a href="BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a>, <a href="BASS_CONFIG_NET_PREBUF.html">BASS_CONFIG_NET_PREBUF</a>, <a href="BASS_CONFIG_NET_TIMEOUT.html">BASS_CONFIG_NET_TIMEOUT</a>

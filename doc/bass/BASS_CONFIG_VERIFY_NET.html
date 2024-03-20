@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_VERIFY_NET config option</h1>
+<p>The amount of data to check in order to verify/detect the file format of internet streams.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_VERIFY_NET,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>length<td>The amount of data to check, in bytes... 1000 (min) to 1000000 (max), or 0 = 25% of the <a href="BASS_CONFIG_VERIFY.html">BASS_CONFIG_VERIFY</a> setting (with a minimum of 1000 bytes). If the value specified is outside this range, it is automatically capped.
+</table>
+<p><h2>Remarks</h2>
+Of the file formats supported as standard, this setting only affects the detection of MP3/MP2/MP1 formats, but it may also be used by add-ons (see the documentation). The verification length excludes any tags that may be found at the start of the file. The default setting is 0, which means 25% of the <a href="BASS_CONFIG_VERIFY.html">BASS_CONFIG_VERIFY</a> setting.
+<p>As well as internet streams, this config setting also applies to "buffered" user file streams created with <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, <a href="BASS_CONFIG_VERIFY.html">BASS_CONFIG_VERIFY</a>

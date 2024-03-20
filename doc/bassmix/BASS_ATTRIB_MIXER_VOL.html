@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_MIXER_VOL attribute</h1>
+<p>Master volume level of a mixer.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    HSTREAM <I>handle</I>,
+    BASS_ATTRIB_MIXER_VOL,
+    float <I>volume</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The mixer stream handle.
+<tr><td>volume<td>The volume level... 0 = silent, 1.0 = normal/default, above 1.0 = amplification.
+</table>
+<p><h2>Remarks</h2>
+This attribute differs from the <a href="mk:@MSITStore:bass.chm::/BASS_ATTRIB_VOL.html">BASS_ATTRIB_VOL</a> attribute in that it changes the level of the generated data, not just playback of it.
+<p><h2>See also</h2>
+<a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>

@@ -1,0 +1,41 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_RECORDINFO structure</h1>
+<p>Used with <a href="BASS_RecordGetInfo.html">BASS_RecordGetInfo</a> to retrieve information on the current recording device.
+<p><pre class="def">typedef struct {
+    DWORD <i>flags</i>;
+    DWORD <i>formats</i>;
+    DWORD <i>inputs</i>;
+    BOOL <i>singlein</i>;
+    DWORD <i>freq</i>;
+} BASS_RECORDINFO;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>flags<td>The device's capabilities... a combination of these flags.
+<table>
+<tr><td>DSCCAPS_EMULDRIVER<td>The device's drivers do not have DirectSound recording support, so it is being emulated.
+<tr><td>DSCCAPS_CERTIFIED<td>The device driver has been certified by Microsoft.
+</table>
+<tr><td>formats<td>The standard formats supported by the device... a combination of these flags.
+<table>
+<tr><td>WAVE_FORMAT_1M08<td>11025 Hz, Mono, 8-bit
+<tr><td>WAVE_FORMAT_1S08<td>11025 Hz, Stereo, 8-bit
+<tr><td>WAVE_FORMAT_1M16<td>11025 Hz, Mono, 16-bit
+<tr><td>WAVE_FORMAT_1S16<td>11025 Hz, Stereo, 16-bit
+<tr><td>WAVE_FORMAT_2M08<td>22050 Hz, Mono, 8-bit
+<tr><td>WAVE_FORMAT_2S08<td>22050 Hz, Stereo, 8-bit
+<tr><td>WAVE_FORMAT_2M16<td>22050 Hz, Mono, 16-bit
+<tr><td>WAVE_FORMAT_2S16<td>22050 Hz, Stereo, 16-bit
+<tr><td>WAVE_FORMAT_4M08<td>44100 Hz, Mono, 8-bit
+<tr><td>WAVE_FORMAT_4S08<td>44100 Hz, Stereo, 8-bit
+<tr><td>WAVE_FORMAT_4M16<td>44100 Hz, Mono, 16-bit
+<tr><td>WAVE_FORMAT_4S16<td>44100 Hz, Stereo, 16-bit
+</table>
+The number of channels supported by the device is in the high 8 bits.
+<tr><td>inputs<td>The number of input sources available to the device.
+<tr><td>singlein<td>TRUE = only one input may be active at a time.
+<tr><td>freq<td>The device's current sample rate. Recording at this rate will give the best quality and performance, as no resampling is required.
+</table>
+<p><h2>Platform-specific</h2>
+The <i>flags</i> member is only used on Windows, and only prior to Vista. The <i>formats</i> member is only used on Windows/macOS/iOS but only for the device's channel count except on Windows prior to Vista. <i>freq</i> is also only available on Windows/macOS/iOS, but not on Windows prior to Vista.
+<p><h2>See also</h2>
+<a href="BASS_RecordGetInfo.html">BASS_RecordGetInfo</a>

@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_VOLDSP_PRIORITY attribute</h1>
+<p>The priority of the volume DSP.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_VOLDSP_PRIORITY,
+    float <I>priority</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>priority<td>The priority... -2147483648 (min) to 2147483647 (max). The value will be automatically capped to this range, and rounded down to a whole number.
+</table>
+<p><h2>Remarks</h2>
+This attribute determines where in the DSP chain the <a href="BASS_ATTRIB_VOLDSP.html">BASS_ATTRIB_VOLDSP</a> attribute is applied; its effect will not be present in the data received by DSP functions with a higher priority. This attribute is write-only, so its value is not available via <a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>.
+<p>The default value is 2147483647 (max). Changes take immediate effect.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ATTRIB_VOLDSP.html">BASS_ATTRIB_VOLDSP</a>

@@ -1,0 +1,19 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_USER attribute</h1>
+<p>User-defined info.
+<p><pre class="def">BASS_ChannelSetAttributeEx(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_USER,
+    void *<I>info</I>,
+    DWORD <I>size</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>info<td>The info.
+<tr><td>size<td>The size of the info... 1 (min) to 8 (max).
+</table>
+<p><h2>Remarks</h2>
+This attribute can be used to associate any info with a channel. It can be set to a pointer for larger info.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttributeEx.html">BASS_ChannelGetAttributeEx</a>, <a href="BASS_ChannelSetAttributeEx.html">BASS_ChannelSetAttributeEx</a>

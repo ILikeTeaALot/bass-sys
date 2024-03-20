@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_MIXER_BUFFER config option</h1>
+<p>The source channel buffer length.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_MIXER_BUFFER,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>length<td>The buffer length... 1 to 5 is a multiplier of the <a href="mk:@MSITStore:bass.chm::/BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a> setting (at the time of the mixer's creation), otherwise it is an absolute length in milliseconds.
+</table>
+<p><h2>Remarks</h2>
+When a source channel has buffering enabled, the mixer will buffer the decoded data so that it is available to the <a href="BASS_Mixer_ChannelGetData.html">BASS_Mixer_ChannelGetData</a> and <a href="BASS_Mixer_ChannelGetLevel.html">BASS_Mixer_ChannelGetLevel</a> and <a href="BASS_Mixer_ChannelGetLevelEx.html">BASS_Mixer_ChannelGetLevelEx</a> functions. The source channel buffer length can be set as a multiple of the <a href="mk:@MSITStore:bass.chm::/BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a> setting (at the time of the mixer's creation) or as an absolute length. If it is set lower than the <a href="mk:@MSITStore:bass.chm::/BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a> setting and the mixer is not a decoding channel, then it will be automatically raised to match that.
+<p>Larger buffers obviously require more memory, so this should not be set higher than necessary. If a source is played at its default rate, then the buffer only needs to be as big as the mixer's playback buffer, but if it is played at a faster rate, then the buffer needs to be bigger for it to contain the data that is currently being heard from the mixer. For example, playing a channel at 2x its normal speed would require its buffer to be 2x the normal size.
+<p>The default setting is 2, for 2x the <a href="mk:@MSITStore:bass.chm::/BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a> setting. Changes only affect subsequently set up channel buffers. An existing channel can have its buffer reinitialized by removing and then resetting the BASS_MIXER_CHAN_BUFFER flag via <a href="BASS_Mixer_ChannelFlags.html">BASS_Mixer_ChannelFlags</a>.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelFlags.html">BASS_Mixer_ChannelFlags</a>, <a href="BASS_Mixer_ChannelGetData.html">BASS_Mixer_ChannelGetData</a>, <a href="BASS_Mixer_ChannelGetLevel.html">BASS_Mixer_ChannelGetLevel</a>, <a href="BASS_Mixer_ChannelGetLevelEx.html">BASS_Mixer_ChannelGetLevelEx</a>, <a href="BASS_Mixer_StreamAddChannel.html">BASS_Mixer_StreamAddChannel</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_GetConfig.html">BASS_GetConfig</a>, <a href="mk:@MSITStore:bass.chm::/BASS_SetConfig.html">BASS_SetConfig</a>

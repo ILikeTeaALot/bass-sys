@@ -1,0 +1,33 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>TAG_BEXT structure</h1>
+<p>BWF "bext" tag structure.
+<p><pre class="def">typedef struct {
+    char <I>Description</I>[256];
+    char <I>Originator</I>[32];
+    char <I>OriginatorReference</I>[32];
+    char <I>OriginationDate</I>[10];
+    char <I>OriginationTime</I>[8];
+    QWORD <I>TimeReference</I>;
+    WORD <I>Version</I>;
+    BYTE <I>UMID</I>[64];
+    BYTE <I>Reserved</I>[190];
+    char <I>CodingHistory</I>[];
+} TAG_BEXT;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>Description<td>A free description of the sequence. To help applications which only display a short description, it is recommended that a summary of the description is contained in the first 64 characters, and the last 192 characters are used for details.
+<tr><td>Originator<td>The name of the originator/producer of the audio file.
+<tr><td>OriginatorReference<td>A non ambiguous reference allocated by the originating organization.
+<tr><td>OriginationDate<td>The date of creation of the audio sequence, in the form of "yyyy-mm-dd" (year-month-day).
+<tr><td>OriginationTime<td>The time of creation of the audio sequence, in the form of "hh-mm-ss" (hours-minutes-seconds).
+<tr><td>TimeReference<td>The timecode of the sequence. The first sample count since midnight.
+<tr><td>Version<td>The BWF version.
+<tr><td>UMID<td>64 bytes containing a UMID (Unique Material Identifier) to the SPMTE 330M standard. If only a 32 byte "basic UMID" is used, the last 32 bytes should be set to zero.
+<tr><td>Reserved<td>Reserved for extensions.
+<tr><td>CodingHistory<td>A series of CR/LF terminated strings, each containing a description of a coding process applied to the audio data.
+</table>
+<p><h2>Remarks</h2>
+The structure is given by <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a> as it is in the RIFF file, which is little-endian, so the <i>TimeReference</i> and <i>Version</i> members will need to be reversed on big-endian platforms. The <i>UMID</i> member is only available with BWF version 1 (and above).
+<p>See the <a href=http://www.ebu.ch/CMSimages/en/tec_doc_t3285_tcm6-10544.pdf target=_blank>BWF specification</a> for further details.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>, <a href="TAG_CART.html">TAG_CART structure</a>

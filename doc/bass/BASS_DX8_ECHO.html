@@ -1,0 +1,20 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_DX8_ECHO structure</h1>
+<p>Used with <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a> and <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a> to retrieve and set the parameters of a DX8 echo effect.
+<p><pre class="def">typedef struct {
+    float <i>fWetDryMix</i>;
+    float <i>fFeedback</i>;
+    float <i>fLeftDelay</i>;
+    float <i>fRightDelay</i>;
+    BOOL <i>lPanDelay</i>;
+} BASS_DX8_ECHO;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>fWetDryMix<td>Ratio of wet (processed) signal to dry (unprocessed) signal. Must be in the range from 0 through 100 (all wet). The default value is 50.
+<tr><td>fFeedback<td>Percentage of output fed back into input, in the range from 0 through 100. The default value is 50.
+<tr><td>fLeftDelay<td>Delay for left channel, in milliseconds, in the range from 1 through 2000. The default value is 500 ms.
+<tr><td>fRightDelay<td>Delay for right channel, in milliseconds, in the range from 1 through 2000. The default value is 500 ms.
+<tr><td>lPanDelay<td>Value that specifies whether to swap left and right delays with each successive echo. The default value is FALSE, meaning no swap.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a>, <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a>

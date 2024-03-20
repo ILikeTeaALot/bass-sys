@@ -1,0 +1,50 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_StreamAddChannelEx</h1>
+<p>Plugs a channel into a mixer, optionally delaying the start and limiting the length.
+<p><pre class="def">BOOL BASS_Mixer_StreamAddChannelEx(
+    HSTREAM <I>handle</I>,
+    DWORD <I>channel</I>,
+    DWORD <I>flags</I>,
+    QWORD <I>start</I>,
+    QWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The mixer handle.
+<tr><td>channel<td>The handle of the channel to plug into the mixer... a HMUSIC, HSTREAM or HRECORD.
+<tr><td>flags<td>Any combination of these flags.
+<table>
+<tr><td>BASS_MIXER_CHAN_ABSOLUTE<td><i>start</i> is an absolute position in the mixer output rather than relative to the mixer's current position. If the position has already passed then the source will start immediately.
+<tr><td>BASS_MIXER_CHAN_BUFFER<td>Buffer the sample data, for use by <a href="BASS_Mixer_ChannelGetData.html">BASS_Mixer_ChannelGetData</a> and <a href="BASS_Mixer_ChannelGetLevel.html">BASS_Mixer_ChannelGetLevel</a> and <a href="BASS_Mixer_ChannelGetLevelEx.html">BASS_Mixer_ChannelGetLevelEx</a>. This increases memory requirements, so should not be enabled needlessly. The size of the buffer can be controlled via the <a href="BASS_CONFIG_MIXER_BUFFER.html">BASS_CONFIG_MIXER_BUFFER</a> config option.
+<tr><td>BASS_MIXER_CHAN_DOWNMIX<td>If the source uses channels/speakers that the mixer output does not have, then a <a href=matrix.html>matrix</a> is created and initialized with a suitable downmixing matrix (for up to 8 channels). Note the source sample data is assumed to follow the standard channel ordering, as described in the <a href="mk:@MSITStore:bass.chm::/STREAMPROC.html">STREAMPROC</a> documentation.
+<tr><td>BASS_MIXER_CHAN_LIMIT<td>Limit the mixer processing to the amount of data available from this source, while the source is active (not ended). If the source stalls, then the mixer will too, rather than continuing to mix other sources, as it would normally do. This flag can only be applied to one source per mixer, so it will automatically be removed from any other source of the same mixer.
+<tr><td>BASS_MIXER_CHAN_MATRIX<td>Creates a <a href=matrix.html>matrix</a>, allowing the source's channels to be sent to any of the mixer output channels, at any levels. The matrix can be retrieved and modified via the <a href="BASS_Mixer_ChannelGetMatrix.html">BASS_Mixer_ChannelGetMatrix</a> and <a href="BASS_Mixer_ChannelSetMatrix.html">BASS_Mixer_ChannelSetMatrix</a> functions. The matrix will initially contain a mapping of the source's channels to the mixer's corresponding channels, or a one-to-one mapping (1st out = 1st in, 2nd out = 2nd in, etc) if the BASS_MIXER_NOSPEAKER flag is set on the mixer.
+<tr><td>BASS_MIXER_CHAN_NORAMPIN<td>Do not ramp-in the start, including after seeking (<a href="BASS_Mixer_ChannelSetPosition.html">BASS_Mixer_ChannelSetPosition</a>). This is useful for gapless playback, where a source channel is intended to seamlessly follow another. Even without this flag, ramping-in is skipped when the sample data begins at a low level (below -42dB). This does not affect volume and pan changes, which are always ramped.
+<tr><td>BASS_MIXER_CHAN_PAUSE<td>Pause processing of the source. Use <a href="BASS_Mixer_ChannelFlags.html">BASS_Mixer_ChannelFlags</a> to resume processing.
+<tr><td>BASS_STREAM_AUTOFREE<td>Automatically free the source channel when it ends. This allows you to add a channel to a mixer and forget about it, as it will automatically be freed when it has reached the end, or when the source is removed from the mixer or when the mixer is freed. When the mixer reaches the end of it, the source will be freed asynchronously (in another thread) to avoid delaying the mixer's other processing.
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href=mk:@MSITStore:bass.chm::/speaker.html>Speaker assignment flags</a>. If matrix mixing is enabled then the matrix will be initialized to place the source on the requested speaker(s), with downmixing also applied if the BASS_MIXER_CHAN_DOWNMIX flag is specified.
+</table>
+<tr><td>start<td>Delay (in bytes) before the channel is mixed in. If the mixer is queued (BASS_MIXER_QUEUE) then this delay will not begin until the source is dequeued.
+<tr><td>length<td>The maximum amount of data (in bytes) to mix... 0 = no limit. Once this end point is reached, the channel will be removed from the mixer.
+</table>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td>At least one of <I>handle</I> and <i>channel</i> is not valid.
+<tr><td>BASS_ERROR_DECODE<td><i>channel</i> is not a decoding channel.
+<tr><td>BASS_ERROR_ALREADY<td><i>channel</i> is already plugged into a mixer. It must be unplugged first.
+<tr><td>BASS_ERROR_SPEAKER<td>The mixer does not support the requested speaker(s), or you are attempting to assign a stereo stream to a mono speaker.
+</table>
+<p><h2>Remarks</h2>
+This function is identical to <a href="BASS_Mixer_StreamAddChannel.html">BASS_Mixer_StreamAddChannel</a>, but with the additional ability to specify a delay and duration for the channel.
+<p>The <i>start</i> and <i>length</i> parameters relate to the mixer output. So when calculating these values, use the mixer stream's sample format rather than the source channel's. The <i>start</i> parameter is automatically rounded-down to the nearest sample boundary, while the <i>length</i> parameter is rounded-up to the nearest sample boundary. If the mixer is restarted with BASS_ChannelPlay (restart = TRUE) or BASS_ChannelSetPosition (pos = 0), the start delay will not be reset at the same time; the delay will be whatever was remaining before the mixer restarted. This is true even if the BASS_MIXER_CHAN_ABSOLUTE flag is set.
+<p><h2>Example</h2>
+Add a channel to a mixer, delaying the start by 1 second and limiting the duration to 2 seconds.
+<pre class="code">
+QWORD start = BASS_ChannelSeconds2Bytes(mixer, 1); // delay
+QWORD length = BASS_ChannelSeconds2Bytes(mixer, 2); // duration
+BASS_Mixer_StreamAddChannelEx(mixer, channel, 0, start, length); // add the channel
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelFlags.html">BASS_Mixer_ChannelFlags</a>, <a href="BASS_Mixer_ChannelGetLevel.html">BASS_Mixer_ChannelGetLevel</a>, <a href="BASS_Mixer_ChannelGetMixer.html">BASS_Mixer_ChannelGetMixer</a>, <a href="BASS_Mixer_ChannelGetPosition.html">BASS_Mixer_ChannelGetPosition</a>, <a href="BASS_Mixer_ChannelIsActive.html">BASS_Mixer_ChannelIsActive</a>, <a href="BASS_Mixer_ChannelRemove.html">BASS_Mixer_ChannelRemove</a>, <a href="BASS_Mixer_ChannelSetMatrix.html">BASS_Mixer_ChannelSetMatrix</a>, <a href="BASS_Mixer_ChannelSetPosition.html">BASS_Mixer_ChannelSetPosition</a>, <a href="BASS_Mixer_StreamAddChannel.html">BASS_Mixer_StreamAddChannel</a>, <a href="BASS_Mixer_StreamCreate.html">BASS_Mixer_StreamCreate</a>

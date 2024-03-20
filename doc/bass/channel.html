@@ -1,0 +1,11 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>What is a channel?</h1>
+<p>A "channel" can be a sample playback channel (HCHANNEL), a sample stream (HSTREAM), a MOD music (HMUSIC), or a recording (HRECORD). Each "Channel" function can be used with one or more of these channel types.
+<p><h2>The types of channel</h2>
+<table>
+<tr><td>HCHANNEL<td>Returned by <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a>.
+<tr><td>HSTREAM<td>Returned by <a href="BASS_StreamCreate.html">BASS_StreamCreate</a>, <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a>. Also add-on provided functions.
+<tr><td>HMUSIC<td>Returned by <a href="BASS_MusicLoad.html">BASS_MusicLoad</a>.
+<tr><td>HRECORD<td>Returned by <a href="BASS_RecordStart.html">BASS_RecordStart</a>.
+</table>
+<p>A sample stream (HSTREAM) or MOD music (HMUSIC) that has been created with the BASS_STREAM_DECODE or BASS_MUSIC_DECODE flag is sometimes referred to as a "decoding channel".

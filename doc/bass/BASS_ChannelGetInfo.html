@@ -1,0 +1,20 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelGetInfo</h1>
+<p>Retrieves information on a channel.
+<p><pre class="def">BOOL BASS_ChannelGetInfo(
+    DWORD <I>handle</I>,
+    <a href="BASS_CHANNELINFO.html">BASS_CHANNELINFO</a> *<I>info</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD.
+<tr><td>info<td>Pointer to structure to receive the channel information.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>, <a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>, <a href="BASS_CHANNELINFO.html">BASS_CHANNELINFO structure</a>

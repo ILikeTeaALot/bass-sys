@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_VOL attribute</h1>
+<p>The volume level of a channel.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_VOL,
+    float <I>volume</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>volume<td>The volume level... 0 = silent, 1.0 = normal, above 1.0 = amplification.
+</table>
+<p><h2>Remarks</h2>
+This attribute is applied during playback of the channel and is not present in the sample data returned by <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>, so it has no direct effect on decoding channels. The <a href="BASS_ATTRIB_VOLDSP.html">BASS_ATTRIB_VOLDSP</a> attribute can be used instead to change the level of a channel's sample data, or the BASS_FX_VOLUME effect via <a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>.
+<p>When using <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a> to slide this attribute, a negative <i>volume</i> value can be used to fade-out and then stop the channel. When the linear volume curve is in use, the BASS_SLIDE_LOG flag can also be used to make a slide logarithmic rather than linear.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a>, <a href="BASS_ATTRIB_VOLDSP.html">BASS_ATTRIB_VOLDSP</a>, <a href="BASS_CONFIG_CURVE_VOL.html">BASS_CONFIG_CURVE_VOL</a>

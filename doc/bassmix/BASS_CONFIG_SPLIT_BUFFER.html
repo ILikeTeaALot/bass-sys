@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_SPLIT_BUFFER config option</h1>
+<p>The splitter buffer length.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_SPLIT_BUFFER,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>length<td>The buffer length in milliseconds.
+</table>
+<p><h2>Remarks</h2>
+When a source has its first splitter stream created, a buffer is allocated to hold its sample data, which all of its subsequently created splitter streams will share. This config option determines how big that buffer is. The default is 2000ms.
+<p>The buffer will always be kept as empty as possible, so its size does not necessarily affect latency; it just determines how far splitter streams can drift apart before there are buffer overflow issues for those left behind.
+<p>Changes do not affect buffers that have already been allocated; any sources that have already had splitter streams created will continue to use their existing buffers.
+<p><h2>See also</h2>
+<a href="BASS_Split_StreamCreate.html">BASS_Split_StreamCreate</a>

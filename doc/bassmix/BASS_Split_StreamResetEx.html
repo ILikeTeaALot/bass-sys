@@ -1,0 +1,30 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Split_StreamResetEx</h1>
+<p>Resets a splitter stream and sets its position in the source buffer.
+<p><pre class="def">BOOL BASS_Split_StreamResetEx(
+    DWORD <I>handle</I>,
+    DWORD <I>offset</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The splitter handle.
+<tr><td>offset<td>How far back (in bytes) to position the splitter in the source buffer. This is based on the source's sample format, which may have a different channel count to the splitter.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a splitter stream.
+</table>
+<p><h2>Remarks</h2>
+This function is the same as <a href="BASS_Split_StreamReset.html">BASS_Split_StreamReset</a> except that it also provides the ability to position the splitter stream within the buffer that is shared by all of the splitter streams of the same source. A splitter stream's buffer position determines what data it will next receive. For example, if its position is half a second back, it will receive half a second of buffered data before receiving new data from the source. Calling this function with <i>offset = 0</i> will result in the next data that the splitter stream receives being new data from the source, and is identical to using <a href="BASS_Split_StreamReset.html">BASS_Split_StreamReset</a>.
+<p><i>offset</i> is automatically limited to the amount of data that the source buffer contains, which is in turn limited to the buffer size, determined by the <a href="BASS_CONFIG_SPLIT_BUFFER.html">BASS_CONFIG_SPLIT_BUFFER</a> config option. The amount of source data buffered, as well as a splitter stream's position within it, is available from <a href="BASS_Split_StreamGetAvailable.html">BASS_Split_StreamGetAvailable</a>.
+<p><h2>Example</h2>
+Create a new splitter stream that will first play 0.5s of already buffered data (if available).
+<pre class="code">
+split = BASS_Split_StreamCreate(source, 0, NULL); // create a splitter stream
+BASS_Split_StreamResetEx(split, BASS_ChannelSeconds2Bytes(source, 0.5)); // set it 0.5s back in the buffer
+BASS_ChannelPlay(split, FALSE); // start playing
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_Split_StreamGetAvailable.html">BASS_Split_StreamGetAvailable</a>, <a href="BASS_Split_StreamReset.html">BASS_Split_StreamReset</a>, <a href="BASS_CONFIG_SPLIT_BUFFER.html">BASS_CONFIG_SPLIT_BUFFER</a>

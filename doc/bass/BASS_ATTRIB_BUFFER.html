@@ -1,0 +1,20 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_BUFFER attribute</h1>
+<p>The playback buffering length.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_BUFFER,
+    float <I>buffer</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HMUSIC or HSTREAM.
+<tr><td>buffer<td>The buffering length in seconds... 0 = no buffering. This is automatically capped to the full length of the channel's playback buffer.
+</table>
+<p><h2>Remarks</h2>
+This attribute allows the amount of playback buffering to be changed without recreating the channel to get a new buffer. It limits how much data the update thread(s) or the <a href="BASS_Update.html">BASS_Update</a> function will try to keep in the playback buffer; it cannot exceed the length of the buffer, determined by the <a href="BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a> setting at the time of its creation. <a href="BASS_ChannelUpdate.html">BASS_ChannelUpdate</a> is unaffected and can still be used to fill the entire buffer. Push streams (using STREAMPROC_PUSH) are also unaffected; they will always place as much data as possible in their playback buffers.
+<p>When this attribute is set to 0, no data will be buffered and the channel will only be asked to produce data as it is needed during the generation of the final mix. This allows the lowest latency to be achieved, but also imposes tighter timing requirements on the channel to produce its data and apply any DSP/FX (and run mixtime syncs) that are set on it; if too long is taken, there will be a break in the output, affecting all channels that are playing on the same device. The channel's data is still placed in its playback buffer, which allows <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> and <a href="BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a> to be used, although there is likely to be less data available to them due to the buffer being less full.
+<p>This attribute can be changed mid-playback. Any excess data that is currently in the playback buffer will still be played but not replaced. Low (but not 0) settings may require the <a href="BASS_CONFIG_UPDATEPERIOD.html">BASS_CONFIG_UPDATEPERIOD</a> setting to be lowered too.
+<p>The default value is the channel's full playback buffer length, as determined by the <a href="BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a> setting at the time of its creation.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>

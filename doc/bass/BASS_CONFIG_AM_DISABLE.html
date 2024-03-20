@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_AM_DISABLE config option</h1>
+<p>Disable the use of Android media codecs?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_AM_DISABLE,
+    BOOL <I>disable</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>disable<td>Disable Android media codecs?
+</table>
+<p><h2>Remarks</h2>
+This option determines whether Android media codecs can be used to decode files and streams. It is set to FALSE by default when Android media codecs are available, which is on Android 4.1 and above. It will otherwise be TRUE and read-only.
+<p><h2>Platform-specific</h2>
+This config option is only available on Android.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>, <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>

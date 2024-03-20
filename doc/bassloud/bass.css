@@ -1,0 +1,11 @@
+body {color:#000000;background-color:#ffffff;font:13px/1.231 arial}
+a {color:#6F0F6F}
+a:hover {color:#df8fdf}
+table {border-collapse:collapse}
+td {vertical-align:top;border:0;padding:0 0 0 15px}
+td:first-child {padding-left:0}
+p {margin-bottom:0}
+h1 {font-size:1.8em;margin:0;font-weight:bold;text-align:right}
+h2 {font-size:1em;margin:0;font-weight:bold}
+.def {background-color:#ffffcf;padding:5px;display:table;width:99.9%;margin:0}
+.code {background-color:#cfffcf;padding:5px;display:table;width:99.9%;margin:6px 0 0 0}

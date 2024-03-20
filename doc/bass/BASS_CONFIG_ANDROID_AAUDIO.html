@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_ANDROID_AAUDIO config option</h1>
+<p>Enable AAudio output on Android?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_ANDROID_AAUDIO,
+    BOOL <I>enable</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>enable<td>Enable AAudio output?
+</table>
+<p><h2>Remarks</h2>
+Android has three audio APIs: AudioTrack, OpenSL ES, AAudio. AudioTrack is available in all Android versions. OpenSL ES was introduced in Android 2.3. AAudio was introduced in Android 8. BASS includes support for all three. AudioTrack is used if the BASS_DEVICE_AUDIOTRACK flag is specified with <a href="BASS_Init.html">BASS_Init</a> (or on pre-2.3 Android). Otherwise, this option determes whether OpenSL ES or AAudio is used.
+<p>The default setting is TRUE (AAudio enabled) on Android 8.1 and above, and FALSE on earlier Android versions. It can be set to TRUE on Android 8.0 devices too but AAudio is known to be buggy/crash on some of those devices. The setting will be ignored on older Android versions where AAudio is not available. Changes take effect from the next <a href="BASS_Init.html">BASS_Init</a> call.
+<p><h2>Platform-specific</h2>
+This config option is only available on Android.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_Init.html">BASS_Init</a>

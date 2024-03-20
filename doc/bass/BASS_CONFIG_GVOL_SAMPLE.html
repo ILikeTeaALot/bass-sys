@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_GVOL_SAMPLE config option</h1>
+<p>The global sample volume level.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_GVOL_SAMPLE,
+    DWORD <I>volume</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>volume<td>Sample global volume level... 0 (silent) to 10000 (full).
+</table>
+<p><h2>Remarks</h2>
+This config option allows you to have control over the volume levels of all the samples, which may be useful for setup options, eg. separate music and effect volume controls.
+<p>A channel's final volume = <I>channel volume x global volume / 10000</I>. For example, if a stream's volume is 0.5 and the global stream volume is 8000, then effectively the stream's volume level is 0.4 (0.5 x 8000 / 10000 = 0.4).
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href=BASS_ATTRIB_VOL.html>BASS_ATTRIB_VOL</a>, <a href="BASS_CONFIG_GVOL_MUSIC.html">BASS_CONFIG_GVOL_MUSIC</a>, <a href="BASS_CONFIG_GVOL_STREAM.html">BASS_CONFIG_GVOL_STREAM</a>

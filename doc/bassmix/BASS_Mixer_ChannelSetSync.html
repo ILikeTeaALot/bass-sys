@@ -1,0 +1,44 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelSetSync</h1>
+<p>Sets up a synchronizer on a mixer source channel.
+<p><pre class="def">HSYNC BASS_Mixer_ChannelSetSync(
+    DWORD <I>handle</I>,
+    DWORD <I>type</I>,
+    QWORD <I>param</I>,
+    <a href="mk:@MSITStore:bass.chm::/SYNCPROC.html">SYNCPROC</a> *<I>proc</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>type<td>The type of sync. This can be one of the standard sync types, as available via <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>, or one of the mixer specific sync types listed below.
+<tr><td>param<td>The sync parameter.
+<tr><td>proc<td>The callback function.
+<tr><td>user<td>User instance data to pass to the callback function.
+</table>
+<p><B>Sync types</b>, with <I><B>param</B></I> and <a href="mk:@MSITStore:bass.chm::/SYNCPROC.html">SYNCPROC</a> <I><B>data</B></I> definitions.
+<table>
+<tr><td>BASS_SYNC_MIXER_ENVELOPE<td>Sync when an envelope ends. This is not triggered by looping envelopes.<br>
+<I><B>param</B></I> : envelope type to sync on, 0 = all types. <I><B>data</B></I> : envelope type.
+<tr><td>BASS_SYNC_MIXER_ENVELOPE_NODE<td>Sync when an envelope reaches a new node.<br>
+<I><B>param</B></I> : envelope type to sync on, 0 = all types. <I><B>data</B></I> : LOWORD = envelope type, HIWORD = node number.
+<tr><td>BASS_SYNC_STALL<td>Sync when mixing of the source channel is stalled/resumed. This is like the standard BASS_SYNC_STALL sync, except it can be either mixtime or not.<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : 0 = stalled, 1 = resumed.
+</table>
+<p><h2>Return value</h2>
+If successful, then the new synchronizer's handle is returned, else 0 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td>The channel is not plugged into a mixer.
+<tr><td>BASS_ERROR_ILLTYPE<td>An illegal <I>type</I> was specified.
+<tr><td>BASS_ERROR_ILLPARAM<td>An illegal <I>param</I> was specified.
+</table>
+<p><h2>Remarks</h2>
+When used on a decoding channel (eg. a mixer source channel), syncs set with <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> are automatically "mixtime", which means that they will be triggered as soon as the sync event is encountered. But if the mixer output is being played, then there is a playback buffer involved, which will delay the hearing of the sync event. This function compensates for that, delaying the triggering of the sync until the event is actually heard.
+<p>Sync types that would automatically be mixtime when using <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> are not so when using this function. The BASS_SYNC_MIXTIME flag should be specified in those cases, or <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> used instead.
+<p>If the mixer itself is a decoding channel, or the BASS_SYNC_MIXTIME flag is used, then there is effectively no real difference between this function and <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>, except for the mixer specific sync types listed above.
+<p>Using syncs on sources to make mixer state changes (eg. adding or removing sources) is not recommended if precise timing is required because they may not take effect at the same time as the sync event (they could be a bit before or after). It is better to use syncs on the mixer itself via <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> for scheduling mixer state changes.
+<p>When a source is removed from a mixer, any syncs that have been set on it via this function are automatically removed. If the channel is subsequently plugged back into a mixer, the previous syncs will not still be set on it. Syncs set via <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> are unaffected.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelRemoveSync.html">BASS_Mixer_ChannelRemoveSync</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>, <a href="mk:@MSITStore:bass.chm::/SYNCPROC.html">SYNCPROC callback</a>

@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Split_StreamGetAvailable</h1>
+<p>Retrieves the amount of buffered data available to a splitter stream, or the amount of data in a splitter source buffer.
+<p><pre class="def">DWORD BASS_Split_StreamGetAvailable(
+    DWORD <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The splitter or source handle.
+</table>
+<p><h2>Return value</h2>
+If successful, then the amount of buffered data (in bytes) is returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is neither a splitter stream or source.
+</table>
+<p><h2>Remarks</h2>
+When used on a splitter source, this function reports how much data is in the buffer that is shared by all of its splitter streams. When used on a splitter stream, this function reports how much data is ahead of it in the buffer, before it will receive any new data from the source. A splitter stream can be repositioned within the buffer via the <a href="BASS_Split_StreamResetEx.html">BASS_Split_StreamResetEx</a> function.
+<p>The amount of data that can be buffered is limited by the buffer size, which is determined by the <a href="BASS_CONFIG_SPLIT_BUFFER.html">BASS_CONFIG_SPLIT_BUFFER</a> config option.
+<p>The returned buffered byte count is always based on the source's sample format, even with splitter streams that were created with a different channel count.
+<p><h2>See also</h2>
+<a href="BASS_Split_StreamResetEx.html">BASS_Split_StreamResetEx</a>, <a href="BASS_CONFIG_SPLIT_BUFFER.html">BASS_CONFIG_SPLIT_BUFFER</a>

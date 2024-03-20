@@ -1,0 +1,52 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_StreamGetFilePosition</h1>
+<p>Retrieves the file position/status of a stream.
+<p><pre class="def">QWORD BASS_StreamGetFilePosition(
+    HSTREAM <I>handle</I>,
+    DWORD <I>mode</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The stream handle.
+<tr><td>mode<td>The file position/status to retrieve. One of the following.<br>
+<table>
+<tr><td>BASS_FILEPOS_ASYNCBUF<td>The amount of data in the asynchronous file reading buffer. This requires that the BASS_ASYNCFILE flag was used at the stream's creation.
+<tr><td>BASS_FILEPOS_AVAILABLE<td>The amount of data currently available to read from the current position.
+<tr><td>BASS_FILEPOS_BUFFER<td>The amount of data in the buffer of an internet file stream or "buffered" user file stream. Unless streaming in blocks, this is the same as BASS_FILEPOS_DOWNLOAD.
+<tr><td>BASS_FILEPOS_BUFFERING<td>The percentage of buffering remaining before playback of an internet file stream or "buffered" user file stream can resume.
+<tr><td>BASS_FILEPOS_CONNECTED<td>Internet file stream or "buffered" user file stream is still connected? 0 = no, 1 = yes, 2 = reconnecting.
+<tr><td>BASS_FILEPOS_CURRENT<td>Position that is to be decoded for playback next. This will be a bit ahead of the position actually being heard due to buffering.
+<tr><td>BASS_FILEPOS_DOWNLOAD<td>Download progress of an internet file stream or "buffered" user file stream.
+<tr><td>BASS_FILEPOS_END<td>End of audio data. When streaming in blocks (the BASS_STREAM_BLOCK flag is in effect), the download buffer length is given.
+<tr><td>BASS_FILEPOS_SIZE<td>Total size of the file.
+<tr><td>BASS_FILEPOS_START<td>Start of audio data.
+</table>
+<i>other modes may be supported by add-ons, see the documentation.</i>
+</table>
+<p><h2>Return value</h2>
+If successful, then the requested file position/status is returned, else -1 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+<tr><td>BASS_ERROR_NOTFILE<td>The stream is not a file stream.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The requested file position/status is not available.
+</table>
+<p><h2>Remarks</h2>
+ID3 tags (both v1 and v2) and WAVE headers, as well as any other rubbish at the start of the file, are excluded from the BASS_FILEPOS_CURRENT, BASS_FILEPOS_DOWNLOAD, and BASS_FILEPOS_END positions. The BASS_FILEPOS_START position can be added to get the actual file position.
+<p>When streaming a file from the internet or a "buffered" user file stream, the entire file is downloaded even if the audio data ends before that, in case there are tags to be read. This means that the BASS_FILEPOS_DOWNLOAD position may go beyond the BASS_FILEPOS_END position.
+<p>It is unwise to use the BASS_FILEPOS_CURRENT position for syncing purposes because it gives the position that is being decoded, not the position that is being heard. Use <a href="BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a> and/or <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> instead.
+<p><h2>Platform-specific</h2>
+When an Android media codec (except AAC/ADTS) is used by a stream, only the BASS_FILEPOS_SIZE mode is supported, as the file reading will not be handled by BASS.
+<p><h2>Example</h2>
+Get the percentage downloaded of an internet file stream, or the buffer level when streaming in blocks.
+<pre class="code">
+QWORD len = BASS_StreamGetFilePosition(stream, BASS_FILEPOS_END); // file/buffer length
+QWORD buf = BASS_StreamGetFilePosition(stream, BASS_FILEPOS_BUFFER); // buffer level
+float progress = 100.0 * buf / len; // percentage of buffer filled
+</pre>
+<p>Get the buffering progress of a stalled internet file stream.
+<pre class="code">
+int progress = 100 - BASS_StreamGetFilePosition(stream, BASS_FILEPOS_BUFFERING);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a>, <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a>

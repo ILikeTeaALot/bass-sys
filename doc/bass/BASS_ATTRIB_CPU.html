@@ -1,0 +1,20 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_CPU attribute</h1>
+<p>The CPU usage of a channel.
+<p><pre class="def">BASS_ChannelGetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_CPU,
+    float *<I>cpu</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HMUSIC or HSTREAM.
+<tr><td>cpu<td>The CPU usage.
+</table>
+<p><h2>Remarks</h2>
+This attribute gives the percentage of CPU that the channel is using, including the time taken by decoding and DSP/FX processing. It does not include the time taken to add the channel's data to the final output mix during playback. The processing of some add-on stream formats may also not be entirely included, if they use additional decoding threads; see the add-on documentation for details.
+<p>Like <a href="BASS_GetCPU.html">BASS_GetCPU</a>, this function does not strictly tell the CPU usage, but rather how timely the processing is. For example, if it takes 10ms to generate 100ms of data, that would be 10%. If the reported usage exceeds 100%, that means the channel's data is taking longer to generate than to play. The duration of the data is based on the channel's current sample rate (<a href="BASS_ATTRIB_FREQ.html">BASS_ATTRIB_FREQ</a>).
+<p>A channel's CPU usage is updated whenever it generates data. That could be during a playback buffer update cycle, or a <a href="BASS_Update.html">BASS_Update</a> call, or a <a href="BASS_ChannelUpdate.html">BASS_ChannelUpdate</a> call. For a decoding channel, it would be in a <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> or <a href="BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a> call.
+<p>This attribute is read-only, so cannot be modified via <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_GetCPU.html">BASS_GetCPU</a>

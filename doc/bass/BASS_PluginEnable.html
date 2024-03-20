@@ -1,0 +1,23 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_PluginEnable</h1>
+<p>Enables or disables an add-on.
+<p><pre class="def">BOOL BASS_PluginEnable(
+    HPLUGIN <I>handle</I>,
+    BOOL <I>enable</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The plugin handle.
+<tr><td>enable<td>Enable the plugin?
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+</table>
+<p><h2>Remarks</h2>
+This function allows a plugin to be excluded from subsequent stream/sample creation calls without affecting any existing streams that are currently using it.
+<p><h2>See also</h2>
+<a href="BASS_PluginFree.html">BASS_PluginFree</a>, <a href="BASS_PluginLoad.html">BASS_PluginLoad</a>
+

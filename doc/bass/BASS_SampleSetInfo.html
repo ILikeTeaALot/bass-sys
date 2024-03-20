@@ -1,0 +1,33 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_SampleSetInfo</h1>
+<p>Sets a sample's default attributes.
+<p><pre class="def">BOOL BASS_SampleSetInfo(
+    HSAMPLE <I>handle</I>,
+    <a href="BASS_SAMPLE.html">BASS_SAMPLE</a> *<I>info</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The sample handle.
+<tr><td>info<td>Pointer to the sample information structure.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td>The <I>handle</I> is invalid.
+<tr><td>BASS_ERROR_ILLPARAM<td>The <a href="BASS_SAMPLE.html">BASS_SAMPLE</a> <i>max</i> value is invalid.
+</table>
+<p><h2>Remarks</h2>
+Use this function and <a href="BASS_SampleGetInfo.html">BASS_SampleGetInfo</a> to edit a sample's default attributes. Changing a sample's default attributes does not affect any existing channels, it only affects channels subsequently created via <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a>. Use <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a> and <a href="BASS_ChannelSet3DAttributes.html">BASS_ChannelSet3DAttributes</a> to change the attributes of an existing sample channel.
+<p>The sample's maximum number of simultaneous playbacks can be changed via the <I>max</I> member of the <a href="BASS_SAMPLE.html">BASS_SAMPLE</a> structure. If the new maximum is lower than the existing number of channels, the channels will remain existing until they are stopped.
+<p>The <I>length</I>, <I>origres</I> and <I>chans</I> members of the <a href="BASS_SAMPLE.html">BASS_SAMPLE</a> structure cannot be modified; any changes are ignored. Only the BASS_SAMPLE_LOOP and BASS_SAMPLE_OVER <i>flags</i> can be changed.
+<p><h2>Example</h2>
+Set a sample's default volume to 0.5.
+<pre class="code">
+BASS_SAMPLE info;
+BASS_SampleGetInfo(sample, &info); // get the sample's current info
+info.volume = 0.5; // set the default volume to 0.5
+BASS_SampleSetInfo(sample, &info); // set the updated info
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelSet3DAttributes.html">BASS_ChannelSet3DAttributes</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_SampleGetInfo.html">BASS_SampleGetInfo</a>, <a href="BASS_SAMPLE.html">BASS_SAMPLE structure</a>

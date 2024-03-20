@@ -1,0 +1,51 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelSetEnvelope</h1>
+<p>Sets an envelope to modify the sample rate, volume or pan of a mixer source channel over a period of time.
+<p><pre class="def">BOOL BASS_Mixer_ChannelSetEnvelope(
+    DWORD <I>handle</I>,
+    DWORD <I>type</I>,
+    <a href="BASS_MIXER_NODE.html">BASS_MIXER_NODE</a> *<I>nodes</I>,
+    DWORD <I>count</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>type<td>The attribute to modify with the envelope. One of the following.
+<table>
+<tr><td>BASS_MIXER_ENV_FREQ<td>Sample rate.
+<tr><td>BASS_MIXER_ENV_VOL<td>Volume.
+<tr><td>BASS_MIXER_ENV_PAN<td>Panning/balance.
+<tr><td>BASS_MIXER_ENV_LOOP<td>Loop the envelope. This is a flag and can be used in combination with any of the above.
+<tr><td>BASS_MIXER_ENV_REMOVE<td>Remove the source from the mixer at the end of the envelope. This is a flag and can be used in combination with any of the above.
+</table>
+<tr><td>nodes<td>The array of envelope nodes, which should have sequential positions.
+<tr><td>count<td>The number of elements in the <i>nodes</i> array... 0 = no envelope.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+<tr><td>BASS_ERROR_ILLTYPE<td><i>type</i> is not valid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_MIXER_ENV_PAN envelope is not available when matrix mixing is enabled.
+</table>
+<p><h2>Remarks</h2>
+Envelopes are applied on top of the channel's attributes, as set via <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>. In the case of BASS_MIXER_ENV_FREQ and BASS_MIXER_ENV_VOL, the final sample rate and volume is a product of the channel attribute and the envelope. While in the BASS_MIXER_ENV_PAN case, the final panning is a sum of the channel attribute and envelope.
+<p><a href="BASS_Mixer_ChannelSetEnvelopePos.html">BASS_Mixer_ChannelSetEnvelopePos</a> and <a href="BASS_Mixer_ChannelGetEnvelopePos.html">BASS_Mixer_ChannelGetEnvelopePos</a> can be used to set and get the current envelope position. A BASS_SYNC_MIXER_ENVELOPE sync can be set via <a href="BASS_Mixer_ChannelSetSync.html">BASS_Mixer_ChannelSetSync</a> to be informed of when an envelope ends. This function can be called again from such a sync, in order to set a new envelope to follow on from the old one.
+<p>Any previous envelope of the same type is replaced by the new envelope. A copy is made of the <i>nodes</i> array, so it does not need to persist beyond this function call.
+<p><h2>Example</h2>
+Set an envelope to bounce the pan position between left and right every 4 seconds.
+<pre class="code">
+BASS_MIXER_NODE nodes[4];
+nodes[0].pos = 0;
+nodes[0].val = 0; // start at centre
+nodes[1].pos = BASS_ChannelSeconds2Bytes(mixer, 1);
+nodes[1].val = -1; // full left after 1 second
+nodes[2].pos = BASS_ChannelSeconds2Bytes(mixer, 3);
+nodes[2].val = 1; // full right after 3 seconds
+nodes[3].pos = BASS_ChannelSeconds2Bytes(mixer, 4);
+nodes[3].val = 0; // back at centre after 4 seconds
+BASS_Mixer_ChannelSetEnvelope(channel, BASS_MIXER_ENV_PAN | BASS_MIXER_ENV_LOOP, nodes, 4); // apply the envelope, looped
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelGetEnvelopePos.html">BASS_Mixer_ChannelGetEnvelopePos</a>, <a href="BASS_Mixer_ChannelSetEnvelopePos.html">BASS_Mixer_ChannelSetEnvelopePos</a>, <a href="BASS_MIXER_NODE.html">BASS_MIXER_NODE structure</a>

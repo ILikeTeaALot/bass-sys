@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_PUSH_LIMIT attribute</h1>
+<p>The maximum amount of data that a push stream can have queued.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_PUSH_LIMIT,
+    float <I>limit</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The push stream handle.
+<tr><td>limit<td>The maximum amount of data in bytes... 0 = no limit.
+</table>
+<p><h2>Remarks</h2>
+By default, the amount of data that a push stream (using STREAMPROC_PUSH) can hold is limited only by available memory. This attribute can be used to set a lower limit to prevent a stream's buffer possibly getting out of control, eg. if playback stops but data pushing continues. This limit does not include the stream's playback buffer, if it has one.
+<p>The limit can be changed at any time. If the new limit is lower than what the stream currently holds then the stream will be allowed to stay above the limit but no more data will be accepted until the excess is used.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_StreamPutData.html">BASS_StreamPutData</a>

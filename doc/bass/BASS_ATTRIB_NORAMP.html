@@ -1,0 +1,19 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_NORAMP attribute</h1>
+<p>Enable or disable playback ramping.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_NORAMP,
+    float <I>noramp</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>noramp<td>Enable or disable playback ramping... 0 = enable ramping, 1 = disable ramping, 2 = disable ramping-in only, 3 =  disable ramping-out only.
+</table>
+<p><h2>Remarks</h2>
+By default, a channel will be ramped-in when starting playback and ramped-out when stopping/pausing playback, to avoid sudden level changes that could result in a click sound each time. That ramping can be disabled via this option. Volume (<a href="BASS_ATTRIB_VOL.html">BASS_ATTRIB_VOL</a>) and panning (<a href="BASS_ATTRIB_PAN.html">BASS_ATTRIB_PAN</a>) changes are always ramped regardless of this option setting. Ramping only applies during normal playback and does not affect decoding channels; it will not be present in the data delivered by <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>.
+<p>Ramping-in is skipped when a channel's sample data begins at a low level (below -42dB), and ramping-out is skipped when a channel is muted. Ramping-out requires data in the channel's playback buffer, so it generally does not apply when buffering has been disabled via the <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a> option unless the channel is a "push" stream or <a href="BASS_ChannelUpdate.html">BASS_ChannelUpdate</a> is used to pre-buffer some data.
+<p>This attribute can be set at any time, and changes take immediate effect. A channel's initial setting is determined by the <a href="BASS_CONFIG_NORAMP.html">BASS_CONFIG_NORAMP</a> config option.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_CONFIG_NORAMP.html">BASS_CONFIG_NORAMP</a>

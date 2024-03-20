@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NET_PREBUF config option</h1>
+<p>Amount to pre-buffer before playing internet streams.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_NET_PREBUF,
+    DWORD <I>prebuf</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>prebuf<td>Amount (percentage) to pre-buffer.
+</table>
+<p><h2>Remarks</h2>
+This setting determines what percentage of the download buffer length (<a href=BASS_CONFIG_NET_BUFFER.html>BASS_CONFIG_NET_BUFFER</a>) should be filled before starting playback. The default is 75%. This setting is just a minimum; BASS will always pre-download a certain amount to detect the stream's format and initialize the decoder.
+<p>Pre-buffering is performed asynchronously and does not hold up stream creation. Its progress can be monitored with <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a> (BASS_FILEPOS_BUFFERING). If <a href="BASS_ChannelStart.html">BASS_ChannelStart</a> or <a href="BASS_ChannelPlay.html">BASS_ChannelPlay</a> is called before pre-buffering is complete then the playback will begin in a stalled state, and will resume when the pre-buffering is complete.
+<p>This setting also determines a stream's initial <a href=BASS_ATTRIB_NET_RESUME.html>BASS_ATTRIB_NET_RESUME</a> value, the amount needed to resume a stalled stream. As well as internet streams, this config setting also applies to "buffered" user file streams created with <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, <a href=BASS_CONFIG_NET_BUFFER.html>BASS_CONFIG_NET_BUFFER</a>

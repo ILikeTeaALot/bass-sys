@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_PLUGININFO structure</h1>
+<p>Used with <a href="BASS_PluginGetInfo.html">BASS_PluginGetInfo</a> to retrieve information on a plugin.
+<p><pre class="def">typedef struct {
+    DWORD <I>version</I>;
+    DWORD <I>formatc</I>;
+    <a href="BASS_PLUGINFORM.html">BASS_PLUGINFORM</a> *<I>formats</I>;
+} BASS_PLUGININFO;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>version<td>Plugin version, in the same form as given by <a href="BASS_GetVersion.html">BASS_GetVersion</a>.
+<tr><td>formatc<td>Number of supported formats.
+<tr><td>formats<td>The array of supported formats. The array contains <I>formatc</I> elements.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_PluginGetInfo.html">BASS_PluginGetInfo</a>, <a href="BASS_PLUGINFORM.html">BASS_PLUGINFORM structure</a>

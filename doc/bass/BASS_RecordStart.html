@@ -1,0 +1,51 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_RecordStart</h1>
+<p>Starts recording.
+<p><pre class="def">HRECORD BASS_RecordStart(
+    DWORD <I>freq</I>,
+    DWORD <I>chans</I>,
+    DWORD <I>flags</I>,
+    <a href="RECORDPROC.html">RECORDPROC</a> *<I>proc</I>
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>freq<td>The sample rate to record at... 0 = device's current sample rate.
+<tr><td>chans<td>The number of channels... 1 = mono, 2 = stereo, etc. 0 = device's current channel count.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMPLE_8BITS<td>Use 8-bit resolution. If neither this or the BASS_SAMPLE_FLOAT flag are specified, then the recorded data is 16-bit.
+<tr><td>BASS_SAMPLE_FLOAT<td>Use 32-bit floating-point sample data. See <a href=float.html>Floating-point channels</a> for info.
+<tr><td>BASS_RECORD_PAUSE<td>Start the recording paused.</table>
+The HIWORD - use MAKELONG(flags,period) - can be used to set the period (in milliseconds) between calls to the callback function. The minimum period is 5ms, the maximum is half the <a href="BASS_CONFIG_REC_BUFFER.html">BASS_CONFIG_REC_BUFFER</a> setting. If the period specified is outside this range, it is automatically capped. The default is 100ms.
+<tr><td>proc<td>The user defined function to receive the recorded sample data... can be NULL if you do not wish to use a callback.
+<tr><td>user<td>User instance data to pass to the callback function.
+</table>
+<p><h2>Return value</h2>
+If successful, the new recording's handle is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_RecordInit.html">BASS_RecordInit</a> has not been successfully called.
+<tr><td>BASS_ERROR_BUSY<td>The device is busy. An existing recording may need to be stopped before starting another one.
+<tr><td>BASS_ERROR_DENIED<td>Recording permission has not been granted by the user.
+<tr><td>BASS_ERROR_FORMAT<td>The sample format is not supported.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+Use <a href="BASS_ChannelFree.html">BASS_ChannelFree</a> or <a href="BASS_ChannelStop.html">BASS_ChannelStop</a> to stop the recording and free its resources. <a href="BASS_ChannelPause.html">BASS_ChannelPause</a> can be used to pause the recording; it can also be started in a paused state via the BASS_RECORD_PAUSE flag, which allows DSP/FX to be set on it before any data reaches the callback function. Use <a href="BASS_ChannelStart.html">BASS_ChannelStart</a> to resume a paused recording.
+<p>The sample data will generally arrive from the recording device in blocks rather than in a continuous stream. So when specifying a very short period between callbacks, some calls may be skipped due to there being no new data available since the last call. A loopback recording device will only deliver data while the corresponding output device is active.
+<p>When not using a callback (<i>proc = NULL</i>), the recorded data is instead retrieved via <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>. To keep latency at a minimum, the amount of data in the recording buffer should be monitored (also done via <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>, with the BASS_DATA_AVAILABLE flag) to check that there is not too much data; freshly recorded data will only be retrieved after the older data in the buffer is.
+<p>When <i>freq</i> and/or <i>chans</i> is set to 0 for the device's current values, <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a> can be used afterwards to find out what values are being used by the recording.
+<p>A recording may end unexpectedly if the device fails, eg. if it is disconnected/disabled. A BASS_SYNC_DEV_FAIL sync can be set via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> to be informed if that happens. It will not be possible to resume the recording channel then; a new recording channel will need to be created when the device becomes available again.
+<p><h2>Platform-specific</h2>
+Multiple simultaneous recordings can be made from the same device on Windows XP and later, but generally not on older Windows. Multiple simultaneous recordings are possible on macOS and iOS, but may not always be on Linux.
+<p>Loopback recording is only available on Windows Vista and above. The option to use the device's current sample rate and/or channel count is only available on Windows/macOS/iOS.
+<p>On macOS and iOS, the device is instructed (when possible) to deliver data at the period set in the HIWORD of <i>flags</i>, even when a callback function is not used. On other platforms, it is up the the system when data arrives from the device.
+<p>On macOS and iOS, this function may succeed but only capture silence when recording permission has not been granted. The AVCaptureDevice authorizationStatusForMediaType method (or the AVAudioSession recordPermission method on iOS) can be used to check the permission status.
+<p><h2>Example</h2>
+Start recording at 44100 Hz stereo 16-bit.
+<pre class="code">HRECORD record = BASS_RecordStart(44100, 2, 0, MyRecordProc, 0);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>, <a href="BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a>, <a href="BASS_ChannelPause.html">BASS_ChannelPause</a>, <a href="BASS_ChannelStop.html">BASS_ChannelStop</a>, <a href="BASS_RecordInit.html">BASS_RecordInit</a>, <a href="RECORDPROC.html">RECORDPROC callback</a>, <a href="BASS_CONFIG_REC_BUFFER.html">BASS_CONFIG_REC_BUFFER</a>

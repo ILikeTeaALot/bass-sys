@@ -1,0 +1,71 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_MusicLoad</h1>
+<p>Loads a MOD music file.
+<p><pre class="def">HMUSIC BASS_MusicLoad(
+    BOOL <I>mem</I>,
+    void *<I>file</I>,
+    QWORD <I>offset</I>,
+    DWORD <I>length</I>,
+    DWORD <I>flags</I>,
+    DWORD <I>freq</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>mem<td>TRUE = load the MOD music from memory.
+<tr><td>file<td>Filename (mem = FALSE) or a memory location (mem = TRUE).
+<tr><td>offset<td>File offset to load the MOD music from (only used if mem = FALSE).
+<tr><td>length<td>Data length... 0 = use all data up to the end of file (if mem = FALSE).
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMPLE_8BITS<td>Use 8-bit resolution. If neither this or the BASS_SAMPLE_FLOAT flags are specified, then the sample data is 16-bit.
+<tr><td>BASS_SAMPLE_FLOAT<td>Use 32-bit floating-point sample data. See <a href=float.html>Floating-point channels</a> for info.
+<tr><td>BASS_SAMPLE_MONO<td>Decode/play the MOD music in mono (uses less CPU than stereo). This flag is automatically applied if BASS_DEVICE_MONO was specified when calling <a href="BASS_Init.html">BASS_Init</a>.
+<tr><td>BASS_SAMPLE_3D<td>Enable 3D functionality. 3D channels must be mono, so BASS_SAMPLE_MONO is automatically applied. The SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_SAMPLE_LOOP<td>Loop the music.
+<tr><td>BASS_MUSIC_NONINTER<td>Use non-interpolated sample mixing. This generally reduces the sound quality, but can be good for chip-tunes.
+<tr><td>BASS_MUSIC_SINCINTER<td>Use sinc interpolated sample mixing. This increases the sound quality, but also requires more CPU. If neither this or the BASS_MUSIC_NONINTER flag is specified, linear interpolation is used.
+<tr><td>BASS_MUSIC_RAMP<td>Use "normal" ramping (as in FastTracker 2).
+<tr><td>BASS_MUSIC_RAMPS<td>Use "sensitive" ramping.
+<tr><td>BASS_MUSIC_SURROUND<td>Apply XMPlay's surround sound to the music. This is ignored if the BASS_SAMPLE_MONO flag is also specified.
+<tr><td>BASS_MUSIC_SURROUND2<td>Apply XMPlay's surround sound mode 2 to the music. This is ignored if the BASS_SAMPLE_MONO flag is also specified.
+<tr><td>BASS_MUSIC_FT2PAN<td>Apply FastTracker 2 panning to XM files.
+<tr><td>BASS_MUSIC_FT2MOD<td>Play .MOD files as FastTracker 2 would, including applying FastTracker 2 panning.
+<tr><td>BASS_MUSIC_PT1MOD<td>Play .MOD files as ProTracker 1 would.
+<tr><td>BASS_MUSIC_POSRESET<td>Stop all notes when seeking (<a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a>).
+<tr><td>BASS_MUSIC_POSRESETEX<td>Stop all notes and reset bpm/etc to defaults when seeking.
+<tr><td>BASS_MUSIC_STOPBACK<td>Stop the music when a backward jump effect is played. This stops musics that never reach the end from going into endless loops. Some MOD musics are designed to jump all over the place, so this flag would cause those to be stopped prematurely. If this flag is used together with the BASS_SAMPLE_LOOP flag, then the music would not be stopped but any BASS_SYNC_END sync would be triggered.
+<tr><td>BASS_MUSIC_PRESCAN<td>Calculate the playback length of the music, and enable seeking in bytes. This slightly increases the time taken to load the music, depending on how long it is. In the case of musics that loop, the length until the loop occurs is calculated. Use <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a> to retrieve the length.
+<tr><td>BASS_MUSIC_NOSAMPLE<td>Do not load the samples. This reduces the time (and memory) taken to load the music, notably with MO3 files, which is useful if you just want to get the text and/or length of the music without playing it.
+<tr><td>BASS_MUSIC_AUTOFREE<td>Automatically free the music when playback ends. Note that some musics have infinite loops, so never actually end on their own.
+<tr><td>BASS_MUSIC_DECODE<td>Decode/render the sample data, without playing it. Use <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> to retrieve decoded sample data. The BASS_SAMPLE_3D, BASS_STREAM_AUTOFREE and SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href=speaker.html>Speaker assignment flags</a>. The BASS_SAMPLE_MONO flag is automatically applied when using a mono speaker assignment flag.
+<tr><td>BASS_UNICODE<td><i>file</i> is in UTF-16 form. Otherwise it is ANSI on Windows and UTF-8 on other platforms.
+</table>
+<tr><td>freq<td>Sample rate to render/play the MOD music at... 0 = the rate specified in the <a href="BASS_Init.html">BASS_Init</a> call, 1 = the device's current output rate (or the <a href="BASS_Init.html">BASS_Init</a> rate if that is not available).
+</table>
+<p><h2>Return value</h2>
+If successful, the loaded MOD music's handle is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_MUSIC_AUTOFREE flag is unavailable to decoding channels.
+<tr><td>BASS_ERROR_FILEOPEN<td>The file could not be opened.
+<tr><td>BASS_ERROR_FILEFORM<td>The file's format is not recognised/supported.
+<tr><td>BASS_ERROR_FORMAT<td>The sample format is not supported.
+<tr><td>BASS_ERROR_SPEAKER<td>The specified SPEAKER flags are invalid.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+<tr><td>BASS_ERROR_NO3D<td>Could not initialize 3D support.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+BASS uses the same code as XMPlay for its MOD music support, giving an accurate reproduction of the MO3 / IT / XM / S3M / MTM / MOD / UMX formats.
+<p>MO3s are treated and used in exactly the same way as normal MOD musics. The advantage of MO3s is that they can be a lot smaller with virtually identical quality. Playing a MO3 does not use any more CPU power than playing the original MOD version does. The only difference is a slightly longer load time as the samples are being decoded. MO3 files are created using the MO3 encoder available at the <a href=http://www.un4seen.com target=_blank>BASS website</a>.
+<p>DMO effects (the same as available with <a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>) can be used in IT and XM files (and MO3 versions of them) created with Modplug Tracker. This allows effects to be added to a track without having to resort to an MP3 or OGG version, so it can remain small and still sound fancy. Of course, the effects require some CPU, so should not be used carelessly if performance is key.
+<p>"Ramping" does not take a lot of extra processing and improves the sound quality by removing clicks, by ramping/smoothing volume and pan changes. The start of a sample may also be ramped-in. That is always the case with XM files (or MOD files in FT2 mode) when using normal ramping, and possibly with all formats when using sensitive ramping; senstitive ramping will only ramp-in when necessary to avoid a click. Generally, normal ramping is recommended for XM files, and sensitive ramping for the other formats, but some XM files may also sound better using sensitive ramping.
+<p>After loading a MOD music from memory (<i>mem = TRUE</i>), the memory can safely be discarded.
+<p><h2>Platform-specific</h2>
+DMO effects require DirectX 8 (or above) on Windows. They are always available on other platforms, except for the following: Compressor, Gargle, and I3DL2Reverb. When a DMO effect is unavailable, the MOD music can still be played, but the effect will be disabled.
+<p>On Android, <i>file</i> may be a String, ByteBuffer, ParcelFileDescriptor, or asset (via the Asset class) when using Java. See the BASS.JAVA file for available overloads.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>, <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a>, <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>, <a href="BASS_ChannelPlay.html">BASS_ChannelPlay</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSetDSP.html">BASS_ChannelSetDSP</a>, <a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_ChannelSetLink.html">BASS_ChannelSetLink</a>, <a href="BASS_MusicFree.html">BASS_MusicFree</a>, <a href="BASS_CONFIG_MUSIC_VIRTUAL.html">BASS_CONFIG_MUSIC_VIRTUAL</a>
+

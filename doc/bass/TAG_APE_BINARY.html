@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>TAG_APE_BINARY structure</h1>
+<p>APEv2 binary tag structure.
+<p><pre class="def">typedef struct {
+    char *<I>key</I>;
+    void *<I>data</I>;
+    DWORD <I>length</I>;
+} TAG_APE_BINARY;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>key<td>The name of the tag.
+<tr><td>data<td>The tag data.
+<tr><td>length<td>The size of <i>data</i> in bytes.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>

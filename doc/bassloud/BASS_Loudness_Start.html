@@ -1,0 +1,43 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Loudness_Start</h1>
+<p>Starts loudness measurement on a channel.
+<p><pre class="def">HLOUDNESS BASS_Loudness_Start(
+    DWORD <I>handle</I>,
+    DWORD <I>flags</I>,
+    int <I>priority</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HSTREAM, HMUSIC, or HRECORD.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_LOUDNESS_CURRENT<td>Enable loudness measurement of the last 400ms or up to the duration (in milliseconds) specified in the HIWORD; use MAKELONG(flags,duration). This is always enabled with a duration of at least 400ms even if not specified.
+<tr><td>BASS_LOUDNESS_INTEGRATED<td>Enable integrated loudness measurement.
+<tr><td>BASS_LOUDNESS_RANGE<td>Enable loudness range measurement.
+<tr><td>BASS_LOUDNESS_PEAK<td>Enable peak level measurement.
+<tr><td>BASS_LOUDNESS_TRUEPEAK<td>Enable true peak level measurement.
+<tr><td>BASS_LOUDNESS_AUTOFREE<td>Automatically free the measurement when the channel is freed.
+</table>
+<tr><td>priority<td>The DSP priority of the measurements. Any DSP/FX with a higher priority than this will be present in the measurements, while any with lower priority will not. Any with the same priority may or may not be present, depending on which was set first.
+</table>
+<p><h2>Return value</h2>
+The loudness measurement handle is returned if it is successfully started, else 0 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+</table>
+<p><h2>Remarks</h2>
+The channel's sample data will be measured during DSP/FX processing, with its position in the DSP chain determined by the <i>priority</i> value. The measurement levels can be retrieved with <a href="BASS_Loudness_GetLevel.html">BASS_Loudness_GetLevel</a> or <a href="BASS_Loudness_GetLevelMulti.html">BASS_Loudness_GetLevelMulti</a>.
+<p>Each measurement type may use a bit more CPU and/or memory, so only the ones that are needed should be included in the <i>flags</i> parameter. When no longer needed, a measurement can be stopped and its resources freed with <a href="BASS_Loudness_Stop.html">BASS_Loudness_Stop</a>. The BASS_LOUDNESS_AUTOFREE flag may also be used to have it freed automatically when the channel is. A measurement may also be moved to another channel via <a href="BASS_Loudness_SetChannel.html">BASS_Loudness_SetChannel</a>.
+<p><h2>Example</h2>
+Start measuring the integrated loudness and loudness range of a channel, with DSP priority -10.
+<pre class="code">
+handle = BASS_Loudness_Start(channel, BASS_LOUDNESS_INTEGRATED | BASS_LOUDNESS_RANGE, -10);
+</pre>
+<p>Start measuring the loudness of up to 3 seconds of a channel, with DSP priority -20.
+<pre class="code">
+handle = BASS_Loudness_Start(channel, MAKELONG(BASS_LOUDNESS_CURRENT, 3000), -20);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_Loudness_GetLevel.html">BASS_Loudness_GetLevel</a>, <a href="BASS_Loudness_GetLevelMulti.html">BASS_Loudness_GetLevelMulti</a>, <a href="BASS_Loudness_Stop.html">BASS_Loudness_Stop</a>

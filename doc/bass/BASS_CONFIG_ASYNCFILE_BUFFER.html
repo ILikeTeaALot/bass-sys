@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_ASYNCFILE_BUFFER config option</h1>
+<p>The buffer length for asynchronous file reading.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_ASYNCFILE_BUFFER,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>length<td>The buffer length in bytes. This will be rounded up to the nearest 4096 byte (4KB) boundary.
+</table>
+<p><h2>Remarks</h2>
+This determines the amount of file data that can be read ahead of time with asynchronous file reading. The default setting is 65536 bytes (64KB). Changes only affect streams that are created afterwards, not any that already exist. So it is possible to have streams with differing buffer lengths by using this config option before creating each of them.
+<p>When asynchronous file reading is enabled, the buffer level is available from <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a>.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>, <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a>

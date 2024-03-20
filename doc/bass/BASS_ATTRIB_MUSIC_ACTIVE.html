@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_MUSIC_ACTIVE attribute</h1>
+<p>The number of active channels in a MOD music.
+<p><pre class="def">BASS_ChannelGetAttribute(
+    HMUSIC <I>handle</I>,
+    BASS_ATTRIB_MUSIC_ACTIVE,
+    float *<I>active</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The MOD music handle.
+<tr><td>active<td>The number of channels.
+</table>
+<p><h2>Remarks</h2>
+This attribute gives the number of channels (including virtual) that are currently active in the decoder, which may not match what is being heard during playback due to buffering. This time difference can be reduced via the <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a> attribute.
+<p>This attribute is read-only, so cannot be modified via <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_CONFIG_MUSIC_VIRTUAL.html">BASS_CONFIG_MUSIC_VIRTUAL</a>

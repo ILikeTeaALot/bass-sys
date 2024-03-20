@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_ANDROID_SESSIONID config option</h1>
+<p>The audio session ID to use for output on Android.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_ANDROID_SESSIONID,
+    DWORD <I>id</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>id<td>The session ID... 0 = automatically allocate a session ID, -1 = none.
+</table>
+<p><h2>Remarks</h2>
+This option allows a session ID to be specified for BASS to use with AAudio or AudioTrack output (OpenSL ES is not affected). The session ID can then be used to apply Android's AudioEffect-based effects on the BASS output (and anything else that uses the same session ID). The AudioManager generateAudioSessionId method can be used to generate a session ID for this. Using a session ID (specifically or automatically) may result in higher latency.
+<p>The default setting is 0 (automatically allocate a session ID). Changes take effect from the next <a href="BASS_Init.html">BASS_Init</a> call.
+<p><h2>Platform-specific</h2>
+This config option is only available on Android.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_Init.html">BASS_Init</a>

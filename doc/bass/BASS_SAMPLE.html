@@ -1,0 +1,62 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_SAMPLE structure</h1>
+<p>Used with <a href="BASS_SampleGetInfo.html">BASS_SampleGetInfo</a> and <a href="BASS_SampleSetInfo.html">BASS_SampleSetInfo</a> to retrieve and set the default playback attributes of a sample.
+<p><pre class="def">typedef struct {
+    DWORD <I>freq</I>;
+    float <I>volume</I>;
+    float <I>pan</I>;
+    DWORD <I>flags</I>;
+    DWORD <I>length</I>;
+    DWORD <I>max</I>;
+    DWORD <I>origres</I>;
+    DWORD <I>chans</I>;
+    DWORD <I>mingap</I>;
+    DWORD <I>mode3d</I>;
+    float <I>mindist</I>;
+    float <I>maxdist</I>;
+    DWORD <I>iangle</I>;
+    DWORD <I>oangle</I>;
+    float <I>outvol</I>;
+    DWORD <i>vam</i>;
+    DWORD <i>priority</i>;
+} BASS_SAMPLE;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>freq<td>Default sample rate.
+<tr><td>volume<td>Default volume... 0 (silent) to 1 (full).
+<tr><td>pan<td>Default panning position... -1 (full left) to +1 (full right), 0 = centre.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMPLE_8BITS<td>8-bit resolution. If neither this or the BASS_SAMPLE_FLOAT flags are present, then the sample is 16-bit.
+<tr><td>BASS_SAMPLE_FLOAT<td>32-bit floating-point.
+<tr><td>BASS_SAMPLE_LOOP<td>Looped?
+<tr><td>BASS_SAMPLE_3D<td>The sample has 3D functionality enabled.
+<tr><td>BASS_SAMPLE_MUTEMAX<td>Mute the sample when it is at (or beyond) its max distance (3D samples only).
+<tr><td>BASS_SAMPLE_OVER_VOL<td>Override: the channel with the lowest volume is overridden.
+<tr><td>BASS_SAMPLE_OVER_POS<td>Override: the longest playing channel is overridden.
+<tr><td>BASS_SAMPLE_OVER_DIST<td>Override: the channel furthest away (from the listener) is overridden (3D samples only).
+</table>
+<tr><td>length<td>The length in bytes.
+<tr><td>max<td>Maximum number of simultaneous playbacks.
+<tr><td>origres<td>The original resolution (bits per sample)... 0 = undefined. If the original sample format is floating-point, then the BASS_ORIGRES_FLOAT flag will be set and the number of bits will be in the LOWORD.
+<tr><td>chans<td>Number of channels... 1 = mono, 2 = stereo, etc.
+<tr><td>mingap<td>Minimum time gap in milliseconds between creating channels using <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a>. This can be used to prevent flanging effects caused by playing a sample multiple times very close to each other. The default setting, after loading/creating a sample, is 0 (disabled). 
+<tr><td COLSPAN="2"><B>The following are the sample's default 3D attributes (if the sample is 3D).</B>
+<tr><td>mode3d<td>The 3D processing mode... one of these flags.
+<table>
+<tr><td>BASS_3DMODE_NORMAL<td>Normal 3D processing.
+<tr><td>BASS_3DMODE_RELATIVE<td>The sample's 3D position (position/velocity/orientation) is relative to the listener. When the listener's position/velocity/orientation is changed with <a href="BASS_Set3DPosition.html">BASS_Set3DPosition</a>, the sample's position relative to the listener does not change.
+<tr><td>BASS_3DMODE_OFF<td>Turn off 3D processing on the sample, the sound will be played in the centre.
+</table>
+<tr><td>mindist<td>The minimum distance. The sample's volume is at maximum when the listener is within this distance.
+<tr><td>maxdist<td>The maximum distance. The sample's volume stops decreasing when the listener is beyond this distance.
+<tr><td>iangle<td>The angle of the inside projection cone in degrees... 0 (no cone) to 360 (sphere).
+<tr><td>oangle<td>The angle of the outside projection cone in degrees... 0 (no cone) to 360 (sphere).
+<tr><td>outvol<td>The delta-volume outside the outer projection cone... 0 (silent) to 1 (full).
+<tr><td>vam<td>Unused.
+<tr><td>priority<td>Unused.
+</table>
+<p><h2>Remarks</h2>
+When a sample has 3D functionality, the <I>iangle</I> and <I>oangle</I> angles decide how wide the sound is projected around the orientation angle (as set via <a href="BASS_ChannelSet3DPosition.html">BASS_ChannelSet3DPosition</a>). Within the inside angle the volume level is the level set in the <I>volume</I> member (or the <a href="BASS_ATTRIB_VOL.html">BASS_ATTRIB_VOL</a> attribute when the sample is playing). Outside the outer angle, the volume changes according to the <I>outvol</I> value. Between the inner and outer angles, the volume gradually changes between the inner and outer volume levels. If the inner and outer angles are 360 degrees, then the sound is transmitted equally in all directions.
+<p><h2>See also</h2>
+<a href="BASS_SampleCreate.html">BASS_SampleCreate</a>, <a href="BASS_SampleGetInfo.html">BASS_SampleGetInfo</a>, <a href="BASS_SampleLoad.html">BASS_SampleLoad</a>, <a href="BASS_SampleSetInfo.html">BASS_SampleSetInfo</a>

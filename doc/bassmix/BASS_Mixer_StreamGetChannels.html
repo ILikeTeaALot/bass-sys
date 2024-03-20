@@ -1,0 +1,36 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_StreamGetChannels</h1>
+<p>Retrieves a mixer's source channels.
+<p><pre class="def">DWORD BASS_Mixer_StreamGetChannels(
+    HSTREAM <I>handle</I>,
+    DWORD *<I>channels</I>,
+    DWORD <I>count</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The mixer handle.
+<tr><td>channels<td>An array to recevive the mixer's source channel handles.
+<tr><td>count<td>The maximum number of channels to receive in the <i>channels</i> array... 0 = get the number of source channels without getting the handles.
+</table>
+<p><h2>Return value</h2>
+If successful, the number of source channels placed in the <i>channels</i> array is returned, or the total number of source channels if <i>count = 0</i>, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid mixer handle.
+</table>
+<p><h2>Remarks</h2>
+To determine whether a particular channel is plugged in a mixer, it is simpler to use <a href="BASS_Mixer_ChannelGetMixer.html">BASS_Mixer_ChannelGetMixer</a> instead of this function.
+<p><h2>Example</h2>
+Remove all source channels from a mixer.
+<pre class="code">
+DWORD *channels;
+DWORD a, count;
+count = BASS_Mixer_StreamGetChannels(mixer, NULL, 0); // get the number of source channels
+channels = (DWORD*)malloc(count * sizeof(DWORD)); // allocate channels array
+BASS_Mixer_StreamGetChannels(mixer, channels, count); // get the channels
+for (a = 0; a &lt; count; a++) // go through them all and...
+    BASS_Mixer_ChannelRemove(channels[a]); // remove from the mixer
+free(channels); // free the channels array
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_Mixer_StreamAddChannel.html">BASS_Mixer_StreamAddChannel</a>, <a href="BASS_Mixer_StreamAddChannelEx.html">BASS_Mixer_StreamAddChannelEx</a>, <a href="BASS_Mixer_ChannelGetMixer.html">BASS_Mixer_ChannelGetMixer</a>

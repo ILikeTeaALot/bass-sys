@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_REC_BUFFER config option</h1>
+<p>The buffer length for recording channels.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_REC_BUFFER,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>length<td>The buffer length in milliseconds... 10 (min) - 5000 (max). If the length specified is outside this range, it is automatically capped.
+</table>
+<p><h2>Remarks</h2>
+Unlike a playback buffer, where the aim is to keep the buffer full, a recording buffer is kept as empty as possible and so this setting has no effect on latency. The default recording buffer length is 2000 milliseconds. Unless processing of the recorded data could cause significant delays, or you want to use a large recording period with <a href="BASS_RecordStart.html">BASS_RecordStart</a>, there should be no need to increase this.
+<p>Using this config option only affects the recording channels that are created afterwards, not any that have already been created. So it is possible to have channels with differing buffer lengths by using this config option each time before creating them.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_RecordStart.html">BASS_RecordStart</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>

@@ -1,0 +1,29 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelUpdate</h1>
+<p>Updates the playback buffer of a stream or MOD music.
+<p><pre class="def">BOOL BASS_ChannelUpdate(
+    DWORD <I>handle</I>,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HMUSIC or HSTREAM.
+<tr><td>length<td>The amount of data to render, in milliseconds... 0 = default (2 x <a href="BASS_CONFIG_UPDATEPERIOD.html">update period</a>). This is capped at the space available in the buffer.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_NOTAVAIL<td>Decoding channels do not have playback buffers.</a>
+<tr><td>BASS_ERROR_ENDED<td>The channel has ended.
+<tr><td>BASS_ERROR_ALREADY<td>The channel is already being updated.</a>
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+When starting playback of a stream or MOD music, after creating it or changing its position, there will be a slight delay while the initial data is generated for playback. Usually the delay is not noticeable or important, but if you need playback to start instantly when you call <a href="BASS_ChannelStart.html">BASS_ChannelStart</a> or <a href="BASS_ChannelPlay.html">BASS_ChannelPlay</a>, then use this function first. The <i>length</i> parameter should be at least equal to the <a href="BASS_CONFIG_UPDATEPERIOD.html">update period</a>.
+<p>It may not always be possible to render the requested amount of data, in which case this function will still succeed. <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> (BASS_DATA_AVAILABLE) can be used to check how much data a channel has buffered for playback.
+<p>When automatic updating is disabled (<a href="BASS_CONFIG_UPDATEPERIOD.html">BASS_CONFIG_UPDATEPERIOD</a> = 0 or <a href="BASS_CONFIG_UPDATETHREADS.html">BASS_CONFIG_UPDATETHREADS</a> = 0), this function could be used instead of <a href="BASS_Update.html">BASS_Update</a> to implement different update periods for different channels, instead of a single update period for all. Unlike <a href="BASS_Update.html">BASS_Update</a>, this function can also be used while automatic updating is enabled.
+<p>The CPU usage of this function is not included in the <a href="BASS_GetCPU.html">BASS_GetCPU</a> reading, but is included in the channel's <a href="BASS_ATTRIB_CPU.html">BASS_ATTRIB_CPU</a> attribute value.
+<p><h2>See also</h2>
+<a href="BASS_ChannelStart.html">BASS_ChannelStart</a>, <a href="BASS_Update.html">BASS_Update</a>

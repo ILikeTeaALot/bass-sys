@@ -1,0 +1,66 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_GetConfig</h1>
+<p>Retrieves the value of a config option.
+<p><pre class="def">DWORD BASS_GetConfig(
+    DWORD <I>option</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>option<td>The option to get the value of... one of the following.<br>
+<table>
+<tr><td><a href="BASS_CONFIG_3DALGORITHM.html">BASS_CONFIG_3DALGORITHM</a><td>The 3D algorithm for software mixed 3D channels.
+<tr><td><a href="BASS_CONFIG_AM_DISABLE.html">BASS_CONFIG_AM_DISABLE</a><td>Disable the use of Android media codecs?
+<tr><td><a href="BASS_CONFIG_ANDROID_AAUDIO.html">BASS_CONFIG_ANDROID_AAUDIO</a><td>Enable AAudio output on Android?
+<tr><td><a href="BASS_CONFIG_ANDROID_SESSIONID.html">BASS_CONFIG_ANDROID_SESSIONID</a><td>Session ID to use for output on Android.
+<tr><td><a href="BASS_CONFIG_ASYNCFILE_BUFFER.html">BASS_CONFIG_ASYNCFILE_BUFFER</a><td>Asynchronous file reading buffer length.
+<tr><td><a href="BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a><td>Playback buffer length.
+<tr><td><a href="BASS_CONFIG_CURVE_PAN.html">BASS_CONFIG_CURVE_PAN</a><td>Panning translation curve.
+<tr><td><a href="BASS_CONFIG_CURVE_VOL.html">BASS_CONFIG_CURVE_VOL</a><td>Volume translation curve.
+<tr><td><a href="BASS_CONFIG_DEV_BUFFER.html">BASS_CONFIG_DEV_BUFFER</a><td>Output device buffer length.
+<tr><td><a href="BASS_CONFIG_DEV_DEFAULT.html">BASS_CONFIG_DEV_DEFAULT</a><td>Include a "Default" entry in the output device list?
+<tr><td><a href="BASS_CONFIG_DEV_NONSTOP.html">BASS_CONFIG_DEV_NONSTOP</a><td>Do not stop an output device when nothing is playing?
+<tr><td><a href="BASS_CONFIG_DEV_PERIOD.html">BASS_CONFIG_DEV_PERIOD</a><td>Output device update period.
+<tr><td><a href="BASS_CONFIG_FLOATDSP.html">BASS_CONFIG_FLOATDSP</a><td>Pass 32-bit floating-point sample data to all DSP functions?
+<tr><td><a href="BASS_CONFIG_GVOL_MUSIC.html">BASS_CONFIG_GVOL_MUSIC</a><td>Global MOD music volume.
+<tr><td><a href="BASS_CONFIG_GVOL_SAMPLE.html">BASS_CONFIG_GVOL_SAMPLE</a><td>Global sample volume.
+<tr><td><a href="BASS_CONFIG_GVOL_STREAM.html">BASS_CONFIG_GVOL_STREAM</a><td>Global stream volume.
+<tr><td><a href="BASS_CONFIG_HANDLES.html">BASS_CONFIG_HANDLES</a><td>Number of existing HMUSIC / HRECORD / HSAMPLE / HSTREAM handles.
+<tr><td><a href="BASS_CONFIG_IOS_SESSION.html">BASS_CONFIG_IOS_SESSION</a><td>Audio session configuration on iOS.
+<tr><td><a href="BASS_CONFIG_MF_DISABLE.html">BASS_CONFIG_MF_DISABLE</a><td>Disable the use of Media Foundation?
+<tr><td><a href="BASS_CONFIG_MF_VIDEO.html">BASS_CONFIG_MF_VIDEO</a><td>Play the audio from videos using Media Foundation?
+<tr><td><a href="BASS_CONFIG_MUSIC_VIRTUAL.html">BASS_CONFIG_MUSIC_VIRTUAL</a><td>IT virtual channels.
+<tr><td><a href="BASS_CONFIG_NET_BUFFER.html">BASS_CONFIG_NET_BUFFER</a><td>Internet download buffer length.
+<tr><td><a href="BASS_CONFIG_NET_META.html">BASS_CONFIG_NET_META</a><td>Request Shoutcast metadata?
+<tr><td><a href="BASS_CONFIG_NET_PASSIVE.html">BASS_CONFIG_NET_PASSIVE</a><td>Use passive mode in FTP connections?
+<tr><td><a href="BASS_CONFIG_NET_PLAYLIST.html">BASS_CONFIG_NET_PLAYLIST</a><td>Process URLs in playlists?
+<tr><td><a href="BASS_CONFIG_NET_PLAYLIST_DEPTH.html">BASS_CONFIG_NET_PLAYLIST_DEPTH</a><td>Maximum nested playlist processing depth.
+<tr><td><a href="BASS_CONFIG_NET_PREBUF.html">BASS_CONFIG_NET_PREBUF</a><td>Amount to pre-buffer before playing internet streams.
+<tr><td><a href="BASS_CONFIG_NET_READTIMEOUT.html">BASS_CONFIG_NET_READTIMEOUT</a><td>Time to wait for a server to deliver more data.
+<tr><td><a href="BASS_CONFIG_NET_RESTRATE.html">BASS_CONFIG_NET_RESTRATE</a><td>Restricted download rate.
+<tr><td><a href="BASS_CONFIG_NET_TIMEOUT.html">BASS_CONFIG_NET_TIMEOUT</a><td>Time to wait for a server to respond to a connection request.
+<tr><td><a href="BASS_CONFIG_NORAMP.html">BASS_CONFIG_NORAMP</a><td>Default playback ramping.
+<tr><td><a href="BASS_CONFIG_OGG_PRESCAN.html">BASS_CONFIG_OGG_PRESCAN</a><td>Pre-scan chained OGG files?
+<tr><td><a href="BASS_CONFIG_PAUSE_NOPLAY.html">BASS_CONFIG_PAUSE_NOPLAY</a><td>Prevent channels being played when the output is paused?
+<tr><td><a href="BASS_CONFIG_REC_BUFFER.html">BASS_CONFIG_REC_BUFFER</a><td>Recording buffer length.
+<tr><td><a href="BASS_CONFIG_REC_DEFAULT.html">BASS_CONFIG_REC_DEFAULT</a><td>Include a "Default" entry in the recording device list?
+<tr><td><a href="BASS_CONFIG_REC_WASAPI.html">BASS_CONFIG_REC_WASAPI</a><td>Use WASAPI when recording?
+<tr><td><a href="BASS_CONFIG_SAMPLE_ONEHANDLE.html">BASS_CONFIG_SAMPLE_ONEHANDLE</a><td>Use the same handle for a sample and its single channel?
+<tr><td><a href="BASS_CONFIG_SRC.html">BASS_CONFIG_SRC</a><td>Default sample rate conversion quality.
+<tr><td><a href="BASS_CONFIG_SRC_SAMPLE.html">BASS_CONFIG_SRC_SAMPLE</a><td>Default sample rate conversion quality for samples.
+<tr><td><a href="BASS_CONFIG_UNICODE.html">BASS_CONFIG_UNICODE</a><td>Unicode device information?
+<tr><td><a href="BASS_CONFIG_UPDATEPERIOD.html">BASS_CONFIG_UPDATEPERIOD</a><td>Update period of playback buffers.
+<tr><td><a href="BASS_CONFIG_UPDATETHREADS.html">BASS_CONFIG_UPDATETHREADS</a><td>Number of update threads.
+<tr><td><a href="BASS_CONFIG_VERIFY.html">BASS_CONFIG_VERIFY</a><td>File format verification length.
+<tr><td><a href="BASS_CONFIG_VERIFY_NET.html">BASS_CONFIG_VERIFY_NET</a><td>File format verification length for internet streams.
+<tr><td><a href="BASS_CONFIG_WASAPI_PERSIST.html">BASS_CONFIG_WASAPI_PERSIST</a><td>Retain Windows mixer settings across sessions?
+</table>
+<i>other config options may be supported by add-ons, see the documentation.</i>
+</table>
+<p><h2>Return value</h2>
+If successful, the value of the requested config option is returned, else -1 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_ILLPARAM<td><i>option</i> is invalid.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_GetConfigPtr.html">BASS_GetConfigPtr</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>

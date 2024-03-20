@@ -1,0 +1,53 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>TAG_CART structure</h1>
+<p>BWF "cart" tag structure.
+<p><pre class="def">typedef struct {
+    char <I>Version</I>[4];
+    char <I>Title</I>[64];
+    char <I>Artist</I>[64];
+    char <I>CutID</I>[64];
+    char <I>ClientID</I>[64];
+    char <I>Category</I>[64];
+    char <I>Classification</I>[64];
+    char <I>OutCue</I>[64];
+    char <I>StartDate</I>[10];
+    char <I>StartTime</I>[8];
+    char <I>EndDate</I>[10];
+    char <I>EndTime</I>[8];
+    char <I>ProducerAppID</I>[64];
+    char <I>ProducerAppVersion</I>[64];
+    char <I>UserDef</I>[64];
+    DWORD <I>dwLevelReference</I>;
+    <a href="TAG_CART_TIMER.html">TAG_CART_TIMER</a> <I>PostTimer</I>[8];
+    char <I>Reserved</I>[276];
+    char <I>URL</I>[1024];
+    char <I>TagText</I>[];
+} TAG_CART;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>Version<td>Version of the data structure.
+<tr><td>Title<td>Title of cart audio sequence.
+<tr><td>Artist<td>Artist or creator name.
+<tr><td>CutID<td>Cut number identification.
+<tr><td>ClientID<td>Client identification.
+<tr><td>Category<td>Category ID, PSA, NEWS, etc.
+<tr><td>Classification<td>Classification or auxiliary key.
+<tr><td>OutCue<td>Out cue text.
+<tr><td>StartDate<td>Start date, in the form of "yyyy-mm-dd" (year-month-day).
+<tr><td>StartTime<td>Start time, in the form of "hh-mm-ss" (hours-minutes-seconds).
+<tr><td>EndDate<td>End date, in the form of "yyyy-mm-dd" (year-month-day).
+<tr><td>EndTime<td>End time, in the form of "hh-mm-ss" (hours-minutes-seconds).
+<tr><td>ProducerAppID<td>Name of vendor or application.
+<tr><td>ProducerAppVersion<td>Version of producer application.
+<tr><td>UserDef<td>User defined text.
+<tr><td>dwLevelReference<td>Sample value for 0 dB reference.
+<tr><td>PostTimer<td>8 time markers after head.
+<tr><td>Reserved<td>Reserved for extensions.
+<tr><td>URL<td>Uniform resource locator.
+<tr><td>TagText<td>Free form text for scripts or tags.
+</table>
+<p><h2>Remarks</h2>
+The structure is given by <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a> as it is in the RIFF file, which is little-endian, so the <i>dwLevelReference</i> and <i>PostTimer</i> members will need to be reversed on big-endian platforms.
+<p>See the <a href=http://www.cartchunk.org/cc_spec.htm target=_blank>"CartChunk" specification</a> for further details.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>, <a href="TAG_BEXT.html">TAG_BEXT structure</a>, <a href="TAG_CART_TIMER.html">TAG_CART_TIMER structure</a>

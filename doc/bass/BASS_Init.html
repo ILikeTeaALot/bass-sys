@@ -1,0 +1,64 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Init</h1>
+<p>Initializes an output device.
+<p><pre class="def">BOOL BASS_Init(
+    int <I>device</I>,
+    DWORD <I>freq</I>,
+    DWORD <I>flags</I>,
+    HWND <I>win</I>,
+    void *<I>clsid</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>device<td>The device to use... -1 = default device, 0 = no sound, 1 = first real output device. <a href="BASS_GetDeviceInfo.html">BASS_GetDeviceInfo</a> can be used to enumerate the available devices.
+<tr><td>freq<td>Output sample rate.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_DEVICE_16BITS<td>Limit the output to 16-bit.
+<tr><td>BASS_DEVICE_MONO<td>Mono output.
+<tr><td>BASS_DEVICE_STEREO<td>Limit the output to stereo, saving some CPU if the device has more speakers available.
+<tr><td>BASS_DEVICE_SPEAKERS<td>Enable 8 speaker output (instead of stereo) when BASS is unable to detect the number of available speakers.
+<tr><td>BASS_DEVICE_NOSPEAKER<td>Ignore speaker arrangement. This flag tells BASS to not make any special consideration for speaker arrangements when playing multi-channel content or using the SPEAKER flags, eg. swapping the CENLFE and REAR speaker channels in 5/7.1 speaker output. This flag should be used with plain multi-channel (rather than 5/7.1) devices.
+<tr><td>BASS_DEVICE_FREQ<td>Set the device's output rate to <i>freq</i>, otherwise leave it as it is.
+<tr><td>BASS_DEVICE_DSOUND<td>Initialize the device to use DirectSound output instead of WASAPI. If WASAPI is not available (pre-Vista Windows) then this will be applied automatically.
+<tr><td>BASS_DEVICE_AUDIOTRACK<td>Initialize the device to use AudioTrack output instead of OpenSL ES or AAudio. If OpenSL ES and AAudio are not available (pre-2.3 Android) then this will be applied automatically.
+<tr><td>BASS_DEVICE_DMIX<td>Initialize the device using the ALSA "dmix" plugin, else initialize the device for exclusive access. This will be applied automatically if the device cannot be initialized without it.
+<tr><td>BASS_DEVICE_SOFTWARE<td>Disable hardware/fastpath output.
+<tr><td>BASS_DEVICE_REINIT<td>Reinitialize the device while retaining the device's existing BASS channels and 3D settings. This flag cannot be used with device -1.
+</table>
+<tr><td>win<td>The application's main window... 0 = the desktop window (use this for console applications). This is only needed when using DirectSound output.
+<tr><td>clsid<td>Unused. Set to NULL.
+</table>
+<p><h2>Return value</h2>
+If the device was successfully initialized, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>device</i> is invalid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_DEVICE_REINIT flag cannot be used when <i>device</i> is -1. Use the real device number instead.
+<tr><td>BASS_ERROR_ALREADY<td>The device has already been initialized. The BASS_DEVICE_REINIT flag can be used to request reinitialization.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>win</i> is not a valid window handle.
+<tr><td>BASS_ERROR_DRIVER<td>There is no available device driver.
+<tr><td>BASS_ERROR_BUSY<td>Something else has exclusive use of the device.
+<tr><td>BASS_ERROR_FORMAT<td>The specified format is not supported by the device. Try changing the <I>freq</I> parameter.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+This function must be successfully called before using any sample, stream or MOD music functions. The recording functions may be used without having called this function.
+<p>Simultaneously using multiple devices is supported in the BASS API via a context switching system; instead of there being an extra "device" parameter in the function calls, the device to be used is set prior to calling the functions. <a href="BASS_SetDevice.html">BASS_SetDevice</a> is used to switch the current device. When successful, BASS_Init automatically sets the current thread's device to the one that was just initialized.
+<p>The default device (<i>device = -1</i>) maps to one of the real devices (not the no sound device). It will always be the "Default" device unless that has been disabled via the <a href="BASS_CONFIG_DEV_DEFAULT.html">BASS_CONFIG_DEV_DEFAULT</a> config option. <a href="BASS_GetDevice.html">BASS_GetDevice</a> can be used afterwards to confirm which device is being used.
+<p>The <a href="BASS_CONFIG_DEV_BUFFER.html">BASS_CONFIG_DEV_BUFFER</a> and <a href="BASS_CONFIG_DEV_PERIOD.html">BASS_CONFIG_DEV_PERIOD</a> config options determine how much data is buffered for the device and how often it is updated.
+<p>When the BASS_DEVICE_REINIT flag is specified to request reinitialization, any BASS channels that were playing prior will continue to do so, if successful. But there is likely to be a small interruption to the sound, so it is best to reinitialize while nothing is playing. If reinitialization fails then playback will be paused and the device will be left in a partially-freed state. Reinitialization could be tried again with different parameters or <a href="BASS_Free.html">BASS_Free</a> used to fully free the device. Until <a href="BASS_Free.html">BASS_Free</a> is used, the device's BASS channels will still exist and can be moved to another device via <a href="BASS_ChannelSetDevice.html">BASS_ChannelSetDevice</a>.
+<p><h2>Platform-specific</h2>
+The sample format specified in the <i>freq</i> and <i>flags</i> parameters has no effect on the output on macOS or iOS, or Windows Vista and above - the device's native sample format is automatically used. On Linux, the output device will use the specified format if possible, but will otherwise use a format as close to it as possible. On Android, the device's native sample rate (as reported by the AudioTrack getNativeOutputSampleRate method) will be used unless the BASS_DEVICE_FREQ flag is specified, in which case the <i>freq</i> parameter will be used (this only affects BASS's output format, not the device's output format). If the BASS_DEVICE_FREQ flag is specified on macOS or iOS then the device's output rate will be set to the <i>freq</i> parameter if possible. The BASS_DEVICE_FREQ flag has no effect on other platforms. <a href="BASS_GetInfo.html">BASS_GetInfo</a> can be used to check what the output format actually is.
+<p>On Android, when the BASS_DEVICE_AUDIOTRACK flag is not specified, AAudio or OpenSL ES output may be used depending on the <a href="BASS_CONFIG_ANDROID_AAUDIO.html">BASS_CONFIG_ANDROID_AAUDIO</a> config option setting. AAudio has a low latency mode, which will be enabled when <tr><td><a href="BASS_CONFIG_DEV_BUFFER.html">BASS_CONFIG_DEV_BUFFER</a> is set below 50.
+<p>The <i>win</i> parameter is only used with DirectSound output on Windows and is ignored in all other cases. The BASS_DEVICE_STEREO flag is ignored on macOS and Windows, except when using DirectSound output.
+<p>The BASS_DEVICE_SOFTWARE flag is only used on Windows to disable DirectSound hardware mixing and on Android to disable AAudio fastpath output.
+<p>The BASS_DEVICE_SPEAKERS flag only has effect on Linux, typically when using PulseAudio or PipeWire output. The BASS_DEVICE_DMIX flag is also only available on Linux, and allows multiple applications to share the device (if they all use "dmix"). It may also be possible for multiple applications to use exclusive access if the device is capable of hardware mixing. If exclusive access initialization fails, the BASS_DEVICE_DMIX flag will automatically be tried; if that happens, it can be detected via <a href="BASS_GetInfo.html">BASS_GetInfo</a> and the <i>initflags</i>.
+<p><h2>Example</h2>
+Initialize BASS to use the default output device with a nominal rate of 44100 Hz.
+<pre class="code">
+BASS_Init(-1, 44100, 0, NULL, NULL);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_Free.html">BASS_Free</a>, <a href="BASS_GetCPU.html">BASS_GetCPU</a>, <a href="BASS_GetDeviceInfo.html">BASS_GetDeviceInfo</a>, <a href="BASS_GetInfo.html">BASS_GetInfo</a>, <a href="BASS_MusicLoad.html">BASS_MusicLoad</a>, <a href="BASS_SampleCreate.html">BASS_SampleCreate</a>, <a href="BASS_SampleLoad.html">BASS_SampleLoad</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_SetDevice.html">BASS_SetDevice</a>, <a href="BASS_StreamCreate.html">BASS_StreamCreate</a>, <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, <a href="BASS_Update.html">BASS_Update</a>, <a href="BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a>, <a href="BASS_CONFIG_DEV_BUFFER.html">BASS_CONFIG_DEV_BUFFER</a>, <a href="BASS_CONFIG_UPDATEPERIOD.html">BASS_CONFIG_UPDATEPERIOD</a>

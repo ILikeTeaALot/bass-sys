@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>FILESEEKPROC callback</h1>
+<p>User file stream seek callback function.
+<p><pre class="def">BOOL CALLBACK FileSeekProc(
+    QWORD <I>offset</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>offset<td>Position in bytes to seek to.
+<tr><td>user<td>The user instance data given when <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a> was called.
+</table>
+<p><h2>Return value</h2>
+TRUE if successful, else FALSE.
+<p><h2>See also</h2>
+<a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_FILEPROCS.html">BASS_FILEPROCS structure</a>

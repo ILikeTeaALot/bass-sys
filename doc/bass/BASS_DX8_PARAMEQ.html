@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_DX8_PARAMEQ structure</h1>
+<p>Used with <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a> and <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a> to retrieve and set the parameters of a DX8 parametric equalizer effect.
+<p><pre class="def">typedef struct {
+    float <i>fCenter</i>;
+    float <i>fBandwidth</i>;
+    float <i>fGain</i>;
+} BASS_DX8_PARAMEQ;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>fCenter<td>Center frequency, in hertz.
+<tr><td>fBandwidth<td>Bandwidth, in semitones, in the range from 1 to 36. The default value is 12.
+<tr><td>fGain<td>Gain, in the range from -15 to 15. The default value is 0 dB.
+</table>
+<p><h2>Platform-specific</h2>
+On Windows, <i>fCenter</i> must be in the range of 80 to 16000, and not exceed one-third of the channel's sample rate. On other platforms, the range is above 0 and below half the channel's sample rate.
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a>, <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a>

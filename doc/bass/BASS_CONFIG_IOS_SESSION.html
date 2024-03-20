@@ -1,0 +1,31 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_IOS_SESSION config option</h1>
+<p>Audio session configuration on iOS.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_IOS_SESSION,
+    DWORD <I>config</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>config<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_IOS_SESSION_MIX<td>Allow other apps to be heard at the same time. Enables AVAudioSessionCategoryOptionMixWithOthers.
+<tr><td>BASS_IOS_SESSION_DUCK<td>Allow other apps to be heard at the same time but reduce their volume level. Enables AVAudioSessionCategoryOptionDuckOthers.
+<tr><td>BASS_IOS_SESSION_AMBIENT<td>Use the "ambient" category.
+<tr><td>BASS_IOS_SESSION_SPEAKER<td>Route the output to the speaker instead of the receiver when recording. Enables AVAudioSessionCategoryOptionDefaultToSpeaker.
+<tr><td>BASS_IOS_SESSION_AIRPLAY<td>Allow playback on Airplay devices when recording (Airplay is always allowed when only playing). Enables AVAudioSessionCategoryOptionAllowAirPlay.
+<tr><td>BASS_IOS_SESSION_BTHFP<td>Allow Bluetooth HFP (hands-free) devices when recording (Bluetooth is always allowed when only playing). Enables AVAudioSessionCategoryOptionAllowBluetooth.
+<tr><td>BASS_IOS_SESSION_BTA2DP<td>Allow Bluetooth A2DP devices when recording (Bluetooth is always allowed when only playing). Enables AVAudioSessionCategoryOptionAllowBluetoothA2DP.
+<tr><td>BASS_IOS_SESSION_DEACTIVATE<td>Deactivate the audio session when nothing is playing or recording. It is otherwise only deactivated when there are no initialized devices and during interruptions.
+<tr><td>BASS_IOS_SESSION_DISABLE<td>Disable BASS's audio session configuration management so that the app can handle that itself.
+</table>
+</table>
+<p><h2>Remarks</h2>
+By default, the audio session category is set to AVAudioSessionCategoryPlayback. If BASS_IOS_SESSION_AMBIENT is set then the category will be set to AVAudioSessionCategorySoloAmbient instead, or AVAudioSessionCategoryAmbient if BASS_IOS_SESSION_MIX or BASS_IOS_SESSION_DUCK is also set. If the "Voice" output device or a recording device are initialized then the category will be set to AVAudioSessionCategoryPlayAndRecord (regardless of BASS_IOS_SESSION_AMBIENT). Descriptions of these categories and other options can be found in Apple's AVAudioSession documentation.
+<p>If mixing with other apps is disabled (neither BASS_IOS_SESSION_MIX or BASS_IOS_SESSION_DUCK is set) then BASS will not automatically resume following an interruption if another app is still playing in the background. <a href="BASS_Start.html">BASS_Start</a> can be used in that case to force resumption (and interrupt the other app).
+<p>When BASS's audio session configuration management is disabled (BASS_IOS_SESSION_DISABLE is set), BASS will still handle activation of the session (including after interruptions) but nothing else. Except for the "No Sound" device, the <a href="BASS_CONFIG_DEV_PERIOD.html">BASS_CONFIG_DEV_PERIOD</a> option is also disabled by this; the AVAudioSession setPreferredIOBufferDuration method can be used instead.
+<p>The default setting is BASS_IOS_SESSION_MIX + BASS_IOS_SESSION_BTHFP.
+<p><h2>Platform-specific</h2>
+This config option is only available on iOS.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_Init.html">BASS_Init</a>, <a href="BASS_RecordInit.html">BASS_RecordInit</a>

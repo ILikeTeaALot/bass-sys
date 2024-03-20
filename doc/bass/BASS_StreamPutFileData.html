@@ -1,0 +1,27 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_StreamPutFileData</h1>
+<p>Adds data to a "push buffered" user file stream's buffer.
+<p><pre class="def">DWORD BASS_StreamPutFileData(
+    HSTREAM <I>handle</I>,
+    void *<I>buffer</I>,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The stream handle.
+<tr><td>buffer<td>Pointer to the file data.
+<tr><td>length<td>The amount of data in bytes, or BASS_FILEDATA_END to end the file.
+</table>
+<p><h2>Return value</h2>
+If successful, the number of bytes read from <i>buffer</i> is returned, else -1 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The stream is not using the STREAMFILE_BUFFERPUSH file system.
+<tr><td>BASS_ERROR_ENDED<td>The file has ended.
+</table>
+<p><h2>Remarks</h2>
+If there is not enough space in the stream's file buffer to receive all of the data, then only the amount that will fit is read from <i>buffer</i>. <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a> can be used to check the amount of space in the buffer.
+<p>File data should be provided at a rate sufficent to sustain playback. If there is insufficient file data, and the playback buffer is subsequently exhausted, BASS will automatically stall playback of the stream, until more data is available. A BASS_SYNC_STALL sync can be set via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>, to be triggered upon playback stalling or resuming.
+<p><h2>See also</h2>
+<a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a>

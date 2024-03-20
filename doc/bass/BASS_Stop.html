@@ -1,0 +1,15 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Stop</h1>
+<p>Stops the output, stopping all musics/samples/streams on it.
+<p><pre class="def">BOOL BASS_Stop();</pre>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html"> BASS_Init</a> has not been successfully called.
+</table>
+<p><h2>Remarks</h2>
+This function can be used after <a href="BASS_Pause.html">BASS_Pause</a> to stop the paused channels, so that they will not be resumed the next time <a href="BASS_Start.html">BASS_Start</a> is called.
+<p>When using multiple devices, the current thread's device setting (as set with <a href="BASS_SetDevice.html">BASS_SetDevice</a>) determines which device this function call applies to.
+<p><h2>See also</h2>
+<a href="BASS_ChannelStop.html">BASS_ChannelStop</a>, <a href="BASS_Pause.html">BASS_Pause</a>, <a href="BASS_Start.html">BASS_Start</a>

@@ -1,0 +1,29 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelSetDSP</h1>
+<p>Sets up a user DSP function on a stream, MOD music, or recording channel.
+<p><pre class="def">HDSP BASS_ChannelSetDSP(
+    DWORD <I>handle</I>,
+    <a href="DSPPROC.html">DSPPROC</a> *<I>proc</I>,
+    void *<I>user</I>,
+    int <I>priority</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HSTREAM, HMUSIC, or HRECORD.
+<tr><td>proc<td>The callback function.
+<tr><td>user<td>User instance data to pass to the callback function.
+<tr><td>priority<td>The priority of the new DSP, which determines its position in the DSP chain. DSPs with higher priority are called before those with lower.
+</table>
+<p><h2>Return value</h2>
+If successful, then the new DSP's handle is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_ILLPARAM<td><I>proc</I> cannot be NULL.
+</table>
+<p><h2>Remarks</h2>
+DSP functions can set and removed at any time, including mid-playback. Use <a href="BASS_ChannelRemoveDSP.html">BASS_ChannelRemoveDSP</a> to remove a DSP function.
+<p> Multiple DSP functions may be used per channel, in which case the order that the functions are called is determined by their priorities. The priorities can be changed via <a href="BASS_FXSetPriority.html">BASS_FXSetPriority</a>. Any DSPs that have the same priority are called in the order that they were given that priority.
+<p>DSP functions can be applied to MOD musics and streams, but not sample channels. If you want to apply DSP functions to a sample, <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a> can create a stream from a sample.
+<p><h2>See also</h2>
+<a href="BASS_ChannelLock.html">BASS_ChannelLock</a>, <a href="BASS_ChannelRemoveDSP.html">BASS_ChannelRemoveDSP</a>, <a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_FXSetPriority.html">BASS_FXSetPriority</a>, <a href="BASS_CONFIG_FLOATDSP.html">BASS_CONFIG_FLOATDSP</a>, <a href="DSPPROC.html">DSPPROC callback</a>

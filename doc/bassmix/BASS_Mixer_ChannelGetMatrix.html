@@ -1,0 +1,27 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelGetMatrix</h1>
+<p>Retrieves a source channel's mixing matrix, if it has one.
+<p><pre class="def">BOOL BASS_Mixer_ChannelGetMatrix(
+    DWORD <I>handle</I>,
+    void *<I>matrix</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>matrix<td>Location to write the matrix.
+</table>
+<p><h2>Return value</h2>
+If successful, a TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The channel is not using matrix mixing.
+</table>
+<p><h2>Example</h2>
+Get the matrix of a stereo channel plugged into a quad mixer.
+<pre class="code">
+float matrix[4][2]; // 4x2 array to receive the matrix
+BASS_Mixer_ChannelGetMatrix(handle, matrix); // get the matrix
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelSetMatrix.html">BASS_Mixer_ChannelSetMatrix</a>, <a href="BASS_Mixer_StreamAddChannel.html">BASS_Mixer_StreamAddChannel</a>, <a href="BASS_Mixer_StreamAddChannelEx.html">BASS_Mixer_StreamAddChannelEx</a>

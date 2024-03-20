@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_3DVECTOR structure</h1>
+<p>Structure used by the 3D functions to describe positions, velocities, and orientations.
+<p><pre class="def">typedef struct {
+    float <i>x</i>;
+    float <i>y</i>;
+    float <i>z</i>;
+} BASS_3DVECTOR;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>x<td>+ve = right, -ve = left.
+<tr><td>y<td>+ve = up, -ve = down.
+<tr><td>z<td>+ve = front, -ve = behind.
+</table>
+<p><h2>Remarks</h2>
+As can be seen above, the left-handed coordinate system is used.

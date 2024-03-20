@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_DX8_COMPRESSOR structure</h1>
+<p>Used with <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a> and <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a> to retrieve and set the parameters of a DX8 compression effect.
+<p><pre class="def">typedef struct {
+    float <i>fGain</i>;
+    float <i>fAttack</i>;
+    float <i>fRelease</i>;
+    float <i>fThreshold</i>;
+    float <i>fRatio</i>;
+    float <i>fPredelay</i>;
+} BASS_DX8_COMPRESSOR;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>fGain<td>Output gain of signal after compression, in the range from -60 to 60. The default value is 0 dB.
+<tr><td>fAttack<td>Time before compression reaches its full value, in the range from 0.01 to 500. The default value is 10 ms.
+<tr><td>fRelease<td>Speed at which compression is stopped after input drops below fThreshold, in the range from 50 to 3000. The default value is 200 ms.
+<tr><td>fThreshold<td>Point at which compression begins, in decibels, in the range from -60 to 0. The default value is -20 dB.
+<tr><td>fRatio<td>Compression ratio, in the range from 1 to 100. The default value is 3, which means 3:1 compression.
+<tr><td>fPredelay<td>Time after fThreshold is reached before attack phase is started, in milliseconds, in the range from 0 to 4. The default value is 4 ms.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a>, <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a>

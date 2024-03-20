@@ -1,0 +1,15 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_DEV_NONSTOP config option</h1>
+<p>Do not stop the output device when nothing is playing on it?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_DEV_NONSTOP,
+    BOOL <I>nonstop</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>nonstop<td>If TRUE, sample data will continue to be sent to the output device while nothing is playing.
+</table>
+<p><h2>Remarks</h2>
+By default, BASS will stop sending data to the output device when nothing is playing, to save a little CPU/power. When that happens, the device buffer will become empty, and the next playback will begin more quickly as a result. Or it may be delayed if the device has gone to sleep in the meantime. If more consistent playback latency (around the value given by <a href="BASS_GetInfo.html">BASS_GetInfo</a>) is wanted, this option can be enabled to keep the device buffer filled with silence when nothing is playing. The output will still be stopped by <a href="BASS_Stop.html">BASS_Stop</a> then.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_CONFIG_DEV_BUFFER.html">BASS_CONFIG_DEV_BUFFER</a>

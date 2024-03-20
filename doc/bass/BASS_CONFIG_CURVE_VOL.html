@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_CURVE_VOL config option</h1>
+<p>The translation curve of volume values.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_CURVE_VOL,
+    BOOL <I>logvol</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>logvol<td>Volume curve... FALSE = linear, TRUE = logarithmic.
+</table>
+<p><h2>Remarks</h2>
+When using the linear curve, the volume range is from 0% (silent) to 100% (full). When using the logarithmic curve, the volume range is from -100 dB (effectively silent) to 0 dB (full). For example, a volume level of 0.5 is 50% linear or -50 dB logarithmic.
+<p>This config setting is used by the <a href="BASS_SetVolume.html">BASS_SetVolume</a> and <a href=BASS_ChannelSet3DAttributes.html>BASS_ChannelSet3DAttributes</a> functions, and the <a href=BASS_ATTRIB_VOL.html>BASS_ATTRIB_VOL</a> attribute. Other volume controls are unaffacted.
+<p>The linear curve is used by default.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_SetVolume.html">BASS_SetVolume</a>, <a href=BASS_ATTRIB_VOL.html>BASS_ATTRIB_VOL</a>, <a href="BASS_CONFIG_CURVE_PAN.html">BASS_CONFIG_CURVE_PAN</a>

@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_MUSIC_PANSEP attribute</h1>
+<p>The pan separation level of a MOD music.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    HMUSIC <I>handle</I>,
+    BASS_ATTRIB_MUSIC_PANSEP,
+    float <I>pansep</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The MOD music handle.
+<tr><td>pansep<td>Pan separation... 0 (min) to 100 (max), 50 = linear. This will be rounded down to a whole number.
+</table>
+<p><h2>Remarks</h2>
+By default BASS uses a linear panning "curve". If you want to use the panning of FT2, use a pan separation setting of around 35. To use the Amiga panning (ie. full left and right) set it to 100.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a>

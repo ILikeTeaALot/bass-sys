@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_UNICODE config option</h1>
+<p>Use the Unicode character set in device information?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_UNICODE,
+    BOOL <I>unicode</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>unicode<td>If TRUE, device information will be in UTF-8 form. Otherwise it will be ANSI.
+</table>
+<p><h2>Remarks</h2>
+This config option determines what character set is used in the <a href="BASS_DEVICEINFO.html">BASS_DEVICEINFO</a> structure and by the <a href="BASS_RecordGetInputName.html">BASS_RecordGetInputName</a> function. The default setting is ANSI, and it can only be changed before <a href="BASS_GetDeviceInfo.html">BASS_GetDeviceInfo</a> or <a href="BASS_Init.html">BASS_Init</a> or <a href="BASS_RecordGetDeviceInfo.html">BASS_RecordGetDeviceInfo</a> or <a href="BASS_RecordInit.html">BASS_RecordInit</a> has been called.
+<p><h2>Platform-specific</h2>
+This config option is only available on Windows.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_DEVICEINFO.html">BASS_DEVICEINFO structure</a>

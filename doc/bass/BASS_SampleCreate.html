@@ -1,0 +1,55 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_SampleCreate</h1>
+<p>Creates a new sample.
+<p><pre class="def">HSAMPLE BASS_SampleCreate(
+    DWORD <I>length</I>,
+    DWORD <I>freq</I>,
+    DWORD <I>chans</I>,
+    DWORD <I>max</I>,
+    DWORD <I>flags</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>length<td>The sample's length, in bytes.
+<tr><td>freq<td>The default sample rate.
+<tr><td>chans<td>The number of channels... 1 = mono, 2 = stereo, etc.
+<tr><td>max<td>Maximum number of simultaneous playbacks... 1 (min) - 65535 (max)... use one of the BASS_SAMPLE_OVER flags to choose the override decider, in the case of there being no free channel available for playback (ie. the sample is already playing <I>max</I> times).
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMPLE_8BITS<td>Use 8-bit resolution. If neither this or the BASS_SAMPLE_FLOAT flags are specified, then the sample is 16-bit.
+<tr><td>BASS_SAMPLE_FLOAT<td>Use 32-bit floating-point sample data. Not really recommended for samples as it (at least) doubles the memory usage.
+<tr><td>BASS_SAMPLE_LOOP<td>Loop the sample.
+<tr><td>BASS_SAMPLE_3D<td>Enable 3D functionality. The sample must be mono (<i>chans=1</i>).
+<tr><td>BASS_SAMPLE_MUTEMAX<td>Mute the sample when it is at (or beyond) its max distance (3D samples only).
+<tr><td>BASS_SAMPLE_OVER_VOL<td>Override: the channel with the lowest volume is overridden.
+<tr><td>BASS_SAMPLE_OVER_POS<td>Override: the longest playing channel is overridden.
+<tr><td>BASS_SAMPLE_OVER_DIST<td>Override: the channel furthest away (from the listener) is overridden (3D samples only).
+</table>
+</table>
+<p><h2>Return value</h2>
+If successful, the new sample's handle is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>max</i> and/or <i>length</i> is invalid.
+<tr><td>BASS_ERROR_FORMAT<td>The sample format is not supported.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+<tr><td>BASS_ERROR_NO3D<td>Could not initialize 3D support.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+The sample's initial content is undefined. <a href="BASS_SampleSetData.html">BASS_SampleSetData</a> should be used to set the sample's data.
+<p>To play a sample, first a channel must be obtained using <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a>, which can then be played using <a href="BASS_ChannelStart.html">BASS_ChannelStart</a> or <a href="BASS_ChannelPlay.html">BASS_ChannelPlay</a>.
+<p>If you want to play a large or one-off sample, then it would probably be better to stream it instead with <a href="BASS_StreamCreate.html">BASS_StreamCreate</a>.
+<p><h2>Example</h2>
+Create a 440 Hz sine wave sample.
+<pre class="code">
+HSAMPLE sample = BASS_SampleCreate(256, 440 * 64, 1, 1, BASS_SAMPLE_LOOP | BASS_SAMPLE_OVER_POS); // create sample
+short data[128]; // data buffer
+int a;
+for (a = 0; a &lt; 128; a++)
+    data[a] = (short)(32767.0 * sin(a * 6.283185 / 64)); // sine wave
+BASS_SampleSetData(sample, data); // set the sample's data
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_SampleFree.html">BASS_SampleFree</a>, <a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a>, <a href="BASS_SampleLoad.html">BASS_SampleLoad</a>, <a href="BASS_SampleSetData.html">BASS_SampleSetData</a>, <a href="BASS_StreamCreate.html">BASS_StreamCreate</a>

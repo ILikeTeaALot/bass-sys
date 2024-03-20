@@ -1,0 +1,21 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelStop</h1>
+<p>Stops a sample, stream, MOD music, or recording.
+<p><pre class="def">BOOL BASS_ChannelStop(
+    DWORD <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+</table>
+<p><h2>Remarks</h2>
+Stopping a user stream (created with <a href="BASS_StreamCreate.html">BASS_StreamCreate</a>) will clear its buffer contents, and stopping a sample channel (HCHANNEL) or recording (HRECORD) will result in it being freed. Use <a href="BASS_ChannelPause.html">BASS_ChannelPause</a> instead if you wish to be able to resume them (with <a href="BASS_ChannelStart.html">BASS_ChannelStart</a>).
+<p>When used with a decoding channel, this function will end the channel at its current position, so that it is not possible to decode any more data from it. Any BASS_SYNC_END syncs that have been set on the channel will not be triggered by this; they are only triggered when reaching the natural end. <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a> can be used to reset the channel and start decoding again.
+<p><h2>See also</h2>
+<a href="BASS_ChannelIsActive.html">BASS_ChannelIsActive</a>, <a href="BASS_ChannelPause.html">BASS_ChannelPause</a>, <a href="BASS_ChannelStart.html">BASS_ChannelStart</a>, <a href="BASS_RecordStart.html">BASS_RecordStart</a>, <a href="BASS_SampleStop.html">BASS_SampleStop</a>

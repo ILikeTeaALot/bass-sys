@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_BITRATE attribute</h1>
+<p>The average bitrate of a file stream.
+<p><pre class="def">BASS_ChannelGetAttribute(
+    HSTREAM <I>handle</I>,
+    BASS_ATTRIB_BITRATE,
+    float *<I>bitrate</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The stream handle.
+<tr><td>bitrate<td>The bitrate in kilobits per second (kbps).
+</table>
+<p><h2>Remarks</h2>
+This attribute gives the average bitrate of the file's audio data. If the file also contains video, that is excluded from the bitrate calculation.
+<p>This attribute is read-only, so cannot be modified via <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a>

@@ -1,0 +1,14 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_DX8_GARGLE structure</h1>
+<p>Used with <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a> and <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a> to retrieve and set the parameters of a gargle DX8 (amplitude modulation) effect.
+<p><pre class="def">typedef struct {
+    DWORD <i>dwRateHz</i>;
+    DWORD <i>dwWaveShape</i>;
+} BASS_DX8_GARGLE;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>dwRateHz<td>Rate of modulation, in Hertz. Must be in the range from 1 through 1000. The default value is 20.
+<tr><td>dwWaveShape<td>Shape of the modulation waveform... 0 = triangle, 1 = square. By default, the waveform is triangle.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a>, <a href="BASS_FXSetParameters.html"BASS_FXSetParameters</a>

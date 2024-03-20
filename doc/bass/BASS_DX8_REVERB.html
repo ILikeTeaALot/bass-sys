@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_DX8_REVERB structure</h1>
+<p>Used with <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a> and <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a> to retrieve and set the parameters of a DX8 reverb effect.
+<p><pre class="def">typedef struct {
+    float <i>fInGain</i>;
+    float <i>fReverbMix</i>;
+    float <i>fReverbTime</i>;
+    float <i>fHighFreqRTRatio</i>;
+} BASS_DX8_REVERB;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>fInGain<td>Input gain of signal, in decibels (dB), in the range from -96 through 0. The default value is 0 dB.
+<tr><td>fReverbMix<td>Reverb mix, in dB, in the range from -96 through 0. The default value is 0 dB.
+<tr><td>fReverbTime<td>Reverb time, in milliseconds, in the range from 0.001 through 3000. The default value is 1000.
+<tr><td>fHighFreqRTRatio<td>High-frequency reverb time ratio, in the range from 0.001 through 0.999. The default value is 0.001.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_FXGetParameters.html">BASS_FXGetParameters</a>, <a href="BASS_FXSetParameters.html">BASS_FXSetParameters</a>

@@ -1,0 +1,48 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_SampleGetChannel</h1>
+<p>Creates/initializes a playback channel for a sample.
+<p><pre class="def">DWORD BASS_SampleGetChannel(
+    HSAMPLE <I>handle</I>,
+    DWORD <I>flags</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>Handle of the sample.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMCHAN_NEW<td>Do not recycle/override one of the sample's existing channels.
+<tr><td>BASS_SAMCHAN_STREAM<td>Create a stream (HSTREAM) rather than a sample channel (HCHANNEL).
+<tr><td>BASS_SAMPLE_LOOP<td>Loop the sample. This is applied automatically if it has been set in the sample's default flags.
+<tr><td>BASS_SAMPLE_OVER_VOL<td>Override: the channel with the lowest volume is overridden. If no override flags are specified then the sample's default override flags will be used.
+<tr><td>BASS_SAMPLE_OVER_POS<td>Override: the longest playing channel is overridden.
+<tr><td>BASS_SAMPLE_OVER_DIST<td>Override: the channel furthest away (from the listener) is overridden (3D samples only).
+<tr><td>BASS_STREAM_AUTOFREE<td>Automatically free the stream when playback ends. This flag is ignored without BASS_SAMCHAN_STREAM.
+<tr><td>BASS_STREAM_DECODE<td>Decode the sample data, without playing it. Use <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> to retrieve decoded sample data. The BASS_SAMPLE_3D, BASS_STREAM_AUTOFREE and SPEAKER flags cannot be used together with this flag. This flag is ignored without BASS_SAMCHAN_STREAM.
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href=speaker.html>Speaker assignment flags</a>. These flags have no effect when the sample is more than stereo.
+</table>
+</table>
+<p><h2>Return value</h2>
+If successful, the handle of the new channel is returned, else NULL is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid sample handle.
+<tr><td>BASS_ERROR_NOCHAN<td>The sample has no free channels, and the BASS_SAMCHAN_NEW flag was specified or no BASS_SAMPLE_OVER flag was.
+<tr><td>BASS_ERROR_TIMEOUT<td>The sample's minimum time gap (see <a href=BASS_SAMPLE.html>BASS_SAMPLE</a>) has not yet passed since the last channel was created.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_STREAM_AUTOFREE flag cannot be combined with the BASS_STREAM_DECODE flag.
+<tr><td>BASS_ERROR_SPEAKER<td>The specified SPEAKER flags are invalid. The device/drivers do not support them, they are attempting to assign a stereo stream to a mono speaker or 3D functionality is enabled.
+</table>
+<p><h2>Remarks</h2>
+A sample can be played in two ways: with a sample channel (HCHANNEL) or a stream (HSTREAM). A sample channel is a bit more CPU and memory efficient, while a stream has more features available, eg. DSP/FX and synchronization. In either case, they all share the same sample data, and just have their own individual state information (volume/position/etc).
+<p>Use <a href="BASS_SampleGetInfo.html">BASS_SampleGetInfo</a> and <a href="BASS_SampleSetInfo.html">BASS_SampleSetInfo</a> to set a sample's default attributes, which are used when creating a channel. After creation, a channel's attributes can be changed via <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSet3DAttributes.html">BASS_ChannelSet3DAttributes</a> and <a href="BASS_ChannelSet3DPosition.html">BASS_ChannelSet3DPosition</a>. <a href="BASS_Apply3D.html">BASS_Apply3D</a> should be called before starting playback of a 3D sample, even if you just want to use the default settings.
+<p>The number of sample streams (HSTREAM) is unlimited. The number of sample channels (HCHANNEL) is limited to the sample's <i>max</i> value (set during creation or via <a href="BASS_SampleSetInfo.html">BASS_SampleSetInfo</a>), and existing channels can be overridden when needed for new ones. When channel overriding has been enabled (via a BASS_SAMPLE_OVER flag) and there are multiple candidates for overriding (eg. with identical volume), the oldest of them will be chosen to make way for the new channel.
+<p>If a sample has a <i>max</i> setting of 1 then a HCHANNEL handle (not HSTREAM) returned will be identical to the HSAMPLE handle (unless disabled via the <a href="BASS_CONFIG_SAMPLE_ONEHANDLE.html">BASS_CONFIG_SAMPLE_ONEHANDLE</a> config option). This means you can use the HSAMPLE handle with functions that usually require a HCHANNEL handle, but you must still call this function first to initialize the channel.
+<p>A sample channel (HCHANNEL) is automatically freed when it is overridden by a new channel, or when stopped by <a href="BASS_ChannelStop.html">BASS_ChannelStop</a>, <a href="BASS_SampleStop.html">BASS_SampleStop</a> or <a href="BASS_Stop.html">BASS_Stop</a>. If you wish to stop a channel and re-use it, <a href="BASS_ChannelPause.html">BASS_ChannelPause</a> should be used to pause it instead. Determining whether a channel still exists can be done by trying to use the handle in a function call. A list of all the sample's existing channels can also be retrieved via <a href="BASS_SampleGetChannels.html">BASS_SampleGetChannels</a>.
+<p>A new sample channel (HCHANNEL) will have an initial state of being paused (BASS_ACTIVE_PAUSED). This prevents the channel being claimed by another call of this function before it has been played, unless it gets overridden due to a lack of free channels.
+<p><h2>Example</h2>
+Play a sample with its default settings.
+<pre class="code">
+HCHANNEL channel = BASS_SampleGetChannel(sample, 0); // get a sample channel
+BASS_ChannelStart(channel); // play it
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelPlay.html">BASS_ChannelPlay</a>, <a href="BASS_ChannelSet3DAttributes.html">BASS_ChannelSet3DAttributes</a>, <a href="BASS_ChannelSet3DPosition.html">BASS_ChannelSet3DPosition</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_SampleCreate.html">BASS_SampleCreate</a>, <a href="BASS_SampleGetChannels.html">BASS_SampleGetChannels</a>, <a href="BASS_SampleLoad.html">BASS_SampleLoad</a>, <a href="BASS_SampleStop.html">BASS_SampleStop</a>, <a href="BASS_CONFIG_SRC_SAMPLE.html">BASS_CONFIG_SRC_SAMPLE</a>

@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelGetMixer</h1>
+<p>Retrieves the mixer that a channel is plugged into.
+<p><pre class="def">HSTREAM BASS_Mixer_ChannelGetMixer(
+    DWORD <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+</table>
+<p><h2>Return value</h2>
+If successful, the mixer stream's handle is returned, else 0 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_Mixer_StreamAddChannel.html">BASS_Mixer_StreamAddChannel</a>, <a href="BASS_Mixer_StreamAddChannelEx.html">BASS_Mixer_StreamAddChannelEx</a>, <a href="BASS_Mixer_StreamGetChannels.html">BASS_Mixer_StreamGetChannels</a>

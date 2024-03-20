@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_FLOATDSP config option</h1>
+<p>Pass 32-bit floating-point sample data to all DSP functions?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_FLOATDSP,
+    BOOL <I>floatdsp</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>floatdsp<td>If TRUE, 32-bit floating-point sample data is passed to all <a href="DSPPROC.html">DSPPROC</a> callback functions.
+</table>
+<p><h2>Remarks</h2>
+Normally DSP functions receive sample data in whatever format the channel is using, ie. it can be 8, 16 or 32-bit. But when this config option is enabled, BASS will convert 8/16-bit sample data to 32-bit floating-point before passing it to DSP functions, and then convert it back after all the DSP functions are done. As well as simplifying the DSP code (no need for 8/16-bit processing), this also means that there is no degradation of quality as sample data passes through a chain of DSP.
+<p>This config option also applies to effects set via <a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a> and the <a href="BASS_ATTRIB_VOLDSP.html">BASS_ATTRIB_VOLDSP</a> attribute.
+<p>Changing the setting while there are DSP or FX set could cause problems, so should be avoided.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="DSPPROC.html">DSPPROC callback</a>

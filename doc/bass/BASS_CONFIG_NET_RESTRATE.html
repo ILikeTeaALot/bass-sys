@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NET_RESTRATE config option</h1>
+<p>The restricted download rate for internet file streams.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_NET_RESTRATE,
+    DWORD <I>rate</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>rate<td>The download rate in bytes per second.
+</table>
+<p><h2>Remarks</h2>
+This setting determines the maximum download speed for an internet file stream with rate restriction enabled via the BASS_STREAM_RESTRATE flag. The rate restriction only comes into effect while a stream's buffered data exceeds its <a href=BASS_CONFIG_NET_BUFFER.html>BASS_CONFIG_NET_BUFFER</a> setting, and a download will otherwise be as fast as the connection allows. Note that a too low setting may result in a server closing (timing-out) the connection before the download is complete.
+<p>The default setting is 20000. Changes only affect streams that are created afterwards, not any that already exist.
+<p>As well as internet streams, this config setting also applies to "buffered" user file streams created with <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>

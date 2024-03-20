@@ -1,0 +1,19 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_LIBSSL config option</h1>
+<p>The OpenSSL (or compatible) library to use for handling HTTPS connections.
+<p><pre class="def">BASS_SetConfigPtr(
+    BASS_CONFIG_LIBSSL,
+    char *<I>filename</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>filename<td>The filename of the OpenSSL library to use... NULL = use default. This should include the full path if it is not in the system library search path.
+</table>
+<p><h2>Remarks</h2>
+By default, BASS will try to use the system's OpenSSL library to handle HTTPS connections. It will look for libssl.so, libssl.so.1.1, libssl.so.10, or libssl.so.1.0.0. If the target system uses a different filename for it, or you want to use a custom OpenSSL build, this option should be set to that. That should be done before the first HTTPS connection is opened. If the specified library cannot be loaded, BASS will fallback to trying the defaults.
+<p><a href="BASS_SetConfigPtr.html">BASS_SetConfigPtr</a> makes a copy of the provided string, so it does not need to persist beyond the call.
+<p><h2>Platform-specific</h2>
+This option is only available on the Linux and Android platforms.
+<p>On Android, BASS will look for the library in the app's library directory if a full path is not provided. A BASS_SSL add-on is available, which will be used by default when present. If that is not present then the default is to use the system's libssl.so or libboringssl.so library, but note that is not possible when targetting Android 7 (API level 24) or above.
+<p><h2>See also</h2>
+<a href="BASS_GetConfigPtr.html">BASS_GetConfigPtr</a>, <a href="BASS_SetConfigPtr.html">BASS_SetConfigPtr</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>

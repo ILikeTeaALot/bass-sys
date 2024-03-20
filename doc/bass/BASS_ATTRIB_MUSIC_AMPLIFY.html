@@ -1,0 +1,20 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_MUSIC_AMPLIFY attribute</h1>
+<p>The amplification level of a MOD music.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    HMUSIC <I>handle</I>,
+    BASS_ATTRIB_MUSIC_AMPLIFY,
+    float <I>amp</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The MOD music handle.
+<tr><td>amp<td>Amplification level... 0 (min) to 100 (max). This will be rounded down to a whole number.
+</table>
+<p><h2>Remarks</h2>
+As the amplification level get's higher, the sample data's range increases, and therefore, the resolution increases. But if the level is set too high, then clipping can occur, which can result in distortion of the sound.
+<p>You can check the current level of a MOD music at any time by using <a href="BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a>. By doing so, you can decide if a MOD music's amplification level needs adjusting.
+<p>The default amplification level is 50.
+<p>During playback, the effect of changes to this attribute are not heard instantaneously, due to buffering. This latency can be reduced via the <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a> attribute.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a>

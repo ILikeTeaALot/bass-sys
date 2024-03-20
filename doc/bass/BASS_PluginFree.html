@@ -1,0 +1,21 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_PluginFree</h1>
+<p>Unplugs an add-on.
+<p><pre class="def">BOOL BASS_PluginFree(
+    HPLUGIN <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The plugin handle... 0 = all plugins.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+</table>
+<p><h2>Remarks</h2>
+If there are streams created by a plugin in existence when it is being freed, those streams will automatically be freed too. Samples loaded by the plugin are unaffected as the plugin has nothing to do with them once they are loaded; the sample data is already fully decoded.
+<p><h2>See also</h2>
+<a href="BASS_PluginEnable.html">BASS_PluginEnable</a>, <a href="BASS_PluginLoad.html">BASS_PluginLoad</a>
+

@@ -1,0 +1,15 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NET_PASSIVE config option</h1>
+<p>Use passive mode in FTP connections?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_NET_PASSIVE,
+    BOOL <I>passive</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>passive<td>If TRUE, passive mode is used, otherwise normal/active mode is used.
+</table>
+<p><h2>Remarks</h2>
+Changes take effect from the next internet stream creation call. By default, passive mode is enabled.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>

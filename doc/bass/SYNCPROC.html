@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>SYNCPROC callback</h1>
+<p>User defined synchronizer callback function.
+<p><pre class="def">void CALLBACK SyncProc(
+    HSYNC <I>handle</I>,
+    DWORD <I>channel</I>,
+    DWORD <I>data</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The sync that has occurred.
+<tr><td>channel<td>The channel that the sync occurred on.
+<tr><td>data<td>Additional data associated with the sync's occurrence.
+<tr><td>user<td>The user instance data given when <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> was called.
+</table>
+<p><h2>Remarks</h2>
+BASS creates a single thread dedicated to executing sync callback functions, so a callback function should be quick as other syncs cannot be processed until it has finished. Attribute slides (initiated with <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a>) are also performed by the sync thread, so are also affected if a sync callback takes a long time.
+<p>"Mixtime" syncs are usually not executed in the sync thread (unless the BASS_SYNC_THREAD flag is used) but rather immediately in whichever thread triggers them. In most cases that will be an update thread, and so the same restrictions that apply to stream callbacks (<a href="STREAMPROC.html">STREAMPROC</a>) also apply here, except that <a href="BASS_ChannelStop.html">BASS_ChannelStop</a> can be used in a BASS_SYNC_POS sync's callback to stop a channel at a particular position. Other exceptions are that the channel can be freed in a BASS_SYNC_DEV_FAIL or BASS_SYNC_DEV_FORMAT or BASS_SYNC_SLIDE sync's callback.
+<p><a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a> can be used in a mixtime sync (without BASS_SYNC_THREAD set) to implement custom looping, eg. set a BASS_SYNC_POS sync at the loop end position and seek to the loop start position in the callback.
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>

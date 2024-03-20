@@ -1,0 +1,26 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+
+<h1>BASS_Get3DFactors</h1>
+<p>Retrieves the factors that affect the calculations of 3D sound.
+<p><pre class="def">BOOL BASS_Get3DFactors(
+    float *<I>distf</I>,
+    float *<I>rollf</I>,
+    float *<I>doppf</I>
+);</pre>
+
+<p><h2>Parameters</h2>
+<table>
+<tr><td>distf<td>The distance factor... NULL = don't retrieve it.
+<tr><td>rollf<td>The rolloff factor... NULL = don't retrieve it.
+<tr><td>doppf<td>The doppler factor... NULL = don't retrieve it.
+</table>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NO3D<td>The device was not initialized with 3D support.</table>
+<p><h2>Remarks</h2>
+When using multiple devices, the current thread's device setting (as set with <a href="BASS_SetDevice.html">BASS_SetDevice</a>) determines which device this function call applies to.
+<p><h2>See also</h2>
+<a href="BASS_Set3DFactors.html">BASS_Set3DFactors</a>

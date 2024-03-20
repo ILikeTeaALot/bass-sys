@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_REC_WASAPI config option</h1>
+<p>Use WASAPI when recording?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_REC_BUFFER,
+    BOOL <I>enable</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>enable<td>Enable the use of WASAPI for recording?
+</table>
+<p><h2>Remarks</h2>
+WASAPI is always used when recording from loopback devices, but this config option determines whether it or DirectSound is used when recording from other devices. WASAPI is enabled by default when available (on Windows Vista and above). Changes take effect from the next <a href="BASS_RecordInit.html">BASS_RecordInit</a> call, and any already initialized devices are unaffected.
+<p><h2>Platform-specific</h2>
+This config option is only available on Windows.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_RecordInit.html">BASS_RecordInit</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>

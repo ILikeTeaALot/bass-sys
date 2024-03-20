@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_NET_RESUME attribute</h1>
+<p>The download buffer level required to resume stalled playback.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_NET_RESUME,
+    float <I>resume</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The stream handle.
+<tr><td>resume<td>The resumption level in percent... 0 - 100.
+</table>
+<p><h2>Remarks</h2>
+This attribute determines what percentage of the download buffer (<a href="BASS_CONFIG_NET_BUFFER.html">BASS_CONFIG_NET_BUFFER</a>) needs to be filled before playback of a stalled internet stream will resume. It also applies to "buffered" user file streams created with <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>. The buffering progress can be monitored with <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a> (BASS_FILEPOS_BUFFERING).
+<p>This attribute can be set at any time, and changes take immediate effect, including mid-stall. The initial value is determined by the <a href="BASS_CONFIG_NET_PREBUF.html">BASS_CONFIG_NET_PREBUF</a> config option.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_CONFIG_NET_BUFFER.html">BASS_CONFIG_NET_BUFFER</a>, <a href="BASS_CONFIG_NET_PREBUF.html">BASS_CONFIG_NET_PREBUF</a>

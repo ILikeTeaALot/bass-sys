@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_MIXER_POSEX config option</h1>
+<p>How far back to keep record of source positions to make available for <a href="BASS_Mixer_ChannelGetPositionEx.html">BASS_Mixer_ChannelGetPositionEx</a>.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_MIXER_POSEX,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>length<td>The length of time to back, in milliseconds.
+</table>
+<p><h2>Remarks</h2>
+If a mixer is not a decoding channel (not using the BASS_STREAM_DECODE flag), this config setting will just be a minimum and the mixer will always have a position record at least equal to its playback buffer length, as determined by the <a href="mk:@MSITStore:bass.chm::/BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a> config option.
+<p>The default setting is 2000ms. Changes only affect newly created mixers, not any that already exist.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelGetPositionEx.html">BASS_Mixer_ChannelGetPositionEx</a>, <a href="BASS_Mixer_StreamCreate.html">BASS_Mixer_StreamCreate</a>

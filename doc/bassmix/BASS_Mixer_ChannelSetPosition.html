@@ -1,0 +1,43 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelSetPosition</h1>
+<p>Sets the playback position of a mixer source channel.
+<p><pre class="def">BOOL BASS_Mixer_ChannelSetPosition(
+    DWORD <I>handle</I>,
+    QWORD <I>pos</I>,
+    DWORD <I>mode</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>pos<td>The position, in units determined by the <i>mode</i>.
+<tr><td>mode<td>How to set the position. One of the following, with optional flags.
+<table>
+<tr><td>BASS_POS_BYTE<td>The position is in bytes, which will be rounded down to the nearest sample boundary.
+<tr><td>BASS_POS_MUSIC_ORDER<td>The position is in orders and rows... use MAKELONG(<i>order,row</i>). (HMUSIC only)
+<tr><td>BASS_POS_OGG<td>The position is a bitstream number in an OGG file... 0 = first.
+<tr><td>BASS_POS_DECODETO<td>Flag: Decode/render up to the position rather than seeking to it. This is useful for streams that are unseekable or that have inexact seeking, but it is generally slower than normal seeking and the requested position cannot be behind the current decoding position. This flag can only be used with the BASS_POS_BYTE mode.
+<tr><td>BASS_POS_INEXACT<td>Flag: Allow inexact seeking. For speed, seeking may stop at the beginning of a block rather than partially processing the block to reach the requested position.
+<tr><td>BASS_POS_RELATIVE<td>Flag: The requested position is relative to the current position. <i>pos</i> is treated as signed in this case and can be negative. Unless the BASS_POS_MIXER_RESET flag is also used, this is relative to the current decoding/processing position, which will be ahead of the currently heard position if the mixer output is buffered.
+<tr><td>BASS_MUSIC_POSRESET<td>Flag: Stop all notes. This flag is applied automatically if it has been set on the channel, eg. via <a href="mk:@MSITStore:bass.chm::/BASS_ChannelFlags.html">BASS_ChannelFlags</a>. (HMUSIC)
+<tr><td>BASS_MUSIC_POSRESETEX<td>Flag: Stop all notes and reset bpm/etc. This flag is applied automatically if it has been set on the channel, eg. via <a href="mk:@MSITStore:bass.chm::/BASS_ChannelFlags.html">BASS_ChannelFlags</a>. (HMUSIC)
+<tr><td>BASS_MIXER_CHAN_NORAMPIN<td>Flag: Do not ramp-in the start after seeking. This flag is applied automatically if it has been set on the channel, eg. via <a href="BASS_Mixer_ChannelFlags.html">BASS_Mixer_ChannelFlags</a>.
+<tr><td>BASS_POS_MIXER_RESET<td>Flag: Flush the mixer's playback buffer, so that the new position is heard immediately in the mixer output. This generally should not be used when the mixer is playing multiple sources, as it will cause a skip in the sound of the other sources. This flag has no effect if the mixer has the BASS_STREAM_DECODE flag set, as the mixer does not have a playback buffer then.
+</table>
+<i>other modes & flags may be supported by add-ons, see the documentation.</i>
+</table>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+<tr><td>BASS_ERROR_NOTFILE<td>The stream is not a file stream.
+<tr><td>BASS_ERROR_POSITION<td>The requested position is invalid, eg. it is beyond the end or the download has not yet reached it.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The requested <i>mode</i> is not available. Invalid flags are ignored and do not result in this error.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+This function works exactly like the standard <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a>, except that it also resets things for the channel in the mixer, as well as supporting the BASS_MIXER_CHAN_NORAMPIN and BASS_POS_MIXER_RESET flags.
+<p>For custom looping purposes (eg. in a mixtime <a href="mk:@MSITStore:bass.chm::/SYNCPROC.html">SYNCPROC</a>), the standard <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a> function should be used instead of this.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelGetPosition.html">BASS_Mixer_ChannelGetPosition</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a>

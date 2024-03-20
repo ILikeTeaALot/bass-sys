@@ -1,0 +1,49 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelGetLevelEx</h1>
+<p>Retrieves the level of a sample, stream, MOD music, or recording channel.
+<p><pre class="def">BOOL BASS_ChannelGetLevelEx(
+    DWORD <I>handle</I>,
+    float *<I>levels</I>,
+    float <I>length</I>,
+    DWORD <I>flags</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD.
+<tr><td>levels<td>An array to receive the levels.
+<tr><td>length<td>The amount of data to inspect to calculate the level, in seconds. The maximum is 1 second, except for decoding channels. Less data than requested may be used if the full amount is not available, eg. if the channel's playback buffer is shorter.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_LEVEL_MONO<td>Get a mono level. If neither this or the BASS_LEVEL_STEREO flag is used then a separate level is retrieved for each channel.
+<tr><td>BASS_LEVEL_NOREMOVE<td>Do not remove the inspected data from a recording channel's buffer. This is automatic if the recording channel is using a <a href="RECORDPROC.html">RECORDPROC</a> callback function. This flag is ignored on other channel types.
+<tr><td>BASS_LEVEL_RMS<td>Get the RMS level. Otherwise the peak level.
+<tr><td>BASS_LEVEL_STEREO<td>Get a stereo level. The left level will be from the even channels, and the right level will be from the odd channels. If there are an odd number of channels then the left and right levels will both include all channels.
+<tr><td>BASS_LEVEL_VOLPAN<td>Apply the current <a href="BASS_ATTRIB_VOL.html">BASS_ATTRIB_VOL</a> and <a href="BASS_ATTRIB_PAN.html">BASS_ATTRIB_PAN</a> values to the level reading.
+</table></table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+<tr><td>BASS_ERROR_ILLPARAM<td><I>length</I> is not valid.
+<tr><td>BASS_ERROR_NOPLAY<td>The channel is not playing.</a>
+<tr><td>BASS_ERROR_ENDED<td>The decoding channel has reached the end.</a>
+</table>
+<p><h2>Remarks</h2>
+This function operates in the same way as <a href="BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a> but has greater flexibility on how the level is measured. The levels are not clipped, so may exceed +/-1.0 on floating-point channels.
+<p>When the BASS_LEVEL_NOREMOVE flag is used to prevent the inspected data being removed from a recording channel's buffer, any DSP/FX set on it will not be present in the level reading, as they are only applied when the data leaves the recording buffer.
+<p><h2>Example</h2>
+Replicate <a href="BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a> but with floating-point levels.
+<pre class="code">float levels[2];
+BASS_ChannelGetLevelEx(handle, levels, 0.02, BASS_LEVEL_STEREO);</pre>
+<p>Get a mono RMS level reading in decibels using 50ms of data.
+<pre class="code">float level;
+BASS_ChannelGetLevelEx(handle, &level, 0.05, BASS_LEVEL_MONO | BASS_LEVEL_RMS); // get the level
+float dblevel = (level > 0 ? 20 * log10(level) : -HUGE_VAL); // translate it to dB</pre>
+<p>Get a peak level reading for each channel using 20ms of data.
+<pre class="code">BASS_CHANNELINFO ci;
+BASS_ChannelGetInfo(handle, &ci);
+float *levels = (float*)malloc(ci.chans * sizeof(float)); // allocate an array for each channel's level
+BASS_ChannelGetLevelEx(handle, levels, 0.02, 0); // get the levels</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>, <a href="BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a>, <a href="BASS_ChannelIsActive.html">BASS_ChannelIsActive</a>

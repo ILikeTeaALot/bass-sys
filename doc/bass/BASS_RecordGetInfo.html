@@ -1,0 +1,25 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_RecordGetInfo</h1>
+<p>Retrieves information on the recording device being used.
+<p><pre class="def">BOOL BASS_RecordGetInfo(
+    <a href="BASS_RECORDINFO.html">BASS_RECORDINFO</a> *<I>info</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>info<td>Pointer to a structure to receive the information.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_RecordInit.html">BASS_RecordInit</a> has not been successfully called.
+</table>
+<p><h2>Example</h2>
+Check if the current device can have multiple inputs enabled.
+<pre class="code">BASS_RECORDINFO info;
+BASS_RecordGetInfo(&info);
+if (!info.singlein) {
+    // device does allow multiple inputs to be enabled
+}</pre>
+<p><h2>See also</h2>
+<a href="BASS_RecordGetDeviceInfo.html">BASS_RecordGetDeviceInfo</a>, <a href="BASS_RECORDINFO.html">BASS_RECORDINFO structure</a>

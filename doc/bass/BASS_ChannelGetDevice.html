@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+
+<h1>BASS_ChannelGetDevice</h1>
+<p>Retrieves the device that a channel is using.
+<p><pre class="def">DWORD BASS_ChannelGetDevice(
+    DWORD <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM, or HRECORD. HSAMPLE handles may also be used.
+</table>
+<p><h2>Return value</h2>
+If successful, the device number is returned, else -1 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+</table>
+<p><h2>Remarks</h2>
+Recording devices are indicated by the HIWORD of the return value being 1, when this function is called with a HRECORD channel.
+<p>The return value may be BASS_NODEVICE, if the channel is not associated with a device.
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetDevice.html">BASS_ChannelSetDevice</a>, <a href="BASS_GetDevice.html">BASS_GetDevice</a>, <a href="BASS_SetDevice.html">BASS_SetDevice</a>, <a href="BASS_RecordGetDevice.html">BASS_RecordGetDevice</a>, <a href="BASS_RecordSetDevice.html">BASS_RecordSetDevice</a>

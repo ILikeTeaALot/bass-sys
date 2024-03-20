@@ -1,0 +1,25 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>Speaker assignment flags</h1>
+<p>Most soundcards these days are capable of more than plain stereo output. To take advantage of this, HSTREAM and HMUSIC channels can be assigned to specific speakers. For example, channels can be played on the front or rear speakers to effectively have 2 separate stereo outputs from the one device. A 3rd stereo output is available on 5.1 cards, and a 4th on 7.1 cards. The <i>speakers</i> member of the <a href="BASS_INFO.html">BASS_INFO</a> structure can be used to check how many speakers are available.
+<p><h2>Stereo speaker assignment flags</h2>
+<table>
+<tr><td>BASS_SPEAKER_FRONT<td>The front speakers.
+<tr><td>BASS_SPEAKER_REAR<td>The rear speakers.
+<tr><td>BASS_SPEAKER_CENLFE<td>The center and LFE (subwoofer) speakers in a 5.1 setup.
+<tr><td>BASS_SPEAKER_SIDE<td>The side speakers in a 7.1 setup.
+</table>
+<p><h2>Mono speaker assignment flags</h2>
+<table>
+<tr><td>BASS_SPEAKER_FRONTLEFT<td>The front left speaker.
+<tr><td>BASS_SPEAKER_FRONTRIGHT<td>The front right speaker.
+<tr><td>BASS_SPEAKER_REARLEFT<td>The rear left speaker.
+<tr><td>BASS_SPEAKER_REARRIGHT<td>The rear right speaker.
+<tr><td>BASS_SPEAKER_CENTER<td>The center speaker in a 5.1 speaker setup.
+<tr><td>BASS_SPEAKER_LFE<td>The LFE (subwoofer) speaker in a 5.1 setup.
+<tr><td>BASS_SPEAKER_SIDELEFT<td>The side left speaker in a 7.1 setup.
+<tr><td>BASS_SPEAKER_SIDERIGHT<td>The side right speaker in a 7.1 setup.
+</table>
+<p>As well as these defined speaker location flags, there is the BASS_SPEAKER_N(<i>n</i>) macro that can be used to access the extra speakers of soundcards that have more than 8 speakers, where <i>n</i> is the n'th pair of speakers (up to a maximum of 15). For example, BASS_SPEAKER_N(1) is equivalent to BASS_SPEAKER_FRONT. To use a speaker in mono, add the BASS_SPEAKER_LEFT or BASS_SPEAKER_RIGHT flags.
+<p>The stereo speaker assignment flags can also be used with mono channels, so that, for example, a mono channel can be played on both the front speakers. But mono speaker assignment flags cannot be used with stereo channels, so, for example, it is not possible to play a stereo channel on just the center speaker.
+<p><h2>See also</h2>
+<a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>, <a href="BASS_MusicLoad.html">BASS_MusicLoad</a>, <a href="BASS_StreamCreate.html">BASS_StreamCreate</a>, <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, <a href="multichan.html">Multi-channel streams</a>

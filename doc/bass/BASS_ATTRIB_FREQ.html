@@ -1,0 +1,19 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_FREQ attribute</h1>
+<p>The sample rate of a channel.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_FREQ,
+    float <I>freq</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>freq<td>The sample rate... 0 = original rate (when the channel was created).
+</table>
+<p><h2>Remarks</h2>
+This attribute is applied during playback of the channel and is not present in the sample data returned by <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>, so it has no direct effect on decoding channels.
+<p>Increasing the sample rate of a stream or MOD music increases its CPU usage, and reduces the length of its playback buffer in terms of time. If you intend to raise the sample rate above the original rate then you may also need to increase the buffer length via the <a href="BASS_CONFIG_BUFFER.html">BASS_CONFIG_BUFFER</a> config option to avoid breaks in the sound.
+<p>When using <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a> to slide this attribute, the BASS_SLIDE_LOG flag can be used to make a slide logarithmic rather than linear.
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a>, <a href="BASS_GetInfo.html">BASS_GetInfo</a>

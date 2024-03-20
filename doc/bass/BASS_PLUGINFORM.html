@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_PLUGINFORM structure</h1>
+<p>Information on a plugin supported format.
+<p><pre class="def">typedef struct {
+    DWORD <I>ctype</I>;
+    char *<I>name</I>;
+    char *<I>exts</I>;
+} BASS_PLUGINFORM;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>ctype<td>The channel type, as would appear in the <a href="BASS_CHANNELINFO.html">BASS_CHANNELINFO</a> structure.
+<tr><td>name<td>Format description.
+<tr><td>exts<td>File extension filter, in the form of "*.ext1;*.ext2;...".
+</table>
+<p><h2>Remarks</h2>
+The extension filter is for information only. A plugin will check the file contents rather than file extension, to verify that it is a supported format.
+<p><h2>See also</h2>
+<a href="BASS_PluginGetInfo.html">BASS_PluginGetInfo</a>, <a href="BASS_PLUGININFO.html">BASS_PLUGININFO structure</a>

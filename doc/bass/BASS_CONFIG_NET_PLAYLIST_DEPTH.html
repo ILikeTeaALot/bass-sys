@@ -1,0 +1,15 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NET_PLAYLIST_DEPTH config option</h1>
+<p>Maximum nested playlist processing depth.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_NET_PLAYLIST_DEPTH,
+    DWORD <I>depth</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>depth<td>Maximum nested playlist processing depth... 0 = do not process nested playlists.
+</table>
+<p><h2>Remarks</h2>
+When playlist processing is enabled via the <a href="BASS_CONFIG_NET_PLAYLIST.html">BASS_CONFIG_NET_PLAYLIST</a> option, this option limits how deep into nested playlists <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a> will go. The default depth is 1, which means playlists within the root playlist will be processed, but not playlists within those playlists.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, <a href="BASS_CONFIG_NET_PLAYLIST.html">BASS_CONFIG_NET_PLAYLIST</a>

@@ -1,0 +1,191 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>Upgrading</h1>
+<p>With every release, all new and modified functions/options/etc are listed in the "History" section of the <a href=bass.html>BASS.TXT</a> file. To make upgrading easier, a list of changes that may require some modification of existing code is provided below.
+
+<p><h2>Upgrading from 2.4.16</h2>
+<p><a href=BASS_RecordInit.html>BASS_RecordInit</a>, <a href=BASS_RecordGetDeviceInfo.html>BASS_RecordGetDeviceInfo</a><br>
+A "Default" recording device has been added on Windows and macOS. It can be disabled via the <a href=BASS_CONFIG_REC_DEFAULT.html>BASS_CONFIG_REC_DEFAULT</a> config option.
+<p><a href=BASS_StreamCreateFileUser.html>BASS_StreamCreateFileUser</a>, <a href=BASS_StreamCreateURL.html>BASS_StreamCreateURL</a>, BASS_CONFIG_NET_PREBUF_WAIT<br>
+Pre-buffering during internet (and buffered user) stream creation is always disabled.
+<p><a href=BASS_ATTRIB_NET_RESUME.html>BASS_ATTRIB_NET_RESUME</a><br>
+The initial value is now determined by the <a href=BASS_CONFIG_NET_PREBUF.html>BASS_CONFIG_NET_PREBUF</a> config option rather than always being 50.
+<p><a href=BASS_PluginLoad.html>BASS_PluginLoad</a><br>
+iOS add-ons are now dynamic libraries, so can be loaded by filename (as on the other platforms) instead of symbol. Old static library add-ons can still be used with the BASS_PLUGIN_PROC flag.
+
+<p><h2>Upgrading from 2.4.15</h2>
+<p><a href=BASS_INFO.html>BASS_INFO</a>, <a href=BASS_SAMPLE.html>BASS_SAMPLE</a>, BASS_SetEAXParameters, BASS_GetEAXParameters, BASS_ATTRIB_EAXMIX<br>
+DirectSound mixing is removed (BASS always does the mixing itself), so DirectSound-specific features are no longer available: hardware mixing, EAX and VAM options. Note that those features were already unavailable since Windows Vista anyway.
+<p><a href=BASS_RecordInit.html>BASS_RecordInit</a><br>
+WASAPI recording is the default on Windows Vista and above. The <a href=BASS_CONFIG_REC_WASAPI.html>BASS_CONFIG_REC_WASAPI</a> config option can be used to keep using DirectSound instead.
+<p><a href=BASS_StreamCreateFileUser.html>BASS_StreamCreateFileUser</a>, <a href=BASS_StreamCreateURL.html>BASS_StreamCreateURL</a><br>
+The BASS_STREAM_BLOCK is applied automatically on files larger than 2GB.
+<p><a href=BASS_SampleGetChannel.html>BASS_SampleGetChannel</a><br>
+The boolean "newonly" parameter has changed to flags. The BASS_SAMCHAN_NEW flag (1) should be used to preserve the old behaviour (-1 will too for languages where true = -1).
+<p><a href=BASS_CONFIG_DEV_DEFAULT.html>BASS_CONFIG_DEV_DEFAULT</a><br>
+This config option is now enabled by default on Windows and macOS.
+<p><a href=BASS_ChannelPause.html>BASS_ChannelPause</a>, <a href=BASS_ChannelSetDevice.html>BASS_ChannelSetDevice</a>, <a href=BASS_ChannelSetLink.html>BASS_ChannelSetLink</a><br>
+These functions now report success rather than failing with BASS_ERROR_ALREADY.
+
+<p><h2>Upgrading from 2.4.13.8</h2>
+<p><a href=BASS_StreamCreateFile.html>BASS_StreamCreateFile</a>, <a href=BASS_StreamCreateFileUser.html>BASS_StreamCreateFileUser</a>, <a href=BASS_StreamCreateURL.html>BASS_StreamCreateURL</a><br>
+Plugin-specific flags are ignored. Those flags can only be used with an add-on's dedicated stream creation functions, or <a href=BASS_ChannelFlags.html>BASS_ChannelFlags</a> in some cases.
+<p><a href=BASS_StreamCreateFileUser.html>BASS_StreamCreateFileUser</a>, <a href=BASS_StreamCreateURL.html>BASS_StreamCreateURL</a><br>
+Pre-buffering during internet (and buffered user) stream creation is disabled by default, but can be re-enabled via the BASS_CONFIG_NET_PREBUF_WAIT config option.
+<p><a href=BASS_CONFIG_NET_READTIMEOUT.html>BASS_CONFIG_NET_READTIMEOUT</a><br>
+Changes no longer affect existing streams.
+
+<p><h2>Upgrading from 2.4.13</h2>
+<p><a href=BASS_ChannelGetData.html>BASS_ChannelGetData</a><br>
+FFT levels will be adjusted/raised to compensate when less sample data than needed (the FFT size) is available.
+<p><a href=BASS_CHANNELINFO.html>BASS_CHANNELINFO</a><br>
+The "origres" member may have the BASS_ORIGRES_FLOAT flag set to indicate a floating-point sample format.
+
+<p><h2>Upgrading from 2.4.12</h2>
+<p><a href=BASS_Init.html>BASS_Init</a><br>
+WASAPI output is the default on Windows Vista and above. The BASS_DEVICE_DSOUND flag can be used to keep using DirectSound instead.
+<p><a href=BASS_CONFIG_NET_PLAYLIST.html>BASS_CONFIG_NET_PLAYLIST</a><br>
+Nested playlist processing is limited to 1 level below the root by default. This can be adjusted via the <a href=BASS_CONFIG_NET_PLAYLIST_DEPTH.html>BASS_CONFIG_NET_PLAYLIST_DEPTH</a> config option.
+<p><a href="BASS_PluginLoad.html">BASS_PluginLoad</a><br>
+HPLUGIN handles are no longer the base address of the loaded add-on.
+<p><a href=FILEREADPROC.html>FILEREADPROC</a><br>
+Returning 0 when using the STREAMFILE_BUFFERPUSH system will not end the file. Return -1 instead to end the file.
+<p><a href=BASS_CHANNELINFO.html>BASS_CHANNELINFO</a><br>
+Dummy streams have a dedicated BASS_CTYPE_STREAM_DUMMY "ctype" value instead of sharing BASS_CTYPE_STREAM.
+
+<p><h2>Upgrading from 2.4.11</h2>
+<p><a href=BASS_CONFIG_NET_AGENT.html>BASS_CONFIG_NET_AGENT</a>, <a href=BASS_CONFIG_NET_PROXY.html>BASS_CONFIG_NET_PROXY</a><br>
+<a href="BASS_SetConfigPtr.html">BASS_SetConfigPtr</a> makes a copy of the provided string, so it no longer needs to persist beyond the call. This also means that the setting cannot be changed by just modifying the string without making another call.
+<p><a href=BASS_StreamCreateFile.html>BASS_StreamCreateFile</a>, <a href=BASS_StreamCreateFileUser.html>BASS_StreamCreateFileUser</a>, <a href=BASS_StreamCreateURL.html>BASS_StreamCreateURL</a><br>
+529 samples of silence are removed from the start of MP3 files that do not include delay info (eg. in a LAME header).
+
+<p><h2>Upgrading from 2.4.10</h2>
+<p><a href=DOWNLOADPROC.html>DOWNLOADPROC</a><br>
+When HTTP headers are enabled via the <a href=BASS_StreamCreateURL.html>BASS_StreamCreateURL</a> BASS_STREAM_STATUS flag, there will be an additional callback for each redirection.
+
+<p><h2>Upgrading from 2.4.9</h2>
+<p><a href=BASS_ChannelSetSync.html>BASS_SYNC_OGG_CHANGE sync</a><br>
+This sync is no longer automatically "mixtime" without the BASS_SYNC_MIXTIME flag.
+
+<p><h2>Upgrading from 2.4.4</h2>
+<p><a href=BASS_RecordGetInput.html>BASS_RecordGetInput</a><br>
+If the volume is requested but not available, a value of -1 instead of 1 will be received.
+
+<p><h2>Upgrading from 2.3</h2>
+<p>BASS_GetDeviceDescription, BASS_RecordGetDeviceDescription<br>
+These functions have been superseded by the new <a href="BASS_GetDeviceInfo.html">BASS_GetDeviceInfo</a> and <a href="BASS_RecordGetDeviceInfo.html">BASS_RecordGetDeviceInfo</a> functions, respectively.
+<p><a href=BASS_INFO.html>BASS_INFO</a>, <a href=BASS_RECORDINFO.html>BASS_RECORDINFO</a><br>
+The "driver" member has been moved to the new <a href=BASS_DEVICEINFO.html>BASS_DEVICEINFO</a> structure.
+<p><a href=BASS_Init.html>BASS_Init</a>, <a href=BASS_RecordInit.html>BASS_RecordInit</a><br>
+The default device (-1) is no longer hardcoded to the first device on Windows (already the case on macOS).
+<p>BASS_ChannelGetAttributes, BASS_ChannelSetAttributes, BASS_ChannelSlideAttributes<br>
+These functions have been replaced by <a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a> and <a href="BASS_ChannelSlideAttribute.html">BASS_ChannelSlideAttribute</a>, respectively.
+<p><a href="BASS_ChannelIsSliding.html">BASS_ChannelIsSliding</a><br>
+An "attrib" parameter has been added to check if a specific attribute is sliding.
+<p>BASS_MusicGetAttribute, BASS_MusicSetAttribute<br>
+These functions have been incorporated into <a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a> and <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>. The channel and instrument volume settings are also now floating-point, with a range of 0 to 1. The attribute names have also changed slightly: the "MUSIC" and "ATTRIB" parts are swapped around.
+<p><a href=BASS_ChannelGetLength.html>BASS_ChannelGetLength</a>, <a href=BASS_ChannelGetPosition.html>BASS_ChannelGetPosition</a>, <a href=BASS_ChannelSetPosition.html>BASS_ChannelSetPosition</a><br>
+A "mode" parameter has been added to these 3 functions. Set that to BASS_POS_BYTE (or 0) to maintain the previous functionality.
+<p>BASS_MusicGetOrders, BASS_MusicGetOrderPosition, MAKEMUSICPOS<br>
+These functions (and macro) have been incorporated into <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a>, <a href="BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a> and <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a>, via the BASS_POS_MUSIC_ORDER "mode".
+<p><a href=BASS_MusicLoad.html>BASS_MusicLoad</a><br>
+The "offset" parameter is now 64-bit (QWORD).
+<p><a href=BASS_SampleLoad.html>BASS_SampleLoad</a><br>
+The "offset" parameter is now 64-bit (QWORD).
+<p><a href=BASS_SampleCreate.html>BASS_SampleCreate</a><br>
+This function now returns a sample handle. The sample's data can be set using the new <a href=BASS_SampleSetData.html>BASS_SampleSetData</a> function.
+<p>BASS_SampleCreateDone<br>
+This function is no longer required following the change to <a href=BASS_SampleCreate.html>BASS_SampleCreate</a>.
+<p><a href=BASS_StreamCreateFile.html>BASS_StreamCreateFile</a><br>
+The "offset" and "length" parameters are now 64-bit (QWORD).
+<p><a href=BASS_StreamGetFilePosition.html>BASS_StreamGetFilePosition</a><br>
+The return value is now 64-bit (QWORD).
+<p><a href=BASS_GetVolume.html>BASS_GetVolume</a>, <a href=BASS_SetVolume.html>BASS_SetVolume</a><br>
+The volume is now a floating-point value, with a range of 0 to 1.
+<p>BASS_CONFIG_MAXVOL<br>
+This config option has been removed, as it is no longer needed following the advent of floating-point volume settings.
+<p><a href="BASS_CONFIG_GVOL_MUSIC.html">BASS_CONFIG_GVOL_MUSIC</a>, <a href="BASS_CONFIG_GVOL_SAMPLE.html">BASS_CONFIG_GVOL_SAMPLE</a>, <a href="BASS_CONFIG_GVOL_STREAM.html">BASS_CONFIG_GVOL_STREAM</a><br>
+The global volume settings now have a range of 0 to 10000.
+<p><a href=BASS_RecordGetInput.html>BASS_RecordGetInput</a>, <a href=BASS_RecordSetInput.html>BASS_RecordSetInput</a><br>
+The volume has been separated from the flags and made a floating-point value, with a range of 0 to 1.
+<p><a href=BASS_Update.html>BASS_Update</a><br>
+A "length" parameter has been added.
+<p>BASS_ChannelPreBuf<br>
+This function has been superseded by <a href=BASS_ChannelUpdate.html>BASS_ChannelUpdate</a>. No parameter changes are required.
+<p>BASS_ChannelSetFlags<br>
+This function has been superseded by <a href=BASS_ChannelFlags.html>BASS_ChannelFlags</a>. For the same functionality, set the "mask" parameter to -1.
+<p><a href=BASS_ChannelSetSync.html>BASS_ChannelSetSync</a><br>
+BASS_SYNC_META sync callbacks no longer receive the metadata in the "data" parameter. It can be retrieved via <a href=BASS_ChannelGetTags.html>BASS_ChannelGetTags</a> (BASS_TAG_META) instead. The BASS_SYNC_META sync is also no longer triggered by a new logical bitstream in a chained OGG stream; a dedicated BASS_SYNC_OGG_CHANGE sync has been added for that purpose. The BASS_SYNC_MESSAGE flag has been removed, and can be reproduced by using the PostMessage Win32 API function in a <a href="SYNCPROC.html">SYNCPROC</a>.
+<p><a href=BASS_ChannelBytes2Seconds.html>BASS_ChannelBytes2Seconds</a><br>
+The return value is now 64-bit floating-point (double).
+<p><a href=BASS_ChannelSeconds2Bytes.html>BASS_ChannelSeconds2Bytes</a><br>
+The "pos" parameter is now 64-bit floating-point (double).
+<p><a href=BASS_SetConfig.html>BASS_SetConfig</a><br>
+This function now returns a boolean value, instead of the config's new setting. If needed, <a href=BASS_GetConfig.html>BASS_GetConfig</a> can be used to get that.
+<p><a href=BASS_CONFIG_NET_AGENT.html>BASS_CONFIG_NET_AGENT</a>, <a href=BASS_CONFIG_NET_PROXY.html>BASS_CONFIG_NET_PROXY</a><br>
+Config options that deal with pointers, like these 2, are now handled by the new <a href=BASS_SetConfigPtr.html>BASS_SetConfigPtr</a> and <a href=BASS_GetConfigPtr.html>BASS_GetConfigPtr</a> functions.
+<p><a href=BASS_CHANNELINFO.html>BASS_CHANNELINFO</a><br>
+"sample" and "filename" members have been added.
+<p><a href=DSPPROC.html>DSPPROC</a>, <a href=DOWNLOADPROC.html>DOWNLOADPROC</a>, <a href=RECORDPROC.html>RECORDPROC</a>, <a href=STREAMPROC.html>STREAMPROC</a>, <a href=SYNCPROC.html>SYNCPROC</a><br>
+All callback function "user" parameters are now pointers.
+
+<p><h2>Upgrading from 2.2</h2>
+<p><a href=BASS_GetVersion.html>BASS_GetVersion</a><br>
+The format of the return value has been changed, to include the minor revision.
+<p>BASS_StreamGetTags<br>
+This function is replaced by <a href=BASS_ChannelGetTags.html>BASS_ChannelGetTags</a>. No parameter changes are required.
+<p>BASS_MusicGetName<br>
+This function is replaced by <a href=BASS_ChannelGetTags.html>BASS_ChannelGetTags</a> and the BASS_TAG_MUSIC_NAME tag type.
+<p><a href="BASS_PluginLoad.html">BASS_PluginLoad</a><br>
+A "flags" parameter has been added.
+<p>BASS_CONFIG_NET_NOPROXY<br>
+This config option has been replaced by the more flexible <a href=BASS_CONFIG_NET_PROXY.html>BASS_CONFIG_NET_PROXY</a> config option. The BASS_CONFIG_NET_NOPROXY behaviour can be reproduced by setting the new option to NULL.
+<p><a href=BASS_CHANNELINFO.html>BASS_CTYPE_STREAM_WAV</a><br>
+This "ctype" is now just a flag to indicate any type of WAVE file, and is no longer a channel type in itself. The LOWORD used with this flag indicates the specific codec (PCM, ADPCM, etc).
+<p><a href=BASS_CHANNELINFO.html>BASS_CHANNELINFO</a>, <a href=BASS_INFO.html>BASS_INFO</a>, <a href=BASS_RECORDINFO.html>BASS_RECORDINFO</a>, <a href=BASS_SAMPLE.html>BASS_SAMPLE</a><br>
+These four structures have new "plugin", "freq", "freq" and "mingap" members, respectively.
+
+<p><h2>Upgrading from 2.1</h2>
+<p>BASS_StreamGetLength, BASS_MusicGetLength<br>
+These functions have been merged into <a href=BASS_ChannelGetLength.html>BASS_ChannelGetLength</a>, which gives the byte length of a channel. To get the number of orders in a MOD music, BASS_MusicGetOrders has been added. Also note that requesting the length when streaming in blocks will now result in a BASS_ERROR_NOTAVAIL error, instead of just 0.
+<p><a href=BASS_ChannelGetPosition.html>BASS_ChannelGetPosition</a><br>
+This function now returns the position in bytes with MOD musics, as it does with other channels. BASS_MusicGetOrderPosition has been added to get the order/row position.
+<p><a href=BASS_ChannelSetPosition.html>BASS_ChannelSetPosition</a><br>
+This function now sets the position in bytes with MOD musics by default. A MAKEMUSICPOS macro has been added for setting the position in orders/rows.
+<p><a href=BASS_ChannelSetSync.html>BASS_ChannelSetSync</a><br>
+The BASS_SYNC_POS sync parameter is now in bytes for MOD musics too. Use the BASS_SYNC_MUSICPOS sync for order/row positions.
+BASS_ChannelPreBuf<br>
+A "length" parameter has been added, to specify how much data to pre-buffer.
+<p><a href=BASS_SampleCreate.html>BASS_SampleCreate</a><br>
+The number of channels is now specified in a separate parameter, rather than via the use of the BASS_SAMPLE_MONO flag. The sample length is also now specified in bytes rather than samples.
+<p><a href=BASS_StreamCreateFile.html>BASS_StreamCreateFile</a><br>
+WAV files are no longer automatically converted to the device initialization resolution (as specified in the <a href="BASS_Init.html">BASS_Init</a> call), eg. 8-bit WAV files will produce 8-bit streams.
+<p><a href=BASS_StreamCreateURL.html>BASS_StreamCreateURL</a><br>
+Shoutcast metadata is now requested automatically, so the BASS_STREAM_META flag has been removed.
+<p><a href="BASS_INFO.html">BASS_INFO</a>, <a href="BASS_RECORDINFO.html">BASS_RECORDINFO</a><br>
+The "size" member has been removed, so there's now no need to set that before calling <a href="BASS_GetInfo.html">BASS_GetInfo</a> and <a href="BASS_RecordGetInfo.html">BASS_RecordGetInfo</a>.
+<p><a href="BASS_SAMPLE.html">BASS_SAMPLE</a><br>
+A "chans" member has been added.
+<p>STREAMFILEPROC callback<br>
+The BASS_FILE_QUERY action has been removed. The BASS_FILE_LEN action may be used more than once with unbuffered streams, not just at the start.
+
+<p><h2>Upgrading from 2.0</h2>
+<p>BASS_StreamPlay<br>
+This function is replaced by <a href=BASS_ChannelPlay.html>BASS_ChannelPlay</a>. The "flags" parameter is not carried forward to the new function, instead the flags can be changed at any time using BASS_ChannelSetFlags.
+<p>BASS_MusicPlay, BASS_MusicPlayEx<br>
+These functions are also replaced by <a href=BASS_ChannelPlay.html>BASS_ChannelPlay</a>. The BASS_MusicPlayEx "pos" and "flags" parameters are not carried forward to the new function, instead they can be implemented via the <a href=BASS_ChannelSetPosition.html>BASS_ChannelSetPosition</a> and BASS_ChannelSetFlags functions. The "reset" parameter is also not carried forward, the BASS_MUSIC_POSRESETEX flag replaces that.
+<p>BASS_SamplePlay, BASS_SamplePlayEx, BASS_SamplePlay3D, BASS_SamplePlay3DEx<br>
+These functions are replaced by a combination of <a href=BASS_SampleGetChannel.html>BASS_SampleGetChannel</a> and <a href=BASS_ChannelPlay.html>BASS_ChannelPlay</a>. The BASS_ChannelSetAttributes and <a href="BASS_ChannelSet3DAttributes.html">BASS_ChannelSet3DAttributes</a> functions can be used to replace the functionality of the "Ex" versions.
+<p>BASS_ChannelResume<br>
+Another function replaced by <a href=BASS_ChannelPlay.html>BASS_ChannelPlay</a>.
+<p>BASS_MusicSetAmplify, BASS_MusicSetPanSep, BASS_MusicSetPositionScaler, BASS_MusicSetVolume, BASS_MusicGetVolume<br>
+These functions are all replaced by BASS_MusicSetAttribute and BASS_MusicGetAttribute.
+<p>BASS_StreamPreBuf, BASS_MusicPreBuf<br>
+These functions are replaced by BASS_ChannelPreBuf.
+<p><a href=BASS_RecordStart.html>BASS_RecordStart</a><br>
+The number of channels (mono/stereo) is now specified in a separate parameter, rather than via the use of the BASS_SAMPLE_MONO flag.
+<p><a href=BASS_ChannelGetLevel.html>BASS_ChannelGetLevel</a><br>
+The level reading is now more precise, having a range of 0 to 32768, instead of the old 0 to 128.
+<p><a href=BASS_ChannelSetFX.html>BASS_ChannelSetFX</a><br>
+There is a new "priority" parameter.
+<p><a href=BASS_CONFIG_FLOATDSP.html>BASS_CONFIG_FLOATDSP</a><br>
+Note that this config option can now affect FX too.

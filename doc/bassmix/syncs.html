@@ -1,0 +1,10 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>Mixer syncs</h1>
+<p>Syncs are set on mixers in exactly the same way as on any other stream, using <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>. Besides the standard stream sync types, mixers also support the following types of sync.
+<p><b>Sync types</b>, with <I><B>param</B></I> and <a href="mk:@MSITStore:bass.chm::/SYNCPROC.html">SYNCPROC</a> <I><B>data</B></I> definitions.
+<table>
+<tr><td>BASS_SYNC_MIXER_QUEUE<br><td>Sync when a source is dequeued. This only applies to queued mixers (BASS_MIXER_QUEUE).<br>
+<I><B>param</B></I> : not used. <I><B>data</B></I> : dequeued channel handle.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelSetSync.html">BASS_Mixer_ChannelSetSync</a>

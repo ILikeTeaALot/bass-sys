@@ -1,0 +1,54 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelFlags</h1>
+<p>Modifies and retrieves a channel's flags.
+<p><pre class="def">DWORD BASS_ChannelFlags(
+    DWORD <I>handle</I>,
+    DWORD <I>flags</I>,
+    DWORD <I>mask</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HCHANNEL, HMUSIC, HSTREAM.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td><tr><td>BASS_SAMPLE_LOOP<td>Loop the channel.
+<tr><td>BASS_SAMPLE_MUTEMAX<td>Mute the channel when it is at (or beyond) its max distance.
+<tr><td><tr><td>BASS_STREAM_AUTOFREE<td>Automatically free the channel when playback ends. Note that the BASS_MUSIC_AUTOFREE flag is identical to this flag. (HSTREAM/HMUSIC only)
+<tr><td>BASS_STREAM_RESTRATE<td>Restrict the download rate. (HSTREAM)
+<tr><td>BASS_MUSIC_NONINTER<td>Use non-interpolated sample mixing. (HMUSIC)
+<tr><td>BASS_MUSIC_SINCINTER<td>Use sinc interpolated sample mixing. (HMUSIC)
+<tr><td>BASS_MUSIC_RAMP<td>Use "normal" ramping. (HMUSIC)
+<tr><td>BASS_MUSIC_RAMPS<td>Use "sensitive" ramping. (HMUSIC)
+<tr><td>BASS_MUSIC_SURROUND<td>Use surround sound. (HMUSIC)
+<tr><td>BASS_MUSIC_SURROUND2<td>Use surround sound mode 2. (HMUSIC)
+<tr><td>BASS_MUSIC_FT2MOD<td>Use FastTracker 2 .MOD playback. (HMUSIC)
+<tr><td>BASS_MUSIC_PT1MOD<td>Use ProTracker 1 .MOD playback. (HMUSIC)
+<tr><td>BASS_MUSIC_POSRESET<td>Stop all notes when seeking. (HMUSIC)
+<tr><td>BASS_MUSIC_POSRESETEX<td>Stop all notes and reset BPM/etc when seeking. (HMUSIC)
+<tr><td>BASS_MUSIC_STOPBACK<td>Stop when a backward jump effect is played. (HMUSIC)
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href=speaker.html>Speaker assignment flags</a>.
+</table>
+<i>other flags may be supported by add-ons, see the documentation.</i>
+<tr><td>mask<td>The flags (as above) to modify. Flags that are not included in this are left as they are, so it can be set to 0 in order to just retrieve the current flags. To modify the speaker flags, any of the BASS_SPEAKER_<i>xxx</i> flags can be used in the mask (no need to include all of them).
+</table>
+<p><h2>Return value</h2>
+If successful, the channel's updated flags are returned, else -1 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid channel.
+</table>
+<p><h2>Remarks</h2>
+Some flags may not be adjustable in some circumstances, so the return value should be checked to confirm any changes. The flags listed above are just the flags that can be modified, and there may be additional flags present in the return value. See the <a href="BASS_CHANNELINFO.html">BASS_CHANNELINFO</a> documentation for a full list of flags.
+<p>Streams that are created by add-ons may have additional flags available. There is a limited number of possible flag values though, so some add-ons may use the same flag value for different things. This means that when using add-on specific flags with a stream created via the plugin system, it is a good idea to first confirm that the add-on is handling the stream, by checking its <i>ctype</i> via <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>.
+<p>During playback, the effects of flag changes are not heard instantaneously, due to buffering. This latency can be reduced via the <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a> attribute.
+<p><h2>Example</h2>
+Toggle looping on a channel.
+<pre class="code">
+if (BASS_ChannelFlags(channel, 0, 0) & BASS_SAMPLE_LOOP) { // looping is enabled, so...
+    BASS_ChannelFlags(channel, 0, BASS_SAMPLE_LOOP); // remove the LOOP flag
+} else { // looping is disabled, so...
+    BASS_ChannelFlags(channel, BASS_SAMPLE_LOOP, BASS_SAMPLE_LOOP); // set the LOOP flag
+}
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>

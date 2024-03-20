@@ -1,0 +1,25 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_RecordGetInputName</h1>
+<p>Retrieves the text description of a recording input source.
+<p><pre class="def">const char *BASS_RecordGetInputName(
+    int <I>input</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>input<td>The input to get the description of... 0 = first, -1 = master.
+</table>
+<p><h2>Return value</h2>
+If successful, then a pointer to the description is returned, else NULL is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_RecordInit.html">BASS_RecordInit</a> has not been successfully called.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>input</i> is invalid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>A master input is not available.
+</table>
+<p><h2>Remarks</h2>
+No input information is available on the "Default" recording device.
+<p><h2>Platform-specific</h2>
+The master input (-1) is only available on Windows and Linux.
+<p>The returned string is in ANSI or UTF-8 form on Windows, depending on the <a href="BASS_CONFIG_UNICODE.html">BASS_CONFIG_UNICODE</a> setting. It is always in UTF-8 form on other platforms.
+<p><h2>See also</h2>
+<a href="BASS_RecordGetInfo.html">BASS_RecordGetInfo</a>, <a href="BASS_RecordGetInput.html">BASS_RecordGetInput</a>, <a href="BASS_RecordSetInput.html">BASS_RecordSetInput</a>

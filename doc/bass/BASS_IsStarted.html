@@ -1,0 +1,12 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_IsStarted</h1>
+<p>Checks if the output has been started and is active.
+<p><pre class="def">DWORD BASS_IsStarted();</pre>
+<p><h2>Return value</h2>
+If the device has not been started, then 0 is returned. If the device has been started, then 1 is returned if it is currently active and 2 is returned if it is inactive (nothing is playing and <a href="BASS_CONFIG_DEV_NONSTOP.html">BASS_CONFIG_DEV_NONSTOP</a> is disabled).
+<p><h2>Remarks</h2>
+When using multiple devices, the current thread's device setting (as set with <a href="BASS_SetDevice.html">BASS_SetDevice</a>) determines which device this function call applies to.
+<p><h2>Platform-specific</h2>
+On iOS, the return value may be 3 to indicate that the app's audio is currently interrupted, but only if the output was started prior to the interruption.
+<p><h2>See also</h2>
+<a href="BASS_ChannelIsActive.html">BASS_ChannelIsActive</a>, <a href="BASS_Pause.html">BASS_Pause</a>, <a href="BASS_Start.html">BASS_Start</a>, <a href="BASS_Stop.html">BASS_Stop</a>, <a href="BASS_CONFIG_DEV_NONSTOP.html">BASS_CONFIG_DEV_NONSTOP</a>

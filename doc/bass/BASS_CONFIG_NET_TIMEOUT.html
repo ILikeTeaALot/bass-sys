@@ -1,0 +1,27 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NET_TIMEOUT config option</h1>
+<p>The time to wait for a server to respond to a connection request.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_NET_TIMEOUT,
+    DWORD <I>timeout</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>timeout<td>The time to wait, in milliseconds.
+</table>
+<p><h2>Remarks</h2>
+The default timeout is 5 seconds (5000 milliseconds).
+<p>The BASS_CONFIG_THREAD flag can be used to make the setting specific to the current thread. When that is non-zero, it will override the global setting in the current thread.
+<p>When playlist processing is enabled via the <a href="BASS_CONFIG_NET_PLAYLIST.html">BASS_CONFIG_NET_PLAYLIST</a> option, the timeout applies to each playlist entry rather than the playlist as a whole.
+<p><h2>Example</h2>
+Set the timeout to 3 seconds.
+<pre class="code">BASS_SetConfig(BASS_CONFIG_NET_TIMEOUT, 3000);
+</pre>
+<p>Set the timeout to 3 seconds only for one stream in the current thread.
+<pre class="code">BASS_SetConfig(BASS_CONFIG_NET_TIMEOUT | BASS_CONFIG_THREAD, 3000); // set the thread's timeout
+HSTREAM stream = BASS_StreamCreateURL(url, 0, 0, NULL, NULL);
+BASS_SetConfig(BASS_CONFIG_NET_TIMEOUT | BASS_CONFIG_THREAD, 0); // reset to the global timeout
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, 
+<a href="BASS_CONFIG_NET_BUFFER.html">BASS_CONFIG_NET_BUFFER</a>, <a href="BASS_CONFIG_NET_READTIMEOUT.html">BASS_CONFIG_NET_READTIMEOUT</a>

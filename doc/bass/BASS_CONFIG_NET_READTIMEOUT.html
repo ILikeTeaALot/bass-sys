@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NET_READTIMEOUT config option</h1>
+<p>The time to wait for a server to deliver more data for an internet stream.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_NET_READTIMEOUT,
+    DWORD <I>timeout</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>timeout<td>The time to wait, in milliseconds... 0 = no timeout.
+</table>
+<p><h2>Remarks</h2>
+When the timeout is hit, the connection with the server will be closed.
+<p>The default setting is 0, no timeout. Changes only affect subsequently created streams, not any that already exist.
+<p>The BASS_CONFIG_THREAD flag can be used to make the setting specific to the current thread. When that is non-zero, it will override the global setting in the current thread.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, 
+<a href="BASS_CONFIG_NET_TIMEOUT.html">BASS_CONFIG_NET_TIMEOUT</a>

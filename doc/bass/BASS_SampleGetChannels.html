@@ -1,0 +1,35 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_SampleGetChannels</h1>
+<p>Retrieves all a sample's existing channels.
+<p><pre class="def">DWORD BASS_SampleGetChannels(
+    HSAMPLE <I>handle</I>,
+    HCHANNEL *<I>channels</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The sample handle.
+<tr><td>channels<td>An array to put the sample's channel handles in. The array should be the same size as the sample's <i>max</i> setting when the sample was created, which can be retrieved using <a href="BASS_SampleGetInfo.html">BASS_SampleGetInfo</a>. NULL can be used to just check how many channels exist.
+</table>
+<p><h2>Return value</h2>
+If successful, the number of existing channels is returned, else -1 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a valid sample handle.
+</table>
+<p><h2>Remarks</h2>
+To determine whether a particular sample channel still exists, it is simplest to just try it in a function call.
+<p><h2>Example</h2>
+Set the sample rate of all a sample's channels to 10000 Hz.
+<pre class="code">
+BASS_SAMPLE info;
+HCHANNEL *channels;
+DWORD a, count;
+BASS_SampleGetInfo(sample, &info); // get sample info for "max" value
+channels = (HCHANNEL*)malloc(info.max * sizeof(HCHANNEL)); // allocate channels array
+count = BASS_SampleGetChannels(sample, channels); // get the channels
+for (a = 0; a &lt; count; a++) // go through them all and...
+    BASS_ChannelSetAttribute(channels[a], BASS_ATTRIB_FREQ, 10000); // set the sample rate to 10000
+free(channels); // free the channels array
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_SampleGetChannel.html">BASS_SampleGetChannel</a>, <a href="BASS_SampleGetInfo.html">BASS_SampleGetInfo</a>

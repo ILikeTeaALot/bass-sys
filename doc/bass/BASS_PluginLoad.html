@@ -1,0 +1,47 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_PluginLoad</h1>
+<p>Plugs an "add-on" into the standard stream and sample creation functions.
+<p><pre class="def">HPLUGIN BASS_PluginLoad(
+    char *<I>file</I>,
+    DWORD <I>flags</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>file<td>Name or filename of the add-on/plugin. If only a name is provided then the platform's standard library prefix and suffix/extension will be added to it.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_UNICODE<td><i>file</i> is in UTF-16 form. Otherwise it is ANSI on Windows and UTF-8 on other platforms.
+<tr><td>BASS_PLUGIN_PROC<td><i>file</i> is a pointer to a "plugin" symbol rather than a name or filename. This should be used with old iOS add-ons that are in static library form.
+</table>
+</table>
+<p><h2>Return value</h2>
+If successful, the loaded plugin's handle is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_FILEOPEN<td>The file could not be opened.
+<tr><td>BASS_ERROR_FILEFORM<td>The file is not a plugin.
+<tr><td>BASS_ERROR_VERSION<td>The plugin requires a different BASS version. Due to the use of the "stdcall" calling-convention, and so risk of stack faults from unexpected API differences, an add-on won't load at all on Windows if the BASS version is unsupported, and a BASS_ERROR_FILEFORM error will be generated instead of this.
+<tr><td>BASS_ERROR_ALREADY<td>The plugin is already loaded.
+</table>
+<p><h2>Remarks</h2>
+There are two ways in which add-ons can provide support for additional formats. They can provide dedicated functions to create streams of the specific format(s) they support and/or they can plug into the standard stream creation functions: <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, and <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>. This function enables the latter method. Both methods can be used side by side. The obvious advantage of the plugin system is convenience, while the dedicated functions can provide extra options that are not possible via the shared function interfaces. See an add-on's documentation for more specific details on it.
+<p>As well as the stream creation functions, plugins also add their additional format support to <a href="BASS_SampleLoad.html">BASS_SampleLoad</a>.
+<p>Information on what file formats a plugin supports is available via the <a href="BASS_PluginGetInfo.html">BASS_PluginGetInfo</a> function.
+<p>When using multiple plugins, the stream/sample creation functions will try each of them in the order that they were loaded via this function, until one that accepts the file is found.
+<p>When an add-on is already loaded (eg. if you are using functions from it), the plugin system will use the same instance (the reference count will just be incremented); there will not be 2 copies of the add-on in memory.
+<p><h2>Platform-specific</h2>
+When no path is specified, Windows' normal library search path will be used, while the BASS library's path (as in the <a href=BASS_CONFIG_FILENAME.html>BASS_CONFIG_FILENAME</a> value) will be used on other platforms.
+<p>On iOS prior to BASS 2.4.17, add-ons were static libraries rather than dynamic libraries and they had to be loaded slightly differently, by providing a "plugin" symbol from the add-on instead of its filename. If wanted, those old add-ons can still be used now with the BASS_PLUGIN_PROC flag. See the example below.
+<p><h2>Example</h2>
+Plugin the BASSFLAC add-on.
+<pre class="code">
+BASS_PluginLoad("bassflac", 0);
+</pre>
+<p>Plugin an old static library BASSFLAC add-on on iOS.
+<pre class="code">
+extern void BASSFLACplugin;
+BASS_PluginLoad(&BASSFLACplugin, BASS_PLUGIN_PROC);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_PluginFree.html">BASS_PluginFree</a>, <a href="BASS_PluginGetInfo.html">BASS_PluginGetInfo</a>, <a href=BASS_CONFIG_FILENAME.html>BASS_CONFIG_FILENAME</a>
+

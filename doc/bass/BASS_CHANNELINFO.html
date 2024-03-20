@@ -1,0 +1,88 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CHANNELINFO structure</h1>
+<p>Used with <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a> to retrieve information on a channel.
+<p><pre class="def">typedef struct {
+    DWORD <I>freq</I>;
+    DWORD <I>chans</I>;
+    DWORD <I>flags</I>;
+    DWORD <I>ctype</I>;
+    DWORD <I>origres</I>;
+    HPLUGIN <I>plugin</I>;
+    HSAMPLE <I>sample</I>;
+    char *<I>filename</I>;
+} BASS_CHANNELINFO;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>freq<td>Default sample rate.
+<tr><td>chans<td>Number of channels... 1=mono, 2=stereo, etc.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMPLE_8BITS<td>The channel's resolution is 8-bit. If neither this or the BASS_SAMPLE_FLOAT flags are present, then the channel's resolution is 16-bit.
+<tr><td>BASS_SAMPLE_FLOAT<td>The channel's resolution is 32-bit floating-point.
+<tr><td>BASS_SAMPLE_LOOP<td>The channel is looped.
+<tr><td>BASS_SAMPLE_3D<td>The channel has 3D functionality enabled.
+<tr><td>BASS_SAMPLE_MUTEMAX<td>The channel is muted when at (or beyond) its max distance.
+<tr><td>BASS_STREAM_RESTRATE<td>The internet file download rate is restricted. (HSTREAM)
+<tr><td>BASS_STREAM_BLOCK<td>The internet file (or "buffered" user file) is streamed in small blocks. (HSTREAM)
+<tr><td>BASS_STREAM_AUTOFREE<td>The channel will automatically be freed when it ends. (HSTREAM/HMUSIC)
+<tr><td>BASS_STREAM_DECODE<td>The channel is a "decoding channel". (HSTREAM/HMUSIC/HRECORD)
+<tr><td>BASS_MUSIC_RAMP<td>The MOD music is using "normal" ramping. (HMUSIC)
+<tr><td>BASS_MUSIC_RAMPS<td>The MOD music is using "sensitive" ramping. (HMUSIC)
+<tr><td>BASS_MUSIC_SURROUND<td>The MOD music is using surround sound. (HMUSIC)
+<tr><td>BASS_MUSIC_SURROUND2<td>The MOD music is using surround sound mode 2. (HMUSIC)
+<tr><td>BASS_MUSIC_NONINTER<td>The MOD music is using non-interpolated mixing. (HMUSIC)
+<tr><td>BASS_MUSIC_FT2MOD<td>The MOD music is using FastTracker 2 .MOD playback. (HMUSIC)
+<tr><td>BASS_MUSIC_PT1MOD<td>The MOD music is using ProTracker 1 .MOD playback. (HMUSIC)
+<tr><td>BASS_MUSIC_STOPBACK<td>The MOD music will be stopped when a backward jump effect is played. (HMUSIC)
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href=speaker.html>Speaker assignment flags</a>. (HSTREAM/HMUSIC)
+<tr><td>BASS_ASYNCFILE<td>The file is read asynchronously. (HSTREAM)
+<tr><td>BASS_UNICODE<td><i>filename</i> is in UTF-16 form.
+</table>
+<i>other flags may be supported by add-ons, see the documentation.</i>
+<tr><td>ctype<td>The type of channel it is, which can be one of the following.<br>
+<table>
+<tr><td>BASS_CTYPE_SAMPLE<td>Sample channel. (HCHANNEL)
+<tr><td>BASS_CTYPE_STREAM<td>User sample stream. This can also be used as a flag to test if the channel is any kind of HSTREAM.
+<tr><td>BASS_CTYPE_STREAM_DUMMY<td>"dummy" stream (using STREAMPROC_DUMMY).
+<tr><td>BASS_CTYPE_STREAM_DEVICE<td>"dummy" stream for device final output mix (using STREAMPROC_DEVICE).
+<tr><td>BASS_CTYPE_STREAM_SAMPLE<td>A sample (HSAMPLE) stream.
+<tr><td>BASS_CTYPE_STREAM_VORBIS<td>Ogg Vorbis format stream.
+<tr><td>BASS_CTYPE_STREAM_MP1<td>MPEG layer 1 format stream.
+<tr><td>BASS_CTYPE_STREAM_MP2<td>MPEG layer 2 format stream.
+<tr><td>BASS_CTYPE_STREAM_MP3<td>MPEG layer 3 format stream.
+<tr><td>BASS_CTYPE_STREAM_AIFF<td>Audio IFF format stream.
+<tr><td>BASS_CTYPE_STREAM_AM<td>Android media codec stream. Additional format information is avaliable from <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a> (BASS_TAG_AM_MIME).
+<tr><td>BASS_CTYPE_STREAM_CA<td>CoreAudio codec stream. Additional format information is avaliable from <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a> (BASS_TAG_CA_CODEC).
+<tr><td>BASS_CTYPE_STREAM_MF<td>Media Foundation codec stream. Additional format information is avaliable from <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a> (BASS_TAG_WAVEFORMAT).
+<tr><td>BASS_CTYPE_STREAM_WAV_PCM<td>Integer PCM WAVE format stream.
+<tr><td>BASS_CTYPE_STREAM_WAV_FLOAT<td>Floating-point PCM WAVE format stream.
+<tr><td>BASS_CTYPE_STREAM_WAV<td>WAVE format flag. This can be used to test if the channel is any kind of WAVE format. The codec (the file's "wFormatTag") is specified in the LOWORD. Additional information is also avaliable from <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a> (BASS_TAG_WAVEFORMAT).
+<tr><td>BASS_CTYPE_MUSIC_MOD<td>Generic MOD format music. This can also be used as a flag to test if the channel is any kind of HMUSIC.
+<tr><td>BASS_CTYPE_MUSIC_MTM<td>MultiTracker format music.
+<tr><td>BASS_CTYPE_MUSIC_S3M<td>ScreamTracker 3 format music.
+<tr><td>BASS_CTYPE_MUSIC_XM<td>FastTracker 2 format music.
+<tr><td>BASS_CTYPE_MUSIC_IT<td>Impulse Tracker format music.
+<tr><td>BASS_CTYPE_MUSIC_MO3<td>MO3 format flag, used in combination with one of the BASS_CTYPE_MUSIC types.
+<tr><td>BASS_CTYPE_RECORD<td>Recording channel. (HRECORD)
+</table>
+<i>other channel types may be supported by add-ons, see the documentation.</i>
+<tr><td>origres<td>The original resolution (bits per sample)... 0 = undefined. If the original sample format is floating-point then the BASS_ORIGRES_FLOAT flag will be set and the number of bits will be in the LOWORD.
+<tr><td>plugin<td>The plugin that is handling the channel... 0 = not using a plugin. Note this is only available with streams created using the plugin system via the standard BASS stream creation functions, not those created by add-on functions. Information on the plugin can be retrieved via <a href="BASS_PluginGetInfo.html">BASS_PluginGetInfo</a>.
+<tr><td>sample<td>The sample that is playing on the channel. Only applicable when <i>ctype</i> is BASS_CTYPE_SAMPLE or BASS_CTYPE_STREAM_SAMPLE.
+<tr><td>filename<td>The filename associated with the channel. (HSTREAM only)
+</table>
+<p><h2>Remarks</h2>
+With a recording channel, the BASS_STREAM_DECODE flag indicates that it is not using a <a href="RECORDPROC.html">RECORDPROC</a> callback function.
+<p>BASS supports 8/16/32-bit sample data, so if a WAV file, for example, uses another sample resolution, it will have to be converted by BASS. The <i>origres</i> member can be used to check what the resolution originally was.
+<p><h2>Platform-specific</h2>
+On Linux/macOS/iOS/Android, the BASS_UNICODE flag may not be present even if it was used in the stream's creation, as BASS will have translated the filename to the native UTF-8 form.
+<p><h2>Example</h2>
+Check if a channel is an MP3 stream.
+<pre class="code">
+BASS_CHANNELINFO info;
+BASS_ChannelGetInfo(channel, &info); // get info
+if (info.ctype == BASS_CTYPE_STREAM_MP3) {
+    // it's an MP3!
+}</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>

@@ -1,0 +1,25 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_GetConfigPtr</h1>
+<p>Retrieves the value of a pointer config option.
+<p><pre class="def">const void *BASS_GetConfigPtr(
+    DWORD <I>option</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>option<td>The option to set the value of... one of the following.<br>
+<table>
+<tr><td><a href=BASS_CONFIG_LIBSSL.html>BASS_CONFIG_LIBSSL</a><td>Library to use for handling HTTPS connections.
+<tr><td><a href=BASS_CONFIG_FILENAME.html>BASS_CONFIG_FILENAME</a><td>Filename of loaded BASS library.
+<tr><td><a href=BASS_CONFIG_NET_AGENT.html>BASS_CONFIG_NET_AGENT</a><td>"User-Agent" header.
+<tr><td><a href=BASS_CONFIG_NET_PROXY.html>BASS_CONFIG_NET_PROXY</a><td>Proxy server settings.
+</table>
+<i>other config options may be supported by add-ons, see the documentation.</i>
+</table>
+<p><h2>Return value</h2>
+If successful, the value of the requested config option is returned, else NULL is returned. NULL may also be a valid setting with some config options, in which case the error code should be used to confirm whether it's an error. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_ILLPARAM<td><i>option</i> is invalid.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfigPtr.html">BASS_SetConfigPtr</a>

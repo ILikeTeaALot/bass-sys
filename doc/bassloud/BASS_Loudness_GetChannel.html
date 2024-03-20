@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Encode_GetChannel</h1>
+<p>Retrieves the channel that a loudness measurement is set on.
+<p><pre class="def">DWORD BASS_Loudness_GetChannel(
+    HLOUDNESS <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The loudness measurement.
+</table>
+<p><h2>Return value</h2>
+If successful, the loudness measurement's channel handle is returned, else 0 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_Loudness_SetChannel.html">BASS_Loudness_SetChannel</a>, <a href="BASS_Loudness_Start.html">BASS_Loudness_Start</a>

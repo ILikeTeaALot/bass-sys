@@ -1,0 +1,24 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>TAG_CUE_POINT structure</h1>
+<p>RIFF "cue " tag cue point structure.
+<p><pre class="def">typedef struct {
+    DWORD <I>dwName</I>;
+    DWORD <I>dwPosition</I>;
+    DWORD <I>fccChunk</I>;
+    DWORD <I>dwChunkStart</I>;
+    DWORD <I>dwBlockStart</I>;
+    DWORD <I>dwSampleOffset</I>;
+} TAG_CUE_POINT;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>dwName<td>Specifies the cue point name. Each <cue-point> record must have a unique <I>dwName</I> field.
+<tr><td>dwPosition<td>Specifies the sample position of the cue point. This is the sequential sample number within the play order.
+<tr><td>fccChunk<td>Specifies the name or chunk ID of the chunk containing the cue point.
+<tr><td>dwChunkStart<td>Specifies the position of the start of the data chunk containing the cue point. This should be zero if there is only one chunk containing data (as is currently always the case).
+<tr><td>dwBlockStart<td>Specifies the position of the start of the block containing the position. This is the byte offset from the start of the data section of the chunk, not the chunk’s FOURCC.
+<tr><td>dwSampleOffset<td>Specifies the sample offset of the cue point relative to the start of the block.
+</table>
+<p><h2>Remarks</h2>
+The structure is given by <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a> as it is in the RIFF file, which is little-endian, so the members will need to be reversed on big-endian platforms.
+<p><h2>See also</h2>
+<a href="TAG_CUE.html">TAG_CUE structure</a>

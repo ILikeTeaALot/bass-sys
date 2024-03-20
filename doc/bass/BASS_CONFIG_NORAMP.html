@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NORAMP config option</h1>
+<p>The default playback ramping setting.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_NORAMP,
+    DWORD <I>noramp</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>noramp<td>Enable or disable playback ramping... 0 = enable ramping, 1 = disable ramping, 2 = disable ramping-in only, 3 =  disable ramping-out only.
+</table>
+<p><h2>Remarks</h2>
+This config option determines the initial <a href="BASS_ATTRIB_NORAMP.html">BASS_ATTRIB_NORAMP</a> attribute setting of new channels. Existing channels are unaffected by changes.
+<p>The default setting is 0 (enable ramping).
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_ATTRIB_NORAMP.html">BASS_ATTRIB_NORAMP</a>

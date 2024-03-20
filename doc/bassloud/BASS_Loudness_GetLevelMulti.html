@@ -1,0 +1,42 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Loudness_GetLevelMulti</h1>
+<p>Retrieves the level of multiple loudness measurements combined.
+<p><pre class="def">BOOL BASS_Loudness_GetLevelMulti(
+    HLOUDNESS *<I>handles</I>,
+    DWORD <I>count</I>,
+    DWORD <I>mode</I>,
+    float *<I>level</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handles<td>An array of loudness measurement handles.
+<tr><td>count<td>The number of handles in the array.
+<tr><td>mode<td>The measurement type to retrieve. One of the following.<br>
+<table>
+<tr><td>BASS_LOUDNESS_INTEGRATED<td>Integrated loudness in LUFS.
+<tr><td>BASS_LOUDNESS_RANGE<td>Loudness range in LU.
+<tr><td>BASS_LOUDNESS_PEAK<td>Peak level in linear scale.
+<tr><td>BASS_LOUDNESS_TRUEPEAK<td>True peak level in linear scale.
+</table>
+<tr><td>level<td>Pointer to a variable to receive the measurement level.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Remarks</h2>
+This function is identical to <a href="BASS_Loudness_GetLevel.html">BASS_Loudness_GetLevel</a> but with the ability to combine the data from multiple measurements, which can be useful for getting the overall loudness (or peak) of a group of files. Combining the measurements of multiple files is equivalent to putting those files through the same measurement one after another.
+<p>The BASS_LOUDNESS_CURRENT mode is not available when combining multiple measurements.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+<tr><td>BASS_ERROR_ILLPARAM<td><I>mode</I> is not valid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The requested measurement has not been enabled. It needs to be enabled on all of the provided handles.
+</table>
+<p><h2>Example</h2>
+Get the level of 2 integrated loudness measurements combined.
+<pre class="code">
+HLOUDNESS handles[2] = { handle1, handle2 }; // the measurement handles
+float level;
+BASS_Loudness_GetLevelMulti(handles, 2, BASS_LOUDNESS_INTEGRATED, &level); // get the combined loudness level
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_Loudness_GetLevel.html">BASS_Loudness_GetLevel</a>, <a href="BASS_Loudness_Start.html">BASS_Loudness_Start</a>

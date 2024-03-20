@@ -1,0 +1,67 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_StreamCreateFile</h1>
+<p>Creates a sample stream from an MP3, MP2, MP1, OGG, WAV, AIFF or plugin supported file.
+<p><pre class="def">HSTREAM BASS_StreamCreateFile(
+    BOOL <I>mem</I>,
+    void *<I>file</I>,
+    QWORD <I>offset</I>,
+    QWORD <I>length</I>,
+    DWORD <I>flags</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>mem<td>TRUE = stream the file from memory.
+<tr><td>file<td>Filename (mem = FALSE) or a memory location (mem = TRUE).
+<tr><td>offset<td>File offset to begin streaming from (only used if mem = FALSE).
+<tr><td>length<td>Data length... 0 = use all data up to the end of the file (if mem = FALSE).
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMPLE_FLOAT<td>Use 32-bit floating-point sample data. See <a href=float.html>Floating-point channels</a> for info.
+<tr><td>BASS_SAMPLE_MONO<td>Decode/play the file (OGG/MP3/MP2/MP1 only) in mono. This flag is automatically applied if BASS_DEVICE_MONO was specified when calling <a href="BASS_Init.html">BASS_Init</a>.
+<tr><td>BASS_SAMPLE_3D<td>Enable 3D functionality. The stream must be mono. The SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_SAMPLE_LOOP<td>Loop the file. This flag can be toggled at any time using <a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>.
+<tr><td>BASS_STREAM_PRESCAN<td>Pre-scan the file for accurate seek points and length reading in MP3/MP2/MP1 files and chained OGG files (has no effect on normal OGG files). This can significantly increase the time taken to create the stream, particularly with a large file and/or slow storage media. <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a> can be used to scan the file after stream creation instead.
+<tr><td>BASS_STREAM_AUTOFREE<td>Automatically free the stream when playback ends.
+<tr><td>BASS_STREAM_DECODE<td>Decode the sample data, without playing it. Use <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a> to retrieve decoded sample data. The BASS_SAMPLE_3D, BASS_STREAM_AUTOFREE and SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href=speaker.html>Speaker assignment flags</a>. These flags have no effect when the stream is more than stereo.
+<tr><td>BASS_ASYNCFILE<td>Read the file asynchronously. When enabled, the file is read and buffered in parallel with the decoding, to reduce the chances of the decoder being affected by I/O delays. This can be particularly useful with slow storage media and/or low latency output. The size of the file buffer is determined by the <a href="BASS_CONFIG_ASYNCFILE_BUFFER.html">BASS_CONFIG_ASYNCFILE_BUFFER</a> config option. This flag is ignored when streaming from memory (<i>mem = TRUE</i>).
+<tr><td>BASS_UNICODE<td><i>file</i> is in UTF-16 form. Otherwise it is ANSI on Windows and UTF-8 on other platforms.
+</table>
+</table>
+<p><h2>Return value</h2>
+If successful, the new stream's handle is returned, else 0 is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_STREAM_AUTOFREE flag cannot be combined with the BASS_STREAM_DECODE flag.
+<tr><td>BASS_ERROR_ILLPARAM<td>The <i>length</i> must be specified when streaming from memory.
+<tr><td>BASS_ERROR_FILEOPEN<td>The file could not be opened.
+<tr><td>BASS_ERROR_FILEFORM<td>The file's format is not recognised/supported.
+<tr><td>BASS_ERROR_NOTAUDIO<td>The file does not contain audio, or it also contains video and videos are disabled.
+<tr><td>BASS_ERROR_CODEC<td>The file uses a codec that is not available/supported. This can apply to WAV and AIFF files.
+<tr><td>BASS_ERROR_FORMAT<td>The sample format is not supported.
+<tr><td>BASS_ERROR_SPEAKER<td>The specified SPEAKER flags are invalid.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+<tr><td>BASS_ERROR_NO3D<td>Could not initialize 3D support.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+BASS has built-in support for MPEG, OGG, WAV and AIFF files. Support for additional formats is available through <a href="BASS_PluginLoad.html">BASS_PluginLoad</a>.
+<p>MPEG 1.0, 2.0 and 2.5 layer 3 (MP3) files are supported, layers 1 (MP1) and 2 (MP2) are also supported. Standard RIFF and RF64 WAV files are supported. All PCM formats from 8 to 32-bit are supported in WAV and AIFF files, but the output will be restricted to 16-bit unless the BASS_SAMPLE_FLOAT flag is used. 64-bit floating-point WAV and AIFF files are also supported, but they are rendered in 16-bit or 32-bit floating-point depending on the flags. The file's original resolution is available from <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>.
+<p>Chained OGG files containing multiple logical bitstreams are supported, but they will need to be scanned to get their length or to seek in them. That scanning will be done at stream creation or at the first <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a> or <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a> call, depending on whether the <a href="BASS_CONFIG_OGG_PRESCAN.html">BASS_CONFIG_OGG_PRESCAN</a> option is enabled (or the BASS_STREAM_PRESCAN flag is used). The BASS_POS_OGG "mode" can be used with <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a> to get the number of bitstreams and with <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a> to seek to a particular one. A BASS_SYNC_OGG_CHANGE sync can be set via <a href="BASS_ChannelSetSync.html">BASS_ChannelSetSync</a> to be informed of when a new bitstream begins during decoding/playback.
+<p>Multi-channel (ie. more than stereo) OGG, WAV and AIFF files are supported.
+<p>Use <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a> to retrieve information on the file format and sample format of the stream. The playback length of the stream can be retrieved using <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a>.
+<p>If <i>length = 0</i> (use all data up to the end of the file), and the file length increases after creating the stream (ie. the file is still being written), then BASS will play the extra data too, but the length returned by <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a> will not be updated until the end is reached. The <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a> return values will be updated during playback of the extra data though.
+<p>When streaming from memory (<i>mem = TRUE</i>), the memory must not be freed before the stream is freed. There may be exceptions to that with some add-ons (see the documentation).
+<p>When a plugin is used by a stream, there may be additional flags that are supported by it. Any such flags can be set after stream creation via <a href="BASS_ChannelFlags.html">BASS_ChannelFlags</a>. <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a> can be used to check which, if any, plugin is being used.
+<p>To stream a file from the internet, use <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>. To stream from other locations, see <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>.
+<p><h2>Platform-specific</h2>
+On Windows, ACM codecs are supported with compressed WAV files. Media Foundation codecs are also supported on Windows 7 and updated versions of Vista, including support for AAC and WMA. The <a href="BASS_CONFIG_MF_DISABLE.html">BASS_CONFIG_MF_DISABLE</a> config option can used to check whether Media Foundation is available. On iOS and macOS, CoreAudio codecs are supported, including support for AAC and ALAC. Android's media codecs are also supported, including support for AAC, on Android 5 and above. In all cases, the OS's codecs are only tried after BASS's built-in decoders and any plugins have rejected the file. Built-in support for IMA and Microsoft ADPCM WAV files is provided on Linux/Android, while they are supported via ACM and CoreAudio codecs on Windows and macOS/iOS.
+<p>On Android, <i>file</i> may be a String, ByteBuffer, ParcelFileDescriptor, or asset (via the Asset class) when using Java. See the BASS.JAVA file for available overloads.
+<p><h2>Example</h2>
+Create a stream from an MP3 file.
+<pre class="code">
+HSTREAM stream = BASS_StreamCreateFile(FALSE, "afile.mp3", 0, 0, 0);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>, <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a>, <a href="BASS_ChannelGetTags.html">BASS_ChannelGetTags</a>, <a href="BASS_ChannelPlay.html">BASS_ChannelPlay</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="BASS_ChannelSetDSP.html">BASS_ChannelSetDSP</a>, <a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="BASS_StreamCreate.html">BASS_StreamCreate</a>, <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, <a href="BASS_StreamFree.html">BASS_StreamFree</a>, <a href="BASS_StreamGetFilePosition.html">BASS_StreamGetFilePosition</a>, <a href="BASS_CONFIG_VERIFY.html">BASS_CONFIG_VERIFY</a>

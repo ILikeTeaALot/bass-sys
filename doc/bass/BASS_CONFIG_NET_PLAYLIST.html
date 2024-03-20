@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_NET_PLAYLIST config option</h1>
+<p>Process URLs in PLS and M3U playlists?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_NET_PLAYLIST,
+    DWORD <I>netlists</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>netlists<td>When to process URLs in PLS and M3U playlists... 0 = never, 1 = in <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a> only, 2 = in <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a> and <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a> too.
+</table>
+<p><h2>Remarks</h2>
+When enabled, BASS will process PLS and M3U playlists, trying each URL until it finds one that it can play. <a href="BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a> can be used to find out the URL that was successfully opened.
+<p>Nested playlists are suported, that is a playlist can contain the URL of another playlist. The <a href="BASS_CONFIG_NET_PLAYLIST_DEPTH.html">BASS_CONFIG_NET_PLAYLIST_DEPTH</a> option limits the nested playlist depth.
+<p>By default, playlist processing is disabled.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateURL.html">BASS_StreamCreateURL</a>, <a href="BASS_CONFIG_NET_PLAYLIST_DEPTH.html">BASS_CONFIG_NET_PLAYLIST_DEPTH</a>

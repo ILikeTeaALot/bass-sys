@@ -1,0 +1,15 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_OGG_PRESCAN config option</h1>
+<p>Pre-scan chained OGG files?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_OGG_PRESCAN,
+    BOOL <I>prescan</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>prescan<td>If TRUE, chained OGG files are pre-scanned.
+</table>
+<p><h2>Remarks</h2>
+This option is enabled by default, and is equivalent to including the BASS_STREAM_PRESCAN flag in a <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a> call when opening an OGG file. When disabled, the scanning of chained OGG files will be delayed until the first <a href="BASS_ChannelGetLength.html">BASS_ChannelGetLength</a> or <a href="BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a> call, for faster stream creation.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a>

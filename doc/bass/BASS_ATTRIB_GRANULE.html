@@ -1,0 +1,25 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ATTRIB_GRANULE attribute</h1>
+<p>The processing granularity of a channel.
+<p><pre class="def">BASS_ChannelSetAttribute(
+    DWORD <I>handle</I>,
+    BASS_ATTRIB_GRANULE,
+    float <I>unit</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HMUSIC, HSTREAM, HRECORD.
+<tr><td>unit<td>The processing unit size in sample frames... 0 = none.
+</table>
+<p><h2>Remarks</h2>
+This attribute allows a channel's processing to be in units of a certain size, which can be helpful for some DSP processing. It does not apply to decoding channels or recording channels without a <a href="RECORDPROC.html">RECORDPROC</a>; their procesing is controlled by <a href="BASS_ChannelGetData.html">BASS_ChannelGetData</a>.
+<p>Each processing cycle will be on a whole number of units, not necessarily only one unit, and the number of units can vary between cycles depending on how much space there is in the channel's playback buffer (or captured data in a recording buffer). There might not be a whole number of units at the end of a file or when a stream stalls.
+<p>When granularity is enabled (non-0), it can change the timing of any DSP/FX changes that are made in mixtime sync callbacks. That is because the DSP/FX processing is done on the entire block of data at the end of the processing cycle then (rather than splitting it at the sync positions), to maintain the specified granularity, resulting in the changes effectively being applied at the start of the processing cycle.
+<p>The default value is 0 (none). Changes take immediate effect.
+<p><h2>Example</h2>
+Request a processing unit of 512 samples.
+<pre class="code">
+BASS_ChannelSetAttribute(stream, BASS_ATTRIB_GRANULE, 512);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_ChannelGetAttribute.html">BASS_ChannelGetAttribute</a>, <a href="BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>

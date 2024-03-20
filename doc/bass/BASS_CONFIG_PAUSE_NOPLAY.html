@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_PAUSE_NOPLAY config option</h1>
+<p>Prevent channels being played while the output is paused?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_PAUSE_NOPLAY,
+    BOOL <I>noplay</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>noplay<td>If TRUE, channels cannot be played while the output is paused.
+</table>
+<p><h2>Remarks</h2>
+When the output is paused using <a href="BASS_Pause.html">BASS_Pause</a>, and this config option is enabled, channels cannot be played until the output is resumed using <a href="BASS_Start.html">BASS_Start</a>. Any attempts to play a channel will result in a BASS_ERROR_START error.
+<p>By default, this config option is enabled.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_Pause.html">BASS_Pause</a>

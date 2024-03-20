@@ -1,0 +1,21 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_DEV_BUFFER config option</h1>
+<p>The output device buffer length.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_DEV_BUFFER,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>length<td>The buffer length in milliseconds.
+</table>
+<p><h2>Remarks</h2>
+The device buffer is where the final mix of all playing channels is placed, ready for the device to play. Its length affects the latency of things like starting and stopping playback of a channel, so you will probably want to avoid setting it unnecessarily high, but setting it too short could result in breaks in the sound. When using a large device buffer, the <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a> attribute could be used to skip the channel buffering step, to avoid further increasing latency for real-time generated sound and/or DSP/FX changes.
+<p>The buffer length needs to be a multiple of, and at least double, the device's update period, which can be set via the <a href="BASS_CONFIG_DEV_PERIOD.html">BASS_CONFIG_DEV_PERIOD</a> option. The buffer length will be rounded up automatically if necessary to achieve that. The system may also choose to use a different buffer length if the requested one is too short or long, or needs rounding for granularity.
+<p>Changes to this config setting only affect subsequently initialized devices, not any that are already initialized. The "No Sound" device does not have a buffer, so is unaffected by this option.
+<p><h2>Platform-specific</h2>
+The default setting is 30ms on Windows, 40ms on Linux and Android. This option is not available on macOS or iOS; the device buffer length on those platforms is twice the device update period, which can be set via the <a href="BASS_CONFIG_DEV_PERIOD.html">BASS_CONFIG_DEV_PERIOD</a> option.
+<p>On Linux, BASS will attempt to set the device buffer-feeding thread to real-time priority (as on other platforms) to reduce the chances of it getting starved of CPU, but if that is not possible (eg. the user account lacks permission) then it may be necessary to increase the buffer length to avoid breaks in the output when the CPU is busy.
+<p>When using AudioTrack output on Android, the buffer length will be automatically raised to the minimum given by the AudioTrack getMinBufferSize method if necessary.
+<p><h2>See also</h2>
+<a href="BASS_GetConfig.html">BASS_GetConfig</a>, <a href="BASS_GetInfo.html">BASS_GetInfo</a>, <a href="BASS_Init.html">BASS_Init</a>, <a href="BASS_SetConfig.html">BASS_SetConfig</a>, <a href="BASS_ATTRIB_BUFFER.html">BASS_ATTRIB_BUFFER</a>, <a href="BASS_CONFIG_DEV_PERIOD.html">BASS_CONFIG_DEV_PERIOD</a>

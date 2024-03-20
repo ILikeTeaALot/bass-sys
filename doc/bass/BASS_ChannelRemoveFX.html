@@ -1,0 +1,21 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_ChannelRemoveFX</h1>
+<p>Removes an effect on a stream, MOD music, or recording channel.
+<p><pre class="def">BOOL BASS_ChannelRemoveFX(
+    DWORD <I>handle</I>,
+    HFX <I>fx</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HSTREAM, HMUSIC, or HRECORD.
+<tr><td>fx<td>Handle of the effect to remove from the channel. This can also be an HDSP handle to remove a DSP function.</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td>At least one of <I>handle</I> and <I>fx</I> is not valid.
+</table>
+<p><h2>Remarks</h2>
+<a href="BASS_ChannelRemoveDSP.html">BASS_ChannelRemoveDSP</a> can also be used to remove effects.
+<p><h2>See also</h2>
+<a href="BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>

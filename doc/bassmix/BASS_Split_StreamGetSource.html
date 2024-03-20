@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Split_StreamGetSource</h1>
+<p>Retrieves the source of a splitter stream.
+<p><pre class="def">DWORD BASS_Split_StreamGetSource(
+    HSTREAM <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The splitter stream handle.
+</table>
+<p><h2>Return value</h2>
+If successful, the source channel's handle is returned, else 0 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><i>handle</i> is not a splitter stream.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_Split_StreamCreate.html">BASS_Split_StreamCreate</a>, <a href="BASS_Split_StreamGetSplits.html">BASS_Split_StreamGetSplits</a>

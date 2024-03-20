@@ -1,0 +1,32 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelGetPosition</h1>
+<p>Retrieves the playback position of a mixer source channel.
+<p><pre class="def">QWORD BASS_Mixer_ChannelGetPosition(
+    DWORD <I>handle</I>,
+    DWORD <I>mode</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>mode<td>How to retrieve the position. One of the following.
+<table>
+<tr><td>BASS_POS_BYTE<td>Get the position in bytes.
+<tr><td>BASS_POS_MUSIC_ORDER<td>Get the position in orders and rows... LOWORD = order, HIWORD = row * scaler (<a href="mk:@MSITStore:bass.chm::/BASS_ATTRIB_MUSIC_PSCALER.html">BASS_ATTRIB_MUSIC_PSCALER</a>). (HMUSIC only)
+<tr><td>BASS_POS_MIXER_DELAY<td>Get the amount remaining of any start delay that was set via <a href="BASS_Mixer_StreamAddChannelEx.html">BASS_Mixer_StreamAddChannelEx</a>.
+</table>
+<i>other modes may be supported by add-ons, see the documentation.</i>
+</table>
+<p><h2>Return value</h2>
+If successful, then the channel's position is returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The requested position is not available.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+This function is like the standard <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a>, but it compensates for the mixer's playback buffering to return the position that is currently being heard. If the mixer is not being played by BASS, it is possible to account for any other output system latency with the <a href="BASS_ATTRIB_MIXER_LATENCY.html">BASS_ATTRIB_MIXER_LATENCY</a> option or the <a href="BASS_Mixer_ChannelGetPositionEx.html">BASS_Mixer_ChannelGetPositionEx</a> function.
+<p>If the mixer is a submixer (source of another mixer) without its own latency set via the <a href="BASS_ATTRIB_MIXER_LATENCY.html">BASS_ATTRIB_MIXER_LATENCY</a> option then the parent mixer's latency will be used. If the parent mixer is also a submixer then the process will be repeated, and so on, until a final latency value is obtained (if possible). This is only possible if the submixer(s) have the BASS_MIXER_POSEX flag set, to enable keeping a record of source positions.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelGetPositionEx.html">BASS_Mixer_ChannelGetPositionEx</a>, <a href="BASS_Mixer_ChannelIsActive.html">BASS_Mixer_ChannelIsActive</a>, <a href="BASS_Mixer_ChannelSetPosition.html">BASS_Mixer_ChannelSetPosition</a>, <a href="BASS_Mixer_ChannelSetSync.html">BASS_Mixer_ChannelSetSync</a>, <a href="BASS_ATTRIB_MIXER_LATENCY.html">BASS_ATTRIB_MIXER_LATENCY</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a>

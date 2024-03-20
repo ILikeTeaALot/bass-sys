@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>FILELENPROC callback</h1>
+<p>User file stream length callback function.
+<p><pre class="def">QWORD CALLBACK FileLenProc(
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>user<td>The user instance data given when <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a> was called.
+</table>
+<p><h2>Return value</h2>
+The length of the file in bytes. Returning 0 for a buffered file stream makes BASS stream the file in blocks and is equivalent to using the BASS_STREAM_BLOCK flag in the <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a> call.
+<p><h2>Remarks</h2>
+This function is called first thing, and only the once with buffered streams. With unbuffered streams, it may be called again when testing for EOF (end of file), allowing the file to grow in size.
+<p><h2>See also</h2>
+<a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="BASS_FILEPROCS.html">BASS_FILEPROCS structure</a>

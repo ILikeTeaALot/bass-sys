@@ -1,0 +1,31 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Mixer_ChannelGetEnvelopePos</h1>
+<p>Retrieves the current position and value of an envelope on a mixer source channel.
+<p><pre class="def">QWORD BASS_Mixer_ChannelGetEnvelopePos(
+    DWORD <I>handle</I>,
+    DWORD <I>type</I>,
+    float *<I>value</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle.
+<tr><td>type<td>The envelope to get the position/value of. One of the following.
+<table>
+<tr><td>BASS_MIXER_ENV_FREQ<td>Sample rate.
+<tr><td>BASS_MIXER_ENV_VOL<td>Volume.
+<tr><td>BASS_MIXER_ENV_PAN<td>Panning/balance.
+</table>
+<tr><td>value<td>Pointer to a variable to receive the envelope value at the current position... NULL = do not retrieve it.
+</table>
+<p><h2>Return value</h2>
+If successful, the current position of the envelope is returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not a mixer source.
+<tr><td>BASS_ERROR_ILLTYPE<td><i>type</i> is not valid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>There is no envelope of the requested type on the channel.
+</table>
+<p><h2>Remarks</h2>
+During playback, the envelope's current position is not necessarily what is currently being heard, due to buffering.
+<p><h2>See also</h2>
+<a href="BASS_Mixer_ChannelSetEnvelope.html">BASS_Mixer_ChannelSetEnvelope</a>, <a href="BASS_Mixer_ChannelSetEnvelopePos.html">BASS_Mixer_ChannelSetEnvelopePos</a>

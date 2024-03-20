@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Split_StreamGetSplits</h1>
+<p>Retrieves the splitter streams of a channel.
+<p><pre class="def">DWORD BASS_Split_StreamGetSplits(
+    DWORD <I>handle</I>,
+    HSTREAM *<I>splits</I>,
+    DWORD count
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The channel handle... a HMUSIC, HSTREAM or HRECORD.
+<tr><td>splits<td>An array to receive the splitter stream handles.
+<tr><td>count<td>The maximum number of handles to receive in the <i>splits</i> array... 0 = get the number of splitters that the channel has without getting the handles.
+</table>
+<p><h2>Return value</h2>
+If successful, the number of splitter streams placed in the <i>splits</i> array is returned, or the total number of splitter streams if <i>count = 0</i>, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><i>handle</i> has never had any splitter streams.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_Split_StreamGetSource.html">BASS_Split_StreamGetSource</a>

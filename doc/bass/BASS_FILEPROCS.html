@@ -1,0 +1,50 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_FILEPROCS structure</h1>
+<p>Table of callback functions used with <a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>.
+<p><pre class="def">typedef struct {
+    <a href="FILECLOSEPROC.html">FILECLOSEPROC</a> *<i>close</i>;
+    <a href="FILELENPROC.html">FILELENPROC</a> *<i>length</i>;
+    <a href="FILEREADPROC.html">FILEREADPROC</a> *<i>read</i>;
+    <a href="FILESEEKPROC.html">FILESEEKPROC</a> *<i>seek</i>;
+} BASS_FILEPROCS;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>close<td>Callback function to close the file.
+<tr><td>length<td>Callback function to get the file length.
+<tr><td>read<td>Callback function to read from the file.
+<tr><td>seek<td>Callback function to seek in the file. Not used by buffered file streams.
+</table>
+<p><h2>Example</h2>
+Stream a file from disk via an "unbuffered" user file stream.
+<pre class="code">
+void CALLBACK MyFileCloseProc(void *user)
+{
+    fclose(user); // close the file
+}
+
+QWORD CALLBACK MyFileLenProc(void *user)
+{
+    struct stat s;
+    fstat(fileno(user), &s);
+    return s.st_size; // return the file length
+}
+
+DWORD CALLBACK MyFileReadProc(void *buffer, DWORD length, void *user)
+{
+    return fread(buffer, 1, length, user); // read from file
+}
+
+BOOL CALLBACK MyFileSeekProc(QWORD offset, void *user)
+{
+    return !fseek(user, offset, SEEK_SET); // seek to offset
+}
+
+...
+
+BASS_FILEPROCS fileprocs = { MyFileCloseProc, MyFileLenProc, MyFileReadProc, MyFileSeekProc }; // callback table
+FILE *file = fopen("a_file.mp3", "rb"); // open the file
+stream = BASS_StreamCreateFileUser(STREAMFILE_NOBUFFER, 0, &fileprocs, file); // create the stream
+</pre>
+<p>NOTE: This is just an example. It is simpler to use <a href="BASS_StreamCreateFile.html">BASS_StreamCreateFile</a> to stream a file from disk.
+<p><h2>See also</h2>
+<a href="BASS_StreamCreateFileUser.html">BASS_StreamCreateFileUser</a>, <a href="FILECLOSEPROC.html">FILECLOSEPROC callback</a>, <a href="FILELENPROC.html">FILELENPROC callback</a>, <a href="FILEREADPROC.html">FILEREADPROC callback</a>, <a href="FILESEEKPROC.html">FILESEEKPROC callback</a>

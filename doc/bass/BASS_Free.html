@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_Free</h1>
+<p>Frees all resources used by the output device, including all its samples, streams and MOD musics.
+<p><pre class="def">BOOL BASS_Free();</pre>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_BUSY<td>The device is currently being reinitialized.
+</table>
+<p><h2>Remarks</h2>
+This function should be called for all initialized devices before the program closes. It is not necessary to individually free the samples/streams/musics as these are all automatically freed by this function.
+<p>When using multiple devices, the current thread's device setting (as set with <a href="BASS_SetDevice.html">BASS_SetDevice</a>) determines which device this function call applies to.
+<p><h2>See also</h2>
+<a href="BASS_Init.html">BASS_Init</a>
