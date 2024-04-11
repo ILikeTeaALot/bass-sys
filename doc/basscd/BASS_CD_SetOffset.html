@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_SetOffset</h1>
+<p>Sets the read offset of a drive.
+<p><pre class="def">BOOL BASS_CD_SetOffset(
+    DWORD <I>drive</I>,
+    int <I>offset</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive... 0 = the first drive.
+<tr><td>offset<td>The offset, in samples (bytes/4).
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>drive</i> is invalid.
+</table>
+<p><h2>Remarks</h2>
+This function can be used to compensate for the fact that most drives will read audio data from CDs at a slight offset from where they ideally should. Different drive models will have differing offsets, a list of which can be found at <a href="http://www.accuraterip.com/driveoffsets.htm" target=_blank>www.accuraterip.com/driveoffsets.htm</a>.
+<p>When a negative offset is used, reading the beginning of the first track will require accessing the lead-in, and when a positive offset is used, reading the end of the last track will require accessing the lead-out. The drive may not support that (overreading), in which case those parts will be replaced with silence.
+<p>Changes do not affect an existing CD stream, unless <a href="BASS_CD_StreamSetTrack.html">BASS_CD_StreamSetTrack</a> is called (and any sub-channel/C2 reading is using a <a href="CDDATAPROC.html">CDDATAPROC</a>).

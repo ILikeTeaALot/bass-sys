@@ -1,0 +1,26 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+
+<h1>BASS_CD_GetTrackLength</h1>
+<p>Retrieves the length (in bytes) of a track.
+<p><pre class="def">DWORD BASS_CD_GetTrackLength(
+    DWORD <I>drive</I>,
+    DWORD <I>track</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive... 0 = the first drive.
+<tr><td>track<td>The track to retrieve the length of... 0 = the first track.
+</table>
+<p><h2>Return value</h2>
+If an error occurs, -1 is returned, use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. If successful, the length of the track is returned.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>drive</i> is invalid.
+<tr><td>BASS_ERROR_NOCD<td>There is no CD in the drive.
+<tr><td>BASS_ERROR_CDTRACK<td>The <I>track</I> number is invalid.
+<tr><td>BASS_ERROR_NOTAUDIO<td>The track is not an audio track.
+</table>
+<p><h2>Remarks</h2>
+CD audio is always 44100hz stereo 16-bit. That is 176400 bytes per second. So dividing the track length by 176400 gives the length in seconds.
+<p><h2>See also</h2>
+<a href="BASS_CD_GetTrackPregap.html">BASS_CD_GetTrackPregap</a>, <a href="BASS_CD_GetTracks.html">BASS_CD_GetTracks</a>

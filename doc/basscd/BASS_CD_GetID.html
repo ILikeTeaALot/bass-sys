@@ -1,0 +1,65 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_GetID</h1>
+<p>Retrieves identification info from the CD in a drive.
+<p><pre class="def">char *BASS_CD_GetID(
+    DWORD <I>drive</I>,
+    DWORD <I>id</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive... 0 = the first drive.
+<tr><td>id<td>The identification to retrieve, one of the following.<br>
+<table>
+<tr><td>BASS_CDID_UPC<td>Returns the catalog number of the CD. The number uses UPC/EAN-code (BAR coding). This might not be available for all CDs.
+<tr><td>BASS_CDID_CDDB<td>Produces a CDDB identifier. This can be used to get details on the CD's contents from a CDDB server.
+<tr><td>BASS_CDID_CDDB_QUERY<td>Sends a "query" command to the configured CDDB server (see <a href="BASS_CONFIG_CD_CDDB_SERVER.html">BASS_CONFIG_CD_CDDB_SERVER</a>) to get a list of matching entries for the CD's CDDB identifier. The contents of each entry can be retrieved via the BASS_CDID_CDDB_READ option.
+<tr><td>BASS_CDID_CDDB_READ + <i>entry</i><td>Sends a "read" command to the configured CDDB server (see <a href="BASS_CONFIG_CD_CDDB_SERVER.html">BASS_CONFIG_CD_CDDB_SERVER</a>) to get a database entry for the CD's CDDB identifier... 0 = first entry.
+<tr><td>BASS_CDID_CDDB_READ_CACHE<td>Returns the cached CDDB "read" command response, if there is one.
+<tr><td>BASS_CDID_CDDB2<td>Produces a CDDB<sup>2</sup> identifier. This can be used to get details on the CD's contents from a CDDB<sup>2</sup> server.
+<tr><td>BASS_CDID_TEXT<td>Retrieves the CD-TEXT information from the CD (see below for details). CD-TEXT is not available on the majority of CDs.
+<tr><td>BASS_CDID_CDPLAYER<td>Produces an identifier that can be used to lookup CD details in the CDPLAYER.INI file, located in the Windows directory.
+<tr><td>BASS_CDID_MUSICBRAINZ<td>Produces an identifier that can be used to get details on the CD's contents from <a href="http://www.musicbrainz.org" target=_blank>MusicBrainz</a>.
+<tr><td>BASS_CDID_ISRC + <i>track</i><td>Returns the International Standard Recording Code of the track... 0 = first track. This might not be available for all CDs.
+</table>
+</table>
+<p><h2>Return value</h2>
+If an error occurs, NULL is returned, use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. If successful, the identification info is returned.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>drive</i> is invalid.
+<tr><td>BASS_ERROR_NOCD<td>There is no CD in the drive.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>id</i> is invalid.
+<tr><td>BASS_ERROR_FILEOPEN<td>Could not send command to CDDB server.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The CD does not have a UPC, ISRC or CD-TEXT info, or the BASS_CDID_CDDB_READ entry number is not valid.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>CD-TEXT tags</h2>
+When requesting CD-TEXT, a series of null-terminated strings is returned (the final string ending in a double null), in the form of "<i>tag</i>=<i>text</i>". The following is a list of all the possible tags. Where <i>&lt;t&gt;</i> is shown, that represents the track number, with "0" being the whole disc/album. For example, "TITLE0" is the album title, while "TITLE1" is the title of the first track.
+<p><table>
+<tr><td>TITLE<i>&lt;t&gt;</i><td>The track (or album) title.
+<tr><td>PERFORMER<i>&lt;t&gt;</i><td>The performer(s).
+<tr><td>SONGWRITER<i>&lt;t&gt;</i><td>The song writer(s).
+<tr><td>COMPOSER<i>&lt;t&gt;</i><td>The composer(s).
+<tr><td>ARRANGER<i>&lt;t&gt;</i><td>The arranger(s).
+<tr><td>MESSAGE<i>&lt;t&gt;</i><td>Message.
+<tr><td>GENRE<i>&lt;t&gt;</i><td>Genre.
+<tr><td>ISRC<i>&lt;t&gt;</i><td>International Standard Recording Code (ISRC) of the track... <i>&lt;t&gt;</i> is never 0.
+<tr><td>UPC<td>UPC/EAN code of the album.
+<tr><td>DISCID<td>Disc identification information.
+</table>
+<p><h2>Remarks</h2>
+The returned identification string will remain in memory until the next call to this function, when it will be overwritten by the next result. If you need to keep the contents of an identification string, you should copy it before calling this function again. Exceptions to that are BASS_CDID_CDDB_QUERY and BASS_CDID_CDDB_READ responses, which are cached separately per-drive. A BASS_CDID_CDDB_QUERY response remains cached while the same CD is in the drive, and a BASS_CDID_CDDB_READ response is cached until a different database entry is requested. The CDDB caches are also cleared whenever the CDDB server is changed via the <a href="BASS_CONFIG_CD_CDDB_SERVER.html">BASS_CONFIG_CD_CDDB_SERVER</a> config option.
+<p>When requesting CDDB identification (BASS_CDID_CDDB), the string returned is what should be used in a CDDB query. The command sent to the CDDB server would be "cddb query &lt;<i>the returned string</i>&gt;". If successful, that results in a list of matching CDs, the contents of which can be retrieved using the "cddb read" command. That is what the BASS_CDID_CDDB_QUERY and BASS_CDID_CDDB_READ options do. Details on the format of CDDB requests and responses can be found here: <a href="http://ftp.freedb.org/pub/freedb/latest/CDDBPROTO" target=_blank>ftp.freedb.org/pub/freedb/latest/CDDBPROTO</a>.
+<p>When commands are sent to a CDDB server via the BASS_CDID_CDDB_QUERY and BASS_CDID_CDDB_READ options, CDDB protocol level 6 is used, which means that the responses are (or should be) in UTF-8 form.
+<p><h2>Example</h2>
+List the CD-TEXT info from the CD in the first drive.
+<pre class="code">
+char *text = BASS_CD_GetID(0, BASS_CDID_TEXT); // request the CD-TEXT
+if (text) // we have got text, display it...
+    while (*text) {
+        printf("%s\n", text); // display the CD-TEXT entry
+        text += strlen(text) + 1; // move on to next entry
+    }
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_CD_IsReady.html">BASS_CD_IsReady</a>

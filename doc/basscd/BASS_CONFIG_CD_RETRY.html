@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_CD_RETRY config option</h1>
+<p>Number of times to retry after a read error.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_CD_RETRY,
+    DWORD <I>retries</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>retries<td>Number of times to retry reading... 0 = do not retry.
+</table>
+<p><h2>Remarks</h2>
+The default is 2 retries.
+<p><h2>See also</h2>
+<a href="BASS_CONFIG_CD_SKIPERROR.html">BASS_CONFIG_CD_SKIPERROR</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_GetConfig.html">BASS_GetConfig</a>, <a href="mk:@MSITStore:bass.chm::/BASS_SetConfig.html">BASS_SetConfig</a>

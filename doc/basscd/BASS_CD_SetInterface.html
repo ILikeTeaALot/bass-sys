@@ -1,0 +1,29 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_SetInterface</h1>
+<p>Sets the interface to use to access CD drives.
+<p><pre class="def">DWORD BASS_CD_SetInterface(
+    DWORD <I>iface</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>iface<td>The interface to use, which can be one of the following.
+<table>
+<tr><td>BASS_CD_IF_AUTO<td>Automatically detect an available interface. The interfaces are checked in the order that they are listed here. For example, if both SPTI and ASPI are available, SPTI will be used.
+<tr><td>BASS_CD_IF_SPTI<td>SCSI Pass-Through Interface. This is only available on NT-based Windows, not Windows 9x, and generally only to administrator user accounts, not limited/restricted user accounts.
+<tr><td>BASS_CD_IF_ASPI<td>Advanced SCSI Programming Interface. This is the only interface available on Windows 9x, and can also be installed on NT-based Windows.
+<tr><td>BASS_CD_IF_WIO<td>Windows I/O. Like SPTI, this is only available on NT-based Windows, but it is also available to limited/restricted user accounts. Some features are not available via this interface, notably sub-channel data reading and read speed control (except on Vista or newer). Door status detection is also affected.
+<tr><td>BASS_CD_IF_LINUX<td>This interface is always used on Linux.
+</table>
+</table>
+<p><h2>Return value</h2>
+If successful, the interface being used is returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_ILLPARAM<td><i>iface</i> is invalid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The interface is not available, or has no drives available.
+</table>
+<p><h2>Remarks</h2>
+The interface can be changed at any time, but any existing CD streams will be freed in doing so. The current interface can also be reinitialized, to detect any newly connected drives.
+<p>Use of this function is optional. If it is not used, BASSCD will automatically detect an available interface.
+<p><h2>See also</h2>
+<a href="BASS_CD_DoorIsLocked.html">BASS_CD_DoorIsLocked</a>, <a href="BASS_CD_DoorIsOpen.html">BASS_CD_DoorIsOpen</a>, <a href="BASS_CD_GetInfo.html">BASS_CD_GetInfo</a>

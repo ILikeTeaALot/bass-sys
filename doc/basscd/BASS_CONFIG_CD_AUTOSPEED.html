@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_CD_AUTOSPEED config option</h1>
+<p>Automatically reduce the read speed when a read error occurs?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_CD_AUTOSPEED,
+    BOOL <I>autospd</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>autospd<td>If TRUE, the read speed will be halved when a read error occurs, before retrying (if the <a href="BASS_CONFIG_CD_RETRY.html">BASS_CONFIG_CD_RETRY</a> config setting allows).
+</table>
+<p><h2>Remarks</h2>
+By default, this option is disabled.
+<p>A <a href="syncs.html">BASS_SYNC_CD_SPEED</a> sync can be set to be informed when the read speed has been automatically changed.
+<p><h2>See also</h2>
+<a href="BASS_CONFIG_CD_RETRY.html">BASS_CONFIG_CD_RETRY</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_GetConfig.html">BASS_GetConfig</a>, <a href="mk:@MSITStore:bass.chm::/BASS_SetConfig.html">BASS_SetConfig</a>

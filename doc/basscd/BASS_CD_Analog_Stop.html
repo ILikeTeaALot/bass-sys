@@ -1,0 +1,21 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_Analog_Stop</h1>
+<p>Stops analog playback on a drive.
+<p><pre class="def">BOOL BASS_CD_Analog_Stop(
+    DWORD <I>drive</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive... 0 = the first drive.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>drive</i> is invalid.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+Pausing can be achieved by getting the position (<a href="BASS_CD_Analog_GetPosition.html">BASS_CD_Analog_GetPosition</a>) just before stopping, and then using that position in a call to <a href="BASS_CD_Analog_Play.html">BASS_CD_Analog_Play</a> to resume.
+<p><h2>See also</h2>
+<a href="BASS_CD_Analog_IsActive.html">BASS_CD_Analog_IsActive</a>, <a href="BASS_CD_Analog_Play.html">BASS_CD_Analog_Play</a>

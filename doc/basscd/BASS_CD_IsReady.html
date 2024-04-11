@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_IsReady</h1>
+<p>Checks if there is a CD ready in a drive.
+<p><pre class="def">BOOL BASS_CD_IsReady(
+    DWORD <I>drive</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive to check... 0 = the first drive.
+</table>
+<p><h2>Return value</h2>
+If there is a CD ready in the drive, then TRUE is returned, else FALSE is returned.
+<p><h2>Remarks</h2>
+This function only returns TRUE once there is a CD in the drive, and it is ready to be accessed.
+<p><h2>See also</h2>
+<a href="BASS_CD_DoorIsOpen.html">BASS_CD_DoorIsOpen</a>

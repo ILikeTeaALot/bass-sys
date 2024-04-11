@@ -1,0 +1,17 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_CD_SKIPERROR config option</h1>
+<p>Skip past errors?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_CD_SKIPERROR,
+    BOOL <I>skip</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>skip<td>If TRUE, reading will skip onto the next frame when a read error occurs, otherwise reading will stop.
+</table>
+<p><h2>Remarks</h2>
+When skipping an error, it will be replaced with silence, so that the track length is unaffected. Before skipping past an error, BASSCD will first retry according to the <a href="BASS_CONFIG_CD_RETRY.html">BASS_CONFIG_CD_RETRY</a> setting.
+<p>By default, this option is enabled.
+<p><h2>See also</h2>
+<a href="BASS_CONFIG_CD_RETRY.html">BASS_CONFIG_CD_RETRY</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_GetConfig.html">BASS_GetConfig</a>, <a href="mk:@MSITStore:bass.chm::/BASS_SetConfig.html">BASS_SetConfig</a>

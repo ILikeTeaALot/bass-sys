@@ -1,0 +1,22 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+
+<h1>BASS_CD_GetSpeed</h1>
+<p>Retrieves the current read speed setting of a drive.
+<p><pre class="def">DWORD BASS_CD_GetSpeed(
+    DWORD <I>drive</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive... 0 = the first drive.
+</table>
+<p><h2>Return value</h2>
+If successful, the read speed (in KB/s) is returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>drive</i> is invalid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The read speed is unavailable.
+</table>
+<p><h2>Remarks</h2>
+Divide the speed by 176.4 to get the real-time speed multiplier, eg. 5645 / 176.4 = "32x speed".
+<p><h2>See also</h2>
+<a href="BASS_CD_GetInfo.html">BASS_CD_GetInfo</a>, <a href="BASS_CD_SetSpeed.html">BASS_CD_SetSpeed</a>

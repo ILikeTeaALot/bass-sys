@@ -1,0 +1,33 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_TOC_TRACK structure</h1>
+<p>A TOC track entry.
+<p><pre class="def">typedef struct {
+    BYTE <i>res1</i>;
+    BYTE <i>adrcon</i>;
+    BYTE <i>track</i>;
+    BYTE <i>res2</i>;
+    union {
+        DWORD <i>lba</i>;
+        BYTE <i>hmsf</i>[4];
+    };
+} BASS_CD_TOC_TRACK;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>res1<td>Unused.
+<tr><td>adrcon<td>ADR (high 4 bits) and control (low 4 bits) fields. The control field indicates the attributes of the track, and may include the following.
+<table>
+<tr><td>BASS_CD_TOC_CON_COPY<td>Digital copy permitted.
+<tr><td>BASS_CD_TOC_CON_DATA<td>Data track.
+<tr><td>BASS_CD_TOC_CON_PRE<td>Pre-emphasis of 50/15 &#181;s.
+</table>
+<tr><td>track<td>The track number... 170 = lead-out area.
+<tr><td>res2<td>Unused.
+<tr><td colspan=2><i>The following contain the start address of the track, depending on whether the BASS_CD_TOC_TIME flag was used in the <a href="BASS_CD_GetTOC.html">BASS_CD_GetTOC</a> call.</i>
+<tr><td>lba<td>The address in LBA (Logical Block Address) form.
+<tr><td>hmsf<td>The address in time form. In order, the 4 bytes contain the address in units of hours, minutes, seconds, and frames. The hours field is always 0, and the minutes field will be above 60 instead if necessary.
+</table>
+</table>
+<p><h2>Remarks</h2>
+If BASS_CD_TOC_INDEX was used in the <a href="BASS_CD_GetTOC.html">BASS_CD_GetTOC</a> call, <i>track</i> will be an index number rather than a track number and <i>lba/hmsf</i> will be the index's offset from the start of the track. The other members are unused.
+<p><h2>See also</h2>
+<a href="BASS_CD_TOC.html">BASS_CD_TOC structure</a>

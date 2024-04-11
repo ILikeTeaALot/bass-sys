@@ -1,0 +1,27 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_StreamGetTrack</h1>
+<p>Retrieves the drive and track number of a CD stream.
+<p><pre class="def">DWORD BASS_CD_StreamGetTrack(
+    HSTREAM <I>handle</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The CD stream handle.
+</table>
+<p><h2>Return value</h2>
+If an error occurs, -1 is returned, use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. If successful, the track number is returned in the low word (low 16-bits), and the drive is returned in the high word (high 16-bits).
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+</table>
+<p><h2>Remarks</h2>
+If the track has just changed, this function will give the new track number even if the old track is still being heard due to buffering. The BASS_POS_CD_TRACK "mode" can be used with <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetPosition.html">BASS_ChannelGetPosition</a> to get the track currently being heard.
+<p><h2>Example</h2>
+Check if a BASS channel is a CD stream, and then display its drive and track number.
+<pre class="code">
+DWORD track = BASS_CD_StreamGetTrack(handle);
+if (track != -1) // it is a CD stream
+    printf("drive = %d, track = %d\n", HIWORD(track), LOWORD(track));
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_CD_StreamCreate.html">BASS_CD_StreamCreate</a>, <a href="BASS_CD_StreamSetTrack.html">BASS_CD_StreamSetTrack</a>

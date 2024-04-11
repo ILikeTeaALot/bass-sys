@@ -1,0 +1,15 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_CD_READ config option</h1>
+<p>Number of frames to read at a time from a CD.
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_CD_READ,
+    DWORD <I>frames</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>frames<td>Number of frames to read at a time.
+</table>
+<p><h2>Remarks</h2>
+The default is to read from CDs in 16 frame blocks. Some drives may perform better with a different number of frames. Changes only affect subsequently created CD streams, not any that already exist.
+<p><h2>See also</h2>
+<a href="mk:@MSITStore:bass.chm::/BASS_GetConfig.html">BASS_GetConfig</a>, <a href="mk:@MSITStore:bass.chm::/BASS_SetConfig.html">BASS_SetConfig</a>

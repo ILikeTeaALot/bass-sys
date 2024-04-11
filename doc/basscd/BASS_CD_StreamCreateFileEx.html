@@ -1,0 +1,49 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_StreamCreateFileEx</h1>
+<p>Creates a sample stream from an audio CD track, using a CDA file on the CD, optionally providing a callback function to receive sub-channel data and/or C2 error info.
+<p><pre class="def">HSTREAM BASS_CD_StreamCreateFileEx(
+    char *<I>file</I>,
+    DWORD <I>flags</I>,
+    <a href="CDDATAPROC.html">CDDATAPROC</a> *<I>proc</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>file<td>The CDA filename... for example, "D:\Track01.cda".
+<tr><td>flags<td>Any combination of these flags.<br>
+<table>
+<tr><td>BASS_SAMPLE_FLOAT<td>Use 32-bit floating-point sample data. See <a href="mk:@MSITStore:bass.chm::/float.html">Floating-point channels</a> for info.
+<tr><td>BASS_SAMPLE_LOOP<td>Loop the file. This flag can be toggled at any time using <a href="mk:@MSITStore:bass.chm::/BASS_ChannelFlags.html">BASS_ChannelFlags</a>.
+<tr><td>BASS_STREAM_AUTOFREE<td>Automatically free the stream when playback ends.
+<tr><td>BASS_STREAM_DECODE<td>Decode the sample data, without playing it. Use <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetData.html">BASS_ChannelGetData</a> to retrieve decoded sample data. The BASS_STREAM_AUTOFREE and SPEAKER flags cannot be used together with this flag.
+<tr><td>BASS_SPEAKER_<i>xxx</i><td><a href="mk:@MSITStore:bass.chm::/speaker.html">Speaker assignment flags</a>.
+<tr><td>BASS_CD_SUBCHANNEL<td>Read sub-channel data. 96 bytes of de-interleaved sub-channel data will be inserted after each 2352 bytes of audio data or delivered to the provided <a href="CDDATAPROC.html">CDDATAPROC</a>. This flag cannot be used without the BASS_STREAM_DECODE flag or with the BASS_SAMPLE_FLOAT flag, unless a <a href="CDDATAPROC.html">CDDATAPROC</a> is provided to receive the sub-channel data.
+<tr><td>BASS_CD_SUBCHANNEL_NOHW<td>Read sub-channel data, without using any hardware de-interleaving. This is identical to the BASS_CD_SUBCHANNEL flag, except that the de-interleaving is always performed by BASSCD even if the drive is apparently capable of de-interleaving itself.
+<tr><td>BASS_CD_C2ERRORS<td>Include C2 error info. 296 bytes of C2 error info is inserted after each 2352 bytes of audio data (and optionally 96 bytes of sub-channel data) or delivered to the provided <a href="CDDATAPROC.html">CDDATAPROC</a>. The first 294 bytes contain the C2 error bits (one bit for each byte of audio), followed by a byte containing the logical "OR" of all 294 bytes, which can be used to quickly check if there were any C2 errors. The final byte is just padding. This flag cannot be used without the BASS_STREAM_DECODE flag or with the BASS_SAMPLE_FLOAT flag, unless a <a href="CDDATAPROC.html">CDDATAPROC</a> is provided to receive the C2 error info.
+<tr><td>BASS_UNICODE<td><i>file</i> is a Unicode (UTF-16) filename.</table>
+<tr><td>proc<td>A callback function to receive sub-channel data and C2 error info... NULL = no callback. If a callback function is provided, sub-channel data and C2 error info will be delivered to it rather than being inserted amongst the sample data.
+<tr><td>user<td>User instance data to pass to the callback function.
+</table>
+<p><h2>Return value</h2>
+If successful, the new stream's handle is returned, else 0 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="mk:@MSITStore:bass.chm::/BASS_Init.html">BASS_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_FILEOPEN<td>The file could not be opened.
+<tr><td>BASS_ERROR_FILEFORM<td>The file was not recognised as a CDA file.
+<tr><td>BASS_ERROR_DEVICE<td>The drive could not be found.
+<tr><td>BASS_ERROR_ALREADY<td>A stream using this drive already exists.
+<tr><td>BASS_ERROR_ILLPARAM<td>The BASS_CD_SUBCHANNEL and BASS_CD_C2ERRORS flags cannot be used without the BASS_STREAM_DECODE flag or with the BASS_SAMPLE_FLOAT flag, unless a <a href="CDDATAPROC.html">CDDATAPROC</a> is provided.
+<tr><td>BASS_ERROR_NOTAVAIL<td>Reading sub-channel data and/or C2 error info is not supported by the drive, or a <a href="BASS_CD_SetOffset.html">read offset</a> is in effect, in which case a <a href="CDDATAPROC.html">CDDATAPROC</a> must be provided to receive sub-channel data or C2 error info.
+<tr><td>BASS_ERROR_FORMAT<td>The sample format is not supported.
+<tr><td>BASS_ERROR_SPEAKER<td>The specified SPEAKER flags are invalid.
+<tr><td>BASS_ERROR_MEM<td>There is insufficient memory.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+This function is identical to <a href="BASS_CD_StreamCreateFile.html">BASS_CD_StreamCreateFile</a>, but with the additional option of providing a callback function to receive sub-channel data and C2 error info.
+<p><h2>Platform-specific</h2>
+CDA files are a feature of Windows, so this function is only available on the Windows platform.
+<p><h2>See also</h2>
+<a href="BASS_CD_GetTracks.html">BASS_CD_GetTracks</a>, <a href="BASS_CD_StreamCreateEx.html">BASS_CD_StreamCreateEx</a>, <a href="BASS_CD_StreamCreateFile.html">BASS_CD_StreamCreateFile</a>, <a href="BASS_CD_StreamSetTrack.html">BASS_CD_StreamSetTrack</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetInfo.html">BASS_ChannelGetInfo</a>, <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetLength.html">BASS_ChannelGetLength</a>, <a href="mk:@MSITStore:bass.chm::/BASS_ChannelPlay.html">BASS_ChannelPlay</a>, <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetAttribute.html">BASS_ChannelSetAttribute</a>, <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetDSP.html">BASS_ChannelSetDSP</a>, <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetFX.html">BASS_ChannelSetFX</a>, <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetLink.html">BASS_ChannelSetLink</a>, <a href="mk:@MSITStore:bass.chm::/BASS_StreamFree.html">BASS_StreamFree</a>

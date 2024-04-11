@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_CD_FREEOLD config option</h1>
+<p>Automatically free an existing stream when creating a new one on the same drive?
+<p><pre class="def">BASS_SetConfig(
+    BASS_CONFIG_CD_FREEOLD,
+    BOOL <I>freeold</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>freeold<td>Free old streams?
+</table>
+<p><h2>Remarks</h2>
+Only one stream can exist at a time per CD drive. So if a stream using the same drive already exists, stream creation function calls will fail, unless this config option is enabled to automatically free the existing stream. This is enabled by default.
+<p><h2>See also</h2>
+<a href="BASS_CD_StreamCreate.html">BASS_CD_StreamCreate</a>, <a href="BASS_CD_StreamCreateFile.html">BASS_CD_StreamCreateFile</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_GetConfig.html">BASS_GetConfig</a>, <a href="mk:@MSITStore:bass.chm::/BASS_SetConfig.html">BASS_SetConfig</a>

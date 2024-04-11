@@ -1,0 +1,33 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_GetTrackPregap</h1>
+<p>Retrieves the pregap length (in bytes) of a track.
+<p><pre class="def">DWORD BASS_CD_GetTrackPregap(
+    DWORD <I>drive</I>,
+    DWORD <I>track</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive... 0 = the first drive.
+<tr><td>track<td>The track to retrieve the pregap length of... 0 = the first track.
+</table>
+<p><h2>Return value</h2>
+If an error occurs, -1 is returned, use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. If successful, the pregap length of the track is returned. To translate the pregap length from bytes to frames, divide by 2352.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>drive</i> is invalid.
+<tr><td>BASS_ERROR_NOCD<td>There is no CD in the drive.
+<tr><td>BASS_ERROR_CDTRACK<td>The <I>track</I> number is invalid.
+<tr><td>BASS_ERROR_NOTAUDIO<td>The track is not an audio track.
+<tr><td>BASS_ERROR_NOTAVAIL<td>Reading sub-channel data is not supported by the drive.
+</table>
+<p><h2>Remarks</h2>
+The drive needs to support sub-channel reading in order to detect all but the first pregap length. <a href="BASS_CD_GetInfo.html">BASS_CD_GetInfo</a> can be used to check whether the drive can read sub-channel data.
+<p>A track's pregap is actually played as part of the preceding track. So to remove the gap from the end of a track, you would get the pregap length of the following track. The gap will usually contain silence, but it does not have to; it could contain crowd noise in a live recording, for example.
+<p><h2>Example</h2>
+Get the length of track 1 minus the ending gap (pregap of track 2).
+<pre class="code">
+DWORD len = BASS_CD_GetTrackLength(0, 0); // get first track length
+len -= BASS_CD_GetTrackPregap(0, 1); // subtract the ending gap
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_CD_GetTrackLength.html">BASS_CD_GetTrackLength</a>, <a href="BASS_CD_GetTracks.html">BASS_CD_GetTracks</a>

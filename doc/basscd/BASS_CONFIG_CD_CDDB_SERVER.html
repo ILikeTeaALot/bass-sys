@@ -1,0 +1,19 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CONFIG_CD_CDDB_SERVER config option</h1>
+<p>The server to use in CDDB requests.
+<p><pre class="def">BASS_SetConfigPtr(
+    BASS_CONFIG_CD_CDDB_SERVER,
+    char *<I>server</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>server<td>The CDDB server address, in the form of "user:pass@server:port/path". The "user:pass@", ":port" and "/path" parts are optional; only the "server" part is required. If not provided, the port and path default to 80 and "/~cddb/cddb.cgi", respectively.
+</table>
+<p><h2>Remarks</h2>
+A copy is made of the provided <i>server</i> string, so it does not need to persist beyond the <a href="mk:@MSITStore:bass.chm::/BASS_SetConfigPtr.html">BASS_SetConfigPtr</a> call. The default setting is "gnudb.gnudb.org".
+<p>The proxy server, as configured via the <a href="mk:@MSITStore:bass.chm::/BASS_CONFIG_NET_PROXY.html">BASS_CONFIG_NET_PROXY</a> option, is used when connecting to the CDDB server.
+<p><h2>Platform-specific</h2>
+On Windows, the BASS_UNICODE flag can be used with a UTF-16 string ("wchar_t" rather than "char").
+<p><h2>See also</h2>
+<a href="BASS_CD_GetID.html">BASS_CD_GetID</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_GetConfigPtr.html">BASS_GetConfigPtr</a>, <a href="mk:@MSITStore:bass.chm::/BASS_SetConfigPtr.html">BASS_SetConfigPtr</a>

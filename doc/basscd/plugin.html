@@ -1,0 +1,6 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>Plugin system</h1>
+<p>As well as providing dedicated stream creation functions, BASSCD supports the BASS plugin system, adding CDA file support to the standard BASS stream and sample creation functions: <a href="mk:@MSITStore:bass.chm::/BASS_StreamCreateFile.html">BASS_StreamCreateFile</a> and <a href="mk:@MSITStore:bass.chm::/BASS_SampleLoad.html">BASS_SampleLoad</a>. This is enabled using the <a href="mk:@MSITStore:bass.chm::/BASS_PluginLoad.html">BASS_PluginLoad</a> function.
+<p>Note that the extra BASSCD flags (eg. BASS_CD_SUBCHANNEL) are not supported via the plugin system; they should only be used with the dedicated functions.
+<p><h2>Platform-specific</h2>
+CDA files are a feature of Windows, so the plugin system is only supported on the Windows platform. Only the dedicated stream creation functions (eg. <a href="BASS_CD_StreamCreate.html">BASS_CD_StreamCreate</a>) are available on other platforms.

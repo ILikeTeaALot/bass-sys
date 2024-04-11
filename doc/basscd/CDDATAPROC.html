@@ -1,0 +1,30 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>CDDATAPROC callback</h1>
+<p>User defined CD data callback function.
+<p><pre class="def">void CALLBACK CDDataProc(
+    HSTREAM <I>handle</I>,
+    int <I>pos</I>,
+    DWORD <I>type</I>,
+    const void *<I>buffer</I>,
+    DWORD <I>length</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The CD stream that provided the data.
+<tr><td>pos<td>The stream position (in bytes) that the data is from.
+<tr><td>type<td>The type of data, which can be one of the following.<br>
+<table>
+<tr><td>BASS_CD_DATA_SUBCHANNEL<td>Sub-channel data.
+<tr><td>BASS_CD_DATA_C2<td>C2 error info.
+</table>
+<tr><td>buffer<td>Pointer to the data.
+<tr><td>length<td>The amount of data in bytes.
+<tr><td>user<td>The user instance data given when <a href="BASS_CD_StreamCreateEx.html">BASS_CD_StreamCreateEx</a> or <a href="BASS_CD_StreamCreateFileEx.html">BASS_CD_StreamCreateFileEx</a> was called.
+</table>
+<p><h2>Remarks</h2>
+Sub-channel data or C2 error info is delivered to this function as soon as it is read from the CD, before the associated audio data is played, or delivered by <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetData.html">BASS_ChannelGetData</a> in the case of a decoding channel. The <i>pos</i> value can be used to synchronize the delivered data with the stream's audio data.
+<p>CDs are read from in units of a frame, and so this function will always receive a whole number of frames' worth of data; there are 96 bytes of sub-channel data per-frame, and 296 bytes of C2 error info. When <a href="BASS_CD_SetOffset.html">BASS_CD_SetOffset</a> has been used to set a read offset, playback may begin mid-frame, and as a result of that, <i>pos</i> may start out negative because the delivered data is from the start of the 1st frame, before where playback will begin from.
+<p>Neither sub-channel data or C2 error info will be delivered in the case of a silenced frame resulting from the <a href="BASS_CONFIG_CD_SKIPERROR.html">BASS_CONFIG_CD_SKIPERROR</a> config option being enabled.
+<p><h2>See also</h2>
+<a href="BASS_CD_StreamCreateEx.html">BASS_CD_StreamCreateEx</a>, <a href="BASS_CD_StreamCreateFileEx.html">BASS_CD_StreamCreateFileEx</a>

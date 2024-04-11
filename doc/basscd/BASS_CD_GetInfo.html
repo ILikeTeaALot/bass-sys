@@ -1,0 +1,28 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_GetInfo</h1>
+<p>Retrieves information on a drive.
+<p><pre class="def">BOOL BASS_CD_GetInfo(
+    DWORD <I>drive</I>,
+    <a href="BASS_CD_INFO.html">BASS_CD_INFO</a> *<I>info</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive to get info on... 0 = the first drive.
+<tr><td>info<td>Pointer to a structure to receive the information.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>drive</i> is invalid.
+</table>
+<p><h2>Example</h2>
+Check if the first drive can read CD-TEXT.
+<pre class="code">
+BASS_CD_INFO info;
+BASS_CD_GetInfo(0, &info);
+if (info.cdtext) {
+    // it can read CD-TEXT!
+}</pre>
+<p><h2>See also</h2>
+<a href="BASS_CD_GetSpeed.html">BASS_CD_GetSpeed</a>, <a href="BASS_CD_INFO.html">BASS_CD_INFO structure</a>

@@ -1,0 +1,16 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_DoorIsLocked</h1>
+<p>Checks if a drive door/tray is locked.
+<p><pre class="def">BOOL BASS_CD_DoorIsLocked(
+    DWORD <I>drive</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive to check... 0 = the first drive.
+</table>
+<p><h2>Return value</h2>
+TRUE is returned if the door is locked, else FALSE is returned.
+<p><h2>Remarks</h2>
+It is not possible to get the drive's current door status via the WIO interface. So the last known status will be returned in that case, which may not be accurate if the door has been locked or unlocked by another application.
+<p><h2>See also</h2>
+<a href="BASS_CD_Door.html">BASS_CD_Door</a>, <a href="BASS_CD_DoorIsOpen.html">BASS_CD_DoorIsOpen</a>, <a href="BASS_CD_IsReady.html">BASS_CD_IsReady</a>, <a href="BASS_CD_SetInterface.html">BASS_CD_SetInterface</a>

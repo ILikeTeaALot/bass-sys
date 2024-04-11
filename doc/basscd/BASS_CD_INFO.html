@@ -1,0 +1,51 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_INFO structure</h1>
+<p>Used with <a href="BASS_CD_GetInfo.html">BASS_CD_GetInfo</a> to retrieve information on a drive.
+<p><pre class="def">typedef struct {
+    char *<i>vendor</i>;
+    char *<i>product</i>;
+    char *<i>rev</i>;
+    int <i>letter</i>;
+    DWORD <i>rwflags</i>;
+    BOOL <i>canopen</i>;
+    BOOL <i>canlock</i>;
+    DWORD <i>maxspeed</i>;
+    DWORD <i>cache</i>;
+    BOOL <i>cdtext</i>;
+} BASS_CD_INFO;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>vendor<td>The drive manufacturer.
+<tr><td>product<td>The drive model.
+<tr><td>rev<td>The revision.
+<tr><td>letter<td>The drive letter... -1=unknown, 0=A, 1=B, etc...
+<tr><td>rwflags<td>The drive's reading and writing capabilities, a combination of the following flags.<br>
+<table>
+<tr><td>BASS_CD_RWFLAG_READANALOG<td>The drive is capable of analog playback.
+<tr><td>BASS_CD_RWFLAG_READC2<td>The drive can provide C2 error info.
+<tr><td>BASS_CD_RWFLAG_READCDDA<td>The drive can read CD audio.
+<tr><td>BASS_CD_RWFLAG_READCDDASIA<td>The drive supports "stream is accurate".
+<tr><td>BASS_CD_RWFLAG_READCDR<td>The drive can read CD-R media.
+<tr><td>BASS_CD_RWFLAG_READCDRW<td>The drive can read CD-RW media.
+<tr><td>BASS_CD_RWFLAG_READCDRW2<td>The drive can read CD-R/RW media where the addressing type is "method 2".
+<tr><td>BASS_CD_RWFLAG_READDVD<td>The drive can read DVD-ROM media.
+<tr><td>BASS_CD_RWFLAG_READDVDR<td>The drive can read DVD-R media.
+<tr><td>BASS_CD_RWFLAG_READDVDRAM<td>The drive can read DVD-RAM media.
+<tr><td>BASS_CD_RWFLAG_READISRC<td>The drive can read ISRC numbers.
+<tr><td>BASS_CD_RWFLAG_READM2F1<td>The drive can read in "mode 2 form 1" format.
+<tr><td>BASS_CD_RWFLAG_READM2F2<td>The drive can read in "mode 2 form 2" format.
+<tr><td>BASS_CD_RWFLAG_READMULTI<td>The drive can read multi-session discs.
+<tr><td>BASS_CD_RWFLAG_READSUBCHAN<td>The drive can read sub-channel data.
+<tr><td>BASS_CD_RWFLAG_READSUBCHANDI<td>The drive can read sub-channel data, and de-interleave it.
+<tr><td>BASS_CD_RWFLAG_READUPC<td>The drive can read UPC numbers.
+</table>
+<tr><td>canopen<td>If TRUE, <a href="BASS_CD_Door.html">BASS_CD_Door</a> can be used to open/close the door.
+<tr><td>canlock<td>If TRUE, <a href="BASS_CD_Door.html">BASS_CD_Door</a> can be used to lock/unlock the door.
+<tr><td>maxspeed<td>The maximum read speed, in kilobytes per second (KB/s). Divide by 176.4 to get the real-time speed multiplier, eg. 5645 / 176.4 = "32x speed".
+<tr><td>cache<td>The drive's cache size, in kilobytes (KB).
+<tr><td>cdtext<td>The drive can read CD-TEXT?
+</table>
+<p><h2>Remarks</h2>
+The <i>rwflags</i>, <i>maxspeed</i> and <i>cache</i> members are unavailable when the WIO interface is used.
+<p><h2>See also</h2>
+<a href="BASS_CD_GetInfo.html">BASS_CD_GetInfo</a>, <a href="BASS_CD_SetInterface.html">BASS_CD_SetInterface</a>

@@ -1,0 +1,27 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_Analog_GetPosition</h1>
+<p>Retrieves the current position on a drive.
+<p><pre class="def">DWORD BASS_CD_Analog_GetPosition(
+    DWORD <I>drive</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive... 0 = the first drive.
+</table>
+<p><h2>Return value</h2>
+If an error occurs, -1 is returned, use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. If successful, the HIWORD contains the track number (0=first), and the LOWORD contains the offset in frames.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>drive</i> is invalid.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Example</h2>
+Get the current position on drive 0, and display it.
+<pre class="code">
+DWORD pos = BASS_CD_Analog_GetPosition(0); // get the position
+DWORD track = HIWORD(pos) + 1; // get track number
+DWORD secs = LOWORD(pos) / 75; // get offset in seconds
+printf("track = %d, pos = %d:%02d\n", track, secs / 60, secs % 60); // display it
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_CD_Analog_IsActive.html">BASS_CD_Analog_IsActive</a>

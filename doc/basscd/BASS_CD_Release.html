@@ -1,0 +1,21 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_Release</h1>
+<p>Releases a drive to allow other applications to access it.
+<p><pre class="def">BOOL BASS_CD_Release(
+    DWORD <I>drive</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive to release... 0 = the first drive.
+</table>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>drive</i> is invalid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The ASPI interface is being used.
+</table>
+<p><h2>Remarks</h2>
+When using the SPTI interface, some applications may require BASSCD to release a CD drive before the app is able to use it. After a drive has been released, BASSCD will attempt to re-acquire it in the next BASSCD function call made on it.
+<p><h2>See also</h2>
+<a href="BASS_CD_SetInterface.html">BASS_CD_SetInterface</a>

@@ -1,0 +1,41 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_GetTOC</h1>
+<p>Retrieves the TOC from the CD in a drive.
+<p><pre class="def">BOOL BASS_CD_GetTOC(
+    DWORD <I>drive</I>,
+    DWORD <i>mode</i>,
+    <a href="BASS_CD_TOC.html">BASS_CD_TOC</a> *<I>toc</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive to get info on... 0 = the first drive.
+<tr><td>mode<td>Optionally, the following.<br>
+<table>
+<tr><td>BASS_CD_TOC_INDEX<br><i>+ track number (0=first)</i><td>Get the position of a track's indexes.
+<tr><td>BASS_CD_TOC_TIME<td>Get the track (or index) start address in time form, else in LBA form.
+</table>
+<tr><td>toc<td>Pointer to a structure to receive the TOC.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>drive</i> is invalid.
+<tr><td>BASS_ERROR_NOCD<td>There is no CD in the drive.
+<tr><td>BASS_ERROR_CDTRACK<td>An invalid track was requested with BASS_CD_TOC_INDEX.
+</table>
+<p><h2>Remarks</h2>
+This function gives the TOC in the form that it is delivered by the drive, except that the byte order may be changed to match the system's native byte order (the TOC is originally big-endian).
+<p><h2>Example</h2>
+List the TOC track entries on the CD in the first drive, using time addressing.
+<pre class="code">
+BASS_CD_TOC toc;
+if (BASS_CD_GetTOC(0, BASS_CD_TOC_TIME, &toc)) {
+    int a;
+    for (a = 0; a &lt; toc.size / sizeof(BASS_CD_TOC_TRACK); a++) {
+        printf("track %u: adrcon=%x start=%02u:%02u:%02u\n",
+            toc.tracks[a].track, toc.tracks[a].adrcon, toc.tracks[a].hmsf[1], toc.tracks[a].hmsf[2], toc.tracks[a].hmsf[3]);
+    }
+}</pre>
+<p><h2>See also</h2>
+<a href="BASS_CD_TOC.html">BASS_CD_TOC structure</a>

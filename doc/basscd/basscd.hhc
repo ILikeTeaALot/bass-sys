@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASSCD.TXT">
+		<param name="Local" value="basscd.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Config">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CONFIG_CD_AUTOSPEED">
+			<param name="Local" value="BASS_CONFIG_CD_AUTOSPEED.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CONFIG_CD_CDDB_SERVER">
+			<param name="Local" value="BASS_CONFIG_CD_CDDB_SERVER.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CONFIG_CD_FREEOLD">
+			<param name="Local" value="BASS_CONFIG_CD_FREEOLD.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CONFIG_CD_READ">
+			<param name="Local" value="BASS_CONFIG_CD_READ.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CONFIG_CD_RETRY">
+			<param name="Local" value="BASS_CONFIG_CD_RETRY.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CONFIG_CD_SKIPERROR">
+			<param name="Local" value="BASS_CONFIG_CD_SKIPERROR.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Drive information, etc...">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_GetInfo">
+			<param name="Local" value="BASS_CD_GetInfo.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_GetSpeed">
+			<param name="Local" value="BASS_CD_GetSpeed.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_Door">
+			<param name="Local" value="BASS_CD_Door.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_DoorIsLocked">
+			<param name="Local" value="BASS_CD_DoorIsLocked.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_DoorIsOpen">
+			<param name="Local" value="BASS_CD_DoorIsOpen.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_SetInterface">
+			<param name="Local" value="BASS_CD_SetInterface.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_SetOffset">
+			<param name="Local" value="BASS_CD_SetOffset.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_SetSpeed">
+			<param name="Local" value="BASS_CD_SetSpeed.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_Release">
+			<param name="Local" value="BASS_CD_Release.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Structures">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CD_INFO">
+				<param name="Local" value="BASS_CD_INFO.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Disc information">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_IsReady">
+			<param name="Local" value="BASS_CD_IsReady.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_GetID">
+			<param name="Local" value="BASS_CD_GetID.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_GetTOC">
+			<param name="Local" value="BASS_CD_GetTOC.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_GetTracks">
+			<param name="Local" value="BASS_CD_GetTracks.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_GetTrackLength">
+			<param name="Local" value="BASS_CD_GetTrackLength.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_GetTrackPregap">
+			<param name="Local" value="BASS_CD_GetTrackPregap.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Structures">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CD_TOC">
+				<param name="Local" value="BASS_CD_TOC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="BASS_CD_TOC_TRACK">
+				<param name="Local" value="BASS_CD_TOC_TRACK.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Streams">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_StreamCreate">
+			<param name="Local" value="BASS_CD_StreamCreate.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_StreamCreateEx">
+			<param name="Local" value="BASS_CD_StreamCreateEx.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_StreamCreateFile">
+			<param name="Local" value="BASS_CD_StreamCreateFile.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_StreamCreateFileEx">
+			<param name="Local" value="BASS_CD_StreamCreateFileEx.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_StreamGetTrack">
+			<param name="Local" value="BASS_CD_StreamGetTrack.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_StreamSetTrack">
+			<param name="Local" value="BASS_CD_StreamSetTrack.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="CD syncs">
+			<param name="Local" value="syncs.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Plugin system">
+			<param name="Local" value="plugin.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Callback functions">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="CDDATAPROC">
+				<param name="Local" value="CDDATAPROC.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Analog playback">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_Analog_GetPosition">
+			<param name="Local" value="BASS_CD_Analog_GetPosition.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_Analog_IsActive">
+			<param name="Local" value="BASS_CD_Analog_IsActive.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_Analog_Play">
+			<param name="Local" value="BASS_CD_Analog_Play.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_Analog_PlayFile">
+			<param name="Local" value="BASS_CD_Analog_PlayFile.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_CD_Analog_Stop">
+			<param name="Local" value="BASS_CD_Analog_Stop.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+	</UL>
+</UL>
+

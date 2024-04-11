@@ -1,0 +1,37 @@
+<!doctype html><html><HEAD><LINK REL="stylesheet" TYPE="text/css" href="bass.css"></HEAD>
+<BODY>
+<h1>BASS_CD_Analog_Play</h1>
+<p>Starts analog playback of an audio CD track.
+<p><pre class="def">BOOL BASS_CD_Analog_Play(
+    DWORD <I>drive</I>,
+    DWORD <I>track</I>,
+    DWORD <I>pos</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>drive<td>The drive... 0 = the first drive.
+<tr><td>track<td>The track... 0 = the first track.
+<tr><td>pos<td>Position in frames to start playback from. There are 75 frames per second.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_DEVICE<td><i>drive</i> is invalid.
+<tr><td>BASS_ERROR_NOCD<td>There is no CD in the drive.
+<tr><td>BASS_ERROR_CDTRACK<td><I>track</I> is invalid.
+<tr><td>BASS_ERROR_NOTAUDIO<td>The track is not an audio track.
+<tr><td>BASS_ERROR_POSITION<td><I>pos</I> is invalid.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+Some old CD drives may not be able to digitally extract audio data (or not quickly enough to sustain playback), so that it is not possible to use <a href="BASS_CD_StreamCreate.html">BASS_CD_StreamCreate</a> to stream CD tracks. This is where the analog playback option can come in handy.<p>
+<p>In analog playback, the sound bypasses BASS; it goes directly from the CD drive to the soundcard (assuming the drive is cabled up to the soundcard). This means that BASS output does not need to be initialized to use analog playback. It also means that it is not possible to apply any DSP/FX to the sound, and nor is it possible to visualise it (unless you record the sound from the soundcard).
+<p>Analog playback is not possible while digital streaming is in progress; the streaming will kill the analog playback. So if you wish to switch from digital to analog playback, you should first free the stream using <a href="mk:@MSITStore:bass.chm::/BASS_StreamFree.html">BASS_StreamFree</a>.
+<p><h2>Example</h2>
+Play track 3 on drive 0, starting at the 10 second point.
+<pre class="code">
+BASS_CD_Analog_Play(0, 3, 10 * 75);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_CD_Analog_GetPosition.html">BASS_CD_Analog_GetPosition</a>, <a href="BASS_CD_Analog_IsActive.html">BASS_CD_Analog_IsActive</a>, <a href="BASS_CD_Analog_Stop.html">BASS_CD_Analog_Stop</a>, <a href="BASS_CD_GetTracks.html">BASS_CD_GetTracks</a>, <a href="BASS_CD_StreamCreate.html">BASS_CD_StreamCreate</a>

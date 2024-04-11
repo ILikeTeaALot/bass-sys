@@ -1,0 +1,27 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_CD_StreamSetTrack</h1>
+<p>Changes the track of a CD stream.
+<p><pre class="def">BOOL BASS_CD_StreamSetTrack(
+    HSTREAM <I>handle</I>,
+    DWORD <I>track</I>
+);</pre>
+
+<p><h2>Parameters</h2>
+<table>
+<tr><td>handle<td>The CD stream handle.
+<tr><td>track<td>The new track... 0 = the first track, BASS_CD_TRACK_PREGAP = 1st track pregap (not all drives support reading of the 1st track pregap).
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_HANDLE<td><I>handle</I> is not valid.
+<tr><td>BASS_ERROR_NOCD<td>There is no CD in the drive.
+<tr><td>BASS_ERROR_CDTRACK<td><I>track</I> is invalid.
+<tr><td>BASS_ERROR_NOTAUDIO<td>The track is not an audio track.
+</table>
+<p><h2>Remarks</h2>
+The stream's current position is set to the start of the new track.
+<p>This function is identical to using the BASS_POS_CD_TRACK "mode" with <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetPosition.html">BASS_ChannelSetPosition</a>. Either can be used with a BASS_SYNC_END sync (set via <a href="mk:@MSITStore:bass.chm::/BASS_ChannelSetSync.html">BASS_ChannelSetSync</a>) to play one track after another.
+<p><h2>See also</h2>
+<a href="BASS_CD_StreamCreate.html">BASS_CD_StreamCreate</a>, <a href="BASS_CD_StreamGetTrack.html">BASS_CD_StreamGetTrack</a>
