@@ -1,4 +1,5 @@
 use std::alloc::{self, Layout, LayoutError};
+use std::ops::{Deref, Not};
 use std::os::raw::{c_char, c_void};
 
 pub type BYTE = u8;
@@ -6,8 +7,23 @@ pub type WORD = u16;
 pub type DWORD = u32;
 pub type QWORD = u64;
 // pub type BOOL = i32;
+
+// Implements both `Default` and `AsRef<bool>`.
+//
+// AsRef<bool> allows this to be used in `if` statements as if it were a regular `bool`.
+//
+/// ```
+/// use bass_sys::*;
+/// let demo_bool = BASS_RecordFree();
+///
+/// if demo_bool == TRUE {
+/// 	// true
+/// } else {
+/// 	// false
+/// }
+/// ```
 #[derive(Clone, Debug, PartialEq, Eq)]
-#[repr(i32)]
+#[repr(u32)]
 pub enum BOOL {
 	FALSE = 0,
 	TRUE = 1,
@@ -17,6 +33,53 @@ impl Default for BOOL {
     fn default() -> Self {
         Self::FALSE
     }
+}
+
+impl Not for BOOL {
+	type Output = bool;
+
+	fn not(self) -> Self::Output {
+		!match self {
+			BOOL::FALSE => false,
+			_ => true,
+		}
+		// !(&self as &bool)
+	}
+}
+
+impl AsRef<bool> for BOOL {
+	fn as_ref(&self) -> &bool {
+		&self
+	}
+}
+
+// impl Into<bool> for BOOL {
+// 	fn into(self) -> bool {
+// 		match self {
+// 			BOOL::FALSE => false,
+// 			_ => true,
+// 		}
+// 	}
+// }
+
+impl From<BOOL> for bool {
+	fn from(value: BOOL) -> Self {
+		match value {
+			BOOL::FALSE => false,
+			_ => true,
+		}
+	}
+}
+
+impl Deref for BOOL {
+	type Target = bool;
+
+	fn deref(&self) -> &Self::Target {
+		match self {
+			BOOL::FALSE => &false,
+			_ => &true,
+		}
+	}
 }
 
 /// Nice little short-hand for if statements
@@ -33,6 +96,34 @@ pub type HSYNC = DWORD;
 pub type HDSP = DWORD;
 pub type HFX = DWORD;
 pub type HPLUGIN = DWORD;
+// Attempt to use structs instead...
+// #[repr(transparent)]
+// #[derive(Clone,Debug, Deref)]
+// pub struct HMUSIC(pub DWORD);
+// #[repr(transparent)]
+// #[derive(Clone,Debug, Deref)]
+// pub struct HSAMPLE(pub DWORD);
+// #[repr(transparent)]
+// #[derive(Clone,Debug, Deref)]
+// pub struct HCHANNEL(pub DWORD);
+// #[repr(transparent)]
+// #[derive(Clone,Debug, Deref)]
+// pub struct HSTREAM(pub DWORD);
+// #[repr(transparent)]
+// #[derive(Clone,Debug, Deref)]
+// pub struct HRECORD(pub DWORD);
+// #[repr(transparent)]
+// #[derive(Clone,Debug, Deref)]
+// pub struct HSYNC(pub DWORD);
+// #[repr(transparent)]
+// #[derive(Clone,Debug, Deref)]
+// pub struct HDSP(pub DWORD);
+// #[repr(transparent)]
+// #[derive(Clone,Debug, Deref)]
+// pub struct HFX(pub DWORD);
+// #[repr(transparent)]
+// #[derive(Clone,Debug, Deref)]
+// pub struct HPLUGIN(pub DWORD);
 
 pub type STREAMPROC = extern "C" fn(HSTREAM, *mut c_void, DWORD, *mut c_void) -> DWORD;
 pub type FILECLOSEPROC = extern "C" fn(*mut c_void);
@@ -40,7 +131,7 @@ pub type FILELENPROC = extern "C" fn(*mut c_void) -> QWORD;
 pub type FILEREADPROC = extern "C" fn(*mut c_void, DWORD, *mut c_void) -> DWORD;
 pub type FILESEEKPROC = extern "C" fn(QWORD, *mut c_void) -> BOOL;
 pub type DOWNLOADPROC = extern "C" fn(*mut c_void, DWORD, *mut c_void);
-pub type SYNCPROC = extern "C" fn(HSYNC, DWORD, DWORD, *mut c_void);
+pub type SYNCPROC<T = c_void> = extern "C" fn(HSYNC, DWORD, DWORD, *mut T);
 pub type DSPPROC = extern "C" fn(HDSP, DWORD, *mut c_void, DWORD, *mut c_void);
 pub type RECORDPROC = extern "C" fn(HRECORD, *mut c_void, DWORD, *mut c_void) -> BOOL;
 pub type IOSNOTIFYPROC = extern "C" fn(DWORD);
@@ -571,7 +662,7 @@ pub struct TagCue {
 
 impl TagCue {
     pub fn new<T: AsRef<[TagCuePoint]>>(cue_points_count: DWORD, cue_points: &T) -> Result<Box<Self>, LayoutError> {
-        assert!(cue_points_count as usize == cue_points.as_ref().len());
+        assert_eq!(cue_points_count as usize, cue_points.as_ref().len());
 
         let cue_points_layout = Layout::array::<TagCuePoint>(cue_points.as_ref().len())?;
         let (tag_cue_layout, _) = Layout::new::<TagCue>()
@@ -653,7 +744,7 @@ impl TagSample {
         sampler_data: DWORD,
         sample_loops: &T,
     ) -> Result<Box<Self>, LayoutError> {
-        assert!(sample_loops_count as usize == sample_loops.as_ref().len());
+        assert_eq!(sample_loops_count as usize, sample_loops.as_ref().len());
 
         let sample_loops_layout = Layout::array::<TagSampleLoop>(sample_loops.as_ref().len())?;
         let (tag_sample_layout, _) = Layout::new::<TagSample>()
@@ -666,7 +757,7 @@ impl TagSample {
             alloc::handle_alloc_error(tag_sample_layout);
         }
 
-        unsafe { 
+        unsafe {
             (*tag_sample).manufacturer = manufacturer;
             (*tag_sample).product = product;
             (*tag_sample).sample_period = sample_period;
