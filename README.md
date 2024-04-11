@@ -11,3 +11,9 @@ bass-sys provides only the bass bindings. To make it actually work with your pro
 # License
 
 By using this project, you agree to adhere to the license conditions of both this library (MPL-2.0) and bass itself.
+
+# Generating Docs
+
+```shell
+cargo doc --all-features --target x86_64-pc-windows-msvc
+```

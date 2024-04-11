@@ -6,6 +6,7 @@ use std::error::Error;
 use std::path::PathBuf;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    generate_bindings();
-	prepare_docs()
+    generate_bindings()?;
+	prepare_docs()?;
+	Ok(())
 }

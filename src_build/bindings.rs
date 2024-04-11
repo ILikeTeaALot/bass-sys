@@ -1,10 +1,13 @@
+use std::{env, fs};
+use std::error::Error;
 use std::path::PathBuf;
 use bindgen::{AliasVariation, EnumVariation};
 
-pub fn generate_bindings() {
+pub fn generate_bindings() -> Result<(), Box<dyn Error>> {
 	// Write the bindings to the $OUT_DIR/bindings.rs file.
-	// let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
-	let out_path = PathBuf::from("./src");
+	let out_path = PathBuf::from(env::var("OUT_DIR")?);
+	fs::create_dir_all(out_path.join("bindings"))?;
+	// let out_path = PathBuf::from("./src");
 
 	// The bindgen::Builder is the main entry point
 	// to bindgen, and lets you build up options for
@@ -34,8 +37,11 @@ pub fn generate_bindings() {
 		.blocklist_item("BOOL")
 		// .default_visibility(FieldVisibilityKind::Private)
 		.no_copy(".*PROC.*")
+		.type_alias(".*BYTE.*")
 		.type_alias(".*WORD.*")
 		.type_alias(".*PROC.*")
+		// .new_type_alias_deref(".*STREAMPROC.*")
+		.new_type_alias(".*STREAMPROC.*")
 		// .type_alias("BOOL")
 		// Impls and Derives
 		.derive_partialeq(true)
@@ -56,6 +62,8 @@ pub fn generate_bindings() {
 		.header("bass.h")
 		// We override the BOOL definition
 		.raw_line(include_str!("./bool.rs"))
+		.raw_line(include_str!("./streamproc.rs"))
+		// .raw_line(include_str!("./makelong.rs"))
 		// Finish the builder and generate the bindings.
 		.generate()
 		// Unwrap the Result and panic on failure.
@@ -67,10 +75,6 @@ pub fn generate_bindings() {
 		// Block bass.h items
 		.blocklist_item(".*WORD.*")
 		.blocklist_item("BYTE")
-		// For names of items
-		.raw_line("#![allow(non_upper_case_globals)]")
-		.raw_line("#![allow(non_camel_case_types)]")
-		.raw_line("#![allow(non_snake_case)]")
 		// For non-core files
 		.raw_line("use super::bass::*;");
 
@@ -125,4 +129,6 @@ pub fn generate_bindings() {
 		.expect("Unable to generate bindings")
 		.write_to_file(out_path.join("bindings/bass_loud.rs"))
 		.expect("Couldn't write bindings!");
+
+	Ok(())
 }
