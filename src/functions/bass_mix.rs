@@ -1,7 +1,7 @@
 use once_cell::sync::Lazy;
 
 use crate::{
-	bindings::*, generate_bindings, include_doc
+	bindings::*, generate_bindings
 };
 use std::os::raw::{c_int, c_void};
 use crate::dword::AsDWORD;
@@ -19,11 +19,6 @@ static BASS_MIX_LIBRARY: Lazy<BASS_Mix> = Lazy::new(|| {
 		panic!("Failed to load the library.");
 	}
 });
-
-// #[doc = include_str!("../doc/bassmix/BASS_Mixer_StreamCreate.html")]
-// fn test() {
-//
-// }
 
 generate_bindings! {
 	BASS_MIX_LIBRARY;

@@ -3,7 +3,6 @@ use once_cell::sync::Lazy;
 use crate::{
 	bindings::*, generate_bindings
 };
-use std::os::raw::{c_int, c_void};
 use crate::dword::AsDWORD;
 
 static BASS_LOUD_LIBRARY: Lazy<BASS_Loud> = Lazy::new(|| {
