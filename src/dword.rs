@@ -8,13 +8,19 @@ macro_rules! generate_impls {
 			}
 		}
 
+		impl Into<DWORD> for $item {
+			fn into(self) -> DWORD {
+				self.0
+			}
+		}
+
 		impl PartialEq<u32> for $item {
 			fn eq(&self, other: &u32) -> bool {
-				*self == *other
+				self.0 == *other
 			}
 
 			fn ne(&self, other: &u32) -> bool {
-				*self != *other
+				self.0 != *other
 			}
 		}
 	};
@@ -46,31 +52,38 @@ macro_rules! generate_impls {
 /// ```
 /// use bass_sys::*;
 ///
-/// fn main() {
+/// fn main() -> Result<(), DWORD> {
 ///     let sample = BASS_SampleCreate(10, 44100, 2, 10, 0);
+///     do_a_thing(sample)?;
+///     Ok(())
 /// }
 ///
-/// fn do_a_thing(channel: impl AsDWORD) {
-///
+/// fn do_a_thing(channel: impl AsDWORD) -> Result<(), DWORD> {
+///     match BASS_ChannelPause(channel.to()) {
+///         BOOL::FALSE => Err(BASS_ErrorGetCode() as DWORD),
+/// 		BOOL::TRUE => Ok(())
+/// 	}
 /// }
 /// ```
 pub trait AsDWORD {
 	fn to(self) -> DWORD;
 }
 
-/// BASS Plugin handle
+// BASS Plugin handle
 generate_impls!(HPLUGIN);
-/// MOD/MO3 handles
+// MOD/MO3 handles
 generate_impls!(HMUSIC);
 generate_impls!(HSAMPLE);
 generate_impls!(HCHANNEL);
-/// Recording "Channel" handle
+// Recording "Channel" handle
 generate_impls!(HRECORD);
-/// File/Other stream handle
+// File/Other stream handle
 generate_impls!(HSTREAM);
-/// SyncProc Sync handle
+// SyncProc Sync handle
 generate_impls!(HSYNC);
+// BASS_Fx Effects
 generate_impls!(HFX);
+// DSP effects
 generate_impls!(HDSP);
 #[cfg(feature = "bassloud")]
 generate_impls!(HLOUDNESS);
