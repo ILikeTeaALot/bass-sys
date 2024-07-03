@@ -33,8 +33,8 @@ generate_bindings! {
     pub fn BASS_CD_GetID(drive.into(): impl Into<DWORD>, id.into(): impl Into<DWORD>) -> *const ::std::os::raw::c_char;
     pub fn BASS_CD_GetSpeed(drive.into(): impl Into<DWORD>) -> DWORD;
     pub fn BASS_CD_SetSpeed(drive.into(): impl Into<DWORD>, speed.into(): impl Into<DWORD>) -> bool;
-    pub fn BASS_CD_GetCache(drive.into(): impl Into<DWORD>) -> DWORD;
-    pub fn BASS_CD_SetCache(drive.into(): impl Into<DWORD>, enable: BOOL) -> bool;
+    // pub fn BASS_CD_GetCache(drive.into(): impl Into<DWORD>) -> DWORD;
+    // pub fn BASS_CD_SetCache(drive.into(): impl Into<DWORD>, enable: BOOL) -> bool;
     pub fn BASS_CD_SetOffset(drive.into(): impl Into<DWORD>, offset: ::std::os::raw::c_int) -> bool;
     pub fn BASS_CD_Release(drive.into(): impl Into<DWORD>) -> bool;
     pub fn BASS_CD_StreamCreate(drive.into(): impl Into<DWORD>, track.into(): impl Into<DWORD>, flags.into(): impl Into<DWORD>) -> HSTREAM;
