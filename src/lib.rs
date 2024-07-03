@@ -7,9 +7,9 @@ pub use types::*;
 pub mod functions;
 mod macros;
 mod bindings;
-mod dword;
+mod impls;
 
-pub use dword::*;
+pub use impls::*;
 
 pub mod consts {
 	pub use crate::bindings::*;
@@ -23,11 +23,11 @@ pub mod types {
 	pub type BassDeviceInfo = BASS_DEVICEINFO;
 
 	impl BASS_DEVICEINFO {
-		pub fn new(name: *const c_char, driver: *const c_char, flags: DWORD) -> Self {
+		pub fn new(name: *const c_char, driver: *const c_char, flags: impl Into<DWORD>) -> Self {
 			Self {
 				name,
 				driver,
-				flags,
+				flags: flags.into(),
 			}
 		}
 	}
@@ -38,7 +38,7 @@ pub mod types {
 
 	pub type BassSample = BASS_SAMPLE;
 
-	pub type BassChannelInfo = BASS_CHANNELINFO;
+	// pub type BassChannelInfo = BASS_CHANNELINFO;
 
 	pub type BassPluginForm = BASS_PLUGINFORM;
 
@@ -46,5 +46,5 @@ pub mod types {
 
 	pub type Bass3DVector = BASS_3DVECTOR;
 
-	pub type BassFileProcs = BASS_FILEPROCS;
+	// pub type BassFileProcs = BASS_FILEPROCS;
 }

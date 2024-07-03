@@ -4,7 +4,6 @@ use crate::{
     bindings::*, generate_bindings
 };
 use std::os::raw::{c_int, c_void};
-use crate::dword::AsDWORD;
 
 static BASS_CD_LIBRARY: Lazy<BASS_CD> = Lazy::new(|| {
     #[cfg(target_os = "windows")]
@@ -21,43 +20,43 @@ static BASS_CD_LIBRARY: Lazy<BASS_CD> = Lazy::new(|| {
 generate_bindings! {
 	BASS_CD_LIBRARY;
 	"/doc/basscd/";
-    fn BASS_CD_SetInterface(iface: DWORD) -> DWORD;
-    fn BASS_CD_GetInfo(drive: DWORD, info: *mut BASS_CD_INFO) -> BOOL;
-    fn BASS_CD_Door(drive: DWORD, action: DWORD) -> BOOL;
-    fn BASS_CD_DoorIsOpen(drive: DWORD) -> BOOL;
-    fn BASS_CD_DoorIsLocked(drive: DWORD) -> BOOL;
-    fn BASS_CD_IsReady(drive: DWORD) -> BOOL;
-    fn BASS_CD_GetTracks(drive: DWORD) -> DWORD;
-    fn BASS_CD_GetTrackLength(drive: DWORD, track: DWORD) -> DWORD;
-    fn BASS_CD_GetTrackPregap(drive: DWORD, track: DWORD) -> DWORD;
-    fn BASS_CD_GetTOC(drive: DWORD, mode: DWORD, toc: *mut BASS_CD_TOC) -> BOOL;
-    fn BASS_CD_GetID(drive: DWORD, id: DWORD) -> *const ::std::os::raw::c_char;
-    fn BASS_CD_GetSpeed(drive: DWORD) -> DWORD;
-    fn BASS_CD_SetSpeed(drive: DWORD, speed: DWORD) -> BOOL;
-    fn BASS_CD_GetCache(drive: DWORD) -> DWORD;
-    fn BASS_CD_SetCache(drive: DWORD, enable: BOOL) -> BOOL;
-    fn BASS_CD_SetOffset(drive: DWORD, offset: ::std::os::raw::c_int) -> BOOL;
-    fn BASS_CD_Release(drive: DWORD) -> BOOL;
-    fn BASS_CD_StreamCreate(drive: DWORD, track: DWORD, flags: DWORD) -> HSTREAM;
-    fn BASS_CD_StreamCreateFile(file: *const ::std::os::raw::c_char, flags: DWORD) -> HSTREAM;
-    fn BASS_CD_StreamCreateEx(
-        drive: DWORD,
-        track: DWORD,
-        flags: DWORD,
-        proc_: CDDATAPROC,
+    pub fn BASS_CD_SetInterface(iface.into(): impl Into<DWORD>) -> DWORD;
+    pub fn BASS_CD_GetInfo(drive.into(): impl Into<DWORD>, info: &mut BASS_CD_INFO as *mut BASS_CD_INFO) -> bool;
+    pub fn BASS_CD_Door(drive.into(): impl Into<DWORD>, action.into(): impl Into<DWORD>) -> bool;
+    pub fn BASS_CD_DoorIsOpen(drive.into(): impl Into<DWORD>) -> bool;
+    pub fn BASS_CD_DoorIsLocked(drive.into(): impl Into<DWORD>) -> bool;
+    pub fn BASS_CD_IsReady(drive.into(): impl Into<DWORD>) -> bool;
+    pub fn BASS_CD_GetTracks(drive.into(): impl Into<DWORD>) -> DWORD;
+    pub fn BASS_CD_GetTrackLength(drive.into(): impl Into<DWORD>, track.into(): impl Into<DWORD>) -> DWORD;
+    pub fn BASS_CD_GetTrackPregap(drive.into(): impl Into<DWORD>, track.into(): impl Into<DWORD>) -> DWORD;
+    pub fn BASS_CD_GetTOC(drive.into(): impl Into<DWORD>, mode.into(): impl Into<DWORD>, toc: &mut BASS_CD_TOC as *mut BASS_CD_TOC) -> bool;
+    pub fn BASS_CD_GetID(drive.into(): impl Into<DWORD>, id.into(): impl Into<DWORD>) -> *const ::std::os::raw::c_char;
+    pub fn BASS_CD_GetSpeed(drive.into(): impl Into<DWORD>) -> DWORD;
+    pub fn BASS_CD_SetSpeed(drive.into(): impl Into<DWORD>, speed.into(): impl Into<DWORD>) -> bool;
+    pub fn BASS_CD_GetCache(drive.into(): impl Into<DWORD>) -> DWORD;
+    pub fn BASS_CD_SetCache(drive.into(): impl Into<DWORD>, enable: BOOL) -> bool;
+    pub fn BASS_CD_SetOffset(drive.into(): impl Into<DWORD>, offset: ::std::os::raw::c_int) -> bool;
+    pub fn BASS_CD_Release(drive.into(): impl Into<DWORD>) -> bool;
+    pub fn BASS_CD_StreamCreate(drive.into(): impl Into<DWORD>, track.into(): impl Into<DWORD>, flags.into(): impl Into<DWORD>) -> HSTREAM;
+    pub fn BASS_CD_StreamCreateFile(file: *const ::std::os::raw::c_char, flags.into(): impl Into<DWORD>) -> HSTREAM;
+    pub fn BASS_CD_StreamCreateEx(
+        drive.into(): impl Into<DWORD>,
+        track.into(): impl Into<DWORD>,
+        flags.into(): impl Into<DWORD>,
+        proc: CDDATAPROC,
         user: *mut ::std::os::raw::c_void,
     ) -> HSTREAM;
-    fn BASS_CD_StreamCreateFileEx(
+    pub fn BASS_CD_StreamCreateFileEx(
         file: *const ::std::os::raw::c_char,
-        flags: DWORD,
-        proc_: CDDATAPROC,
+        flags.into(): impl Into<DWORD>,
+        proc: CDDATAPROC,
         user: *mut ::std::os::raw::c_void,
     ) -> HSTREAM;
-    fn BASS_CD_StreamGetTrack(handle: HSTREAM) -> DWORD;
-    fn BASS_CD_StreamSetTrack(handle: HSTREAM, track: DWORD) -> BOOL;
-    fn BASS_CD_Analog_Play(drive: DWORD, track: DWORD, pos: DWORD) -> BOOL;
-    fn BASS_CD_Analog_PlayFile(file: *const ::std::os::raw::c_char, pos: DWORD) -> DWORD;
-    fn BASS_CD_Analog_Stop(drive: DWORD) -> BOOL;
-    fn BASS_CD_Analog_IsActive(drive: DWORD) -> DWORD;
-    fn BASS_CD_Analog_GetPosition(drive: DWORD) -> DWORD;
+    pub fn BASS_CD_StreamGetTrack(handle: HSTREAM) -> DWORD;
+    pub fn BASS_CD_StreamSetTrack(handle: HSTREAM, track.into(): impl Into<DWORD>) -> bool;
+    pub fn BASS_CD_Analog_Play(drive.into(): impl Into<DWORD>, track.into(): impl Into<DWORD>, pos.into(): impl Into<DWORD>) -> bool;
+    pub fn BASS_CD_Analog_PlayFile(file: *const ::std::os::raw::c_char, pos.into(): impl Into<DWORD>) -> DWORD;
+    pub fn BASS_CD_Analog_Stop(drive.into(): impl Into<DWORD>) -> bool;
+    pub fn BASS_CD_Analog_IsActive(drive.into(): impl Into<DWORD>) -> DWORD;
+    pub fn BASS_CD_Analog_GetPosition(drive.into(): impl Into<DWORD>) -> DWORD;
 }

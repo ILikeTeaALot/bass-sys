@@ -1,17 +1,14 @@
 use once_cell::sync::Lazy;
 
-use crate::{
-	bindings::*, generate_bindings
-};
-use crate::dword::AsDWORD;
+use crate::{bindings::*, generate_bindings};
 
 static BASS_LOUD_LIBRARY: Lazy<BASS_Loud> = Lazy::new(|| {
 	#[cfg(target_os = "macos")]
-		let library_name = "libbassloud.dylib";
+	let library_name = "libbassloud.dylib";
 	#[cfg(target_os = "windows")]
-		let library_name = "bassloud.dll";
+	let library_name = "bassloud.dll";
 	#[cfg(target_os = "linux")]
-		let library_name = "libbassloud.so";
+	let library_name = "libbassloud.so";
 	if let Ok(library) = unsafe { BASS_Loud::new(library_name) } {
 		library
 	} else {
@@ -22,8 +19,8 @@ static BASS_LOUD_LIBRARY: Lazy<BASS_Loud> = Lazy::new(|| {
 generate_bindings! {
 	BASS_LOUD_LIBRARY;
 	"/doc/bassloud/";
-    // Info
-    fn BASS_Loudness_GetVersion() -> DWORD;
+	// Info
+	pub fn BASS_Loudness_GetVersion() -> DWORD;
 	// Measurement
 
 	// Retrieves the channel that a loudness measurement is set on.
@@ -47,7 +44,7 @@ generate_bindings! {
 	// See also
 	//
 	// BASS_Loudness_SetChannel, BASS_Loudness_Start
-	fn BASS_Loudness_GetChannel(handle: HLOUDNESS) -> DWORD;
+	pub fn BASS_Loudness_GetChannel(handle: HLOUDNESS) -> DWORD;
 	// Retrieves the level of a loudness measurement.
 	//
 	// ```c
@@ -103,5 +100,5 @@ generate_bindings! {
 	// ## See also
 	//
 	// BASS_Loudness_GetLevelMulti, BASS_Loudness_Start
-	fn BASS_Loudness_GetLevel(handle: HLOUDNESS, mode.to(): impl AsDWORD, level: *mut f32) -> BOOL;
+	pub fn BASS_Loudness_GetLevel(handle: HLOUDNESS, mode.into(): impl Into<DWORD>, level: &mut f32 as *mut f32) -> bool;
 }
