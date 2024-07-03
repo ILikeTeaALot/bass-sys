@@ -10,7 +10,7 @@ macro_rules! generate_bindings {
 			$(#[$meta:meta])*
 			$visibility:vis
 			$(most $safety:ident)?
-			fn $binding_name:ident$(<$($generic_type:ident /*$(: $($generic_trait:ty)+)?*/ $(= $generic_default: ty)?),*>)?($($parameter_name:ident$(.$method: ident())*: $parameter_type:ty $(as $parameter_cast: ty)*),*) $(-> $return_type:ty)?;
+			fn $binding_name:ident$(<$($generic_type:ident /*$(: $($generic_trait:ty)+)?*/ $(= $generic_default: ty)?),*>)?($($parameter_name:ident$(.$method: ident())*: $parameter_type:ty $(as $parameter_cast: ty)*),*$(,)?) $(-> $return_type:ty)?;
 	    )*
     } => {
         $(
