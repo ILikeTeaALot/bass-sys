@@ -4,9 +4,8 @@ use src_build::*;
 use std::error::Error;
 
 fn main() -> Result<(), Box<dyn Error>> {
-	#[cfg(not(target = "windows"))]
+	#[cfg(not(target_os = "windows"))]
     generate_bindings()?;
-	#[cfg(not(target = "windows"))]
 	prepare_docs()?;
 	Ok(())
 }
