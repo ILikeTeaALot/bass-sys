@@ -1,0 +1,28 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_GetVolume</h1>
+<p>Retrieves the current volume level.
+<p><pre class="def">float BASS_WASAPI_GetVolume(
+    DWORD <i>mode</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>mode<td>The type of volume to get and the curve to use.
+<table>
+<tr><td>BASS_WASAPI_VOL_SESSION<td>Get the session volume, else the device volume.
+<tr><td>BASS_WASAPI_CURVE_DB<td>Use a logarithmic curve. This is the default if no curve is specified.
+<tr><td>BASS_WASAPI_CURVE_LINEAR<td>Use a linear curve.
+<tr><td>BASS_WASAPI_CURVE_WINDOWS<td>Use Windows' hybrid curve, as used by Windows' volume controls.</table>
+</table>
+<p><h2>Return value</h2>
+If successful, the volume level is returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_WASAPI_Init.html"> BASS_WASAPI_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>Volume control is unavailable.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+Session volume always uses the BASS_WASAPI_CURVE_WINDOWS curve.
+<p>When using multiple devices, the current thread's device setting (as set with <a href="BASS_WASAPI_SetDevice.html">BASS_WASAPI_SetDevice</a>) determines which device this function call applies to.
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_SetVolume.html">BASS_WASAPI_SetVolume</a>

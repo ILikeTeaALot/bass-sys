@@ -1,0 +1,32 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_SetVolume</h1>
+<p>Sets the device volume.
+<p><pre class="def">BOOL BASS_WASAPI_SetVolume(
+    DWORD <i>mode</i>,
+    float <I>volume</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>mode<td>The type of volume to set and the curve to use.
+<table>
+<tr><td>BASS_WASAPI_VOL_SESSION<td>Set the session volume, else the device volume.
+<tr><td>BASS_WASAPI_CURVE_DB<td>Use a logarithmic curve. This is the default if no curve is specified.
+<tr><td>BASS_WASAPI_CURVE_LINEAR<td>Use a linear curve.
+<tr><td>BASS_WASAPI_CURVE_WINDOWS<td>Use Windows' hybrid curve, as used by Windows' volume controls.</table>
+<tr><td>volume<td>The volume level... 0 (silent) to 1 (max) if using the linear or Windows curves, else a dB level. The device's valid dB level range can be obtained from <a href="BASS_WASAPI_GetInfo.html">BASS_WASAPI_GetInfo</a>.
+</table>
+<p><h2>Return value</h2>
+If successful, then TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>Volume control is unavailable.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>volume</i> is invalid.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+Session volume only affects the current process, so other users of the device are unaffected. It has no effect on exclusive mode output, and maps to the device volume with input devices (so does affect other users). Session volume always uses the BASS_WASAPI_CURVE_WINDOWS curve.
+<p>When the BASS_WASAPI_CURVE_LINEAR curve is used, the resulting volume level may not be exactly as requested because it gets translated to a dB value within the device's valid dB level range, which is available from <a href="BASS_WASAPI_GetInfo.html">BASS_WASAPI_GetInfo</a>.
+<p>When using multiple devices, the current thread's device setting (as set with <a href="BASS_WASAPI_SetDevice.html">BASS_WASAPI_SetDevice</a>) determines which device this function call applies to.
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_GetVolume.html">BASS_WASAPI_GetVolume</a>, <a href="BASS_WASAPI_SetMute.html">BASS_WASAPI_SetMute</a>

@@ -1,0 +1,21 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_GetInfo</h1>
+<p>Retrieves information on the device being used.
+<p><pre class="def">BOOL BASS_WASAPI_GetInfo(
+    <a href="BASS_WASAPI_INFO.html">BASS_WASAPI_INFO</a> *<I>info</I>
+);</pre>
+
+<p><h2>Parameters</h2>
+<table>
+<tr><td>info<td>Pointer to a structure to receive the information.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a> has not been successfully called.
+</table>
+<p><h2>Remarks</h2>
+When using multiple devices, the current thread's device setting (as set with <a href="BASS_WASAPI_SetDevice.html">BASS_WASAPI_SetDevice</a>) determines which device this function call applies to.
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_GetDeviceInfo.html">BASS_WASAPI_GetDeviceInfo</a>, <a href="BASS_WASAPI_INFO.html">BASS_WASAPI_INFO structure</a>

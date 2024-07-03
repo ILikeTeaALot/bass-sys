@@ -1,0 +1,37 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>WASAPIPROC callback</h1>
+<p>User defined output/input processing callback function.
+<p><pre class="def">DWORD CALLBACK WasapiProc(
+    void *<I>buffer</I>,
+    DWORD <I>length</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>buffer<td>Pointer to the buffer to put the sample data for an output device, or to get the data from an input device. The sample data is always 32-bit floating-point.
+<tr><td>length<td>The number of bytes to process.
+<tr><td>user<td>The user instance data given when <a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a> was called.
+</table>
+<p><h2>Return value</h2>
+In the case of an output device, the number of bytes written to the buffer. If the value is negative (high bit set), it will be treated as 0. In the case of an input device, 0 = stop the device, else continue.
+<p><h2>Remarks</h2>
+An output/input processing function should obviously be as quick as possible, to avoid buffer underruns (output) or overruns (input). Using a larger buffer makes that less crucial. <a href="BASS_WASAPI_GetData.html">BASS_WASAPI_GetData</a> (BASS_DATA_AVAILABLE) can be used to check how much data is buffered.
+<p>If an output device has been initialized to use exclusive mode and less data than requested is returned, the remainder of the buffer will be filled with silence.
+<p>Do not call <a href="BASS_WASAPI_Free.html">BASS_WASAPI_Free</a> from within a callback function.
+<p><a href="BASS_WASAPI_GetDevice.html">BASS_WASAPI_GetDevice</a> can be used by the callback function to check which device it is dealing with.
+<p><h2>Example</h2>
+Feed a BASS decoding channel to an output device, and stop the device at the end.
+<pre class="code">
+DWORD CALLBACK OutputWasapiProc(void *buffer, DWORD length, void *user)
+{
+    int c=BASS_ChannelGetData(decoder, buffer, length);
+    if (c<0) { // at the end
+        if (!BASS_WASAPI_GetData(NULL, BASS_DATA_AVAILABLE)) // check no buffered data remaining
+            BASS_WASAPI_Stop(FALSE); // stop the output
+        return 0;
+    }
+    return c;
+}
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a>, <a href="BASS_WASAPI_PutData.html">BASS_WASAPI_PutData</a>

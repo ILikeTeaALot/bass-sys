@@ -1,0 +1,33 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_CheckFormat</h1>
+<p>Checks if a particular sample format is supported by a device.
+<p><pre class="def">DWORD BASS_WASAPI_CheckFormat(
+    int <I>device</I>,
+    DWORD <I>freq</I>,
+    DWORD <I>chans</I>,
+    DWORD <I>flags</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>device<td>The device to use... -1 = default output device, -2 = default input device, -3 = default loopback input device. <a href="BASS_WASAPI_GetDeviceInfo.html">BASS_WASAPI_GetDeviceInfo</a> can be used to enumerate the available devices.
+<tr><td>freq<td>The sample rate.
+<tr><td>chans<td>The number of channels... 1 = mono, 2 = stereo, etc.
+<tr><td>flags<td>Any combination of these flags.
+<table>
+<tr><td>BASS_WASAPI_EXCLUSIVE<td>Check the device in exclusive mode, else shared mode. The HIWORD - use MAKELONG(flags,format) - can be used to limit the sample formats that are checked in exclusive mode. The default is to check 32-bit floating-point, 32-bit integer, 24-bit integer, 16-bit integer, 8-bit integer, in that order. A BASS_WASAPI_FORMAT value (see <a href="BASS_WASAPI_INFO.html">BASS_WASAPI_INFO</a>) can be used to bypass the formats that precede it in that list.
+</table>
+</table>
+<p><h2>Return value</h2>
+If the sample format is supported, the maximum supported resolution (a BASS_WASAPI_FORMAT value) is returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_WASAPI<td>WASAPI is not available.
+<tr><td>BASS_ERROR_DEVICE<td><i>device</i> is invalid.
+<tr><td>BASS_ERROR_NOTAVAIL<td>Exclusive mode is unavailable on the device.
+<tr><td>BASS_ERROR_DRIVER<td>The driver could not be initialized.
+<tr><td>BASS_ERROR_FORMAT<td>The specified format is not supported by the device.
+</table>
+<p><h2>Remarks</h2>
+Shared and exclusive modes may have different sample formats available. Only the "mix format" (available from <a href="BASS_WASAPI_GetDeviceInfo.html">BASS_WASAPI_GetDeviceInfo</a>) is generally supported in shared mode.
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a>

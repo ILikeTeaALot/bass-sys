@@ -1,0 +1,52 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_DEVICEINFO structure</h1>
+<p>Used with <a href="BASS_WASAPI_GetDeviceInfo.html">BASS_WASAPI_GetDeviceInfo</a> to retrieve information on a device.
+<p><pre class="def">typedef struct {
+    char *<i>name</i>;
+    char *<i>id</i>;
+    DWORD <i>type</i>;
+    DWORD <i>flags</i>;
+    float <i>minperiod</i>;
+    float <i>defperiod</i>;
+    DWORD <i>mixfreq</i>;
+    DWORD <i>mixchans</i>;
+} BASS_WASAPI_DEVICEINFO;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>name<td>Description of the device.
+<tr><td>id<td>The device's ID.
+<tr><td>type<td>The type of device, which may be one of the following.
+<table>
+<tr><td>BASS_WASAPI_TYPE_NETWORKDEVICE<td>An audio endpoint device that the user accesses remotely through a network.
+<tr><td>BASS_WASAPI_TYPE_SPEAKERS<td>A set of speakers.
+<tr><td>BASS_WASAPI_TYPE_LINELEVEL<td>An audio endpoint device that sends a line-level analog signal to a line-input jack on an audio adapter or that receives a line-level analog signal from a line-output jack on the adapter.
+<tr><td>BASS_WASAPI_TYPE_HEADPHONES<td>A set of headphones.
+<tr><td>BASS_WASAPI_TYPE_MICROPHONE<td>A microphone.
+<tr><td>BASS_WASAPI_TYPE_HEADSET<td>An earphone or a pair of earphones with an attached mouthpiece for two-way communication.
+<tr><td>BASS_WASAPI_TYPE_HANDSET<td>The part of a telephone that is held in the hand and that contains a speaker and a microphone for two-way communication.
+<tr><td>BASS_WASAPI_TYPE_DIGITAL<td>An audio endpoint device that connects to an audio adapter through a connector for a digital interface of unknown type.
+<tr><td>BASS_WASAPI_TYPE_SPDIF<td>An audio endpoint device that connects to an audio adapter through a Sony/Philips Digital Interface (S/PDIF) connector.
+<tr><td>BASS_WASAPI_TYPE_HDMI<td>An audio endpoint device that connects to an audio adapter through a High-Definition Multimedia Interface (HDMI) connector or a DisplayPort.
+<tr><td>BASS_WASAPI_TYPE_UNKNOWN<td>An audio endpoint device with unknown physical attributes.
+</table>
+<tr><td>flags<td>The device's current and input/output status... a combination of these flags.
+<table>
+<tr><td>BASS_DEVICE_ENABLED<td>The device is enabled and ready for use. It will not be possible to initialize the device if this flag is not present.
+<tr><td>BASS_DEVICE_DEFAULT<td>The device is the system default.
+<tr><td>BASS_DEVICE_INIT<td>The device is initialized, ie. <a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a> has been called.
+<tr><td>BASS_DEVICE_INPUT<td>The device is a recording device, otherwise it is an output device.
+<tr><td>BASS_DEVICE_LOOPBACK<td>The device is a loopback input device; it captures the sound from an output device.
+<tr><td>BASS_DEVICE_UNPLUGGED<td>The device does not have an audio jack connected. This is only applicable to devices that have jack-presence detection.
+<tr><td>BASS_DEVICE_DISABLED<td>The device has been disabled in the Sound control panel.
+</table>
+<tr><td>minperiod<td>The minimum update period in seconds.
+<tr><td>defperiod<td>The default update period in seconds.
+<tr><td>mixfreq<td>The sample rate in shared mode.
+<tr><td>mixchans<td>The number of channels in shared mode.
+</table>
+<p><h2>Remarks</h2>
+If none of the BASS_DEVICE_ENABLED, BASS_DEVICE_DISABLED, or BASS_DEVICE_UNPLUGGED flags are present, then the device is not present. That could be because it is an unplugged USB device or it has been disabled in Device Manager, for example.
+<p>Depending on the <a href="mk:@MSITStore:bass.chm::/BASS_CONFIG_UNICODE.html">BASS_CONFIG_UNICODE</a> config setting, <i>name</i> and <i>id</i> can be in ANSI or UTF-8 form. <i>minperiod</i>, <i>defperiod</i>, <i>mixfreq</i>, <i>mixchans</i> will all be 0 when the device is not enabled (BASS_DEVICE_ENABLED flag not present).
+<p>The corresponding BASS device can be found by its <a href="mk:@MSITStore:bass.chm::/BASS_DEVICEINFO.html">BASS_DEVICEINFO</a> "driver" member matching <i>id</i>.
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_GetDeviceInfo.html">BASS_WASAPI_GetDeviceInfo</a>

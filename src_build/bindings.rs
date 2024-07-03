@@ -162,5 +162,25 @@ pub fn generate_bindings() -> Result<(), Box<dyn Error>> {
 		.write_to_file(out_path.join("bindings/bass_loud.rs"))
 		.expect("Couldn't write bindings!");
 
+	bindings
+		.clone()
+		.dynamic_library_name("BASS_WASAPI")
+		.header("basswasapi.h")
+		// Only Allow BASSLoud-specific items
+		.allowlist_item(".*WASAPI.*")
+		.allowlist_item("BASS_DEVICE_ENABLED")
+		.allowlist_item("BASS_DEVICE_DEFAULT")
+		.allowlist_item("BASS_DEVICE_INIT")
+		.allowlist_item("BASS_DEVICE_LOOPBACK")
+		.allowlist_item("BASS_DEVICE_INPUT")
+		.allowlist_item("BASS_DEVICE_UNPLUGGED")
+		.allowlist_item("BASS_DEVICE_DISABLED")
+		// Finish the builder and generate the bindings.
+		.generate()
+		// Unwrap the Result and panic on failure.
+		.expect("Unable to generate bindings")
+		.write_to_file(out_path.join("bindings/bass_wasapi.rs"))
+		.expect("Couldn't write bindings!");
+
 	Ok(())
 }

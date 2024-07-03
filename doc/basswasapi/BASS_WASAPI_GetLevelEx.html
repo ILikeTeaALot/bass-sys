@@ -1,0 +1,32 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_GetLevelEx</h1>
+<p>Retrieves the level.
+<p><pre class="def">BOOL BASS_WASAPI_GetLevelEx(
+    float *<I>levels</I>,
+    float <I>length</I>,
+    DWORD <I>flags</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>levels<td>An array to receive the levels.
+<tr><td>length<td>The amount of data to inspect to calculate the level, in seconds. The maximum is 1 second. Less data than requested may be used if the full amount is not available, eg. if the device's buffer is shorter.
+<tr><td>flags<td>A combination of these flags.<br>
+<table>
+<tr><td>BASS_LEVEL_MONO<td>Get a mono level. If neither this or the BASS_LEVEL_STEREO flag is used, then a separate level is retrieved for each channel; the number of channels is available from <a href="BASS_WASAPI_GetInfo.html">BASS_WASAPI_GetInfo</a>.
+<tr><td>BASS_LEVEL_STEREO<td>Get a stereo level. The left level will be from the even channels, and the right level will be from the odd channels. If there are an odd number of channels then the left and right levels will both include all channels.
+<tr><td>BASS_LEVEL_RMS<td>Get the RMS level. Otherwise the peak level.</table>
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_WASAPI_BUFFER flag was not specified in the device's initialization.</a>
+<tr><td>BASS_ERROR_ILLPARAM<td><I>length</I> is not valid.
+</table>
+<p><h2>Remarks</h2>
+This function uses <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetLevelEx.html">BASS_ChannelGetLevelEx</a> internally, so it behaves identically to that.
+<p>The BASS_WASAPI_BUFFER flag needs to have been specified in the device's initialization to enable the use of this function.
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_GetData.html">BASS_WASAPI_GetData</a>, <a href="BASS_WASAPI_GetDeviceLevel.html">BASS_WASAPI_GetDeviceLevel</a>, <a href="BASS_WASAPI_GetLevel.html">BASS_WASAPI_GetLevel</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetLevelEx.html">BASS_ChannelGetLevelEx</a>

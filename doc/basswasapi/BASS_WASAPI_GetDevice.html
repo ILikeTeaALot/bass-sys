@@ -1,0 +1,12 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_GetDevice</h1>
+<p>Retrieves the device setting of the current thread.
+<p><pre class="def">DWORD BASS_WASAPI_GetDevice();</pre>
+<p><h2>Return value</h2>
+If successful, the device number is returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a> has not been successfully called; there are no initialized devices.
+</table>
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a>, <a href="BASS_WASAPI_SetDevice.html">BASS_WASAPI_SetDevice</a>

@@ -1,0 +1,8 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_GetCPU</h1>
+<p>Retrieves the current CPU usage of BASSWASAPI.
+<p><pre class="def">float BASS_WASAPI_GetCPU();</pre>
+<p><h2>Return value</h2>
+The BASSWASAPI CPU usage as a percentage of total CPU time.
+<p><h2>Remarks</h2>
+This function includes the time taken by <a href="WASAPIPROC.html">WASAPIPROC</a> callback functions, but not <a href="BASS_WASAPI_PutData.html">BASS_WASAPI_PutData</a> calls.

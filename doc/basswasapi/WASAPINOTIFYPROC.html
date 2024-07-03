@@ -1,0 +1,25 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>WASAPINOTIFYPROC callback</h1>
+<p>User defined notification callback function.
+<p><pre class="def">void CALLBACK WasapiNotifyProc(
+    DWORD <I>notify</I>,
+    DWORD <I>device</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>notify<td>The notification, one of the following.
+<table>
+<tr><td>BASS_WASAPI_NOTIFY_ENABLED<td>The device has been enabled.
+<tr><td>BASS_WASAPI_NOTIFY_DISABLED<td>The device has been disabled/disconnected.
+<tr><td>BASS_WASAPI_NOTIFY_DEFINPUT<td>The device is now the default input device.
+<tr><td>BASS_WASAPI_NOTIFY_DEFOUTPUT<td>The device is now the default output device.
+<tr><td>BASS_WASAPI_NOTIFY_FAIL<td>The device has failed and been stopped. If the device is still enabled and shared mode was being used, then it may be that the device's sample format has changed. It can be freed and reinitialized, with <a href="BASS_WASAPI_Free.html">BASS_WASAPI_Free</a> and <a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a>, to resume in that case.
+</table>
+<tr><td>device<td>The device that the notification applies to.
+<tr><td>user<td>The user instance data given when <a href="BASS_WASAPI_SetNotify.html">BASS_WASAPI_SetNotify</a> was called.
+</table>
+<p><h2>Remarks</h2>
+<a href="BASS_WASAPI_Free.html">BASS_WASAPI_Free</a> should not be called from within a WASAPINOTIFYPROC callback.
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_GetDeviceInfo.html">BASS_WASAPI_GetDeviceInfo</a>, <a href="BASS_WASAPI_SetNotify.html">BASS_WASAPI_SetNotify</a>

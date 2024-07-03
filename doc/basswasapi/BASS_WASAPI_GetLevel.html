@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_GetLevel</h1>
+<p>Retrieves the level (peak amplitude).
+<p><pre class="def">DWORD BASS_WASAPI_GetLevel();</pre>
+<p><h2>Return value</h2>
+If an error occurs, -1 is returned, use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. If successful, the level of the left channel is returned in the low word (low 16 bits), and the level of the right channel is returned in the high word (high 16 bits). If the channel is mono, then the low word is duplicated in the high word. The level ranges linearly from 0 (silent) to 32768 (max). 0 will be returned when a channel is stalled.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_WASAPI_BUFFER flag was not specified in the device's initialization.</a>
+</table>
+<p><h2>Remarks</h2>
+This function uses <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a> internally, so it behaves identically to that.
+<p>The BASS_WASAPI_BUFFER flag needs to have been specified in the device's initialization to enable the use of this function.
+<p>More flexible level retrieval is available with <a href="BASS_WASAPI_GetLevelEx.html">BASS_WASAPI_GetLevelEx</a>. 
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_GetData.html">BASS_WASAPI_GetData</a>, <a href="BASS_WASAPI_GetDeviceLevel.html">BASS_WASAPI_GetDeviceLevel</a>, <a href="BASS_WASAPI_GetLevelEx.html">BASS_WASAPI_GetLevelEx</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetLevel.html">BASS_ChannelGetLevel</a>

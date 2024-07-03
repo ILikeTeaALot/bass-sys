@@ -1,0 +1,36 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_INFO structure</h1>
+<p>Used with <a href="BASS_WASAPI_GetInfo.html">BASS_WASAPI_GetInfo</a> to retrieve information on the current device.
+<p><pre class="def">typedef struct {
+    DWORD <i>initflags</i>;
+    DWORD <i>freq</i>;
+    DWORD <i>chans</i>;
+    DWORD <i>format</i>;
+    DWORD <i>buflen</i>;
+    DWORD <i>volmax</i>;
+    DWORD <i>volmin</i>;
+    DWORD <i>volstep</i>;
+} BASS_WASAPI_INFO;</pre>
+<p><h2>Members</h2>
+<table>
+<tr><td>initflags<td>The <i>flags</i> parameter of the <a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a> call.
+<tr><td>freq<td>The sample rate.
+<tr><td>chans<td>The number of channels... 1 = mono, 2 = stereo, etc.
+<tr><td>format<td>The device's sample format. One of the following.
+<table>
+<tr><td>BASS_WASAPI_FORMAT_8BIT<td>8-bit integer.
+<tr><td>BASS_WASAPI_FORMAT_16BIT<td>16-bit integer.
+<tr><td>BASS_WASAPI_FORMAT_24BIT<td>24-bit integer.
+<tr><td>BASS_WASAPI_FORMAT_32BIT<td>32-bit integer.
+<tr><td>BASS_WASAPI_FORMAT_FLOAT<td>32-bit floating-point.
+</table>
+<tr><td>buflen<td>The buffer size in bytes.
+<tr><td>volmax<td>The maximum volume setting in dB.
+<tr><td>volmin<td>The minimum volume setting in dB.
+<tr><td>volstep<td>The volume step size in dB.
+</table>
+<p><h2>Remarks</h2>
+<i>format</i> indicates the device's sample format, which is not necessarily the same as what a <a href="WASAPIPROC.html">WASAPIPROC</a> callback function or the <a href="BASS_WASAPI_PutData.html">BASS_WASAPI_PutData</a> and <a href="BASS_WASAPI_GetData.html">BASS_WASAPI_GetData</a> functions deal in; that is always 32-bit floating-point.
+<p><i>volmin</i> and <i>volmax</i> indicate the valid device volume range for <a href="BASS_WASAPI_SetVolume.html">BASS_WASAPI_SetVolume</a> and <a href="BASS_WASAPI_GetVolume.html">BASS_WASAPI_GetVolume</a> when using the logarithmic curve.
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_GetInfo.html">BASS_WASAPI_GetInfo</a>

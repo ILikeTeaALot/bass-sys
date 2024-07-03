@@ -53,15 +53,6 @@ impl AsRef<bool> for BOOL {
 	}
 }
 
-// impl Into<bool> for BOOL {
-// 	fn into(self) -> bool {
-// 		match self {
-// 			BOOL::FALSE => false,
-// 			_ => true,
-// 		}
-// 	}
-// }
-
 impl From<BOOL> for bool {
 	fn from(value: BOOL) -> Self {
 		match value {
@@ -99,14 +90,10 @@ impl From<BOOL> for DWORD {
 	}
 }
 
-// impl From<BOOL> for u32 {
-// 	fn from(value: BOOL) -> Self {
-// 		value as u32
-// 	}
-// }
-
 pub const TRUE: BOOL = BOOL::TRUE;
 pub const FALSE: BOOL = BOOL::FALSE;
+// The commented code in this file is for posterity and for others to learn how NOT to do weird function pointers in Rust
+
 // pub const STREAMPROC_DUMMY: STREAMPROC = ::std::option::Option::Some(
 // 	(0u32 as *const ::std::os::raw::c_void)
 // 		as unsafe extern "C" fn(

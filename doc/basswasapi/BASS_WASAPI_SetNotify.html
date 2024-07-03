@@ -1,0 +1,23 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_SetNotify</h1>
+<p>Sets a device change notification callback.
+<p><pre class="def">BOOL BASS_WASAPI_SetNotify(
+    <a href="WASAPINOTIFYPROC.html">WASAPINOTIFYPROC</a> *<I>proc</I>,
+    void *<i>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>proc<td>User defined notification function... NULL = disable notifications.
+<tr><td>user<td>User instance data to pass to the callback function.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_WASAPI<td>WASAPI is not available.
+</table>
+<p><h2>Remarks</h2>
+A previously set notification callback can be changed or removed at any time by calling this function again.
+<p>If the BASSWASAPI DLL is loaded dynamically (eg. via LoadLibrary), this function should be called with NULL parameters prior to unloading the DLL.
+<p><h2>See also</h2>
+<a href="WASAPINOTIFYPROC.html">WASAPINOTIFYPROC callback</a>

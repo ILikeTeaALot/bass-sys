@@ -1,0 +1,26 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_GetDeviceLevel</h1>
+<p>Retrieves the level (peak amplitude) of a device.
+<p><pre class="def">float BASS_WASAPI_GetDeviceLevel(
+    DWORD <I>device</I>,
+    int <I>chan</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>device<td>The device to get the level from.
+<tr><td>chan<td>The channel to get the level of... 0 = first channel, -1 = all channels.
+</table>
+<p><h2>Return value</h2>
+If successful, the level is returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. 
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_WASAPI<td>WASAPI is not available.
+<tr><td>BASS_ERROR_DEVICE<td><i>device</i> is not valid.
+<tr><td>BASS_ERROR_DRIVER<td>The device driver does not support level retrieval.
+<tr><td>BASS_ERROR_ILLPARAM<td><i>chan</i> is not valid.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+This function gets the level from the device/driver, or WASAPI if the device does not have its own level meter. In the latter case, the level will be unavailable when exclusive mode is active.
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_GetDeviceInfo.html">BASS_WASAPI_GetDeviceInfo</a>, <a href="BASS_WASAPI_GetLevel.html">BASS_WASAPI_GetLevel</a>

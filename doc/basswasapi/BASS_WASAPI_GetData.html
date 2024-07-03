@@ -1,0 +1,28 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_GetData</h1>
+<p>Retrieves the immediate sample data or an FFT representation of it.
+<p><pre class="def">DWORD BASS_WASAPI_GetData(
+    void *<I>buffer</I>,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>buffer<td>Pointer to a buffer to receive the data.
+<tr><td>length<td>Number of bytes wanted, and/or the <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetData.html">BASS_ChannelGetData</a> flags.
+</table>
+
+</table>
+<p><h2>Return value</h2>
+If an error occurs, -1 is returned, use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code. When requesting FFT data, the number of bytes read from the device buffer (to perform the FFT) is returned. When requesting sample data, the number of bytes written to <i>buffer</i> will be returned. When using the BASS_DATA_AVAILABLE flag, the number of bytes in the device's buffer is returned.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The BASS_WASAPI_BUFFER flag was not specified in the device's initialization.</a>
+</table>
+<p><h2>Remarks</h2>
+This function uses <a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetData.html">BASS_ChannelGetData</a> internally, so it has the same options available.
+<p>The BASS_WASAPI_BUFFER flag needs to have been specified in the device's initialization to enable the use of this function, except for with the BASS_DATA_AVAILABLE flag.
+<p>With an output device, the BASS_DATA_AVAILABLE return value may be larger than the buffer size indicated by <a href="BASS_WASAPI_GetInfo.html">BASS_WASAPI_GetInfo</a> due to additional latency in the device/driver. When a mixer is feeding an output device, the BASS_DATA_AVAILABLE return value can be used with the <a href="mk:@MSITStore:bassmix.chm::/BASS_ATTRIB_MIXER_LATENCY.html">BASS_ATTRIB_MIXER_LATENCY</a> attribute and/or the <a href="mk:@MSITStore:bassmix.chm::/BASS_Mixer_ChannelGetPositionEx.html">BASS_Mixer_ChannelGetPositionEx</a> function, to have the mixer account for the latency in its source position reporting and data/level retrieval.
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_GetDeviceLevel.html">BASS_WASAPI_GetDeviceLevel</a>, <a href="BASS_WASAPI_GetLevel.html">BASS_WASAPI_GetLevel</a>, <a href="BASS_WASAPI_GetLevelEx.html">BASS_WASAPI_GetLevelEx</a>
+<p><a href="mk:@MSITStore:bass.chm::/BASS_ChannelGetData.html">BASS_ChannelGetData</a>

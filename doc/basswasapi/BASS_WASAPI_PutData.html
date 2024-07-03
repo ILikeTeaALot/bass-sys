@@ -1,0 +1,26 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_PutData</h1>
+<p>Adds sample data to an output device buffer.
+<p><pre class="def">DWORD BASS_WASAPI_PutData(
+    void *<I>buffer</I>,
+    DWORD <I>length</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>buffer<td>Pointer to the sample data.
+<tr><td>length<td>The amount of data in bytes.
+</table>
+<p><h2>Return value</h2>
+If successful, the amount of data used is returned, else -1 is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a> has not been successfully called.
+<tr><td>BASS_ERROR_NOTAVAIL<td>The device is being fed by a <a href="WASAPIPROC.html">WASAPIPROC</a> callback function, or it is an input device.
+<tr><td>BASS_ERROR_ILLPARAM<td><I>length</I> is not valid, it must equate to a whole number of samples.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+As much data as possible will be placed in the device's buffer; this function will have to be called again for any remainder.
+<p>Data should be provided at a rate sufficent to sustain playback. If the buffer gets exhausted, output will stall until more data is provided. <a href="BASS_WASAPI_GetData.html">BASS_WASAPI_GetData</a> (BASS_DATA_AVAILABLE) can be used to check how much data is buffered.
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a>, <a href="WASAPIPROC.html">WASAPIPROC callback</a>

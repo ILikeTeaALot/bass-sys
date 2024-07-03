@@ -1,0 +1,18 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_Lock</h1>
+<p>Locks the device to the current thread.
+<p><pre class="def">BOOL BASS_WASAPI_Lock(
+    BOOL <I>lock</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>lock<td>If FALSE, unlock the device, else lock it.
+</table>
+<p><h2>Return value</h2>
+If successful, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_INIT<td><a href="BASS_WASAPI_Init.html">BASS_WASAPI_Init</a> has not been successfully called.
+</table>
+<p><h2>Remarks</h2>
+Locking a device prevents other threads from accessing the device buffer, including a <a href="WASAPIPROC.html">WASAPIPROC</a>. Other threads wanting to access a locked device will block until it is unlocked, so a device should only be locked very briefly. A device must be unlocked in the same thread that it was locked.

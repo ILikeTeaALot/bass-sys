@@ -1,0 +1,87 @@
+<!doctype html><html><head><link rel="stylesheet" type="text/css" href="bass.css"></head><body>
+<h1>BASS_WASAPI_Init</h1>
+<p>Initializes a device.
+<p><pre class="def">BOOL BASS_WASAPI_Init(
+    int <I>device</I>,
+    DWORD <I>freq</I>,
+    DWORD <I>chans</I>,
+    DWORD <I>flags</I>,
+    float <I>buffer</I>,
+    float <I>period</I>,
+    <a href="WASAPIPROC.html">WASAPIPROC</a> *<I>proc</I>,
+    void *<I>user</I>
+);</pre>
+<p><h2>Parameters</h2>
+<table>
+<tr><td>device<td>The device to use... -1 = default output device, -2 = default input device, -3 = default loopback input device. <a href="BASS_WASAPI_GetDeviceInfo.html">BASS_WASAPI_GetDeviceInfo</a> can be used to enumerate the available devices.
+<tr><td>freq<td>The sample rate... 0 = "mix format" sample rate
+<tr><td>chans<td>The number of channels... 0 = "mix format" channels, 1 = mono, 2 = stereo, etc.
+<tr><td>flags<td>Any combination of these flags.
+<table>
+<tr><td>BASS_WASAPI_ASYNC<td>Call the callback function asynchronously. This only applies to event-driven exclusive mode output and is otherwise ignored. When enabled, a buffer is filled asynchronously in advance. This reduces the chances of underruns but also increases latency by up to one buffer length. If an underrun does occur, a silent buffer (rather than nothing) is still sent to the device, which can prevent sound glitches on some devices following an underrun.
+<tr><td>BASS_WASAPI_AUTOFORMAT<td>Automatically choose another sample format if the specified format is not supported. If possible, a higher sample rate than <i>freq</i> will be used, rather than a lower one. This flag disables resampling.
+<tr><td>BASS_WASAPI_BUFFER<td>Enable double buffering, for use by <a href="BASS_WASAPI_GetData.html">BASS_WASAPI_GetData</a> and <a href="BASS_WASAPI_GetLevel.html">BASS_WASAPI_GetLevel</a> and <a href="BASS_WASAPI_GetLevelEx.html">BASS_WASAPI_GetLevelEx</a>. This requires BASS to have been initilized, via <a href="mk:@MSITStore:bass.chm::/BASS_Init.html">BASS_Init</a>.
+<tr><td>BASS_WASAPI_DITHER<td>Apply dither (TPDF) when converting floating-point sample data to the device's format. This flag only has effect on exclusive mode output.
+<tr><td>BASS_WASAPI_EVENT<td>Enable event-driven buffering. BASSWASAPI will normally periodically write data to (or read data from) the device's buffer according to the <i>period</i> parameter, but with the event-driven system WASAPI will signal to BASSWASAPI when more data should be written to (or read from) the buffer. So the <i>period</i> parameter is ignored. In exclusive mode, there are 2 buffers of <i>buffer</i> length that are processed alternately. Event-driven buffering is unavailable on loopback devices.
+<tr><td>BASS_WASAPI_EXCLUSIVE<td>Initialize the device in exclusive mode, else shared mode. The HIWORD -- use MAKELONG(flags,format) -- can be used to limit the sample format that is used in exclusive mode. The default is to try 32-bit floating-point, 32-bit integer, 24-bit integer, 16-bit integer, 8-bit integer, in that order. A BASS_WASAPI_FORMAT value (see <a href="BASS_WASAPI_INFO.html">BASS_WASAPI_INFO</a>) can be used to bypass the formats that precede it in that list. Exclusive mode is unavailable on loopback devices.
+<tr><td>BASS_WASAPI_RAW<td>Request raw mode, which bypasses any sound enhancements that have been enabled on the device. This is only available on Windows 8.1 and above.
+<tr><td>BASS_WASAPI_SAMPLES<td><i>buffer</i> and <i>period</i> are in samples rather than seconds.
+<tr><td colspan=2>One of the following can also be used to set the audio category on Windows 8 and above (otherwise ignored).<br>
+<table>
+<tr><td>BASS_WASAPI_CATEGORY_ALERTS<td>Alert sounds. For output devices only.
+<tr><td>BASS_WASAPI_CATEGORY_COMMUNICATIONS<td>Real-time communications, such as VOIP or chat.
+<tr><td>BASS_WASAPI_CATEGORY_GAMECHAT<td>Game chat audio. Similar to COMMUNICATIONS except that this will not attenuate other streams. For output devices only.
+<tr><td>BASS_WASAPI_CATEGORY_GAMEEFFECTS<td>Game sound effects. For output devices only.
+<tr><td>BASS_WASAPI_CATEGORY_GAMEMEDIA<td>Background audio for games. For output devices only.
+<tr><td>BASS_WASAPI_CATEGORY_MEDIA<td>Stream that includes audio without dialog. For output devices only.
+<tr><td>BASS_WASAPI_CATEGORY_MOVIE<td>Stream that includes audio with dialog. For output devices only.
+<tr><td>BASS_WASAPI_CATEGORY_OTHER<td>Other audio stream.
+<tr><td>BASS_WASAPI_CATEGORY_SOUNDEFFECTS<td>Sound effects. For output devices only.
+<tr><td>BASS_WASAPI_CATEGORY_SPEECH<td>Speech.
+</table></table>
+<tr><td>buffer<td>The length of the device's buffer in seconds or samples, depending on BASS_WASAPI_SAMPLES. This is a minimum and the driver may choose to use a larger buffer; <a href="BASS_WASAPI_GetInfo.html">BASS_WASAPI_GetInfo</a> can be used to confirm what the buffer size is. For an output device, the buffer size determines the latency. With event-driven exclusive mode, there will be 2 buffers of this length, so the total buffer length is double.
+<tr><td>period<td>The interval (in seconds or samples depending on BASS_WASAPI_SAMPLES) between callback function calls... 0 = use default. If the specified period is below the minimum update period, it will automatically be raised to that. This is ignored when the BASS_WASAPI_EVENT flag is specified, except in shared mode when <i>buffer = 0</i> on Windows 10 (see remarks).
+<tr><td>proc<td>The callback function to provide/receive sample data, or one of the following.<br>
+<table>
+<tr><td>WASAPIPROC_BASS<td>Feed data to/from a BASS channel, specified in the <i>user</i> parameter. It must be a decoding channel (using BASS_STREAM_DECODE) for an output device, or a "push" or "dummy" stream (using STREAMPROC_PUSH or STREAMPROC_DUMMY) for an input device. The <i>freq</i> and <i>chans</i> parameters are ignored and the sample format of the BASS channel is used instead, but it must be floating-point (BASS_SAMPLE_FLOAT).
+<tr><td>WASAPIPROC_PUSH<td>Instead of BASSWASAPI pulling data from a <a href="WASAPIPROC.html">WASAPIPROC</a> function, data is pushed to BASSWASAPI via <a href="BASS_WASAPI_PutData.html">BASS_WASAPI_PutData</a>. This cannot be used with input devices or the BASS_WASAPI_EVENT flag.
+</table>
+<tr><td>user<td>User instance data to pass to the callback function, or a BASS channel handle with WASAPIPROC_BASS. Unused with WASAPIPROC_PUSH.
+</table>
+<p><h2>Return value</h2>
+If the device was successfully initialized, TRUE is returned, else FALSE is returned. Use <a href="mk:@MSITStore:bass.chm::/BASS_ErrorGetCode.html">BASS_ErrorGetCode</a> to get the error code.
+<p><h2>Error codes</h2>
+<table>
+<tr><td>BASS_ERROR_WASAPI<td>WASAPI is not available.
+<tr><td>BASS_ERROR_DEVICE<td><i>device</i> is invalid.
+<tr><td>BASS_ERROR_ALREADY<td>The device has already been initialized. <a href="BASS_WASAPI_Free.html">BASS_WASAPI_Free</a> must be called before it can be initialized again.
+<tr><td>BASS_ERROR_NOTAVAIL<td>Exclusive mode and/or event-driven buffering is unavailable on the device, or WASAPIPROC_PUSH is unavailable on input devices and when using event-driven buffering.
+<tr><td>BASS_ERROR_DRIVER<td>The driver could not be initialized.
+<tr><td>BASS_ERROR_HANDLE<td>The BASS channel handle in <i>user</i> is invalid, or not of the required type.
+<tr><td>BASS_ERROR_FORMAT<td>The specified format (or that of the BASS channel) is not supported by the device. If the BASS_WASAPI_AUTOFORMAT flag was specified, no other format could be found either.
+<tr><td>BASS_ERROR_BUSY<td>The device is already in use, eg. another process may have initialized it in exclusive mode.
+<tr><td>BASS_ERROR_INIT<td>BASS has not been initialized.
+<tr><td>BASS_ERROR_WASAPI_BUFFER<td><i>buffer</i> is too large or small (exclusive mode only).
+<tr><td>BASS_ERROR_WASAPI_CATEGORY<td>The category/raw mode could not be set.
+<tr><td>BASS_ERROR_WASAPI_DENIED<td>Access to the device is denied. This could be due to privacy settings.
+<tr><td>BASS_ERROR_UNKNOWN<td>Some other mystery problem!
+</table>
+<p><h2>Remarks</h2>
+For convenience, devices are always initialized to use their highest sample resolution (unless restricted by <i>flags</i>) and that is then converted to 32-bit floating-point, so that <a href="WASAPIPROC.html">WASAPIPROC</a> callback functions and the <a href="BASS_WASAPI_PutData.html">BASS_WASAPI_PutData</a> and <a href="BASS_WASAPI_GetData.html">BASS_WASAPI_GetData</a> functions are always dealing with the same sample format. The device's sample format can be obtained from <a href="BASS_WASAPI_GetInfo.html">BASS_WASAPI_GetInfo</a>.
+<p>WASAPI can resample when required in shared mode (if the BASS_WASAPI_AUTOFORMAT flag is not specified), except with loopback input devices prior to Windows 10. WASAPI will not resample in exclusive mode; the requested sample format must be supported by the device. <a href="BASS_WASAPI_CheckFormat.html">BASS_WASAPI_CheckFormat</a> can be used to check whether a particular sample format is supported. The <a href="mk:@MSITStore:bass.chm::/bassmix.html">BASSmix</a> add-on can be used to play (or record) in otherwise unsupported formats, as well as playing multiple sources. When using BASSmix for mixing, it is generally a good idea to also have it handle resampling even if WASAPI could, to avoid the possiblity of resampling twice (from source format to mixer format to WASAPI format).
+<p>A loopback device can only be used when the corresponding output device is not being used in exclusive mode, and it will only deliver data when the ouput device does; if the output device produces no data, then the loopback device will capture no data.
+<p>Shared mode usually has a fixed period of 10ms, but Windows 10 supports shorter periods, which allows smaller buffers and lower latency. A shorter period (and buffer) can be requested by setting <i>buffer</i> to 0 and <i>period</i> to the length wanted. If the requested period is lower than the device (or Windows) supports, then it will be automatically raised to the minimum supported. It will also be rounded up if it does not match the device's granularity. The actual period in use can be determined from the (minimum) amount of data that gets requested from the <a href="WASAPIPROC.html">WASAPIPROC</a> callback function. The shared mode period is a system-wide setting that affects all users of the device, particular those using event-driven buffering; they will be asked to provide data at the new period. If another process is already using a non-default period, then it will not be possible to set a different period until they finish; the existing period will have to be used in the meantime.
+<p>The initialized device will not begin processing data until <a href="BASS_WASAPI_Start.html">BASS_WASAPI_Start</a> is called.
+<p>Simultaneously using multiple devices is supported in the BASS API via a context switching system; instead of there being an extra "device" parameter in the function calls, the device to be used is set prior to calling the functions. <a href="BASS_WASAPI_SetDevice.html">BASS_WASAPI_SetDevice</a> is used to switch the current device. When successful, BASS_WASAPI_Init automatically sets the current thread's device to the one that was just initialized.
+<p>When using the default output or input device, <a href="BASS_WASAPI_GetDevice.html">BASS_WASAPI_GetDevice</a> can be used to find out which device it was mapped to.
+<p><h2>Example</h2>
+Initialize BASSWASAPI to use the default output device in exclusive mode, with 44100 Hz stereo output, and a 100ms buffer with the default period.
+<pre class="code">
+BASS_WASAPI_Init(-1, 44100, 2, BASS_WASAPI_EXCLUSIVE, 0.1, 0, MyWasapiProc, NULL);
+</pre>
+<p>Initialize BASSWASAPI to feed a BASS channel to the default output device in event-driven exclusive mode, with a 100ms buffer (2x 50ms).
+<pre class="code">
+BASS_WASAPI_Init(-1, 0, 0, BASS_WASAPI_EXCLUSIVE | BASS_WASAPI_EVENT, 0.05, 0, WASAPIPROC_BASS, (void*)handle);
+</pre>
+<p><h2>See also</h2>
+<a href="BASS_WASAPI_CheckFormat.html">BASS_WASAPI_CheckFormat</a>, <a href="BASS_WASAPI_Free.html">BASS_WASAPI_Free</a>, <a href="BASS_WASAPI_GetDeviceInfo.html">BASS_WASAPI_GetDeviceInfo</a>, <a href="BASS_WASAPI_GetInfo.html">BASS_WASAPI_GetInfo</a>, <a href="BASS_WASAPI_Start.html">BASS_WASAPI_Start</a>, <a href="WASAPIPROC.html">WASAPIPROC callback</a>

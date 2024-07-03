@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASSWASAPI.TXT">
+		<param name="Local" value="basswasapi.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_CheckFormat">
+		<param name="Local" value="BASS_WASAPI_CheckFormat.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_Free">
+		<param name="Local" value="BASS_WASAPI_Free.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_GetCPU">
+		<param name="Local" value="BASS_WASAPI_GetCPU.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_GetData">
+		<param name="Local" value="BASS_WASAPI_GetData.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_GetDevice">
+		<param name="Local" value="BASS_WASAPI_GetDevice.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_GetDeviceInfo">
+		<param name="Local" value="BASS_WASAPI_GetDeviceInfo.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_GetDeviceLevel">
+		<param name="Local" value="BASS_WASAPI_GetDeviceLevel.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_GetInfo">
+		<param name="Local" value="BASS_WASAPI_GetInfo.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_GetLevel">
+		<param name="Local" value="BASS_WASAPI_GetLevel.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_GetLevelEx">
+		<param name="Local" value="BASS_WASAPI_GetLevelEx.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_GetMute">
+		<param name="Local" value="BASS_WASAPI_GetMute.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_GetVersion">
+		<param name="Local" value="BASS_WASAPI_GetVersion.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_GetVolume">
+		<param name="Local" value="BASS_WASAPI_GetVolume.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_Init">
+		<param name="Local" value="BASS_WASAPI_Init.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_IsStarted">
+		<param name="Local" value="BASS_WASAPI_IsStarted.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_Lock">
+		<param name="Local" value="BASS_WASAPI_Lock.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_PutData">
+		<param name="Local" value="BASS_WASAPI_PutData.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_SetDevice">
+		<param name="Local" value="BASS_WASAPI_SetDevice.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_SetMute">
+		<param name="Local" value="BASS_WASAPI_SetMute.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_SetNotify">
+		<param name="Local" value="BASS_WASAPI_SetNotify.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_SetVolume">
+		<param name="Local" value="BASS_WASAPI_SetVolume.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_Start">
+		<param name="Local" value="BASS_WASAPI_Start.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BASS_WASAPI_Stop">
+		<param name="Local" value="BASS_WASAPI_Stop.html">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Callback functions">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="WASAPINOTIFYPROC">
+			<param name="Local" value="WASAPINOTIFYPROC.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="WASAPIPROC">
+			<param name="Local" value="WASAPIPROC.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Structures">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_WASAPI_DEVICEINFO">
+			<param name="Local" value="BASS_WASAPI_DEVICEINFO.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BASS_WASAPI_INFO">
+			<param name="Local" value="BASS_WASAPI_INFO.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+	</UL>
+</UL>
+
