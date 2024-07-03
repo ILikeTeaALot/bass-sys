@@ -1,13 +1,40 @@
 use std::{env, fs};
 use std::error::Error;
 use std::path::PathBuf;
+use bindgen::callbacks::{IntKind, ParseCallbacks};
 use bindgen::{AliasVariation, EnumVariation};
+
+#[derive(Debug)]
+struct TypeCallbackParser;
+
+impl ParseCallbacks for TypeCallbackParser {
+	fn int_macro(&self, name: &str, _value: i64) -> Option<bindgen::callbacks::IntKind> {
+		match name {
+			"BASSVERSION" => {
+				Some(IntKind::NewType { name: "DWORD", is_signed: false })
+			}
+			"BASS_OK" => {
+				None
+			}
+			_ => {
+				if name.starts_with("BASS_ERROR") {
+					None
+				} else {
+					Some(IntKind::NewType { name: "DWORD", is_signed: false })
+				}
+			}
+		}
+	}
+}
 
 pub fn generate_bindings() -> Result<(), Box<dyn Error>> {
 	// Write the bindings to the $OUT_DIR/bindings.rs file.
-	let out_path = PathBuf::from(env::var("OUT_DIR")?);
-	fs::create_dir_all(out_path.join("bindings"))?;
-	// let out_path = PathBuf::from("./src");
+	// let out_path = PathBuf::from(env::var("OUT_DIR")?);
+	// fs::create_dir_all(out_path.join("bindings"))?;
+	// Nope, for Windows-users sakes just do it to src.
+	let out_path = PathBuf::from("./src");
+
+	let callback_parser = Box::new(TypeCallbackParser);
 
 	// The bindgen::Builder is the main entry point
 	// to bindgen, and lets you build up options for
@@ -18,6 +45,7 @@ pub fn generate_bindings() -> Result<(), Box<dyn Error>> {
 		.default_enum_style(EnumVariation::ModuleConsts)
 		.generate_cstr(true)
 		.derive_default(true)
+		.parse_callbacks(callback_parser)
 		// Filter just BASS items
 		// .allowlist_function("BASS.*")
 		// .allowlist_item("BASS.*")
@@ -37,8 +65,8 @@ pub fn generate_bindings() -> Result<(), Box<dyn Error>> {
 		.blocklist_item("BOOL")
 		// .default_visibility(FieldVisibilityKind::Private)
 		.no_copy(".*PROC.*")
-		.type_alias(".*BYTE.*")
-		.type_alias(".*WORD.*")
+		// .type_alias(".*BYTE.*")
+		// .type_alias(".*WORD.*")
 		.type_alias(".*PROC.*")
 		// .new_type_alias_deref(".*STREAMPROC.*")
 		.new_type_alias(".*STREAMPROC.*")
@@ -50,6 +78,8 @@ pub fn generate_bindings() -> Result<(), Box<dyn Error>> {
 		.impl_debug(true)
 		.clang_args(["-fparse-all-comments"])
 		.default_alias_style(AliasVariation::NewTypeDeref)
+		// Include the bits
+		.raw_line(include_str!("./include/top.rs"))
 		// Tell cargo to invalidate the built crate whenever any of the
 		// included header files changed.
 		.parse_callbacks(Box::new(bindgen::CargoCallbacks::new()));
@@ -60,9 +90,11 @@ pub fn generate_bindings() -> Result<(), Box<dyn Error>> {
 		// The input header we would like to generate
 		// bindings for.
 		.header("bass.h")
+		.raw_line(include_str!("./include/top-ex-bass.rs"))
 		// We override the BOOL definition
-		.raw_line(include_str!("./bool.rs"))
-		.raw_line(include_str!("./streamproc.rs"))
+		.raw_line(include_str!("./include/bool.rs"))
+		// And add the necessary STREAMPROC definitions (They require some finangling because Rust doesn't like them.)
+		.raw_line(include_str!("./include/streamproc.rs"))
 		// .raw_line(include_str!("./makelong.rs"))
 		// Finish the builder and generate the bindings.
 		.generate()

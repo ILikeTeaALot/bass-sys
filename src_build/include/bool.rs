@@ -7,6 +7,20 @@ pub enum BOOL {
 	TRUE = 1,
 }
 
+impl BOOL {
+	pub fn ok(&self) -> bool {
+		self.is_true()
+	}
+
+	pub fn is_true(&self) -> bool {
+		*self == BOOL::TRUE
+	}
+
+	pub fn is_false(&self) -> bool {
+		*self == BOOL::FALSE
+	}
+}
+
 impl Default for BOOL {
 	fn default() -> Self {
 		Self::FALSE
@@ -30,20 +44,21 @@ impl AsRef<bool> for BOOL {
 	}
 }
 
-// impl Into<bool> for BOOL {
-// 	fn into(self) -> bool {
-// 		match self {
-// 			BOOL::FALSE => false,
-// 			_ => true,
-// 		}
-// 	}
-// }
-
 impl From<BOOL> for bool {
 	fn from(value: BOOL) -> Self {
 		match value {
 			BOOL::FALSE => false,
 			_ => true,
+		}
+	}
+}
+
+impl From<bool> for BOOL {
+	fn from(value: bool) -> Self {
+		if value {
+			BOOL::TRUE
+		} else {
+			BOOL::FALSE
 		}
 	}
 }
@@ -61,16 +76,10 @@ impl Deref for BOOL {
 
 impl From<BOOL> for DWORD {
 	fn from(value: BOOL) -> DWORD {
-		// DWORD(value as u32)
-		value as u32
+		DWORD(value as u32) // NewType
+		// value as u32 // Alias
 	}
 }
-
-// impl From<BOOL> for u32 {
-// 	fn from(value: BOOL) -> Self {
-// 		value as u32
-// 	}
-// }
 
 pub const TRUE: BOOL = BOOL::TRUE;
 pub const FALSE: BOOL = BOOL::FALSE;
