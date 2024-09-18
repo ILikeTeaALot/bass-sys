@@ -216,8 +216,9 @@ generate_bindings! {
 	pub fn BASS_ChannelLock(handle.into(): impl Into<DWORD>, lock.into(): impl Into<BOOL>) -> bool;
 	pub fn BASS_ChannelFree(handle.into(): impl Into<DWORD>) -> bool;
 	pub fn BASS_ChannelPlay(handle.into(): impl Into<DWORD>, restart.into(): impl Into<BOOL>) -> bool;
-	pub fn BASS_ChannelStop(handle.into(): impl Into<DWORD>) -> bool;
 	pub fn BASS_ChannelPause(handle.into(): impl Into<DWORD>) -> bool;
+	pub fn BASS_ChannelStop(handle.into(): impl Into<DWORD>) -> bool;
+	pub fn BASS_ChannelStart(handle.into(): impl Into<DWORD>) -> bool;
 	pub fn BASS_ChannelSetAttribute(handle.into(): impl Into<DWORD>, attribute.into(): impl Into<DWORD>, value: f32) -> bool;
 	pub fn BASS_ChannelGetAttribute(handle.into(): impl Into<DWORD>, attribute.into(): impl Into<DWORD>, value: &mut f32 as *mut f32) -> bool;
 	pub fn BASS_ChannelSlideAttribute(handle.into(): impl Into<DWORD>, attribute.into(): impl Into<DWORD>, value: f32, time.into(): impl Into<DWORD>)-> bool;
