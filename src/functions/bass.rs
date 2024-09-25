@@ -279,9 +279,9 @@ generate_bindings! {
 		mode.into(): impl Into<DWORD>
 	) -> QWORD;
 	pub fn BASS_ChannelGetLevel(handle.into(): impl Into<DWORD>) -> DWORD;
-	pub fn BASS_ChannelGetLevelEx(
+	pub most unsafe fn BASS_ChannelGetLevelEx(
 		handle.into(): impl Into<DWORD>,
-		levels: &mut f32 as *mut f32,
+		levels: *mut f32,
 		length: f32,
 		flags.into(): impl Into<DWORD>
 	) -> bool;
