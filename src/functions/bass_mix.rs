@@ -62,7 +62,7 @@ generate_bindings! {
     pub most unsafe fn BASS_Mixer_ChannelGetData(handle.into(): impl Into<DWORD>, buffer: *mut c_void, length.into(): impl Into<DWORD>) -> DWORD;
     pub fn BASS_Mixer_ChannelGetEnvelopePos(handle.into(): impl Into<DWORD>, env_type.into(): impl Into<DWORD>, value: &mut f32 as *mut f32) -> QWORD;
     pub fn BASS_Mixer_ChannelGetLevel(handle.into(): impl Into<DWORD>) -> DWORD;
-    pub fn BASS_Mixer_ChannelGetLevelEx(handle.into(): impl Into<DWORD>, levels: &mut f32 as *mut f32, length: f32, flags.into(): impl Into<DWORD>) -> bool;
+    pub fn BASS_Mixer_ChannelGetLevelEx(handle.into(): impl Into<DWORD>, levels: *mut f32, length: f32, flags.into(): impl Into<DWORD>) -> bool;
     pub most unsafe fn BASS_Mixer_ChannelGetMatrix(handle.into(): impl Into<DWORD>, matrix: *mut c_void) -> bool;
     pub fn BASS_Mixer_ChannelGetMixer(handle.into(): impl Into<DWORD>) -> HSTREAM;
     pub fn BASS_Mixer_ChannelGetPosition(handle.into(): impl Into<DWORD>, mode.into(): impl Into<DWORD>) -> QWORD;
