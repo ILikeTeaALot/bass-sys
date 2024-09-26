@@ -70,7 +70,7 @@ generate_bindings! {
     pub fn BASS_Mixer_ChannelIsActive(handle.into(): impl Into<DWORD>) -> DWORD;
     pub fn BASS_Mixer_ChannelRemove(handle.into(): impl Into<DWORD>) -> bool;
     pub fn BASS_Mixer_ChannelRemoveSync(handle.into(): impl Into<DWORD>, sync: HSYNC) -> bool;
-    pub fn BASS_Mixer_ChannelSetEnvelope(handle.into(): impl Into<DWORD>, env_type.into(): impl Into<DWORD>, nodes: *mut BASS_MIXER_NODE, count.into(): impl Into<DWORD>) -> bool;
+    pub most unsafe fn BASS_Mixer_ChannelSetEnvelope(handle.into(): impl Into<DWORD>, env_type.into(): impl Into<DWORD>, nodes: *mut BASS_MIXER_NODE, count.into(): impl Into<DWORD>) -> bool;
     pub fn BASS_Mixer_ChannelSetEnvelopePos(handle.into(): impl Into<DWORD>, env_type.into(): impl Into<DWORD>, pos.into(): impl Into<QWORD>) -> bool;
     pub most unsafe fn BASS_Mixer_ChannelSetMatrix(handle.into(): impl Into<DWORD>, matrix: *mut c_void) -> bool;
     pub most unsafe fn BASS_Mixer_ChannelSetMatrixEx(handle.into(): impl Into<DWORD>, matrix: *mut c_void, time: f32) -> bool;
