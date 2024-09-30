@@ -20,7 +20,7 @@ pub mod types {
 
 	pub use crate::bindings::*;
 
-	pub type BassDeviceInfo = BASS_DEVICEINFO;
+	// pub type BassDeviceInfo = BASS_DEVICEINFO;
 
 	impl BASS_DEVICEINFO {
 		pub fn new(name: *const c_char, driver: *const c_char, flags: impl Into<DWORD>) -> Self {
@@ -32,19 +32,19 @@ pub mod types {
 		}
 	}
 
-	pub type BassInfo = BASS_INFO;
+	// pub type BassInfo = BASS_INFO;
 
-	pub type BassRecordInfo = BASS_RECORDINFO;
+	// pub type BassRecordInfo = BASS_RECORDINFO;
 
-	pub type BassSample = BASS_SAMPLE;
+	// pub type BassSample = BASS_SAMPLE;
 
-	// pub type BassChannelInfo = BASS_CHANNELINFO;
+	// // pub type BassChannelInfo = BASS_CHANNELINFO;
 
-	pub type BassPluginForm = BASS_PLUGINFORM;
+	// pub type BassPluginForm = BASS_PLUGINFORM;
 
-	pub type BassPluginInfo = BASS_PLUGININFO;
+	// pub type BassPluginInfo = BASS_PLUGININFO;
 
-	pub type Bass3DVector = BASS_3DVECTOR;
+	// pub type Bass3DVector = BASS_3DVECTOR;
 
 	// pub type BassFileProcs = BASS_FILEPROCS;
 }
