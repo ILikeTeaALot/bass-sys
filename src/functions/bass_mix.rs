@@ -80,7 +80,7 @@ generate_bindings! {
     pub most unsafe fn BASS_Split_StreamCreate(channel.into(): impl Into<DWORD>, flags.into(): impl Into<DWORD>, chanmap: *const c_int) -> HSTREAM;
     pub fn BASS_Split_StreamGetAvailable(handle.into(): impl Into<DWORD>) -> DWORD;
     pub fn BASS_Split_StreamGetSource(handle: HSTREAM) -> DWORD;
-    pub fn BASS_Split_StreamGetSplits(handle.into(): impl Into<DWORD>, splits: *mut HSTREAM, count.into(): impl Into<DWORD>) -> DWORD;
+    pub most unsafe fn BASS_Split_StreamGetSplits(handle.into(): impl Into<DWORD>, splits: *mut HSTREAM, count.into(): impl Into<DWORD>) -> DWORD;
     pub fn BASS_Split_StreamReset(handle.into(): impl Into<DWORD>) -> bool;
     pub fn BASS_Split_StreamResetEx(handle.into(): impl Into<DWORD>, offset.into(): impl Into<DWORD>) -> bool;
 }
