@@ -4,7 +4,7 @@ use crate::{bindings::*, generate_bindings};
 
 static BASS_LOUD_LIBRARY: Lazy<BASS_Loud> = Lazy::new(|| {
 	#[cfg(target_os = "macos")]
-	let library_name = "@executable_path/libbassloud.dylib";
+	let library_name = "libbassloud.dylib";
 	#[cfg(target_os = "windows")]
 	let library_name = "bassloud.dll";
 	#[cfg(target_os = "linux")]

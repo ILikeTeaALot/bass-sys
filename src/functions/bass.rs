@@ -13,7 +13,7 @@ use std::os::raw::{c_char, c_int, c_void};
 
 static BASS_LIBRARY: Lazy<BASS> = Lazy::new(|| {
 	#[cfg(target_os = "macos")]
-	let library_name = "@executable_path/libbass.dylib";
+	let library_name = "libbass.dylib";
 	#[cfg(target_os = "windows")]
 	let library_name = "bass.dll";
 	#[cfg(target_os = "linux")]
