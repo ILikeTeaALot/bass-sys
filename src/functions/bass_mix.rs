@@ -5,6 +5,8 @@ use crate::{
 };
 use std::os::raw::{c_int, c_void};
 
+use super::bass_path_prefix;
+
 static BASS_MIX_LIBRARY: Lazy<BASS_Mix> = Lazy::new(|| {
 	#[cfg(target_os = "macos")]
 		let library_name = "libbassmix.dylib";
@@ -12,7 +14,7 @@ static BASS_MIX_LIBRARY: Lazy<BASS_Mix> = Lazy::new(|| {
 		let library_name = "bassmix.dll";
 	#[cfg(target_os = "linux")]
 		let library_name = "libbassmix.so";
-	if let Ok(library) = unsafe { BASS_Mix::new(library_name) } {
+	if let Ok(library) = unsafe { BASS_Mix::new(String::from(bass_path_prefix()) + library_name) } {
 		library
 	} else {
 		panic!("Failed to load the library.");

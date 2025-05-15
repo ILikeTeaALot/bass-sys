@@ -2,6 +2,8 @@ use once_cell::sync::Lazy;
 
 use crate::{bindings::*, generate_bindings};
 
+use super::bass_path_prefix;
+
 static BASS_LOUD_LIBRARY: Lazy<BASS_Loud> = Lazy::new(|| {
 	#[cfg(target_os = "macos")]
 	let library_name = "libbassloud.dylib";
@@ -9,7 +11,7 @@ static BASS_LOUD_LIBRARY: Lazy<BASS_Loud> = Lazy::new(|| {
 	let library_name = "bassloud.dll";
 	#[cfg(target_os = "linux")]
 	let library_name = "libbassloud.so";
-	if let Ok(library) = unsafe { BASS_Loud::new(library_name) } {
+	if let Ok(library) = unsafe { BASS_Loud::new(String::from(bass_path_prefix()) + library_name) } {
 		library
 	} else {
 		panic!("Failed to load the library.");

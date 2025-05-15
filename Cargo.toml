@@ -18,6 +18,10 @@ bassloud = []
 basswasapi = []
 default = ["bassmix", "bassloud", "basscd"]
 
+executable_path = []
+loader_path = []
+rpath = []
+
 [dependencies]
 libloading = "0.8.1"
 once_cell = "1.13.0"

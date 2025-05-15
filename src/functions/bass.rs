@@ -11,19 +11,31 @@ use crate::{
 };
 use std::os::raw::{c_char, c_int, c_void};
 
+pub(crate) const fn bass_path_prefix() -> &'static str {
+	#[cfg(not(all(
+		target_os = "macos",
+		any(feature = "rpath", feature = "executable_path", feature = "loader_path")
+	)))]
+	return "";
+	#[allow(unreachable_code)]
+	#[cfg(all(feature = "rpath", target_os = "macos"))]
+	return "@rpath/";
+	#[allow(unreachable_code)]
+	#[cfg(all(feature = "executable_path", target_os = "macos"))]
+	return "@executable_path/";
+	#[allow(unreachable_code)]
+	#[cfg(all(feature = "loader_path", target_os = "macos"))]
+	return "@loader_path/";
+}
+#[cfg(target_os = "macos")]
+const LIBRARY_NAME: &str = "libbass.dylib";
+#[cfg(target_os = "windows")]
+const LIBRARY_NAME: &str = "bass.dll";
+#[cfg(target_os = "linux")]
+const LIBRARY_NAME: &str = "libbass.so";
+
 static BASS_LIBRARY: Lazy<BASS> = Lazy::new(|| {
-	#[cfg(target_os = "macos")]
-	let library_name = "libbass.dylib";
-	#[cfg(target_os = "windows")]
-	let library_name = "bass.dll";
-	#[cfg(target_os = "linux")]
-	let library_name = "libbass.so";
-	// if let Ok(library) = unsafe { Library::new(library_name) } {
-	//     return library;
-	// } else {
-	//     panic!("Failed to load the library.");
-	// }
-	if let Ok(library) = unsafe { BASS::new(library_name) } {
+	if let Ok(library) = unsafe { BASS::new(String::from(bass_path_prefix()) + LIBRARY_NAME) } {
 		library
 	} else {
 		panic!("Failed to load the library.");
