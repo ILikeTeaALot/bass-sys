@@ -8,8 +8,6 @@ mod bindings;
 pub mod functions;
 mod impls;
 mod macros;
-mod bindings;
-mod impls;
 
 pub use impls::*;
 
